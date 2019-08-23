@@ -1,0 +1,13 @@
+# LOG FILES
+*.log
+log
+
+# log
+yarn-error.log
+
+# modules
+node_modules
+
+# built files
+lib
+dist

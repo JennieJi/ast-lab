@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportAllFrom.js"],{"./exportDefault":["default"]}) 1`] = `Array []`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportAllFrom.js"],{"./exportNamed":["a"]}) 1`] = `
+Array [
+  "/__fixtures__/exports/exportAllFrom.js",
+]
+`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportDefault.js"],{"./exportDefault":["default"]}) 1`] = `
+Array [
+  "/__fixtures__/exports/exportDefault.js",
+]
+`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportDefault.js"],{"./exportNamed":["a"]}) 1`] = `Array []`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportDefaultAliasFrom.js"],{"./exportDefault":["default"]}) 1`] = `
+Array [
+  "/__fixtures__/exports/exportDefaultAliasFrom.js",
+]
+`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportDefaultAliasFrom.js"],{"./exportNamed":["a"]}) 1`] = `Array []`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportNamedFrom.js"],{"./exportDefault":["default"]}) 1`] = `Array []`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["exportNamedFrom.js"],{"./exportNamed":["a"]}) 1`] = `
+Array [
+  "/__fixtures__/exports/exportNamedFrom.js",
+]
+`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["noExports.js"],{"./exportDefault":["default"]}) 1`] = `Array []`;
+
+exports[`filterDependents() exports from - ("sources","targets") - (["noExports.js"],{"./exportNamed":["a"]}) 1`] = `Array []`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["base.js"],{"./base":["a","default"]}) 1`] = `
+Array [
+  "/__fixtures__/imports/base.js",
+]
+`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["importAlias.js"],{"./base":["a","default"]}) 1`] = `
+Array [
+  "/__fixtures__/imports/importAlias.js",
+]
+`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["importAll.js"],{"./base":["a","default"]}) 1`] = `
+Array [
+  "/__fixtures__/imports/importAll.js",
+]
+`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["importDefault.js"],{"./base":["a","default"]}) 1`] = `
+Array [
+  "/__fixtures__/imports/importDefault.js",
+]
+`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["importNamed.js"],{"./base":["a","default"]}) 1`] = `
+Array [
+  "/__fixtures__/imports/importNamed.js",
+]
+`;
+
+exports[`filterDependents() imports - ("sources","targets") - (["noImports.js"],{"./base":["a","default"]}) 1`] = `Array []`;

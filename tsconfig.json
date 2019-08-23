@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es2018",
+    "lib": ["es2018"],
+    "moduleResolution": "Node",
+    "module": "CommonJS",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "declaration": false,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "downlevelIteration": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/*.test.ts",
+    "**/types"
+  ]
+}

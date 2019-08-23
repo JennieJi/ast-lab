@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`markDependents() should mark all paths given - ("marked","pathNode") - ({},["b1","b2","m2"]) 1`] = `
+Map {
+  "m4" => true,
+  "m3" => true,
+  "m2" => true,
+  "m1" => true,
+  "b2" => true,
+  "b1" => true,
+}
+`;
+
+exports[`markDependents() should mark all paths given - ("marked","pathNode") - ({},["m1","m2","m3","m4"]) 1`] = `
+Map {
+  "m4" => true,
+  "m3" => true,
+  "m2" => true,
+  "m1" => true,
+}
+`;
+
+exports[`markDependents() should not mark if end node is not marked - ("marked","pathNode") - ({},["m1","m2","m3","m4"]) 1`] = `
+Map {
+  "m2" => true,
+}
+`;
+
+exports[`markDependents() should not mark if end node is not marked - ("marked","pathNode") - ({},["m1","m2","m3"]) 1`] = `
+Map {
+  "m2" => true,
+}
+`;
+
+exports[`markDependents() should not mark if end node is not marked - ("marked","pathNode") - ({},{"source":"import-default","importModule":"m2","i2e":{},"prev":{"source":"root","importModule":"m2","i2e":null,"prev":null}}) 1`] = `
+Map {
+  "m2" => true,
+  "import-default" => true,
+}
+`;
