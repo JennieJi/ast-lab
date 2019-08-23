@@ -1,0 +1,42 @@
+{
+  "name": "get-dependencies",
+  "version": "1.0.0-alpha",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
+    "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
+  },
+  "keywords": [
+    "affected",
+    "dependency",
+    "change"
+  ],
+  "files": [
+    "./bin",
+    "./dist"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "repository": {
+    "url": "https://github.com/JennieJi/affected",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/affected/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cli-progress": "^1.8.1",
+    "@types/debug": "^4.1.4",
+    "@types/estree": "^0.0.39",
+    "@types/glob": "^7.1.1",
+    "@types/resolve": "^0.0.8"
+  },
+  "dependencies": {
+    "cli-progress": "^2.1.1",
+    "debug": "^4.1.1",
+    "glob": "^7.1.4",
+    "node-source-walk": "^4.2.0",
+    "resolve": "^1.11.1"
+  }
+}
