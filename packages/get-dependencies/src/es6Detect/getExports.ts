@@ -1,15 +1,12 @@
 // @ts-ignore
 import Walker from 'node-source-walk';
 import { Node, ModuleSpecifier, Program } from 'estree';
-import fs from 'fs';
-import _importSpecifier2Dependents from './importSpecifier2Dependents';
-import _depsFromExportAll from './depsFromExportAll';
 import exportSpecifier2Dependents from './exportSpecifier2Dependents';
 import getPatternIdentifiers from './getPatternIdentifiers';
 
 export type Options = {
   resolve: (mod: string) => string | void,
-  load: (file: string) => string
+  loader: (file: string) => string
 }
 
 export function astFindExports(node: Node, opts: Options): string[] {
@@ -52,14 +49,13 @@ export default function getExports(
 ): string[] {
   const {
     resolve,
-    load = (file: string) => fs.readFileSync(file, 'utf8')
+    loader
   } = opts;
   const realPath = resolve(src);
   if (!realPath) {
     throw new Error('src cannot be found!');
   }
-  const fileContent = load(realPath);
-  console.log(realPath, fileContent.length);
+  const fileContent = loader(realPath);
   if (!fileContent) {
     return [];
   }

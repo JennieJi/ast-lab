@@ -5,32 +5,33 @@ import { Dependents, ModuleImported } from '../types';
 // import getPatternIdentifiers from './getPatternIdentifiers';
 import fs from 'fs';
 import _importSpecifier2Dependents from './importSpecifier2Dependents';
-import depsFromExportNamed from './depsFromExportNamed';
-import _depsFromExportAll from './depsFromExportAll';
+import { astFindExports } from './getExports';
+import exportSpecifier2Dependents from './exportSpecifier2Dependents';
 
 type Options = {
   inDetail?: boolean,
   resolve: (mod: string) => string | void,
-  load: (file: string) => string
+  loader?: (file: string) => string
 }
 
 /**
  * Get ES6 file dependencies (module and imported defination)
  * @todo support import affected export mapping
- * @param src {string} file content
+ * @param file {string} file path
  * @param [inDetail] {boolean} NOT FULLY SUPPORTED. Get affected exports
  * @return {Map<string, Set<name> | null>}
  */
 export default function getEs6Dependents(
-  src: string,
+  file: string,
   {
     inDetail,
     resolve,
-    load = (file: string) => fs.readFileSync(file, 'utf8')
+    loader: _loader
   }: Options): Dependents {
   const walkerIns = new Walker();
+  const loader = _loader || ((file: string) => fs.readFileSync(file, 'utf8'));
+  const src = loader(file);
   let dependencies: Dependents = new Map();
-  src = load(src);
   if (src === '') {
     return dependencies;
   }
@@ -40,51 +41,51 @@ export default function getEs6Dependents(
 
   const ast: Program = walkerIns.parse(src).program;
   const importSpecifier2Dependents = _importSpecifier2Dependents(inDetail);
-  const depsFromExportAll = _depsFromExportAll({ resolve, load });
-  const rootDeclarations: string[] = ast.body.reduce((roots: string[], node: Node) => {
+  const findNodeExports = (ast: Node) => astFindExports(ast, { resolve, loader });
+  ast.body.forEach((node: Node) => {
     switch (node.type) {
       case 'ImportDeclaration':{
         const modulePath = node.source && node.source.value as string;
-        if (!modulePath) { return roots; }
+        if (!modulePath) { return; }
         if (!dependencies.has(modulePath)) {
           dependencies.set(modulePath, new Map() as ModuleImported);
         }
         node.specifiers.forEach((specifier: ModuleSpecifier) => {
           const depMap = dependencies.get(modulePath) as ModuleImported;
           dependencies.set(modulePath, importSpecifier2Dependents(depMap, specifier));
-          roots.push(specifier.local.name);
         });
         break;
       }
-      case 'ExportNamedDeclaration':{
+      case 'ExportNamedDeclaration': {
         const modulePath = node.source && (node.source.value as string);
-        if (!modulePath) { return roots; }
-        dependencies = depsFromExportNamed(dependencies, node);
-        (dependencies.get(modulePath) as ModuleImported).forEach(
-          ({ alias }, name) => roots.push(alias || name)
-        );
+        if (!modulePath) { return; }
+        if (!dependencies.get(modulePath)) {
+          dependencies.set(modulePath, new Map() as ModuleImported);
+        }
+        node.specifiers.forEach((specifier: ModuleSpecifier) => {
+          const depMap = dependencies.get(modulePath) as ModuleImported;
+          dependencies.set(modulePath, exportSpecifier2Dependents(depMap, specifier));
+        });
         break;
       }
-      case 'ExportAllDeclaration':
-        dependencies = depsFromExportAll(dependencies, node);
-        /** @todo find roots for export all */
+      case 'ExportAllDeclaration': {
+        const exported = findNodeExports(node);
+        if (node.source && node.source.value) {
+          dependencies.set(
+            node.source.value as string,
+            new Map(exported.map((name: string) => [
+              name,
+              {
+                alias: null,
+                affectedExports: new Set()
+              }
+            ]))
+          );
+        }
         break;
-      case "ExportDefaultDeclaration":
-        roots.push('default');
-        break;
-      // case 'VariableDeclaration':
-      //   node.declarations.forEach(({ id }) => {
-      //     roots.concat(getPatternIdentifiers(id));
-      //   });
-      //   break;
-      // case 'FunctionDeclaration':
-      // case 'ClassDeclaration':
-      //   roots.concat(getPatternIdentifiers(node.id));
-      //   break;
+      }
     }
-    return roots;
-  }, [] as string[]);
-  console.log(rootDeclarations);
+  });
 
   /** @todo support dynamic import */
   // walkerIns.walk(ast, function(node: Node) {

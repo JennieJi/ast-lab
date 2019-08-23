@@ -1,6 +1,5 @@
-import fs from 'fs';
 import path from 'path';
-import getEs6Dependents from './es6Detect';
+import getEs6Dependents from './es6Detect/getEs6Dependents';
 import resolveModulePath from './resolveModulePath';
 import markDependents from './markDependents';
 import { PathNode,  Exports, Options } from './types';
@@ -16,7 +15,7 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
   const deps = getEs6Dependents(source, {
     inDetail: false,
     resolve,
-    load: (file: string) => loader ? loader(file) : fs.readFileSync(file, 'utf8')
+    loader
   });
   visited.add(source);
   // console.log('marking == ', node);
