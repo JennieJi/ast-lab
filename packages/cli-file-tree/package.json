@@ -1,0 +1,20 @@
+{
+  "name": "cli-file-tree",
+  "version": "1.0.0-alpha",
+  "description": "Find git changes affected files",
+  "keywords": [
+    "affected",
+    "changes",
+    "git",
+    "dependencies"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
