@@ -1,0 +1,31 @@
+{
+  "name": "git-changes-affected",
+  "version": "1.0.0-alpha",
+  "description": "Find git changes affected files",
+  "keywords": [
+    "affected",
+    "changes",
+    "git",
+    "dependencies"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "repository": {
+    "url": "https://github.com/JennieJi/affected",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/affected/issues"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
+    "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
+  },
+  "dependencies": {
+    "get-dependencies": "^1.0.0-alpha"
+  }
+}

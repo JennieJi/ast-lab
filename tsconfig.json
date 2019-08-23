@@ -9,7 +9,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "downlevelIteration": true,
