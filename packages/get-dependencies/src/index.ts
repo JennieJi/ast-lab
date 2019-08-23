@@ -1,3 +1,4 @@
 module.exports = {
-  getDependencies: require('./filterDependents')
+  filterDependents: require('./filterDependents'),
+  getExports: require('./es6Detect/getExports')
 };
