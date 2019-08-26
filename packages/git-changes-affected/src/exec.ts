@@ -1,6 +1,7 @@
-import util from 'util';
-import { exec } from 'child_process';
+import { execSync } from 'child_process';
 
-const pExec = util.promisify(exec);
+function exec(cmd: string): string {
+  return execSync(cmd).toString();
+}
 
-export default pExec;
+export default exec;

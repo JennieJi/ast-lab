@@ -14,6 +14,7 @@ index 0000000..40b878d
 +node_modules/
 \\\\ No newline at end of file",
     "source": ".eslintignore",
+    "target": ".eslintignore",
   },
   ".eslintrc.js" => Object {
     "offset": 179,
@@ -45,6 +46,7 @@ index 0000000..b4f888d
 +  }
 +};",
     "source": ".eslintrc.js",
+    "target": ".eslintrc.js",
   },
   ".gitignore" => Object {
     "offset": 737,
@@ -70,6 +72,7 @@ index 0000000..0792609
 +dist
 \\\\ No newline at end of file",
     "source": ".gitignore",
+    "target": ".gitignore",
   },
   "lerna.json" => Object {
     "offset": 999,
@@ -87,6 +90,7 @@ index 0000000..7e970f8
 +}
 \\\\ No newline at end of file",
     "source": "lerna.json",
+    "target": "lerna.json",
   },
   "package-lock.json" => Object {
     "offset": 1237,
@@ -5708,6 +5712,7 @@ index 0000000..f4a41a3
 +  }
 +}",
     "source": "package-lock.json",
+    "target": "package-lock.json",
   },
   "package.json" => Object {
     "offset": 209117,
@@ -5737,6 +5742,7 @@ index 0000000..7c521d7
 +  }
 +}",
     "source": "package.json",
+    "target": "package.json",
   },
   "packages/get-dependencies/jest.config.js" => Object {
     "offset": 209711,
@@ -5751,6 +5757,7 @@ index 0000000..b6b81bf
 +  preset: 'ts-jest'
 +}",
     "source": "packages/get-dependencies/jest.config.js",
+    "target": "packages/get-dependencies/jest.config.js",
   },
   "packages/get-dependencies/package-lock.json" => Object {
     "offset": 209973,
@@ -5986,6 +5993,7 @@ index 0000000..9c210b9
 +  }
 +}",
     "source": "packages/get-dependencies/package-lock.json",
+    "target": "packages/get-dependencies/package-lock.json",
   },
   "packages/get-dependencies/package.json" => Object {
     "offset": 219094,
@@ -6039,6 +6047,7 @@ index 0000000..d87f742
 +  }
 +}",
     "source": "packages/get-dependencies/package.json",
+    "target": "packages/get-dependencies/package.json",
   },
   "packages/get-dependencies/src/constants.ts" => Object {
     "offset": 220308,
@@ -6053,6 +6062,7 @@ index 0000000..56a4bbd
 +export const DEFAULT = 'default';
 +export const ALL_EXPORTS: true = true;",
     "source": "packages/get-dependencies/src/constants.ts",
+    "target": "packages/get-dependencies/src/constants.ts",
   },
   "packages/get-dependencies/src/es6Detect/depsFromExportAll.ts" => Object {
     "offset": 220640,
@@ -6085,6 +6095,7 @@ index 0000000..19a3d33
 +  }
 +}",
     "source": "packages/get-dependencies/src/es6Detect/depsFromExportAll.ts",
+    "target": "packages/get-dependencies/src/es6Detect/depsFromExportAll.ts",
   },
   "packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts" => Object {
     "offset": 221518,
@@ -6113,6 +6124,7 @@ index 0000000..a3674b7
 +  return dependencies;
 +}",
     "source": "packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts",
+    "target": "packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts",
   },
   "packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts" => Object {
     "offset": 222606,
@@ -6138,6 +6150,7 @@ index 0000000..0ec5f03
 +  return moduleImported;
 +}",
     "source": "packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts",
+    "target": "packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts",
   },
   "packages/get-dependencies/src/es6Detect/getExports.ts" => Object {
     "offset": 223370,
@@ -6222,6 +6235,7 @@ index 0000000..43b5f4a
 +  );
 +}",
     "source": "packages/get-dependencies/src/es6Detect/getExports.ts",
+    "target": "packages/get-dependencies/src/es6Detect/getExports.ts",
   },
   "packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts" => Object {
     "offset": 225888,
@@ -6255,6 +6269,7 @@ index 0000000..e8022c9
 +}
 +export default getPatternIdentifiers;",
     "source": "packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts",
+    "target": "packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts",
   },
   "packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts" => Object {
     "offset": 226941,
@@ -6289,6 +6304,7 @@ index 0000000..bba898b
 +  };
 +}",
     "source": "packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts",
+    "target": "packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts",
   },
   "packages/get-dependencies/src/es6Detect/index.ts" => Object {
     "offset": 228039,
@@ -6409,6 +6425,7 @@ index 0000000..42ea774
 +  return dependencies;
 +}",
     "source": "packages/get-dependencies/src/es6Detect/index.ts",
+    "target": "packages/get-dependencies/src/es6Detect/index.ts",
   },
   "packages/get-dependencies/src/filterDependents.ts" => Object {
     "offset": 232075,
@@ -6487,6 +6504,7 @@ index 0000000..ae248ab
 +  return Array.from(filtered);
 +}",
     "source": "packages/get-dependencies/src/filterDependents.ts",
+    "target": "packages/get-dependencies/src/filterDependents.ts",
   },
   "packages/get-dependencies/src/index.ts" => Object {
     "offset": 234504,
@@ -6502,6 +6520,7 @@ index 0000000..c0b8ce1
 +};
 \\\\ No newline at end of file",
     "source": "packages/get-dependencies/src/index.ts",
+    "target": "packages/get-dependencies/src/index.ts",
   },
   "packages/get-dependencies/src/isCore.ts" => Object {
     "offset": 234818,
@@ -6518,6 +6537,7 @@ index 0000000..4b2555e
 +  return core.has(mod);
 +}",
     "source": "packages/get-dependencies/src/isCore.ts",
+    "target": "packages/get-dependencies/src/isCore.ts",
   },
   "packages/get-dependencies/src/isRealFile.ts" => Object {
     "offset": 235167,
@@ -6535,6 +6555,7 @@ index 0000000..41f2a49
 +  fs.lstatSync(mod).isFile()
 +}",
     "source": "packages/get-dependencies/src/isRealFile.ts",
+    "target": "packages/get-dependencies/src/isRealFile.ts",
   },
   "packages/get-dependencies/src/isThirdParty.ts" => Object {
     "offset": 235534,
@@ -6549,6 +6570,7 @@ index 0000000..3330707
 +  return mod.indexOf('node_modules') > -1
 +}",
     "source": "packages/get-dependencies/src/isThirdParty.ts",
+    "target": "packages/get-dependencies/src/isThirdParty.ts",
   },
   "packages/get-dependencies/src/markDependents.ts" => Object {
     "offset": 235866,
@@ -6594,6 +6616,7 @@ index 0000000..4cf3206
 +}
 +export default markDependents;",
     "source": "packages/get-dependencies/src/markDependents.ts",
+    "target": "packages/get-dependencies/src/markDependents.ts",
   },
   "packages/get-dependencies/src/markExports.ts" => Object {
     "offset": 237247,
@@ -6627,6 +6650,7 @@ index 0000000..589cbcf
 +
 +export default markExports;",
     "source": "packages/get-dependencies/src/markExports.ts",
+    "target": "packages/get-dependencies/src/markExports.ts",
   },
   "packages/get-dependencies/src/replaceAlias.ts" => Object {
     "offset": 238209,
@@ -6645,6 +6669,7 @@ index 0000000..d959003
 +    mod.replace(token, (_match, alias) => alias[alias]);
 +}",
     "source": "packages/get-dependencies/src/replaceAlias.ts",
+    "target": "packages/get-dependencies/src/replaceAlias.ts",
   },
   "packages/get-dependencies/src/resolveModulePath.ts" => Object {
     "offset": 238687,
@@ -6692,6 +6717,7 @@ index 0000000..5d5dec6
 +  }
 +}",
     "source": "packages/get-dependencies/src/resolveModulePath.ts",
+    "target": "packages/get-dependencies/src/resolveModulePath.ts",
   },
   "packages/get-dependencies/src/types/index.ts" => Object {
     "offset": 239829,
@@ -6740,6 +6766,7 @@ index 0000000..4b0f775
 +  alias?: Alias
 +};",
     "source": "packages/get-dependencies/src/types/index.ts",
+    "target": "packages/get-dependencies/src/types/index.ts",
   },
   "packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js" => Object {
     "offset": 240963,
@@ -6752,6 +6779,7 @@ index 0000000..efe038a
 @@ -0,0 +1 @@
 +import './baliurhfiaulehlfiuahweliofjawioejda'",
     "source": "packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js",
+    "target": "packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js",
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js" => Object {
     "offset": 241305,
@@ -6776,6 +6804,7 @@ index 0000000..da4c037
 +  b();
 +}",
     "source": "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js",
+    "target": "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js",
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js" => Object {
     "offset": 241731,
@@ -6795,6 +6824,7 @@ index 0000000..92f746c
 +  return b;
 +}",
     "source": "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js",
+    "target": "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js",
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js" => Object {
     "offset": 242139,
@@ -6815,6 +6845,7 @@ index 0000000..4648de9
 +
 +export const c = b();",
     "source": "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js",
+    "target": "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js",
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js" => Object {
     "offset": 242540,
@@ -6832,6 +6863,7 @@ index 0000000..9aec022
 +export const c = b * 2;
 +}",
     "source": "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js",
+    "target": "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js" => Object {
     "offset": 242918,
@@ -6844,6 +6876,7 @@ index 0000000..695fb85
 @@ -0,0 +1 @@
 +export * from './exportNamed';",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefault.js" => Object {
     "offset": 243250,
@@ -6858,6 +6891,7 @@ index 0000000..79a081d
 +
 +export default a;",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportDefault.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportDefault.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js" => Object {
     "offset": 243587,
@@ -6870,6 +6904,7 @@ index 0000000..9789caf
 @@ -0,0 +1 @@
 +export { default as b } from './exportDefault';",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js" => Object {
     "offset": 243963,
@@ -6886,6 +6921,7 @@ index 0000000..eb3ec62
 +
 +export default a;",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js" => Object {
     "offset": 244335,
@@ -6900,6 +6936,7 @@ index 0000000..6db6370
 +
 +export default a;",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportFunc.js" => Object {
     "offset": 244698,
@@ -6914,6 +6951,7 @@ index 0000000..df340a4
 +
 +};",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportFunc.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportFunc.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js" => Object {
     "offset": 245020,
@@ -6930,6 +6968,7 @@ index 0000000..4d7c892
 +
 +export {a as b};",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportNamed.js" => Object {
     "offset": 245370,
@@ -6942,6 +6981,7 @@ index 0000000..cc798ff
 @@ -0,0 +1 @@
 +export const a = 1;",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportNamed.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportNamed.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js" => Object {
     "offset": 245685,
@@ -6954,6 +6994,7 @@ index 0000000..d7bb03f
 @@ -0,0 +1 @@
 +export { a } from './exportNamed';",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js" => Object {
     "offset": 246027,
@@ -6968,6 +7009,7 @@ index 0000000..2438832
 +
 +export {a as b};",
     "source": "packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js",
   },
   "packages/get-dependencies/test/__fixtures__/exports/noExports.js" => Object {
     "offset": 246368,
@@ -6982,6 +7024,7 @@ index 0000000..b2ee884
 +
 +}",
     "source": "packages/get-dependencies/test/__fixtures__/exports/noExports.js",
+    "target": "packages/get-dependencies/test/__fixtures__/exports/noExports.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/base.js" => Object {
     "offset": 246680,
@@ -6995,6 +7038,7 @@ index 0000000..2e0adef
 +export const a = {};
 +export default a;",
     "source": "packages/get-dependencies/test/__fixtures__/imports/base.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/base.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/importAlias.js" => Object {
     "offset": 246996,
@@ -7007,6 +7051,7 @@ index 0000000..4868782
 @@ -0,0 +1 @@
 +import { a as b } from './base';",
     "source": "packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/importAll.js" => Object {
     "offset": 247324,
@@ -7019,6 +7064,7 @@ index 0000000..5a73a49
 @@ -0,0 +1 @@
 +import * as base from './base';",
     "source": "packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/importAll.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/importDefault.js" => Object {
     "offset": 247645,
@@ -7031,6 +7077,7 @@ index 0000000..96315b4
 @@ -0,0 +1 @@
 +import base from './base';",
     "source": "packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/importNamed.js" => Object {
     "offset": 247973,
@@ -7043,6 +7090,7 @@ index 0000000..05a8a8a
 @@ -0,0 +1 @@
 +import { a } from './base';",
     "source": "packages/get-dependencies/test/__fixtures__/imports/importNamed.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/importNamed.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/noImports.js" => Object {
     "offset": 248296,
@@ -7057,6 +7105,7 @@ index 0000000..b2ee884
 +
 +}",
     "source": "packages/get-dependencies/test/__fixtures__/imports/noImports.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/noImports.js",
   },
   "packages/get-dependencies/test/__fixtures__/imports/require.js" => Object {
     "offset": 248608,
@@ -7069,6 +7118,7 @@ index 0000000..3173cca
 @@ -0,0 +1 @@
 +const a = require('./base.js')",
     "source": "packages/get-dependencies/test/__fixtures__/imports/require.js",
+    "target": "packages/get-dependencies/test/__fixtures__/imports/require.js",
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/a.js" => Object {
     "offset": 248922,
@@ -7081,6 +7131,7 @@ index 0000000..ff8b4c5
 @@ -0,0 +1 @@
 +export default {};",
     "source": "packages/get-dependencies/test/__fixtures__/module-alias/a.js",
+    "target": "packages/get-dependencies/test/__fixtures__/module-alias/a.js",
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js" => Object {
     "offset": 249221,
@@ -7093,6 +7144,7 @@ index 0000000..038c91c
 @@ -0,0 +1 @@
 +import a from 'alias-folder/a';",
     "source": "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js",
+    "target": "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js",
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js" => Object {
     "offset": 249578,
@@ -7105,6 +7157,7 @@ index 0000000..884a1db
 @@ -0,0 +1 @@
 +import a from 'alias-a';",
     "source": "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js",
+    "target": "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js",
   },
   "packages/get-dependencies/test/__fixtures__/module-directory/a.js" => Object {
     "offset": 249922,
@@ -7117,6 +7170,7 @@ index 0000000..ff8b4c5
 @@ -0,0 +1 @@
 +export default {};",
     "source": "packages/get-dependencies/test/__fixtures__/module-directory/a.js",
+    "target": "packages/get-dependencies/test/__fixtures__/module-directory/a.js",
   },
   "packages/get-dependencies/test/__fixtures__/module-directory/b.js" => Object {
     "offset": 250233,
@@ -7130,6 +7184,7 @@ index 0000000..6b60f40
 +import a from 'module-directory/a';
 +",
     "source": "packages/get-dependencies/test/__fixtures__/module-directory/b.js",
+    "target": "packages/get-dependencies/test/__fixtures__/module-directory/b.js",
   },
   "packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap" => Object {
     "offset": 250565,
@@ -7210,6 +7265,7 @@ index 0000000..00298de
 +
 +exports[\`filterDependents() imports - (\\"sources\\",\\"targets\\") - ([\\"noImports.js\\"],{\\"./base\\":[\\"a\\",\\"default\\"]}) 1\`] = \`Array []\`;",
     "source": "packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap",
+    "target": "packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap",
   },
   "packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap" => Object {
     "offset": 253564,
@@ -7388,6 +7444,7 @@ index 0000000..ae51feb
 +}
 +\`;",
     "source": "packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap",
+    "target": "packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap",
   },
   "packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap" => Object {
     "offset": 257586,
@@ -7439,6 +7496,7 @@ index 0000000..492c5ab
 +}
 +\`;",
     "source": "packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap",
+    "target": "packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap",
   },
   "packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap" => Object {
     "offset": 258990,
@@ -7534,6 +7592,7 @@ index 0000000..18e4412
 +}
 +\`;",
     "source": "packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap",
+    "target": "packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap",
   },
   "packages/get-dependencies/test/filterDependents.test.ts" => Object {
     "offset": 261235,
@@ -7613,6 +7672,7 @@ index 0000000..e934761
 +  );
 +});",
     "source": "packages/get-dependencies/test/filterDependents.test.ts",
+    "target": "packages/get-dependencies/test/filterDependents.test.ts",
   },
   "packages/get-dependencies/test/getEs6Dependents.test.ts" => Object {
     "offset": 263241,
@@ -7671,6 +7731,7 @@ index 0000000..20a4f74
 +  ])
 +);",
     "source": "packages/get-dependencies/test/getEs6Dependents.test.ts",
+    "target": "packages/get-dependencies/test/getEs6Dependents.test.ts",
   },
   "packages/get-dependencies/test/markDependents.test.ts" => Object {
     "offset": 264829,
@@ -7763,6 +7824,7 @@ index 0000000..6666aee
 +  );
 +});",
     "source": "packages/get-dependencies/test/markDependents.test.ts",
+    "target": "packages/get-dependencies/test/markDependents.test.ts",
   },
   "packages/get-dependencies/test/markExports.test.ts" => Object {
     "offset": 267031,
@@ -7836,6 +7898,7 @@ index 0000000..2207029
 +  );
 +});",
     "source": "packages/get-dependencies/test/markExports.test.ts",
+    "target": "packages/get-dependencies/test/markExports.test.ts",
   },
   "packages/get-dependencies/tsconfig.json" => Object {
     "offset": 268842,
@@ -7857,6 +7920,7 @@ index 0000000..fce45b2
 +  ]
 +}",
     "source": "packages/get-dependencies/tsconfig.json",
+    "target": "packages/get-dependencies/tsconfig.json",
   },
   "prettier.config.js" => Object {
     "offset": 269208,
@@ -7875,6 +7939,7 @@ index 0000000..5237db9
 +  printWidth: 80,
 +};",
     "source": "prettier.config.js",
+    "target": "prettier.config.js",
   },
   "tsconfig.json" => Object {
     "offset": 269505,
@@ -7911,6 +7976,7 @@ index 0000000..015cfb2
 +}
 ",
     "source": "tsconfig.json",
+    "target": "tsconfig.json",
   },
 }
 `;
