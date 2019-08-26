@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportAllFrom.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportAllFrom.js",{"inDetail":false}] 1`] = `
 Map {
   "./exportNamed" => Map {
     "a" => Object {
@@ -11,7 +11,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportAllFrom.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportAllFrom.js",{"inDetail":true}] 1`] = `
 Map {
   "./exportNamed" => Map {
     "a" => Object {
@@ -22,7 +22,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportDefaultAliasFrom.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportDefaultAliasFrom.js",{"inDetail":false}] 1`] = `
 Map {
   "./exportDefault" => Map {
     "default" => Object {
@@ -35,7 +35,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportDefaultAliasFrom.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportDefaultAliasFrom.js",{"inDetail":true}] 1`] = `
 Map {
   "./exportDefault" => Map {
     "default" => Object {
@@ -48,7 +48,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportNamedFrom.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportNamedFrom.js",{"inDetail":false}] 1`] = `
 Map {
   "./exportNamed" => Map {
     "a" => Object {
@@ -61,7 +61,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/exportNamedFrom.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/exportNamedFrom.js",{"inDetail":true}] 1`] = `
 Map {
   "./exportNamed" => Map {
     "a" => Object {
@@ -74,11 +74,11 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/noExports.js",{"inDetail":false}) 1`] = `Map {}`;
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/noExports.js",{"inDetail":false}] 1`] = `Map {}`;
 
-exports[`getEs6Dependents() - ("source","opts") - ("exports/noExports.js",{"inDetail":true}) 1`] = `Map {}`;
+exports[`getEs6Dependents() - (["source", "opts"]) - ["exports/noExports.js",{"inDetail":true}] 1`] = `Map {}`;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importAlias.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importAlias.js",{"inDetail":false}] 1`] = `
 Map {
   "./base" => Map {
     "a" => Object {
@@ -89,7 +89,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importAlias.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importAlias.js",{"inDetail":true}] 1`] = `
 Map {
   "./base" => Map {
     "a" => Object {
@@ -100,7 +100,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importAll.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importAll.js",{"inDetail":false}] 1`] = `
 Map {
   "./base" => Map {
     "*" => Object {
@@ -111,7 +111,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importAll.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importAll.js",{"inDetail":true}] 1`] = `
 Map {
   "./base" => Map {
     "*" => Object {
@@ -122,7 +122,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importDefault.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importDefault.js",{"inDetail":false}] 1`] = `
 Map {
   "./base" => Map {
     "default" => Object {
@@ -133,7 +133,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importDefault.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importDefault.js",{"inDetail":true}] 1`] = `
 Map {
   "./base" => Map {
     "default" => Object {
@@ -144,7 +144,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importNamed.js",{"inDetail":false}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importNamed.js",{"inDetail":false}] 1`] = `
 Map {
   "./base" => Map {
     "a" => Object {
@@ -155,7 +155,7 @@ Map {
 }
 `;
 
-exports[`getEs6Dependents() - ("source","opts") - ("imports/importNamed.js",{"inDetail":true}) 1`] = `
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importNamed.js",{"inDetail":true}] 1`] = `
 Map {
   "./base" => Map {
     "a" => Object {

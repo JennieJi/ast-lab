@@ -1,4 +1,8 @@
-module.exports = {
-  filterDependents: require('./filterDependents'),
-  getExports: require('./es6Detect/getExports')
+import filterDependents from './filterDependents';
+import getExports from './es6Detect/getExports';
+export * from './types';
+
+export {
+  filterDependents,
+  getExports,
 };
