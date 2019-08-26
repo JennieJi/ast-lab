@@ -1,7 +1,8 @@
 import path from 'path';
+import fs from 'fs';
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
-import _getEs6Dependents from '../src/es6Detect';
+import _getEs6Dependents from '../src/es6Detect/getEs6Dependents';
 import resolveModulePath from '../src/resolveModulePath';
 
 const FIXTURE_DIR = 'test/__fixtures__';
@@ -10,8 +11,11 @@ function getEs6Dependents(file: string, opts: any) {
   return _getEs6Dependents(path.resolve(FIXTURE_DIR, file), opts);
 }
 
-function resolveImports(mod: string) {
-  return resolveModulePath(mod, path.resolve(FIXTURE_DIR, 'imports'));
+function loader(dir: string) {
+  return (mod: string) => {
+    const realpath = resolveModulePath(mod, path.resolve(FIXTURE_DIR, dir));
+    return realpath ? fs.readFileSync(realpath, 'utf-8') : '';
+  };
 }
 enumerateArgsTestFunction(
   getEs6Dependents,
@@ -23,14 +27,11 @@ enumerateArgsTestFunction(
     'imports/importDefault.js',
   ])
   .arg('opts', [
-    { inDetail: false, resolve: resolveImports },
-    { inDetail: true, resolve: resolveImports }
+    { inDetail: false, loader: loader('imports') },
+    { inDetail: true,  loader: loader('imports') }
   ])
 );
 
-function resolveExports(mod: string) {
-  return resolveModulePath(mod, path.resolve(FIXTURE_DIR, 'exports'));
-}
 enumerateArgsTestFunction(
   getEs6Dependents,
   configArgs()
@@ -41,7 +42,7 @@ enumerateArgsTestFunction(
     'exports/noExports.js'
   ])
   .arg('opts', [
-    { inDetail: false, resolve: resolveExports },
-    { inDetail: true, resolve: resolveExports }
+    { inDetail: false,  loader: loader('exports') },
+    { inDetail: true,  loader: loader('exports') }
   ])
 );

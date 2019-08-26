@@ -2,7 +2,8 @@
   "name": "get-dependencies",
   "version": "1.0.0-alpha",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"

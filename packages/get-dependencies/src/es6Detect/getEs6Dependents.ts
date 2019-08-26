@@ -1,7 +1,7 @@
 // @ts-ignore
 import Walker from 'node-source-walk';
 import { Node, ModuleSpecifier, Program } from 'estree';
-import { Dependents, ModuleImported } from '../types';
+import { Dependents, ModuleImported, Loader } from '../types';
 // import getPatternIdentifiers from './getPatternIdentifiers';
 import fs from 'fs';
 import _importSpecifier2Dependents from './importSpecifier2Dependents';
@@ -10,8 +10,7 @@ import exportSpecifier2Dependents from './exportSpecifier2Dependents';
 
 type Options = {
   inDetail?: boolean,
-  resolve: (mod: string) => string | void,
-  loader?: (file: string) => string
+  loader?: Loader
 }
 
 /**
@@ -25,7 +24,6 @@ export default function getEs6Dependents(
   file: string,
   {
     inDetail,
-    resolve,
     loader: _loader
   }: Options): Dependents {
   const walkerIns = new Walker();
@@ -41,7 +39,7 @@ export default function getEs6Dependents(
 
   const ast: Program = walkerIns.parse(src).program;
   const importSpecifier2Dependents = _importSpecifier2Dependents(inDetail);
-  const findNodeExports = (ast: Node) => astFindExports(ast, { resolve, loader });
+  const findNodeExports = (ast: Node) => astFindExports(ast, { loader });
   ast.body.forEach((node: Node) => {
     switch (node.type) {
       case 'ImportDeclaration':{

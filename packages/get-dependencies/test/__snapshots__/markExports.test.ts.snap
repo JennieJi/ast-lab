@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`markExports() all exports should not be overwritten - ("marked","source","markExports") - ({},"a",{}) 1`] = `
+exports[`markExports() all exports should not be overwritten - (["marked", "source", "markExports"]) - [{},"a",{}] 1`] = `
 Map {
   "a" => true,
 }
 `;
 
-exports[`markExports() all exports should not be overwritten - ("marked","source","markExports") - ({},"a",null) 1`] = `
+exports[`markExports() all exports should not be overwritten - (["marked", "source", "markExports"]) - [{},"a",null] 1`] = `
 Map {
   "a" => true,
 }
 `;
 
-exports[`markExports() all exports should not be overwritten - ("marked","source","markExports") - ({},"a",true) 1`] = `
+exports[`markExports() all exports should not be overwritten - (["marked", "source", "markExports"]) - [{},"a",true] 1`] = `
 Map {
   "a" => true,
 }
 `;
 
-exports[`markExports() exports should append and dedupe - ("marked","source","markExports") - ({},"a",{}) 1`] = `
+exports[`markExports() exports should append and dedupe - (["marked", "source", "markExports"]) - [{},"a",{}] 1`] = `
 Map {
   "a" => Set {
     "a1",
@@ -27,7 +27,7 @@ Map {
 }
 `;
 
-exports[`markExports() exports should append and dedupe - ("marked","source","markExports") - ({},"a",{}) 2`] = `
+exports[`markExports() exports should append and dedupe - (["marked", "source", "markExports"]) - [{},"a",{}] 2`] = `
 Map {
   "a" => Set {
     "a1",
@@ -37,7 +37,7 @@ Map {
 }
 `;
 
-exports[`markExports() limited exports should be overwritten by all exports - ("marked","source","markExports") - ({},"a",{}) 1`] = `
+exports[`markExports() limited exports should be overwritten by all exports - (["marked", "source", "markExports"]) - [{},"a",{}] 1`] = `
 Map {
   "a" => Set {
     "a1",
@@ -47,13 +47,13 @@ Map {
 }
 `;
 
-exports[`markExports() limited exports should be overwritten by all exports - ("marked","source","markExports") - ({},"a",true) 1`] = `
+exports[`markExports() limited exports should be overwritten by all exports - (["marked", "source", "markExports"]) - [{},"a",true] 1`] = `
 Map {
   "a" => true,
 }
 `;
 
-exports[`markExports() no exports should be overwritten by limited exports - ("marked","source","markExports") - ({},"a",{}) 1`] = `
+exports[`markExports() no exports should be overwritten by limited exports - (["marked", "source", "markExports"]) - [{},"a",{}] 1`] = `
 Map {
   "a" => Set {
     "a1",
@@ -61,7 +61,7 @@ Map {
 }
 `;
 
-exports[`markExports() no exports should be overwritten by limited exports - ("marked","source","markExports") - ({},"a",{}) 2`] = `
+exports[`markExports() no exports should be overwritten by limited exports - (["marked", "source", "markExports"]) - [{},"a",{}] 2`] = `
 Map {
   "a" => Set {
     "a1",
@@ -71,13 +71,13 @@ Map {
 }
 `;
 
-exports[`markExports() no exports should be overwritten by limited exports - ("marked","source","markExports") - ({},"a",null) 1`] = `
+exports[`markExports() no exports should be overwritten by limited exports - (["marked", "source", "markExports"]) - [{},"a",null] 1`] = `
 Map {
   "a" => null,
 }
 `;
 
-exports[`markExports() no exports should not mark - ("marked","source","markExports") - ({},"a",null) 1`] = `
+exports[`markExports() no exports should not mark - (["marked", "source", "markExports"]) - [{},"a",null] 1`] = `
 Map {
   "a" => null,
 }

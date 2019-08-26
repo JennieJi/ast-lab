@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import getEs6Dependents from './es6Detect/getEs6Dependents';
 import resolveModulePath from './resolveModulePath';
 import markDependents from './markDependents';
@@ -14,8 +15,10 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
   const resolve = (mod: string) => resolveModulePath(mod, path.dirname(source), options);
   const deps = getEs6Dependents(source, {
     inDetail: false,
-    resolve,
-    loader
+    loader(file: string) {
+      const realPath = resolve(file);
+      return realPath ? loader ? loader(file) : fs.readFileSync(realPath, 'utf8') : '';
+    }
   });
   visited.add(source);
   // console.log('marking == ', node);

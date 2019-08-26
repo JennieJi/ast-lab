@@ -1,12 +1,12 @@
 // @ts-ignore
 import Walker from 'node-source-walk';
-import { Node, ModuleSpecifier, Program } from 'estree';
+import { Node, ModuleSpecifier } from 'estree';
 import exportSpecifier2Dependents from './exportSpecifier2Dependents';
 import getPatternIdentifiers from './getPatternIdentifiers';
+import { Loader } from '../types';
 
 export type Options = {
-  resolve: (mod: string) => string | void,
-  loader: (file: string) => string
+  loader: Loader
 }
 
 export function astFindExports(node: Node, opts: Options): string[] {
@@ -48,19 +48,14 @@ export default function getExports(
   opts: Options
 ): string[] {
   const {
-    resolve,
     loader
   } = opts;
-  const realPath = resolve(src);
-  if (!realPath) {
-    throw new Error('src cannot be found!');
-  }
-  const fileContent = loader(realPath);
+  const fileContent = loader(src);
   if (!fileContent) {
     return [];
   }
-
-  const ast: Program = new Walker().parse(fileContent).program;
+  const insWalker = new Walker();
+  const { program: ast } = insWalker.parse(fileContent);
   return ast.body.reduce(
     (ret: string[], node: Node) =>
       ret.concat(astFindExports(node, opts)),
