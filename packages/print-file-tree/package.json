@@ -1,5 +1,5 @@
 {
-  "name": "cli-file-tree",
+  "name": "print-file-tree",
   "version": "1.0.0-alpha",
   "description": "Find git changes affected files",
   "keywords": [
@@ -11,10 +11,12 @@
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "files": [
     "dist"
   ],
   "scripts": {
+    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
     "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }
