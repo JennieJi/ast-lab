@@ -23,7 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
+    "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
   "dependencies": {

@@ -17,7 +17,7 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
     inDetail: false,
     loader(file: string) {
       const realPath = resolve(file);
-      return realPath ? loader ? loader(file) : fs.readFileSync(realPath, 'utf8') : '';
+      return realPath ? loader ? loader(realPath) : fs.readFileSync(realPath, 'utf8') : '';
     }
   });
   visited.add(source);
