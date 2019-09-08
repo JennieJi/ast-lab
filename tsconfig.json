@@ -13,12 +13,13 @@
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "downlevelIteration": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
   },
   "exclude": [
     "**/node_modules",
     "**/dist",
     "**/*.test.ts",
-    "**/types"
+    "**/types",
+    "**/__tests__"
   ]
 }

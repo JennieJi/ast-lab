@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
+    "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
   "keywords": [
@@ -14,7 +14,6 @@
     "change"
   ],
   "files": [
-    "./bin",
     "./dist"
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",

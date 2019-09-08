@@ -4,7 +4,7 @@ import { getGitDiffs } from './getGitDiffs';
 import exec from './exec';
 
 function gitRoot(){
-  return exec('git rev-parse --show-toplevel');
+  return exec('git rev-parse --show-toplevel').trim();
 }
 
 function getRevisionFile(revision: string, file: string) {
@@ -12,7 +12,7 @@ function getRevisionFile(revision: string, file: string) {
     const ret = exec(`git show ${revision}:${file}`);
     return ret;
   } catch(e) {
-    console.warn(e);
+    console.warn(`WARN ${file} ${revision}`);
     return '';
   }
 }
@@ -22,8 +22,8 @@ function getBeforeRevisionFile(revision: string, file: string) {
 }
 
 
- export function getTrackedFiles(paths?: string[]) {
-  const raw = exec(`git ls-tree -r master --name-only ${paths ? paths.join(' ')  : ''}`);
+ export function getTrackedFiles(revision: string, paths?: string[]) {
+  const raw = exec(`git ls-tree -r ${revision} --name-only ${paths ? paths.join(' ')  : ''}`);
   return raw.split('\n');
 }
 
@@ -80,14 +80,18 @@ function gitChangesAffected(
   options: Options = {} 
 ) {
   const { extensions, paths, transform } = options;
+  exec(`git checkout ${commit}`);
   const exportMap = getDiffExportMap(commit, { 
     transform,
     extensions
   });
-  const sources = getTrackedFiles(paths);
+  const sources = getTrackedFiles(commit, paths);
+  const root = gitRoot();
   return filterDependents(sources, exportMap, {
     ...options,
-    loader: (file: string) => {
+    loader: (absPath: string) => {
+      const file = absPath.startsWith(root) ? absPath.substring(root.length + 1) : absPath;
+      console.log('filterDependents loader: ', file);
       const raw = getRevisionFile(commit, file);
       return transform ? transform(raw) : raw;
     }
