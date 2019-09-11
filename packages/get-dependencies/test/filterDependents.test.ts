@@ -49,6 +49,7 @@ describe('filterDependents()', () => {
     ]),
     'imports'
   );
+
   enumerateArgsTestFunction(
     filterDependents.bind(null, 'exports'),
     configArgs()
@@ -64,5 +65,54 @@ describe('filterDependents()', () => {
       { './exportDefault': ['default'] }
     ]),
     'exports from'
+  );
+
+  enumerateArgsTestFunction(
+    filterDependents.bind(null, 'module-alias'),
+    configArgs()
+    .arg('sources', [
+      ['unrelated-folder.js'],
+      ['unrelated-name.js'],
+    ])
+    .arg('targets', [
+      { './a': ['default'] }
+    ])
+    .arg('options', [{
+      alias: {
+        'alias-folder': './',
+        'alias-a': './a'
+      }
+    }]),
+    'module alias'
+  );
+  
+  enumerateArgsTestFunction(
+    filterDependents.bind(null, 'module-directory'),
+    configArgs()
+    .arg('sources', [
+      ['a.js', 'b.js'],
+    ])
+    .arg('targets', [
+      { './a': ['default'] }
+    ])
+    .arg('options', [{
+      moduleDirectory: ['../']
+    }]),
+    'module alias'
+  );
+
+  enumerateArgsTestFunction(
+    filterDependents.bind(null, 'circular'),
+    configArgs()
+    .arg('sources', [
+      ['a.js', 'b.js', 'c.js'],
+    ])
+    .arg('targets', [
+      { './a': ['default'] }
+    ])
+    .arg('options', [{
+      moduleDirectory: ['../']
+    }]),
+    'circular'
   );
 });

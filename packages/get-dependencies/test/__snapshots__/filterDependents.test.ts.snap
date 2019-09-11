@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`filterDependents() circular - (["sources", "targets", "options"]) - [["a.js","b.js","c.js"],{"./a":["default"]},{"moduleDirectory":["../"]}] 1`] = `
+Array [
+  "/__fixtures__/circular/a.js",
+  "/__fixtures__/circular/b.js",
+  "/__fixtures__/circular/c.js",
+]
+`;
+
 exports[`filterDependents() exports from - (["sources", "targets"]) - [["exportAllFrom.js"],{"./exportDefault":["default"]}] 1`] = `Array []`;
 
 exports[`filterDependents() exports from - (["sources", "targets"]) - [["exportAllFrom.js"],{"./exportNamed":["a"]}] 1`] = `
@@ -67,3 +75,22 @@ Array [
 `;
 
 exports[`filterDependents() imports - (["sources", "targets"]) - [["noImports.js"],{"./base":["a","default"]}] 1`] = `Array []`;
+
+exports[`filterDependents() module alias - (["sources", "targets", "options"]) - [["a.js","b.js"],{"./a":["default"]},{"moduleDirectory":["../"]}] 1`] = `
+Array [
+  "/__fixtures__/module-directory/a.js",
+  "/__fixtures__/module-directory/b.js",
+]
+`;
+
+exports[`filterDependents() module alias - (["sources", "targets", "options"]) - [["unrelated-folder.js"],{"./a":["default"]},{"alias":{"alias-folder":"./","alias-a":"./a"}}] 1`] = `
+Array [
+  "/__fixtures__/module-alias/unrelated-folder.js",
+]
+`;
+
+exports[`filterDependents() module alias - (["sources", "targets", "options"]) - [["unrelated-name.js"],{"./a":["default"]},{"alias":{"alias-folder":"./","alias-a":"./a"}}] 1`] = `
+Array [
+  "/__fixtures__/module-alias/unrelated-name.js",
+]
+`;
