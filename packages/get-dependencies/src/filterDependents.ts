@@ -5,10 +5,18 @@ import resolveModulePath from './resolveModulePath';
 import markDependents from './markDependents';
 import { PathNode,  Exports, Options } from './types';
 
-type Visited = Set<string>;
+type VisitedNode = Set<PathNode>;
+type Visited = Map<string, VisitedNode>;
 
 function visitPath(visited: Visited, marked: Exports, node: PathNode, options: Options) {
   const { importModule: source } = node;
+  if (visited.has(source)) {
+    (visited.get(source) as VisitedNode).add(node);
+    return;
+  } else {
+    visited.set(source, new Set([node]));
+  }
+
   const {
     loader,
   } = options;
@@ -20,11 +28,6 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
       return realPath ? loader ? loader(realPath) : fs.readFileSync(realPath, 'utf8') : '';
     }
   });
-  visited.add(source);
-  // console.log('marking == ', node);
-  markDependents(marked, node);
-  // console.log('deps == ', deps);
-  // console.log('marked == ', marked);
   deps.forEach((i2e, mod) => {
     const importModule = resolve(mod);
     if (!importModule) { return; }
@@ -41,29 +44,26 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
 export default function filterDependents(sources: string[], targets: Exports, options: Options = {}): string[] {
   // console.log('===============================');
   const marked = new Map(targets.entries());
-  const visited: Visited = new Set();
-  const filtered: Set<string> = sources
-    .reduce((ret, s) => {
-      const sourcePath = resolveModulePath(s, path.dirname(s), options);
-      if (!sourcePath) {
-        return ret;
-      }
-      if (!visited.has(sourcePath)) {
-        const rootNode = {
-          source: null,
-          importModule: sourcePath,
-          i2e: null,
-          prev: null
-        };
-        visitPath(visited, marked, rootNode, options);
-      }
-      // console.log('marked == ', marked);
-      // console.log('source == ', sourcePath);
-      if (marked.has(sourcePath)) {
-        // console.log('added == ', sourcePath);
-        ret.add(sourcePath);
-      }
-      return ret;
-    }, new Set() as Set<string>);
-  return Array.from(filtered);
+  const visited: Visited = new Map();
+  const resolvedSourcePaths = sources.map(s => {
+    const sourcePath = resolveModulePath(s, path.dirname(s), options);
+    if (sourcePath && !visited.has(sourcePath)) {
+      const rootNode = {
+        source: null,
+        importModule: sourcePath,
+        i2e: null,
+        prev: null
+      };
+      visitPath(visited, marked, rootNode, options);
+    }
+    return sourcePath;
+  })
+  targets.forEach((_exported, mod) => {
+    const nodes = visited.get(mod);
+    if (nodes) {
+      nodes.forEach(n => markDependents(marked, n));
+    }
+  });
+  return (resolvedSourcePaths
+  .filter(s => s && marked.has(s)) as string[]);
 }
