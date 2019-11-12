@@ -19,8 +19,12 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
 
   const {
     loader,
+    extensions
   } = options;
-  const resolve = (mod: string) => resolveModulePath(mod, path.dirname(source), options);
+  const basePath = path.dirname(source)
+  const resolve = (mod: string) => {
+    return resolveModulePath(mod, basePath, options);
+  };
   const deps = getEs6Dependents(source, {
     inDetail: false,
     loader(file: string) {
@@ -29,6 +33,9 @@ function visitPath(visited: Visited, marked: Exports, node: PathNode, options: O
     }
   });
   deps.forEach((i2e, mod) => {
+    /**
+     * @TODO extension validation, avoid resolving source that didn't transformed
+     */
     const importModule = resolve(mod);
     if (!importModule) { return; }
     const nextNode: PathNode = {
@@ -46,7 +53,8 @@ export default function filterDependents(sources: string[], targets: Exports, op
   const marked = new Map(targets.entries());
   const visited: Visited = new Map();
   const resolvedSourcePaths = sources.map(s => {
-    const sourcePath = resolveModulePath(s, path.dirname(s), options);
+    const basePath = path.dirname(s);
+    const sourcePath = resolveModulePath(s, basePath, options);
     if (sourcePath && !visited.has(sourcePath)) {
       const rootNode = {
         source: null,

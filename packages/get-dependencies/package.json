@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "node-source-walk": "^4.2.0",
-    "resolve": "^1.11.1"
+    "resolve": "^1.12.0"
   }
 }

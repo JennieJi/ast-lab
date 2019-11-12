@@ -1,10 +1,16 @@
+import fs from 'fs';
 import path from 'path';
-import { getExports, filterDependents, Alias, ModuleDirectory, Loader } from 'get-dependencies';
+import { getExports, filterDependents, Alias, ModuleDirectory } from 'get-dependencies';
 import { getGitDiffs } from './getGitDiffs';
 import exec from './exec';
 
+type Transform = (raw: string, path: string) => string;
+
 function gitRoot(){
   return exec('git rev-parse --show-toplevel').trim();
+}
+function getAbsolutePath(relativePath: string) {
+  return path.resolve(gitRoot(), relativePath);
 }
 
 function getRevisionFile(revision: string, file: string) {
@@ -29,13 +35,11 @@ function getBeforeRevisionFile(revision: string, file: string) {
 
 type GetDiffExportMapOptions = {
   extensions?: string[],
-  transform?: Loader
+  transform?: Transform
 };
 export function getDiffExportMap(commit: string, { extensions, transform }: GetDiffExportMapOptions) {
   const extToken = new RegExp(`.(${(extensions || ['js', 'jsx', 'ts', 'tsx']).join('|')})$`);
   const diffs = getGitDiffs(commit);
-  const rootPath = gitRoot();
-  const resolve = (relativePath: string) => path.resolve(rootPath, relativePath);
   const exportMap = new Map();
   diffs.forEach(({ target, source }) => {
     if (extToken && !extToken.test(target)) {
@@ -44,16 +48,16 @@ export function getDiffExportMap(commit: string, { extensions, transform }: GetD
     const targetExports = getExports(target, {
       loader: (file: string) => {
         const raw = getRevisionFile(commit, file);
-        return transform ? transform(raw) : raw;
+        return transform ? transform(raw, file) : raw;
       }
     });
     const sourceExports = getExports(source, {
       loader: (file: string) => {
         const raw = getBeforeRevisionFile(commit, file);
-        return transform ? transform(raw) : raw;
+        return transform ? transform(raw, file) : raw;
       }
     });
-    const absoluteTargetPath = resolve(target);
+    const absoluteTargetPath = getAbsolutePath(target);
     if (source === target) {
       exportMap.set(absoluteTargetPath, new Set([
         ...targetExports,
@@ -61,7 +65,7 @@ export function getDiffExportMap(commit: string, { extensions, transform }: GetD
       ]));
     } else {
       exportMap.set(absoluteTargetPath, new Set(targetExports));
-      exportMap.set(resolve(source), new Set(sourceExports));
+      exportMap.set(getAbsolutePath(source), new Set(sourceExports));
     }
   });
   return exportMap;
@@ -72,7 +76,7 @@ type Options = {
   moduleDirectory?: ModuleDirectory,
   extensions?: string[],
   alias?: Alias,
-  transform?: Loader
+  transform?: Transform,
 };
 
 function gitChangesAffected(
@@ -85,15 +89,12 @@ function gitChangesAffected(
     transform,
     extensions
   });
-  const sources = getTrackedFiles(commit, paths);
-  const root = gitRoot();
+  const sources = getTrackedFiles(commit, paths).map(getAbsolutePath);
   return filterDependents(sources, exportMap, {
     ...options,
-    loader: (absPath: string) => {
-      const file = absPath.startsWith(root) ? absPath.substring(root.length + 1) : absPath;
-      console.log('filterDependents loader: ', file);
-      const raw = getRevisionFile(commit, file);
-      return transform ? transform(raw) : raw;
+    loader(file: string) {
+      const raw = fs.readFileSync(file, 'utf-8');
+      return transform ? transform(raw, file) : raw;
     }
   });
 }
