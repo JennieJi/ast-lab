@@ -11,6 +11,9 @@ export default function resolveModulePath(mod: string, basedir: string, { alias,
   if (!mod || isCore(mod)) {
     return;
   }
+  if (isRealFile(mod)) {
+    return mod;
+  }
   if (alias) {
     mod = replaceAlias(alias)(mod);
   }
@@ -18,7 +21,7 @@ export default function resolveModulePath(mod: string, basedir: string, { alias,
     const result = resolve.sync(mod, {
       moduleDirectory,
       basedir,
-      extensions,
+      extensions: extensions || ['.js', '.jsx', '.ts', '.tsx'],
     });
 
     if (!result) {
