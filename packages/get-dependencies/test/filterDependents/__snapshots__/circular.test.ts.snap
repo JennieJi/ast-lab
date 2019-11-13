@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`circular - (["sources", "targets", "options"]) - [["a.js","b.js","c.js"],{"./a":["default"]},{"moduleDirectory":["../"]}] 1`] = `
+Array [
+  "/circular/a.js",
+  "/circular/b.js",
+  "/circular/c.js",
+]
+`;

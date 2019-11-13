@@ -1,39 +1,35 @@
-import resolve from 'resolve';
-import fs from 'fs';
+import enhancedResolve from 'enhanced-resolve';
+import path from 'path';
 
-import replaceAlias from './replaceAlias';
 import isCore from './isCore';
 import isThirdParty from './isThirdParty';
-import isRealFile from './isRealFile';
 import { Options } from './types';
 
-export default function resolveModulePath(mod: string, basedir: string, { alias, moduleDirectory, extensions }: Options = {}): string | void {
+export default async function resolveModulePath(mod: string, basedir: string, { alias, moduleDirectory: modules, extensions }: Options = {}): Promise<string | void> {
   if (!mod || isCore(mod)) {
     return;
   }
-  if (isRealFile(mod)) {
+  if (path.isAbsolute(mod)) {
     return mod;
   }
-  if (alias) {
-    mod = replaceAlias(alias)(mod);
-  }
-  try {
-    const result = resolve.sync(mod, {
-      moduleDirectory,
-      basedir,
-      extensions: extensions || ['.js', '.jsx', '.ts', '.tsx'],
-    });
-
-    if (!result) {
-      console.log(`Couldn't find module ${mod}!`)
-      return;
+  const resolver = enhancedResolve.create({
+    extensions: extensions,
+    modules,
+    alias
+  });
+  const result = await new Promise((resolve, reject) => resolver(basedir, mod, (err: Error, res: string | undefined) => {
+    if (err) {
+      console.warn(err);
+      return reject(err);
     }
-    if (isThirdParty(result) || !isRealFile(result)) {
-      return;
+    if (!res) {
+      console.log(`Couldn't find module ${mod}!`);
+      return resolve();
     }
-    return fs.realpathSync(result);
-  } catch(err) {
-    console.log(err);
-    return;
-  }
+    if (isThirdParty(res)) {
+      return resolve();
+    }
+    return resolve(res);
+  })) as string | void;
+  return result;
 }

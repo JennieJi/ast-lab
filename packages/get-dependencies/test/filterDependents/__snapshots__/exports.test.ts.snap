@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportAllFrom.js"],{"./exportDefault":["default"]}] 1`] = `
+Array [
+  "/exports/exportDefault.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportAllFrom.js"],{"./exportNamed":["a"]}] 1`] = `
+Array [
+  "/exports/exportNamed.js",
+  "/exports/exportAllFrom.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportDefaultAliasFrom.js"],{"./exportDefault":["default"]}] 1`] = `
+Array [
+  "/exports/exportDefault.js",
+  "/exports/exportDefaultAliasFrom.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportDefaultAliasFrom.js"],{"./exportNamed":["a"]}] 1`] = `
+Array [
+  "/exports/exportNamed.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportNamedFrom.js"],{"./exportDefault":["default"]}] 1`] = `
+Array [
+  "/exports/exportDefault.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","exportNamedFrom.js"],{"./exportNamed":["a"]}] 1`] = `
+Array [
+  "/exports/exportNamed.js",
+  "/exports/exportNamedFrom.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","noExports.js"],{"./exportDefault":["default"]}] 1`] = `
+Array [
+  "/exports/exportDefault.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js","noExports.js"],{"./exportNamed":["a"]}] 1`] = `
+Array [
+  "/exports/exportNamed.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js"],{"./exportDefault":["default"]}] 1`] = `
+Array [
+  "/exports/exportDefault.js",
+]
+`;
+
+exports[`exports from - (["sources", "targets"]) - [["./exportNamed.js","./exportDefault.js"],{"./exportNamed":["a"]}] 1`] = `
+Array [
+  "/exports/exportNamed.js",
+]
+`;

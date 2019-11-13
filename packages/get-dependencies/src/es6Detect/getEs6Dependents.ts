@@ -20,15 +20,15 @@ type Options = {
  * @param [inDetail] {boolean} NOT FULLY SUPPORTED. Get affected exports
  * @return {Map<string, Set<name> | null>}
  */
-export default function getEs6Dependents(
+export default async function getEs6Dependents(
   file: string,
   {
     inDetail,
     loader: _loader
-  }: Options): Dependents {
+  }: Options): Promise<Dependents> {
   const walkerIns = new Walker();
-  const loader = _loader || ((file: string) => fs.readFileSync(file, 'utf8'));
-  const src = loader(file);
+  const loader = _loader || ((file: string) => Promise.resolve(fs.readFileSync(file, 'utf8')));
+  const src = await loader(file);
   let dependencies: Dependents = new Map();
   if (src === '') {
     return dependencies;
@@ -40,6 +40,7 @@ export default function getEs6Dependents(
   const ast: Program = walkerIns.parse(src).program;
   const importSpecifier2Dependents = _importSpecifier2Dependents(inDetail);
   const findNodeExports = (ast: Node) => astFindExports(ast, { loader });
+  let queue = [] as Promise<any>[];
   ast.body.forEach((node: Node) => {
     switch (node.type) {
       case 'ImportDeclaration':{
@@ -67,19 +68,20 @@ export default function getEs6Dependents(
         break;
       }
       case 'ExportAllDeclaration': {
-        const exported = findNodeExports(node);
-        if (node.source && node.source.value) {
-          dependencies.set(
-            node.source.value as string,
-            new Map(exported.map((name: string) => [
-              name,
-              {
-                alias: null,
-                affectedExports: new Set()
-              }
-            ]))
-          );
-        }
+        queue.push(findNodeExports(node).then(exported => {
+          if (node.source && node.source.value) {
+            dependencies.set(
+              node.source.value as string,
+              new Map(exported.map((name: string) => [
+                name,
+                {
+                  alias: null,
+                  affectedExports: new Set()
+                }
+              ]))
+            );
+          }
+        }));
         break;
       }
     }
@@ -103,6 +105,7 @@ export default function getEs6Dependents(
   //       break;
   //   }
   // });
+  await Promise.all(queue);
 
   return dependencies;
 }

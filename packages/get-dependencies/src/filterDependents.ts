@@ -1,77 +1,100 @@
 import path from 'path';
 import fs from 'fs';
+import { DEFAULT_EXTENSIONS } from './constants';
 import getEs6Dependents from './es6Detect/getEs6Dependents';
 import resolveModulePath from './resolveModulePath';
 import markDependents from './markDependents';
-import { PathNode,  Exports, Options } from './types';
+import hasExt from './hasExt';
+import { PathNode,  Exports, Options, Visited, VisitedNode } from './types';
 
-type VisitedNode = Set<PathNode>;
-type Visited = Map<string, VisitedNode>;
+function skipFile(file: string, extensions: string[] | void){
+  return extensions && !hasExt(file, extensions) && hasExt(file);
+}
 
-function visitPath(visited: Visited, marked: Exports, node: PathNode, options: Options) {
-  const { importModule: source } = node;
-  if (visited.has(source)) {
-    (visited.get(source) as VisitedNode).add(node);
+function addVisitedNode(visited: Visited, node: PathNode) {
+  const { importModule } = node;
+  if (visited.has(importModule)) {
+    (visited.get(importModule) as VisitedNode).push(node);
     return;
   } else {
-    visited.set(source, new Set([node]));
+    visited.set(importModule, [node]);
   }
+}
 
+async function visitPath(visited: Visited, node: PathNode, options: Options) {
   const {
     loader,
     extensions
   } = options;
+  const { importModule: source } = node;
   const basePath = path.dirname(source)
-  const resolve = (mod: string) => {
-    return resolveModulePath(mod, basePath, options);
+  const resolve = async (mod: string) => {
+    try {
+      return await resolveModulePath(mod, basePath, options);
+    } catch (err) {
+      console.info('Visiting node: ', node);
+      console.log(err);
+    }
   };
-  const deps = getEs6Dependents(source, {
+  const deps = await getEs6Dependents(source, {
     inDetail: false,
-    loader(file: string) {
-      const realPath = resolve(file);
+    async loader(file: string) {
+      if (skipFile(file, extensions)) { return ''; }
+      const realPath = await resolve(file);
       return realPath ? loader ? loader(realPath) : fs.readFileSync(realPath, 'utf8') : '';
     }
   });
+  addVisitedNode(visited, node);
+
+  let queue = [] as Promise<any>[];
   deps.forEach((i2e, mod) => {
-    /**
-     * @TODO extension validation, avoid resolving source that didn't transformed
-     */
-    const importModule = resolve(mod);
-    if (!importModule) { return; }
-    const nextNode: PathNode = {
-      source,
-      importModule,
-      i2e,
-      prev: node,
-    };
-    visitPath(visited, marked, nextNode, options);
+    if (skipFile(mod, extensions)) { 
+      return;
+    }
+    queue.push((async () => {
+      const importModule = await resolve(mod);
+      if (!importModule) { return; }
+      const visitedPaths = visited.get(importModule);
+      if (visitedPaths && visitedPaths.find(node => node.source === source)) {
+        return;
+      }
+      const nextNode: PathNode = {
+        source,
+        importModule,
+        i2e,
+        prev: node,
+      };
+      await visitPath(visited, nextNode, options);
+    })())
   });
+  await Promise.all(queue);
 }
 
-export default function filterDependents(sources: string[], targets: Exports, options: Options = {}): string[] {
-  // console.log('===============================');
-  const marked = new Map(targets.entries());
+export default async function filterDependents(sources: string[], targets: Exports, options: Options = {}): Promise<string[]> {
+  // console.log('===============================');
   const visited: Visited = new Map();
-  const resolvedSourcePaths = sources.map(s => {
-    const basePath = path.dirname(s);
-    const sourcePath = resolveModulePath(s, basePath, options);
-    if (sourcePath && !visited.has(sourcePath)) {
+  let resolvedSourcePaths = [] as string[];
+  options = {
+    extensions: DEFAULT_EXTENSIONS,
+    ...options
+  };
+  for(let i = 0; i < sources.length; i++) {
+    const sourcePath = sources[i];
+    if (!sourcePath || !hasExt(sourcePath) || !path.isAbsolute(sourcePath)) {
+      continue;
+    }
+    resolvedSourcePaths.push(sourcePath);
+    if (!visited.has(sourcePath)) {
       const rootNode = {
         source: null,
         importModule: sourcePath,
         i2e: null,
         prev: null
       };
-      visitPath(visited, marked, rootNode, options);
+      await visitPath(visited, rootNode, options);
     }
-    return sourcePath;
-  })
-  targets.forEach((_exported, mod) => {
-    const nodes = visited.get(mod);
-    if (nodes) {
-      nodes.forEach(n => markDependents(marked, n));
-    }
-  });
-  return (resolvedSourcePaths
-  .filter(s => s && marked.has(s)) as string[]);
+  }
+  const marked = new Map(Array.from(targets));
+  markDependents(marked, visited);
+  return resolvedSourcePaths.filter(s => marked.has(s));
 }

@@ -6,14 +6,14 @@ import _getEs6Dependents from '../src/es6Detect/getEs6Dependents';
 import resolveModulePath from '../src/resolveModulePath';
 
 const FIXTURE_DIR = 'test/__fixtures__';
-
+const getPath = (file: string) => path.resolve(FIXTURE_DIR, file);
 function getEs6Dependents(file: string, opts: any) {
-  return _getEs6Dependents(path.resolve(FIXTURE_DIR, file), opts);
+  return _getEs6Dependents(getPath(file), opts);
 }
 
 function loader(dir: string) {
-  return (mod: string) => {
-    const realpath = resolveModulePath(mod, path.resolve(FIXTURE_DIR, dir));
+  return async (mod: string) => {
+    const realpath = await resolveModulePath(mod, getPath(dir));
     return realpath ? fs.readFileSync(realpath, 'utf-8') : '';
   };
 }
