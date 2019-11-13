@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`imports - (["sources", "targets"]) - [["base.js","importAlias.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+  "/imports/importAlias.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js","importAll.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+  "/imports/importAll.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js","importCss.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js","importDefault.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+  "/imports/importDefault.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js","importNamed.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+  "/imports/importNamed.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js","noImports.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+]
+`;
+
+exports[`imports - (["sources", "targets"]) - [["base.js"],{"./base":["a","default"]}] 1`] = `
+Array [
+  "/imports/base.js",
+]
+`;

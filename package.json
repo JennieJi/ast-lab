@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "setup": "npm i && lerna bootstrap",
+    "build": "lerna run build"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
@@ -9,7 +13,7 @@
     "eslint-plugin-jest": "^22.15.2",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
-    "lazy-jest": "0.1.0-beta.6",
+    "lazy-jest": "^0.2.0-alpha",
     "lerna": "^3.15.0",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",

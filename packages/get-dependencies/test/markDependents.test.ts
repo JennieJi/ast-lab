@@ -1,29 +1,36 @@
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
 import _markDependents from '../src/markDependents';
-import { Exports, PathNode } from '../src/types';
+import { Exports, PathNode, ModuleExported } from '../src/types';
 import { ALL_EXPORTS, ALL_MODULES } from '../src/constants';
 
 function makeSimplePath(paths: string[]) {
+  let root = null as PathNode | null;
   return paths.reduce((ret, p, i) => {
-    if (i === paths.length - 1) {
-      return ret;
-    }
-    return {
-      source: p,
-      importModule: paths[i + 1],
+    const source =  paths[i - 1] || null;
+    root = {
+      source,
+      importModule: p,
       i2e: new Map([
         [ALL_MODULES, {
           alias: 'ImportAlias',
           affectedExports: ALL_EXPORTS
         }]
       ]),
-      prev: ret
+      prev: root
     };
-  }, {} as PathNode);
+    ret.set(p, root);
+    return ret;
+  }, new Map());
 }
-function markDependents(marked: Exports, paths: string[]) {
-  return _markDependents(marked, makeSimplePath(paths));
+function objToMap(obj: { [key: string]: ModuleExported }): Exports {
+  return new Map(Object.keys(obj).map(key => [key, obj[key]]));
+}
+function markDependents(marked: { [key: string]: ModuleExported }, paths: string[]) {
+  return _markDependents(
+    objToMap(marked), 
+    makeSimplePath(paths)
+  );
 }
 
 describe('markDependents()', () => {
@@ -33,33 +40,33 @@ describe('markDependents()', () => {
     i2e: null,
     prev: null
   };
-  enumerateArgsTestFunction(
-    _markDependents,
-    configArgs()
-    .arg('marked', [new Map([
-      ['m2', true]
-    ])])
-    .arg('pathNode', [
-      {
-        source: 'import-default',
-        importModule: 'm2',
-        i2e: new Map([
-          ['default', {
-            alias: 'alias',
-            affectedExports: ALL_EXPORTS
+  test('should not mark if end node is not marked', () => {
+    expect(
+      _markDependents(
+        new Map([['m2', true]]),
+        new Map().set(
+          'm3',
+          [{
+            source: 'm2',
+            importModule: 'm3',
+            i2e: new Map([
+              ['default', {
+                alias: 'alias',
+                affectedExports: ALL_EXPORTS
+              }]
+            ]),
+            prev: rootNode
           }]
-        ]),
-        prev: rootNode
-      }
-    ]),
-    'should not mark if end node is not marked'
-  );
+        ),
+      )
+    ).toMatchSnapshot();
+  });
   enumerateArgsTestFunction(
     markDependents,
     configArgs()
-    .arg('marked', [new Map([
-      ['m2', true]
-    ])])
+    .arg('marked', [
+      { m2: true }
+    ])
     .arg('pathNode', [
       ['m1', 'm2', 'm3', 'm4'],
       ['m1', 'm2', 'm3']
@@ -69,12 +76,12 @@ describe('markDependents()', () => {
   enumerateArgsTestFunction(
     markDependents,
     configArgs()
-    .arg('marked', [new Map([
-      ['m4', true]
-    ])])
+    .arg('marked', [
+      { m4: true }
+    ])
     .arg('pathNode', [
       ['m1', 'm2', 'm3', 'm4'],
-      ['b1', 'b2', 'm2'],
+      ['b1', 'b2', 'm4'],
     ]),
     'should mark all paths given'
   );

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filterDependents() filter extensions 1`] = `
+Array [
+  "/imports/importCss.js",
+]
+`;

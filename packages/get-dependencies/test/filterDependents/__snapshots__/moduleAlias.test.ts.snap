@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`module alias - (["sources", "targets", "options"]) - [["./a.js","unrelated-folder.js"],{"./a":["default"]},{"alias":{"alias-folder":"./","alias-a":"./a"}}] 1`] = `
+Array [
+  "/module-alias/a.js",
+  "/module-alias/unrelated-folder.js",
+]
+`;
+
+exports[`module alias - (["sources", "targets", "options"]) - [["./a.js","unrelated-name.js"],{"./a":["default"]},{"alias":{"alias-folder":"./","alias-a":"./a"}}] 1`] = `
+Array [
+  "/module-alias/a.js",
+  "/module-alias/unrelated-name.js",
+]
+`;
