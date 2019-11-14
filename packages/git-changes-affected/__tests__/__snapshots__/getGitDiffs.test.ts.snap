@@ -4,6 +4,7 @@ exports[`git-changes-affected can work 1`] = `
 Map {
   ".eslintignore" => Object {
     "offset": 1,
+    "operation": 1,
     "raw": "
 diff --git a/.eslintignore b/.eslintignore
 new file mode 100644
@@ -18,6 +19,7 @@ index 0000000..40b878d
   },
   ".eslintrc.js" => Object {
     "offset": 179,
+    "operation": 1,
     "raw": "
 diff --git a/.eslintrc.js b/.eslintrc.js
 new file mode 100644
@@ -50,6 +52,7 @@ index 0000000..b4f888d
   },
   ".gitignore" => Object {
     "offset": 737,
+    "operation": 1,
     "raw": "
 diff --git a/.gitignore b/.gitignore
 new file mode 100644
@@ -76,6 +79,7 @@ index 0000000..0792609
   },
   "lerna.json" => Object {
     "offset": 999,
+    "operation": 1,
     "raw": "
 diff --git a/lerna.json b/lerna.json
 new file mode 100644
@@ -94,6 +98,7 @@ index 0000000..7e970f8
   },
   "package-lock.json" => Object {
     "offset": 1237,
+    "operation": 1,
     "raw": "
 diff --git a/package-lock.json b/package-lock.json
 new file mode 100644
@@ -5716,6 +5721,7 @@ index 0000000..f4a41a3
   },
   "package.json" => Object {
     "offset": 209117,
+    "operation": 1,
     "raw": "
 diff --git a/package.json b/package.json
 new file mode 100644
@@ -5746,6 +5752,7 @@ index 0000000..7c521d7
   },
   "packages/get-dependencies/jest.config.js" => Object {
     "offset": 209711,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/jest.config.js b/packages/get-dependencies/jest.config.js
 new file mode 100644
@@ -5761,6 +5768,7 @@ index 0000000..b6b81bf
   },
   "packages/get-dependencies/package-lock.json" => Object {
     "offset": 209973,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/package-lock.json b/packages/get-dependencies/package-lock.json
 new file mode 100644
@@ -5997,6 +6005,7 @@ index 0000000..9c210b9
   },
   "packages/get-dependencies/package.json" => Object {
     "offset": 219094,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/package.json b/packages/get-dependencies/package.json
 new file mode 100644
@@ -6051,6 +6060,7 @@ index 0000000..d87f742
   },
   "packages/get-dependencies/src/constants.ts" => Object {
     "offset": 220308,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/constants.ts b/packages/get-dependencies/src/constants.ts
 new file mode 100644
@@ -6066,6 +6076,7 @@ index 0000000..56a4bbd
   },
   "packages/get-dependencies/src/es6Detect/depsFromExportAll.ts" => Object {
     "offset": 220640,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/depsFromExportAll.ts b/packages/get-dependencies/src/es6Detect/depsFromExportAll.ts
 new file mode 100644
@@ -6099,6 +6110,7 @@ index 0000000..19a3d33
   },
   "packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts" => Object {
     "offset": 221518,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts b/packages/get-dependencies/src/es6Detect/depsFromExportNamed.ts
 new file mode 100644
@@ -6128,6 +6140,7 @@ index 0000000..a3674b7
   },
   "packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts" => Object {
     "offset": 222606,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts b/packages/get-dependencies/src/es6Detect/exportSpecifier2Dependents.ts
 new file mode 100644
@@ -6154,6 +6167,7 @@ index 0000000..0ec5f03
   },
   "packages/get-dependencies/src/es6Detect/getExports.ts" => Object {
     "offset": 223370,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/getExports.ts b/packages/get-dependencies/src/es6Detect/getExports.ts
 new file mode 100644
@@ -6239,6 +6253,7 @@ index 0000000..43b5f4a
   },
   "packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts" => Object {
     "offset": 225888,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts b/packages/get-dependencies/src/es6Detect/getPatternIdentifiers.ts
 new file mode 100644
@@ -6273,6 +6288,7 @@ index 0000000..e8022c9
   },
   "packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts" => Object {
     "offset": 226941,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts b/packages/get-dependencies/src/es6Detect/importSpecifier2Dependents.ts
 new file mode 100644
@@ -6308,6 +6324,7 @@ index 0000000..bba898b
   },
   "packages/get-dependencies/src/es6Detect/index.ts" => Object {
     "offset": 228039,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/es6Detect/index.ts b/packages/get-dependencies/src/es6Detect/index.ts
 new file mode 100644
@@ -6429,6 +6446,7 @@ index 0000000..42ea774
   },
   "packages/get-dependencies/src/filterDependents.ts" => Object {
     "offset": 232075,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/filterDependents.ts b/packages/get-dependencies/src/filterDependents.ts
 new file mode 100644
@@ -6508,6 +6526,7 @@ index 0000000..ae248ab
   },
   "packages/get-dependencies/src/index.ts" => Object {
     "offset": 234504,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/index.ts b/packages/get-dependencies/src/index.ts
 new file mode 100644
@@ -6524,6 +6543,7 @@ index 0000000..c0b8ce1
   },
   "packages/get-dependencies/src/isCore.ts" => Object {
     "offset": 234818,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/isCore.ts b/packages/get-dependencies/src/isCore.ts
 new file mode 100644
@@ -6541,6 +6561,7 @@ index 0000000..4b2555e
   },
   "packages/get-dependencies/src/isRealFile.ts" => Object {
     "offset": 235167,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/isRealFile.ts b/packages/get-dependencies/src/isRealFile.ts
 new file mode 100644
@@ -6559,6 +6580,7 @@ index 0000000..41f2a49
   },
   "packages/get-dependencies/src/isThirdParty.ts" => Object {
     "offset": 235534,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/isThirdParty.ts b/packages/get-dependencies/src/isThirdParty.ts
 new file mode 100644
@@ -6574,6 +6596,7 @@ index 0000000..3330707
   },
   "packages/get-dependencies/src/markDependents.ts" => Object {
     "offset": 235866,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/markDependents.ts b/packages/get-dependencies/src/markDependents.ts
 new file mode 100644
@@ -6620,6 +6643,7 @@ index 0000000..4cf3206
   },
   "packages/get-dependencies/src/markExports.ts" => Object {
     "offset": 237247,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/markExports.ts b/packages/get-dependencies/src/markExports.ts
 new file mode 100644
@@ -6654,6 +6678,7 @@ index 0000000..589cbcf
   },
   "packages/get-dependencies/src/replaceAlias.ts" => Object {
     "offset": 238209,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/replaceAlias.ts b/packages/get-dependencies/src/replaceAlias.ts
 new file mode 100644
@@ -6673,6 +6698,7 @@ index 0000000..d959003
   },
   "packages/get-dependencies/src/resolveModulePath.ts" => Object {
     "offset": 238687,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/resolveModulePath.ts b/packages/get-dependencies/src/resolveModulePath.ts
 new file mode 100644
@@ -6721,6 +6747,7 @@ index 0000000..5d5dec6
   },
   "packages/get-dependencies/src/types/index.ts" => Object {
     "offset": 239829,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/src/types/index.ts b/packages/get-dependencies/src/types/index.ts
 new file mode 100644
@@ -6770,6 +6797,7 @@ index 0000000..4b0f775
   },
   "packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js" => Object {
     "offset": 240963,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js b/packages/get-dependencies/test/__fixtures__/cant-resolve/broken.js
 new file mode 100644
@@ -6783,6 +6811,7 @@ index 0000000..efe038a
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js" => Object {
     "offset": 241305,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js b/packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js
 new file mode 100644
@@ -6808,6 +6837,7 @@ index 0000000..da4c037
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js" => Object {
     "offset": 241731,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js b/packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js
 new file mode 100644
@@ -6828,6 +6858,7 @@ index 0000000..92f746c
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js" => Object {
     "offset": 242139,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js b/packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js
 new file mode 100644
@@ -6849,6 +6880,7 @@ index 0000000..4648de9
   },
   "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js" => Object {
     "offset": 242540,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js b/packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates2.js
 new file mode 100644
@@ -6867,6 +6899,7 @@ index 0000000..9aec022
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js" => Object {
     "offset": 242918,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js b/packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js
 new file mode 100644
@@ -6880,6 +6913,7 @@ index 0000000..695fb85
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefault.js" => Object {
     "offset": 243250,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportDefault.js b/packages/get-dependencies/test/__fixtures__/exports/exportDefault.js
 new file mode 100644
@@ -6895,6 +6929,7 @@ index 0000000..79a081d
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js" => Object {
     "offset": 243587,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js b/packages/get-dependencies/test/__fixtures__/exports/exportDefaultAliasFrom.js
 new file mode 100644
@@ -6908,6 +6943,7 @@ index 0000000..9789caf
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js" => Object {
     "offset": 243963,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js b/packages/get-dependencies/test/__fixtures__/exports/exportDefaultFuncAlias.js
 new file mode 100644
@@ -6925,6 +6961,7 @@ index 0000000..eb3ec62
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js" => Object {
     "offset": 244335,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js b/packages/get-dependencies/test/__fixtures__/exports/exportDefaultValueAlias.js
 new file mode 100644
@@ -6940,6 +6977,7 @@ index 0000000..6db6370
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportFunc.js" => Object {
     "offset": 244698,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportFunc.js b/packages/get-dependencies/test/__fixtures__/exports/exportFunc.js
 new file mode 100644
@@ -6955,6 +6993,7 @@ index 0000000..df340a4
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js" => Object {
     "offset": 245020,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js b/packages/get-dependencies/test/__fixtures__/exports/exportFuncAlias.js
 new file mode 100644
@@ -6972,6 +7011,7 @@ index 0000000..4d7c892
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportNamed.js" => Object {
     "offset": 245370,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportNamed.js b/packages/get-dependencies/test/__fixtures__/exports/exportNamed.js
 new file mode 100644
@@ -6985,6 +7025,7 @@ index 0000000..cc798ff
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js" => Object {
     "offset": 245685,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js b/packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js
 new file mode 100644
@@ -6998,6 +7039,7 @@ index 0000000..d7bb03f
   },
   "packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js" => Object {
     "offset": 246027,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js b/packages/get-dependencies/test/__fixtures__/exports/exportValueAlias.js
 new file mode 100644
@@ -7013,6 +7055,7 @@ index 0000000..2438832
   },
   "packages/get-dependencies/test/__fixtures__/exports/noExports.js" => Object {
     "offset": 246368,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/exports/noExports.js b/packages/get-dependencies/test/__fixtures__/exports/noExports.js
 new file mode 100644
@@ -7028,6 +7071,7 @@ index 0000000..b2ee884
   },
   "packages/get-dependencies/test/__fixtures__/imports/base.js" => Object {
     "offset": 246680,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/base.js b/packages/get-dependencies/test/__fixtures__/imports/base.js
 new file mode 100644
@@ -7042,6 +7086,7 @@ index 0000000..2e0adef
   },
   "packages/get-dependencies/test/__fixtures__/imports/importAlias.js" => Object {
     "offset": 246996,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/importAlias.js b/packages/get-dependencies/test/__fixtures__/imports/importAlias.js
 new file mode 100644
@@ -7055,6 +7100,7 @@ index 0000000..4868782
   },
   "packages/get-dependencies/test/__fixtures__/imports/importAll.js" => Object {
     "offset": 247324,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/importAll.js b/packages/get-dependencies/test/__fixtures__/imports/importAll.js
 new file mode 100644
@@ -7068,6 +7114,7 @@ index 0000000..5a73a49
   },
   "packages/get-dependencies/test/__fixtures__/imports/importDefault.js" => Object {
     "offset": 247645,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/importDefault.js b/packages/get-dependencies/test/__fixtures__/imports/importDefault.js
 new file mode 100644
@@ -7081,6 +7128,7 @@ index 0000000..96315b4
   },
   "packages/get-dependencies/test/__fixtures__/imports/importNamed.js" => Object {
     "offset": 247973,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/importNamed.js b/packages/get-dependencies/test/__fixtures__/imports/importNamed.js
 new file mode 100644
@@ -7094,6 +7142,7 @@ index 0000000..05a8a8a
   },
   "packages/get-dependencies/test/__fixtures__/imports/noImports.js" => Object {
     "offset": 248296,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/noImports.js b/packages/get-dependencies/test/__fixtures__/imports/noImports.js
 new file mode 100644
@@ -7109,6 +7158,7 @@ index 0000000..b2ee884
   },
   "packages/get-dependencies/test/__fixtures__/imports/require.js" => Object {
     "offset": 248608,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/imports/require.js b/packages/get-dependencies/test/__fixtures__/imports/require.js
 new file mode 100644
@@ -7122,6 +7172,7 @@ index 0000000..3173cca
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/a.js" => Object {
     "offset": 248922,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/module-alias/a.js b/packages/get-dependencies/test/__fixtures__/module-alias/a.js
 new file mode 100644
@@ -7135,6 +7186,7 @@ index 0000000..ff8b4c5
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js" => Object {
     "offset": 249221,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js b/packages/get-dependencies/test/__fixtures__/module-alias/unrelated-folder.js
 new file mode 100644
@@ -7148,6 +7200,7 @@ index 0000000..038c91c
   },
   "packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js" => Object {
     "offset": 249578,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js b/packages/get-dependencies/test/__fixtures__/module-alias/unrelated-name.js
 new file mode 100644
@@ -7161,6 +7214,7 @@ index 0000000..884a1db
   },
   "packages/get-dependencies/test/__fixtures__/module-directory/a.js" => Object {
     "offset": 249922,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/module-directory/a.js b/packages/get-dependencies/test/__fixtures__/module-directory/a.js
 new file mode 100644
@@ -7174,6 +7228,7 @@ index 0000000..ff8b4c5
   },
   "packages/get-dependencies/test/__fixtures__/module-directory/b.js" => Object {
     "offset": 250233,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__fixtures__/module-directory/b.js b/packages/get-dependencies/test/__fixtures__/module-directory/b.js
 new file mode 100644
@@ -7188,6 +7243,7 @@ index 0000000..6b60f40
   },
   "packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap" => Object {
     "offset": 250565,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap b/packages/get-dependencies/test/__snapshots__/filterDependents.test.ts.snap
 new file mode 100644
@@ -7269,6 +7325,7 @@ index 0000000..00298de
   },
   "packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap" => Object {
     "offset": 253564,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap b/packages/get-dependencies/test/__snapshots__/getEs6Dependents.test.ts.snap
 new file mode 100644
@@ -7448,6 +7505,7 @@ index 0000000..ae51feb
   },
   "packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap" => Object {
     "offset": 257586,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap b/packages/get-dependencies/test/__snapshots__/markDependents.test.ts.snap
 new file mode 100644
@@ -7500,6 +7558,7 @@ index 0000000..492c5ab
   },
   "packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap" => Object {
     "offset": 258990,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap b/packages/get-dependencies/test/__snapshots__/markExports.test.ts.snap
 new file mode 100644
@@ -7596,6 +7655,7 @@ index 0000000..18e4412
   },
   "packages/get-dependencies/test/filterDependents.test.ts" => Object {
     "offset": 261235,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/filterDependents.test.ts b/packages/get-dependencies/test/filterDependents.test.ts
 new file mode 100644
@@ -7676,6 +7736,7 @@ index 0000000..e934761
   },
   "packages/get-dependencies/test/getEs6Dependents.test.ts" => Object {
     "offset": 263241,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/getEs6Dependents.test.ts b/packages/get-dependencies/test/getEs6Dependents.test.ts
 new file mode 100644
@@ -7735,6 +7796,7 @@ index 0000000..20a4f74
   },
   "packages/get-dependencies/test/markDependents.test.ts" => Object {
     "offset": 264829,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/markDependents.test.ts b/packages/get-dependencies/test/markDependents.test.ts
 new file mode 100644
@@ -7828,6 +7890,7 @@ index 0000000..6666aee
   },
   "packages/get-dependencies/test/markExports.test.ts" => Object {
     "offset": 267031,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/test/markExports.test.ts b/packages/get-dependencies/test/markExports.test.ts
 new file mode 100644
@@ -7902,6 +7965,7 @@ index 0000000..2207029
   },
   "packages/get-dependencies/tsconfig.json" => Object {
     "offset": 268842,
+    "operation": 1,
     "raw": "
 diff --git a/packages/get-dependencies/tsconfig.json b/packages/get-dependencies/tsconfig.json
 new file mode 100644
@@ -7924,6 +7988,7 @@ index 0000000..fce45b2
   },
   "prettier.config.js" => Object {
     "offset": 269208,
+    "operation": 1,
     "raw": "
 diff --git a/prettier.config.js b/prettier.config.js
 new file mode 100644
@@ -7943,6 +8008,7 @@ index 0000000..5237db9
   },
   "tsconfig.json" => Object {
     "offset": 269505,
+    "operation": 1,
     "raw": "
 diff --git a/tsconfig.json b/tsconfig.json
 new file mode 100644
