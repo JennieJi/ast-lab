@@ -1,74 +1,80 @@
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
-import { getExports, filterDependents, Alias, ModuleDirectory } from 'get-dependencies';
-import { getGitDiffs } from './getGitDiffs';
+import { getExports, filterDependents, hasExt, Alias, ModuleDirectory } from 'get-dependencies';
+import { getGitDiffs, GIT_OPERATION } from './getGitDiffs';
 import exec from './exec';
 
 type Transform = (raw: string, path: string) => string;
 
-function gitRoot(){
-  return exec('git rev-parse --show-toplevel').trim();
-}
+const gitRoot = exec('git rev-parse --show-toplevel').trim();
+const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
+
 function getAbsolutePath(relativePath: string) {
-  return path.resolve(gitRoot(), relativePath);
+  return path.resolve(gitRoot, relativePath);
+}
+function getRelativePath(file: string) {
+  return path.isAbsolute(file) ? path.relative(gitRoot, file) : file;
 }
 
 function getRevisionFile(revision: string, file: string) {
-  try {
-    const ret = exec(`git show ${revision}:${file}`);
-    return ret;
-  } catch(e) {
-    console.warn(`WARN ${file} ${revision}`);
-    return '';
-  }
+  // try {
+    return exec(`git show ${revision}:${getRelativePath(file)}`);
+  // } catch (err) {
+  //   console.warn('Can not find ', file, revision);
+  //   return '';
+  // }
 }
 
-function getBeforeRevisionFile(revision: string, file: string) {
-  return getRevisionFile(`${revision}~1`, file);
+function createLoader(revision: string, transform?: Transform) {
+  return (file: string) => {
+    const raw = getRevisionFile(revision, file);
+    return Promise.resolve(transform ? transform(raw, file) : raw);
+  };
 }
 
-
- export function getTrackedFiles(revision: string, paths?: string[]) {
-  const raw = exec(`git ls-tree -r ${revision} --name-only ${paths ? paths.join(' ')  : ''}`);
-  return raw.split('\n');
+ export function getTrackedFiles(revision: string = 'HEAD', paths?: string[]) {
+  const raw = exec(`git ls-tree -r ${revision} --name-only --full-name ${paths &&paths.length ? paths.join(' ') : gitRoot}`);
+  return raw.split('\n').slice(0, -1);
 }
 
 type GetDiffExportMapOptions = {
   extensions?: string[],
   transform?: Transform
 };
-export function getDiffExportMap(commit: string, { extensions, transform }: GetDiffExportMapOptions) {
-  const extToken = new RegExp(`.(${(extensions || ['js', 'jsx', 'ts', 'tsx']).join('|')})$`);
+export async function getDiffExportMap(commit: string, { extensions, transform }: GetDiffExportMapOptions) {
   const diffs = getGitDiffs(commit);
   const exportMap = new Map();
-  diffs.forEach(({ target, source }) => {
-    if (extToken && !extToken.test(target)) {
+  const staleExportMap = new Map();
+  let queue = [] as Promise<void>[];
+  diffs.forEach(({ target, source, operation }) => {
+    if (!hasExt(target, extensions || DEFAULT_EXTENSIONS)) {
       return;
     }
-    const targetExports = getExports(target, {
-      loader: (file: string) => {
-        const raw = getRevisionFile(commit, file);
-        return transform ? transform(raw, file) : raw;
+    queue.push((async () => {
+      const targetExports = operation === GIT_OPERATION.delete ?
+        [] : 
+        await getExports(target, {
+          loader: createLoader(commit, transform)
+        });
+      const sourceExports = operation === GIT_OPERATION.new ?
+        [] :
+        await getExports(source, {
+          loader: createLoader(`${commit}~1`, transform)
+        });
+      const absoluteTargetPath = getAbsolutePath(target);
+      if (source === target) {
+        exportMap.set(absoluteTargetPath, new Set([
+          ...targetExports,
+          ...sourceExports
+        ]));
+      } else {
+        exportMap.set(absoluteTargetPath, new Set(targetExports));
+        staleExportMap.set(getAbsolutePath(source), new Set(sourceExports));
       }
-    });
-    const sourceExports = getExports(source, {
-      loader: (file: string) => {
-        const raw = getBeforeRevisionFile(commit, file);
-        return transform ? transform(raw, file) : raw;
-      }
-    });
-    const absoluteTargetPath = getAbsolutePath(target);
-    if (source === target) {
-      exportMap.set(absoluteTargetPath, new Set([
-        ...targetExports,
-        ...sourceExports
-      ]));
-    } else {
-      exportMap.set(absoluteTargetPath, new Set(targetExports));
-      exportMap.set(getAbsolutePath(source), new Set(sourceExports));
-    }
+    })());
   });
-  return exportMap;
+  await Promise.all(queue);
+  return [exportMap, staleExportMap];
 }
 
 type Options = {
@@ -79,23 +85,31 @@ type Options = {
   transform?: Transform,
 };
 
-function gitChangesAffected(
+async function gitChangesAffected(
   commit: string, 
   options: Options = {} 
 ) {
-  const { extensions, paths, transform } = options;
-  exec(`git checkout ${commit}`);
-  const exportMap = getDiffExportMap(commit, { 
+  const { extensions = DEFAULT_EXTENSIONS, paths, transform, moduleDirectory, alias } = options;
+  const [exportMap, staleExportMap] = await getDiffExportMap(commit, { 
     transform,
     extensions
   });
-  const sources = getTrackedFiles(commit, paths).map(getAbsolutePath);
-  return filterDependents(sources, exportMap, {
-    ...options,
-    loader(file: string) {
-      const raw = fs.readFileSync(file, 'utf-8');
-      return transform ? transform(raw, file) : raw;
-    }
+  const commitSources = getTrackedFiles(commit, paths).map(getAbsolutePath);
+  const currentAffected =  await filterDependents(commitSources, exportMap, {
+    moduleDirectory,
+    alias,
+    extensions,
+    loader: createLoader(commit, transform)
   });
+  const beforeCommitSources = getTrackedFiles(`${commit}~1`, paths).map(getAbsolutePath);
+
+  const staleAffected = await filterDependents(beforeCommitSources, staleExportMap, {
+    moduleDirectory,
+    alias,
+    extensions,
+    loader: createLoader(`${commit}~1`, transform)
+  });
+  /** @todo dedupe */
+  return currentAffected.concat(staleAffected);
 }
 export default gitChangesAffected;
