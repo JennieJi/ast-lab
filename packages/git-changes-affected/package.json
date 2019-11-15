@@ -27,6 +27,7 @@
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
   "dependencies": {
+    "enhanced-resolve": "^4.1.1",
     "get-dependencies": "^1.0.0-alpha"
   }
 }

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createResolver() can work 1`] = `"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/filterDependents.test.ts"`;
