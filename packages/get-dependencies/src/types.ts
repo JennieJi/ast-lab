@@ -1,4 +1,5 @@
-import { ALL_EXPORTS } from '../constants';
+import { ALL_EXPORTS } from './constants';
+import resolveModulePath from './resolveModulePath';
 
 export type Module = string;
 type Imported = string;
@@ -32,8 +33,9 @@ export type PathNode = {
 export type Options = {
   loader?: Loader,
   moduleDirectory?: ModuleDirectory,
-  extensions?: string[],
-  alias?: Alias
+  extensions: string[],
+  alias?: Alias,
+  resolver: typeof resolveModulePath
 };
 
 export type VisitedNode = PathNode[];

@@ -3,9 +3,25 @@ import path from 'path';
 
 import isCore from './isCore';
 import isThirdParty from './isThirdParty';
-import { Options } from './types';
+import { Alias } from './types';
 
-export default async function resolveModulePath(mod: string, basedir: string, { alias, moduleDirectory: modules, extensions }: Options = {}): Promise<string | void> {
+type ResolveOptions = {
+  alias?: Alias,
+  moduleDirectory?: string[],
+  extensions?: string[],
+  plugins?: any[]
+}
+
+export default async function resolveModulePath(
+  mod: string, 
+  source: string, 
+  { 
+    alias, 
+    moduleDirectory: modules, 
+    extensions,
+    plugins
+  }: ResolveOptions = {}
+): Promise<string | void> {
   if (!mod || isCore(mod)) {
     return;
   }
@@ -15,12 +31,13 @@ export default async function resolveModulePath(mod: string, basedir: string, { 
   const resolver = enhancedResolve.create({
     extensions: extensions,
     modules,
-    alias
+    alias,
+    plugins
   });
+  const basedir = path.dirname(source);
   const result = await new Promise((resolve, reject) => resolver(basedir, mod, (err: Error, res: string | undefined) => {
     if (err) {
-      console.warn(err);
-      return reject(err);
+      return reject(err.message);
     }
     if (!res) {
       console.log(`Couldn't find module ${mod}!`);

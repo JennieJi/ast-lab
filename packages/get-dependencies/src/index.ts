@@ -1,10 +1,6 @@
-import filterDependents from './filterDependents';
-import getExports from './es6Detect/getExports';
-import hasExt from './hasExt';
-export * from './types';
+export { default as filterDependents } from './filterDependents';
+export { default as getExports } from './es6Detect/getExports';
+export { default as hasExt } from './hasExt';
+export { default as resolve } from './resolveModulePath';
 
-export {
-  filterDependents,
-  getExports,
-  hasExt
-};
+export * from './types';
