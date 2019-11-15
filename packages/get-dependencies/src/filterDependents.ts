@@ -27,20 +27,20 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
     extensions
   } = options;
   const { importModule: source } = node;
-  const basePath = path.dirname(source)
-  const resolve = async (mod: string) => {
+  const resolver = async (file: string, source: string, options: Options) => {
     try {
-      return await resolveModulePath(mod, basePath, options);
+      return await options.resolver(file, source, options);
     } catch (err) {
-      console.info('Visiting node: ', node);
-      console.log(err);
+      console.info('node:', node);
+      console.info('source:', source);
+      throw err;
     }
   };
   const deps = await getEs6Dependents(source, {
     inDetail: false,
     async loader(file: string) {
       if (skipFile(file, extensions)) { return ''; }
-      const realPath = await resolve(file);
+      const realPath = await resolver(file, source, options);
       return realPath ? loader ? loader(realPath) : fs.readFileSync(realPath, 'utf8') : '';
     }
   });
@@ -52,7 +52,7 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
       return;
     }
     queue.push((async () => {
-      const importModule = await resolve(mod);
+      const importModule = await resolver(mod, source, options);
       if (!importModule) { return; }
       const visitedPaths = visited.get(importModule);
       if (visitedPaths && visitedPaths.find(node => node.source === source)) {
@@ -70,12 +70,13 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
   await Promise.all(queue);
 }
 
-export default async function filterDependents(sources: string[], targets: Exports, options: Options = {}): Promise<string[]> {
+export default async function filterDependents(sources: string[], targets: Exports, options: Partial<Options> = {}): Promise<string[]> {
   // console.log('===============================');
   const visited: Visited = new Map();
   let resolvedSourcePaths = [] as string[];
-  options = {
+  const opts = {
     extensions: DEFAULT_EXTENSIONS,
+    resolver: resolveModulePath,
     ...options
   };
   for(let i = 0; i < sources.length; i++) {
@@ -91,7 +92,7 @@ export default async function filterDependents(sources: string[], targets: Expor
         i2e: null,
         prev: null
       };
-      await visitPath(visited, rootNode, options);
+      await visitPath(visited, rootNode, opts);
     }
   }
   const marked = new Map(Array.from(targets));

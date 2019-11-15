@@ -13,7 +13,7 @@ function getEs6Dependents(file: string, opts: any) {
 
 function loader(dir: string) {
   return async (mod: string) => {
-    const realpath = await resolveModulePath(mod, getPath(dir));
+    const realpath = await resolveModulePath(mod, getPath(`${dir}/index`));
     return realpath ? fs.readFileSync(realpath, 'utf-8') : '';
   };
 }
