@@ -1,6 +1,6 @@
 // import fs from 'fs';
 import path from 'path';
-import { getExports, filterDependents, hasExt, Alias, ModuleDirectory } from 'get-dependencies';
+import { getExports, filterDependents, hasExt, resolve, Alias, ModuleDirectory, Exports } from 'get-dependencies';
 import { getGitDiffs, GIT_OPERATION } from './getGitDiffs';
 import exec from './exec';
 
@@ -43,8 +43,8 @@ type GetDiffExportMapOptions = {
 };
 export async function getDiffExportMap(commit: string, { extensions, transform }: GetDiffExportMapOptions) {
   const diffs = getGitDiffs(commit);
-  const exportMap = new Map();
-  const staleExportMap = new Map();
+  const exportMap = new Map() as Exports;
+  const staleExportMap = new Map() as Exports;
   let queue = [] as Promise<void>[];
   diffs.forEach(({ target, source, operation }) => {
     if (!hasExt(target, extensions || DEFAULT_EXTENSIONS)) {
@@ -77,6 +77,51 @@ export async function getDiffExportMap(commit: string, { extensions, transform }
   return [exportMap, staleExportMap];
 }
 
+class FileListIncludesPlugin {
+  files: Set<string>;
+  extensions: string[];
+
+	constructor(files: string[], extensions?: string[]) {
+    this.files = new Set(files);
+    this.extensions = extensions || ['.jsx', '.js', '.ts', '.tsx']
+	}
+
+	apply(resolver: any) {
+		const target = resolver.ensureHook('resolved');
+		resolver
+			.getHook('directory')
+			.tapAsync("FileListIncludesPlugin", (request: any, resolveContext: any, callback: any) => {
+        const filename = request.path;
+        const fileExt = this.extensions.find(ext => {
+          const file = `${filename}${ext}`;
+          const fileRelativePath =  path.relative(gitRoot, file);
+          if (this.files.has(fileRelativePath)) {
+            if (resolveContext.fileDependencies)
+              resolveContext.fileDependencies.add(file);
+            resolver.doResolve(
+              target,
+              {
+                ...request,
+                path: file
+              },
+              "existing file: " + file,
+              resolveContext,
+              callback
+            );
+            return true;
+          }
+          return false;
+        });
+        if (!fileExt) {
+          if (resolveContext.missingDependencies)
+          resolveContext.missingDependencies.add(filename);
+          if (resolveContext.log) resolveContext.log(filename + " doesn't exist");
+          return callback();
+        }
+			});
+	}
+};
+
 type Options = {
   paths?: string[],
   moduleDirectory?: ModuleDirectory,
@@ -85,30 +130,43 @@ type Options = {
   transform?: Transform,
 };
 
+type ResolveOptions = {
+  alias?: Alias,
+  moduleDirectory?: string[],
+  extensions?: string[],
+  plugins?: any[]
+}
+export function createResolver(trackedFiles: string[], extensions: string[]): typeof resolve {
+  return (mod: string, source: string, options: ResolveOptions) => resolve(mod, source, {
+    ...options,
+    plugins: [new FileListIncludesPlugin(trackedFiles, extensions)]
+  });
+};
+
+async function dependenciesInRevision(revision: string, exports: Exports, options: Options) {
+  const { extensions = DEFAULT_EXTENSIONS, paths, transform, moduleDirectory, alias } = options;
+  const trackedFiles = getTrackedFiles(revision, paths);
+  const trackedFilesAbsolute = trackedFiles.map(getAbsolutePath);
+  return await filterDependents(trackedFilesAbsolute, exports, {
+    moduleDirectory,
+    alias,
+    extensions,
+    loader: createLoader(revision, transform),
+    resolver: createResolver(trackedFiles, extensions)
+  });
+}
+
 async function gitChangesAffected(
   commit: string, 
   options: Options = {} 
 ) {
-  const { extensions = DEFAULT_EXTENSIONS, paths, transform, moduleDirectory, alias } = options;
+  const { extensions = DEFAULT_EXTENSIONS, transform } = options;
   const [exportMap, staleExportMap] = await getDiffExportMap(commit, { 
     transform,
     extensions
   });
-  const commitSources = getTrackedFiles(commit, paths).map(getAbsolutePath);
-  const currentAffected =  await filterDependents(commitSources, exportMap, {
-    moduleDirectory,
-    alias,
-    extensions,
-    loader: createLoader(commit, transform)
-  });
-  const beforeCommitSources = getTrackedFiles(`${commit}~1`, paths).map(getAbsolutePath);
-
-  const staleAffected = await filterDependents(beforeCommitSources, staleExportMap, {
-    moduleDirectory,
-    alias,
-    extensions,
-    loader: createLoader(`${commit}~1`, transform)
-  });
+  const currentAffected = await dependenciesInRevision(commit, exportMap, options);
+  const staleAffected = await dependenciesInRevision(`${commit}~1`, staleExportMap, options);
   /** @todo dedupe */
   return currentAffected.concat(staleAffected);
 }
