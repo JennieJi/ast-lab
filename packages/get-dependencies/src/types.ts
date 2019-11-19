@@ -21,7 +21,7 @@ export type Alias = {
   [key: string]: string
 };
 
-export type Loader = (filename: string) => Promise<string>;
+export type Loader = (absoluteFilePath: string) => Promise<string>;
 
 export type PathNode = {
   source: Module | null,

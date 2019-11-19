@@ -25,6 +25,8 @@ enumerateArgsTestFunction(
     'imports/importAlias.js',
     'imports/importAll.js',
     'imports/importDefault.js',
+    'imports/importDeeperPath.js',
+    'imports/noImports.js',
   ])
   .arg('opts', [
     { inDetail: false, loader: loader('imports') },

@@ -21,28 +21,22 @@ function addVisitedNode(visited: Visited, node: PathNode) {
   }
 }
 
+
 async function visitPath(visited: Visited, node: PathNode, options: Options) {
   const {
     loader,
-    extensions
+    extensions,
+    resolver,
   } = options;
   const { importModule: source } = node;
-  const resolver = async (file: string, source: string, options: Options) => {
-    try {
-      return await options.resolver(file, source, options);
-    } catch (err) {
-      console.info('node:', node);
-      console.info('source:', source);
-      throw err;
-    }
-  };
+
   const deps = await getEs6Dependents(source, {
     inDetail: false,
     async loader(file: string) {
       if (skipFile(file, extensions)) { return ''; }
-      const realPath = await resolver(file, source, options);
-      return realPath ? loader ? loader(realPath) : fs.readFileSync(realPath, 'utf8') : '';
-    }
+      return loader ? loader(file) : fs.readFileSync(file, 'utf8');
+    },
+    resolver
   });
   addVisitedNode(visited, node);
 
@@ -52,7 +46,14 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
       return;
     }
     queue.push((async () => {
-      const importModule = await resolver(mod, source, options);
+      let importModule;
+      try {
+        importModule = await resolver(mod, source, options);
+      } catch (err) {
+        console.info(`Prepare visit - resolving ${mod} in ${source}`);
+        console.info('Node:', node);
+        throw err;
+      }
       if (!importModule) { return; }
       const visitedPaths = visited.get(importModule);
       if (visitedPaths && visitedPaths.find(node => node.source === source)) {
@@ -64,7 +65,12 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
         i2e,
         prev: node,
       };
-      await visitPath(visited, nextNode, options);
+      try {
+        await visitPath(visited, nextNode, options);
+      } catch(err) {
+        console.error(err);
+        throw(err);
+      }
     })())
   });
   await Promise.all(queue);
@@ -92,7 +98,12 @@ export default async function filterDependents(sources: string[], targets: Expor
         i2e: null,
         prev: null
       };
-      await visitPath(visited, rootNode, opts);
+      try {
+        await visitPath(visited, rootNode, opts);
+      } catch(err) {
+        console.error(err);
+        throw(err);
+      }
     }
   }
   const marked = new Map(Array.from(targets));
