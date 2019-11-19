@@ -17,12 +17,7 @@ function getRelativePath(file: string) {
 }
 
 function getRevisionFile(revision: string, file: string) {
-  // try {
-    return exec(`git show ${revision}:${getRelativePath(file)}`);
-  // } catch (err) {
-  //   console.warn('Can not find ', file, revision);
-  //   return '';
-  // }
+  return exec(`git show ${revision}:${getRelativePath(file)}`);
 }
 
 function createLoader(revision: string, transform?: Transform) {
@@ -83,7 +78,7 @@ class FileListIncludesPlugin {
 
 	constructor(files: string[], extensions?: string[]) {
     this.files = new Set(files);
-    this.extensions = extensions || ['.jsx', '.js', '.ts', '.tsx']
+    this.extensions = extensions || ['.jsx', '.js', '.ts', '.tsx'];
 	}
 
 	apply(resolver: any) {
@@ -113,9 +108,12 @@ class FileListIncludesPlugin {
           return false;
         });
         if (!fileExt) {
-          if (resolveContext.missingDependencies)
-          resolveContext.missingDependencies.add(filename);
-          if (resolveContext.log) resolveContext.log(filename + " doesn't exist");
+          if (resolveContext.missingDependencies) {
+            resolveContext.missingDependencies.add(filename);
+          }
+          if (resolveContext.log) {
+            resolveContext.log(filename + " doesn't exist");
+          }
           return callback();
         }
 			});
@@ -137,9 +135,10 @@ type ResolveOptions = {
   plugins?: any[]
 }
 export function createResolver(trackedFiles: string[], extensions: string[]): typeof resolve {
+  const plugins = [new FileListIncludesPlugin(trackedFiles, extensions)];
   return (mod: string, source: string, options: ResolveOptions) => resolve(mod, source, {
     ...options,
-    plugins: [new FileListIncludesPlugin(trackedFiles, extensions)]
+    plugins
   });
 };
 
