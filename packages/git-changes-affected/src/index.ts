@@ -1,6 +1,6 @@
 // import fs from 'fs';
 import path from 'path';
-import { getExports, filterDependents, hasExt, resolve, Alias, ModuleDirectory, Exports } from 'get-dependencies';
+import { getExports, filterDependents, createResolver, hasExt, Exports } from 'get-dependencies';
 import { getGitDiffs, GIT_OPERATION } from './getGitDiffs';
 import exec from './exec';
 
@@ -122,36 +122,25 @@ class FileListIncludesPlugin {
 
 type Options = {
   paths?: string[],
-  moduleDirectory?: ModuleDirectory,
+  modules?: string[],
   extensions?: string[],
-  alias?: Alias,
+  alias?: { [alias: string]: string },
   transform?: Transform,
 };
 
-type ResolveOptions = {
-  alias?: Alias,
-  moduleDirectory?: string[],
-  extensions?: string[],
-  plugins?: any[]
-}
-export function createResolver(trackedFiles: string[], extensions: string[]): typeof resolve {
-  const plugins = [new FileListIncludesPlugin(trackedFiles, extensions)];
-  return (mod: string, source: string, options: ResolveOptions) => resolve(mod, source, {
-    ...options,
-    plugins
-  });
-};
-
 async function dependenciesInRevision(revision: string, exports: Exports, options: Options) {
-  const { extensions = DEFAULT_EXTENSIONS, paths, transform, moduleDirectory, alias } = options;
+  const { extensions = DEFAULT_EXTENSIONS, paths, transform, modules, alias } = options;
   const trackedFiles = getTrackedFiles(revision, paths);
   const trackedFilesAbsolute = trackedFiles.map(getAbsolutePath);
   return await filterDependents(trackedFilesAbsolute, exports, {
-    moduleDirectory,
-    alias,
     extensions,
     loader: createLoader(revision, transform),
-    resolver: createResolver(trackedFiles, extensions)
+    resolver: createResolver({
+      extensions,
+      alias,
+      modules,
+      plugins: [new FileListIncludesPlugin(trackedFiles, extensions)]
+    })
   });
 }
 

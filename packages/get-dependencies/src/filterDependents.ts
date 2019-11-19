@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { DEFAULT_EXTENSIONS } from './constants';
 import getEs6Dependents from './es6Detect/getEs6Dependents';
-import resolveModulePath from './resolveModulePath';
+import createResolver from './createResolver';
 import markDependents from './markDependents';
 import hasExt from './hasExt';
 import { PathNode,  Exports, Options, Visited, VisitedNode } from './types';
@@ -48,7 +48,7 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
     queue.push((async () => {
       let importModule;
       try {
-        importModule = await resolver(mod, source, options);
+        importModule = await resolver(mod, source);
       } catch (err) {
         console.info(`Prepare visit - resolving ${mod} in ${source}`);
         console.info('Node:', node);
@@ -80,9 +80,10 @@ export default async function filterDependents(sources: string[], targets: Expor
   // console.log('===============================');
   const visited: Visited = new Map();
   let resolvedSourcePaths = [] as string[];
+  const extensions = options.extensions || DEFAULT_EXTENSIONS;
   const opts = {
-    extensions: DEFAULT_EXTENSIONS,
-    resolver: resolveModulePath,
+    extensions,
+    resolver: createResolver({ extensions }),
     ...options
   };
   for(let i = 0; i < sources.length; i++) {

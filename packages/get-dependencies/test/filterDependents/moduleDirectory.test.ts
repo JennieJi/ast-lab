@@ -1,6 +1,7 @@
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
 import { filterDependents } from './utils';
+import resolveModulePath from '../../src/createResolver';
 
 enumerateArgsTestFunction(
   filterDependents.bind(null, 'module-directory'),
@@ -11,8 +12,12 @@ enumerateArgsTestFunction(
   .arg('targets', [
     { './a': ['default'] }
   ])
-  .arg('options', [{
-    moduleDirectory: ['../']
-  }]),
+  .arg('options', [
+    {
+      resolver: resolveModulePath({
+        modules: ['../']
+      })
+    }
+  ]),
   'module alias'
 );

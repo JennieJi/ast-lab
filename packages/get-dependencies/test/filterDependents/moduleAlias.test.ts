@@ -1,6 +1,7 @@
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
 import { filterDependents } from './utils';
+import createResolver from '../../src/createResolver';
 
 enumerateArgsTestFunction(
   filterDependents.bind(null, 'module-alias'),
@@ -12,11 +13,15 @@ enumerateArgsTestFunction(
   .arg('targets', [
     { './a': ['default'] }
   ])
-  .arg('options', [{
-    alias: {
-      'alias-folder': './',
-      'alias-a': './a'
+  .arg('options', [
+    { 
+      resolver: createResolver({
+        alias: {
+          'alias-folder': './',
+          'alias-a': './a'
+        }
+      })
     }
-  }]),
+  ]),
   'module alias'
 );

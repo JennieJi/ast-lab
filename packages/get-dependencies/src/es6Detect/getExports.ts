@@ -2,14 +2,13 @@
 import Walker from 'node-source-walk';
 import { Node } from 'estree';
 import astNodeExports from './astNodeExports';
-import { Loader, Exported } from '../types';
-import resolveModulePath from '../resolveModulePath';
+import { Loader, Exported, Resolver } from '../types';
 
 export default async function getExports(
   file: string,
   opts: {
     loader: Loader,
-    resolver?: typeof resolveModulePath
+    resolver?: Resolver
   }
 ): Promise<string[]> {
   const {

@@ -3,7 +3,7 @@ import fs from 'fs';
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
 import _getEs6Dependents from '../src/es6Detect/getEs6Dependents';
-import resolveModulePath from '../src/resolveModulePath';
+import resolveModulePath from '../src/createResolver';
 
 const FIXTURE_DIR = 'test/__fixtures__';
 const getPath = (file: string) => path.resolve(FIXTURE_DIR, file);
@@ -13,7 +13,7 @@ function getEs6Dependents(file: string, opts: any) {
 
 function loader(dir: string) {
   return async (mod: string) => {
-    const realpath = await resolveModulePath(mod, getPath(`${dir}/index`));
+    const realpath = await resolveModulePath()(mod, getPath(`${dir}/index`));
     return realpath ? fs.readFileSync(realpath, 'utf-8') : '';
   };
 }

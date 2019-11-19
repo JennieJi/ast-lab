@@ -2,12 +2,12 @@ import { Node, ModuleSpecifier } from 'estree';
 import exportSpecifier2Dependents from './exportSpecifier2Dependents';
 import getPatternIdentifiers from './getPatternIdentifiers';
 import getExports from './getExports';
-import { Exported, Loader } from '../types';
-import resolveModulePath from '../resolveModulePath';
+import { Exported, Loader, Resolver } from '../types';
+import resolveModulePath from '../createResolver';
 
 export default async function astNodeExports(node: Node, file: string,  opts: {
   loader: Loader,
-  resolver?: typeof resolveModulePath
+  resolver?: Resolver
 }): Promise<Exported[]> {
   switch (node.type) {
     case 'ExportNamedDeclaration':{
@@ -35,7 +35,7 @@ export default async function astNodeExports(node: Node, file: string,  opts: {
     case 'ExportAllDeclaration':
       if (node.source && node.source.value) {
         const mod = node.source.value as string;
-        const fullPath = await (opts.resolver || resolveModulePath)(mod, file) as string;
+        const fullPath = await (opts.resolver || resolveModulePath())(mod, file) as string;
         return await getExports(fullPath, opts);
       }
       return [];
