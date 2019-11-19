@@ -1,5 +1,4 @@
 import { ALL_EXPORTS } from './constants';
-import resolveModulePath from './resolveModulePath';
 
 export type Module = string;
 type Imported = string;
@@ -15,13 +14,8 @@ export type ModuleImported = Map<Imported, {
 export type Dependents = Map<Module, ModuleImported>;
 export type Exports = Map<Module, ModuleExported>;
 
-export type ModuleDirectory = string[];
-
-export type Alias = {
-  [key: string]: string
-};
-
 export type Loader = (absoluteFilePath: string) => Promise<string>;
+export type Resolver = (mod: string, source: string) => Promise<string | void>;
 
 export type PathNode = {
   source: Module | null,
@@ -32,10 +26,8 @@ export type PathNode = {
 
 export type Options = {
   loader?: Loader,
-  moduleDirectory?: ModuleDirectory,
   extensions: string[],
-  alias?: Alias,
-  resolver: typeof resolveModulePath
+  resolver: Resolver
 };
 
 export type VisitedNode = PathNode[];

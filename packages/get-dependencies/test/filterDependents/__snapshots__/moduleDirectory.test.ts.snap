@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`module alias - (["sources", "targets", "options"]) - [["a.js","b.js"],{"./a":["default"]},{"moduleDirectory":["../"]}] 1`] = `
+exports[`module alias - (["sources", "targets", "options"]) - [["a.js","b.js"],{"./a":["default"]},{}] 1`] = `
 Array [
   "/module-directory/a.js",
   "/module-directory/b.js",

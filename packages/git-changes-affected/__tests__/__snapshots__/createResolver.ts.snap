@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`createResolver() relative path 1`] = `"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/filterDependents.test.ts"`;
-
-exports[`createResolver() relative path 2`] = `"/Users/jennie.ji/Projects/affected/packages/get-dependencies/jest.config.js"`;

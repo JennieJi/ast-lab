@@ -1,18 +1,17 @@
 // @ts-ignore
 import Walker from 'node-source-walk';
 import { Node, ModuleSpecifier, Program } from 'estree';
-import { Dependents, ModuleImported, Loader } from '../types';
+import { Dependents, ModuleImported, Loader, Resolver } from '../types';
 // import getPatternIdentifiers from './getPatternIdentifiers';
 import fs from 'fs';
 import _importSpecifier2Dependents from './importSpecifier2Dependents';
 import astNodeExports from './astNodeExports';
 import exportSpecifier2Dependents from './exportSpecifier2Dependents';
-import resolveModulePath from '../resolveModulePath';
 
 type Options = {
   inDetail?: boolean,
   loader?: Loader,
-  resolver?: typeof resolveModulePath
+  resolver?: Resolver
 }
 
 /**
