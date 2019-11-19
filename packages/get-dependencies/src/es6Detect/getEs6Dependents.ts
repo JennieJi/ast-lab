@@ -5,12 +5,14 @@ import { Dependents, ModuleImported, Loader } from '../types';
 // import getPatternIdentifiers from './getPatternIdentifiers';
 import fs from 'fs';
 import _importSpecifier2Dependents from './importSpecifier2Dependents';
-import { astFindExports } from './getExports';
+import astNodeExports from './astNodeExports';
 import exportSpecifier2Dependents from './exportSpecifier2Dependents';
+import resolveModulePath from '../resolveModulePath';
 
 type Options = {
   inDetail?: boolean,
-  loader?: Loader
+  loader?: Loader,
+  resolver?: typeof resolveModulePath
 }
 
 /**
@@ -24,7 +26,8 @@ export default async function getEs6Dependents(
   file: string,
   {
     inDetail,
-    loader: _loader
+    loader: _loader,
+    resolver
   }: Options): Promise<Dependents> {
   const walkerIns = new Walker();
   const loader = _loader || ((file: string) => Promise.resolve(fs.readFileSync(file, 'utf8')));
@@ -39,7 +42,7 @@ export default async function getEs6Dependents(
 
   const ast: Program = walkerIns.parse(src).program;
   const importSpecifier2Dependents = _importSpecifier2Dependents(inDetail);
-  const findNodeExports = (ast: Node) => astFindExports(ast, { loader });
+  const findNodeExports = (ast: Node) => astNodeExports(ast, file, { loader, resolver });
   let queue = [] as Promise<any>[];
   ast.body.forEach((node: Node) => {
     switch (node.type) {

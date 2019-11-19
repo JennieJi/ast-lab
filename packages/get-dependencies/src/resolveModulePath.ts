@@ -14,7 +14,7 @@ type ResolveOptions = {
 
 export default async function resolveModulePath(
   mod: string, 
-  source: string, 
+  source: string = '/', 
   { 
     alias, 
     moduleDirectory: modules, 
@@ -34,7 +34,7 @@ export default async function resolveModulePath(
     alias,
     plugins
   });
-  const basedir = path.dirname(source);
+  const basedir = path.dirname(source || '/');
   const result = await new Promise((resolve, reject) => resolver(basedir, mod, (err: Error, res: string | undefined) => {
     if (err) {
       return reject(err.message);

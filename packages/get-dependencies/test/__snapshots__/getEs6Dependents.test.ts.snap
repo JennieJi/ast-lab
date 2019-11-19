@@ -122,6 +122,28 @@ Map {
 }
 `;
 
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importDeeperPath.js",{"inDetail":false}] 1`] = `
+Map {
+  "./deeper" => Map {
+    "*" => Object {
+      "affectedExports": true,
+      "alias": "deeper",
+    },
+  },
+}
+`;
+
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importDeeperPath.js",{"inDetail":true}] 1`] = `
+Map {
+  "./deeper" => Map {
+    "*" => Object {
+      "affectedExports": null,
+      "alias": "deeper",
+    },
+  },
+}
+`;
+
 exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/importDefault.js",{"inDetail":false}] 1`] = `
 Map {
   "./base" => Map {
@@ -165,3 +187,7 @@ Map {
   },
 }
 `;
+
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/noImports.js",{"inDetail":false}] 1`] = `Map {}`;
+
+exports[`getEs6Dependents() - (["source", "opts"]) - ["imports/noImports.js",{"inDetail":true}] 1`] = `Map {}`;

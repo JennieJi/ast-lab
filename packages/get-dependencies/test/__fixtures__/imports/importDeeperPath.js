@@ -1,0 +1,1 @@
+import * as deeper from './deeper';
