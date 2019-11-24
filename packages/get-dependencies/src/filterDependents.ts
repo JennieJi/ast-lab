@@ -50,7 +50,7 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
       try {
         importModule = await resolver(mod, source);
       } catch (err) {
-        console.info(`Prepare visit - resolving ${mod} in ${source}`);
+        console.error(err);
         console.info('Node:', node);
         throw err;
       }
