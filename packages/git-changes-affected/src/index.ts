@@ -6,7 +6,7 @@ import exec from './exec';
 
 type Transform = (raw: string, path: string) => string;
 
-const gitRoot = exec('git rev-parse --show-toplevel').trim();
+const gitRoot = exec('git rev-parse --show-toplevel');
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
 function getAbsolutePath(relativePath: string) {
@@ -16,7 +16,7 @@ function getRelativePath(file: string) {
   return path.isAbsolute(file) ? path.relative(gitRoot, file) : file;
 }
 
-function getRevisionFile(revision: string, file: string) {
+export function getRevisionFile(revision: string, file: string) {
   return exec(`git show ${revision}:${getRelativePath(file)}`);
 }
 
@@ -28,8 +28,8 @@ function createLoader(revision: string, transform?: Transform) {
 }
 
  export function getTrackedFiles(revision: string = 'HEAD', paths?: string[]) {
-  const raw = exec(`git ls-tree -r ${revision} --name-only --full-name ${paths &&paths.length ? paths.join(' ') : gitRoot}`);
-  return raw.split('\n').slice(0, -1);
+  const raw = exec(`git ls-tree -r ${revision} --name-only --full-name ${paths &&paths.length ? paths.join(' ') : ''}`);
+  return raw.split('\n');
 }
 
 type GetDiffExportMapOptions = {
