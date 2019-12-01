@@ -4,7 +4,7 @@ import { getExports, filterDependents, createResolver, hasExt, Exports } from 'g
 import { getGitDiffs, GIT_OPERATION } from './getGitDiffs';
 import exec from './exec';
 
-type Transform = (raw: string, path: string) => string;
+type Transform = (raw: string, more: { file: string, revision: string }) => string;
 
 const gitRoot = exec('git rev-parse --show-toplevel');
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
@@ -23,7 +23,7 @@ export function getRevisionFile(revision: string, file: string) {
 function createLoader(revision: string, transform?: Transform) {
   return (file: string) => {
     const raw = getRevisionFile(revision, file);
-    return Promise.resolve(transform ? transform(raw, file) : raw);
+    return Promise.resolve(transform ? transform(raw, { file, revision }) : raw);
   };
 }
 
@@ -82,13 +82,12 @@ class FileListIncludesPlugin {
 	}
 
 	apply(resolver: any) {
-		const target = resolver.ensureHook('resolved');
+    const target = resolver.ensureHook('resolved');
 		resolver
 			.getHook('directory')
 			.tapAsync("FileListIncludesPlugin", (request: any, resolveContext: any, callback: any) => {
         const filename = request.path;
-        const fileExt = this.extensions.find(ext => {
-          const file = `${filename}${ext}`;
+        const tryResolveFile = (file: string) => {
           const fileRelativePath =  path.relative(gitRoot, file);
           if (this.files.has(fileRelativePath)) {
             if (resolveContext.fileDependencies)
@@ -105,7 +104,10 @@ class FileListIncludesPlugin {
             );
             return true;
           }
-          return false;
+        };
+        const fileExt = this.extensions.find(ext => {
+          return tryResolveFile(`${filename}${ext}`) || 
+            tryResolveFile(`${filename}/index${ext}`);
         });
         if (!fileExt) {
           if (resolveContext.missingDependencies) {
