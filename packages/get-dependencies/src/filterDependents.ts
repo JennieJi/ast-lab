@@ -5,7 +5,7 @@ import getEs6Dependents from './es6Detect/getEs6Dependents';
 import createResolver from './createResolver';
 import markDependents from './markDependents';
 import hasExt from './hasExt';
-import { PathNode,  Exports, Options, Visited, VisitedNode } from './types';
+import { PathNode,  Exports, Options, Visited, VisitedNode, Dependents } from './types';
 
 function skipFile(file: string, extensions: string[] | void){
   return extensions && !hasExt(file, extensions) && hasExt(file);
@@ -30,14 +30,19 @@ async function visitPath(visited: Visited, node: PathNode, options: Options) {
   } = options;
   const { importModule: source } = node;
 
-  const deps = await getEs6Dependents(source, {
-    inDetail: false,
-    async loader(file: string) {
-      if (skipFile(file, extensions)) { return ''; }
-      return loader ? loader(file) : fs.readFileSync(file, 'utf8');
-    },
-    resolver
-  });
+  let deps = new Map() as Dependents;
+  try {
+    deps = await getEs6Dependents(source, {
+      inDetail: false,
+      async loader(file: string) {
+        if (skipFile(file, extensions)) { return ''; }
+        return loader ? loader(file) : fs.readFileSync(file, 'utf8');
+      },
+      resolver
+    });
+  } catch(err) {
+    console.warn('getEs6Dependents fail:', source, err);
+  }
   addVisitedNode(visited, node);
 
   let queue = [] as Promise<any>[];
