@@ -1,5 +1,5 @@
 {
-  "name": "get-dependencies",
+  "name": "es-stats",
   "version": "1.0.0-alpha",
   "description": "",
   "main": "dist/index.js",
@@ -9,9 +9,13 @@
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
   "keywords": [
-    "affected",
+    "ecma",
+    "es6",
+    "import",
+    "export",
+    "relation",
     "dependency",
-    "change"
+    "ast"
   ],
   "files": [
     "./dist"
@@ -32,7 +36,6 @@
   "dependencies": {
     "@babel/parser": "^7.7.5",
     "@babel/traverse": "^7.7.4",
-    "enhanced-resolve": "^4.1.1",
-    "es-stats": "1.0.0-alpha"
+    "enhanced-resolve": "^4.1.1"
   }
 }
