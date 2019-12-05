@@ -1,34 +1,29 @@
-import { ALL_EXPORTS } from './constants';
+import { MODULE_ALL } from './constants';
 
 export type Module = string;
-type Imported = string;
-type ImportedAlias = string;
-export type Exported = string;
-
-export type ModuleExported = Set<Exported> | null | typeof ALL_EXPORTS;
-export type ModuleImported = Map<Imported, {
-  alias: ImportedAlias | null,
-  affectedExports: ModuleExported
-}>;
-
-export type Dependents = Map<Module, ModuleImported>;
-export type Exports = Map<Module, ModuleExported>;
-
-export type Loader = (absoluteFilePath: string) => Promise<string>;
-export type Resolver = (mod: string, source: string) => Promise<string | void>;
-
-export type PathNode = {
-  source: Module | null,
-  importModule: Module,
-  i2e: ModuleImported | null,
-  prev: PathNode | null
+export type Member = string;
+export type Members = Member[] | typeof MODULE_ALL;
+export type MemberRef = {
+  name: Member,
+  alias: Member,
 };
+export type Import =  MemberRef & Entry;
+export type Exports = {
+  extends?: Module[],
+  members: MemberRef[]
+};
+export type MemberRelation =  { [name: string]: Set<Member> };
+
+export type Entry = {
+  source: Module, 
+  name: Member
+};
+export type AffectedMap = Map<Member, Entry[]>;
+export type DependencyMap = Map<Module, AffectedMap>;
+
+export type Loader = (path: string) => Promise<string | void>
 
 export type Options = {
-  loader?: Loader,
-  extensions: string[],
-  resolver: Resolver
-};
-
-export type VisitedNode = PathNode[];
-export type Visited = Map<Module, VisitedNode>;
+  resolver?: (base: string, target: string) => Promise<string | void>,
+  loader?: Loader
+}

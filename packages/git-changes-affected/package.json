@@ -10,11 +10,11 @@
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "repository": {
-    "url": "https://github.com/JennieJi/affected",
+    "url": "https://github.com/JennieJi/ast-lab",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/JennieJi/affected/issues"
+    "url": "https://github.com/JennieJi/ast-lab/issues"
   },
   "license": "MIT",
   "main": "dist/index.js",
