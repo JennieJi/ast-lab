@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`import visitors dynamicImport-asyncawait.js 1`] = `
+Array [
+  Object {
+    "alias": "a",
+    "name": "a",
+    "source": "./b",
+  },
+]
+`;
+
+exports[`import visitors dynamicImport-then.js 1`] = `Array []`;
+
 exports[`import visitors importAlias.js 1`] = `
 Array [
   Object {
