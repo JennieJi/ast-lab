@@ -1,7 +1,7 @@
 // @ts-ignore
 import { enumerateArgsTestFunction, configArgs } from 'lazy-jest';
 import _markDependents from '../src/markDependents';
-import { Exports, PathNode, ModuleExported } from '../src/types';
+import { Exports, PathNode, ModuleExported } from 'ast-lab-types';
 import { ALL_EXPORTS, ALL_MODULES } from '../src/constants';
 
 function makeSimplePath(paths: string[]) {

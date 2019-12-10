@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`export visitors exportAllFrom.js 1`] = `
+Object {
+  "extends": Array [
+    "./exportNamed",
+  ],
+  "members": Array [],
+}
+`;
+
+exports[`export visitors exportDefault.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportDefaultFuncAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportDefaultValueAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportFunc.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportFuncAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "b",
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportNamed.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportNamedFrom.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors noExports.js 1`] = `
+Object {
+  "members": Array [],
+}
+`;

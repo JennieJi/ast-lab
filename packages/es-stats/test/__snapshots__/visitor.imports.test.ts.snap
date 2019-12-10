@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import visitors importAlias.js 1`] = `
+Array [
+  Object {
+    "alias": "b",
+    "name": "a",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors importAll.js 1`] = `
+Array [
+  Object {
+    "alias": "base",
+    "name": "*",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors importCss.js 1`] = `
+Array [
+  Object {
+    "alias": "styles",
+    "name": "default",
+    "source": "../nonjs/style.css",
+  },
+]
+`;
+
+exports[`import visitors importDefault.js 1`] = `
+Array [
+  Object {
+    "alias": "base",
+    "name": "default",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors importNamed.js 1`] = `
+Array [
+  Object {
+    "alias": "a",
+    "name": "a",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors noImports.js 1`] = `Array []`;
