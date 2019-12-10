@@ -1,7 +1,7 @@
 
 import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
-import { MemberRelation } from '../../types';
+import { MemberRelation } from 'ast-lab-types';
 
 type Scope = { privates: Set<string>, candidates: Set<string> };
 

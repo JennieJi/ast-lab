@@ -1,9 +1,9 @@
 {
-  "name": "get-dependencies",
+  "name": "ast-lab-types",
   "version": "1.0.0-alpha",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.d.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
@@ -25,12 +25,7 @@
     "url": "https://github.com/JennieJi/ast-lab/issues"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@types/enhanced-resolve": "^3.0.6",
-    "ast-lab-types": "1.0.0-alpha"
-  },
-  "dependencies": {
-    "enhanced-resolve": "^4.1.1",
-    "es-stats": "1.0.0-alpha"
+  "peerDependencies": {
+    "typescript": "^3.5.3"
   }
 }

@@ -1,8 +1,6 @@
-import { MODULE_ALL } from './constants';
-
 export type Module = string;
 export type Member = string;
-export type Members = Member[] | typeof MODULE_ALL;
+export type Members = Member[] | '*';
 export type MemberRef = {
   name: Member,
   alias: Member,

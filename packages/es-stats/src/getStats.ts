@@ -1,10 +1,9 @@
-// @ts-ignore
 import { parse } from '@babel/parser';
 import traverse, { Visitor } from '@babel/traverse';
 import createExportVisitors from './visitors/exports';
 import createImportVisitors from './visitors/imports';
 import createRootRelationVisitors from './visitors/rootRelation';
-import { Import, Exports, MemberRelation } from '../types';
+import { Import, Exports, MemberRelation } from 'ast-lab-types';
 
 
 
@@ -15,7 +14,7 @@ import { Import, Exports, MemberRelation } from '../types';
  * @return {Map<string, Set<name> | null>}
  */
 export default function getStats(file: string) {
-  const ast = parse(file).program;
+  const ast = parse(file, { sourceType: 'module' }).program;
   const imports = [] as Import[];
   const exports = { members: [] } as Exports;
   const relations = {} as MemberRelation;

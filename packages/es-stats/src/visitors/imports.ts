@@ -1,6 +1,6 @@
 import { Visitor } from '@babel/traverse';
 import { StringLiteral } from '@babel/types'; 
-import { Import } from "../../types";
+import { Import } from "ast-lab-types";
 import getPatternNames from '../getPatternNames';
 import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
 
@@ -9,6 +9,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
     ImportDeclaration({ node }) {
       const modulePath = node.source.value;
       node.specifiers.forEach((specifier) => {
+        // @ts-ignore
         const dep = importSpecifier2Dependents(specifier);
         if (dep) {
           const { name, alias } = dep;

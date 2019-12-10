@@ -1,5 +1,5 @@
 import { LVal } from "@babel/types";
-import { MemberRef } from '../types';
+import { MemberRef } from 'ast-lab-types';
 
 function getPatternNames(pattern: LVal): Array<MemberRef> {
   switch(pattern.type) {
