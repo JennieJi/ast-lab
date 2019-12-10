@@ -1,8 +1,8 @@
 import { Visitor } from '@babel/traverse';
 import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import getDeclarationNames from '../getDeclarationNames';
-import { MODULE_DEFAULT } from '../../constants';
-import { Exports } from '../../types';
+import { MODULE_DEFAULT } from '../constants';
+import { Exports } from 'ast-lab-types';
 
 export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
   return {
@@ -13,6 +13,7 @@ export default function createExportVisitors(exports: Exports = { members: [] })
       const { specifiers, declaration } = node;
       if (specifiers.length) {
         specifiers.forEach(specifier => {
+          // @ts-ignore
           const dep = getModuleRefFromExportSpecifier(specifier);
           if (dep) {
             exports.members.push(dep);
@@ -20,6 +21,7 @@ export default function createExportVisitors(exports: Exports = { members: [] })
         });
       }
       if (declaration) {
+        // @ts-ignore
         const names = getDeclarationNames(declaration)
         if (names && names.length) {
           names.forEach(({ name }) => {
@@ -31,6 +33,7 @@ export default function createExportVisitors(exports: Exports = { members: [] })
     ExportDefaultDeclaration({ node }) {
       const { declaration } = node;
       const alias = MODULE_DEFAULT;
+      // @ts-ignore
       const names = getDeclarationNames(declaration);
       if (names && names.length) {
         names.forEach(({ name }) => {

@@ -1,6 +1,6 @@
-import { MODULE_ALL, MODULE_DEFAULT} from '../constants';
+import { MODULE_ALL, MODULE_DEFAULT} from './constants';
 import { ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier } from '@babel/types';
-import { MemberRef } from '../types';
+import { MemberRef } from 'ast-lab-types';
 
 export default function(specifier: ImportDefaultSpecifier | ImportNamespaceSpecifier | ImportSpecifier): MemberRef | null {
   const alias = specifier.local.name;

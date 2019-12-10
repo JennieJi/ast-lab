@@ -2,7 +2,7 @@ import {
   Declaration
 } from '@babel/types';
 import getPatternIdentifiers from './getPatternNames';
-import { MemberRef } from '../types';
+import { MemberRef } from 'ast-lab-types';
 
 export default function getDeclarationNames(node: Declaration): Array<MemberRef> | null {
   switch(node.type) {

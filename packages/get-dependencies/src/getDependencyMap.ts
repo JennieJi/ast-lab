@@ -1,4 +1,4 @@
-import { DependencyMap, AffectedMap, Options } from './types';
+import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
 import getMemberDependency from './getMemberDependency';
 
 

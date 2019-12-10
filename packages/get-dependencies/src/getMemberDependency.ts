@@ -3,7 +3,7 @@ import path from 'path';
 import enhancedResolve from 'enhanced-resolve';
 import ecmaStats from 'es-stats';
 import denodeify from './denodeify';
-import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } from './types';
+import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } from 'ast-lab-types';
 import { MODULE_ALL } from './constants';
 
 function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {

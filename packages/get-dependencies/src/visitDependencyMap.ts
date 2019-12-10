@@ -1,4 +1,4 @@
-import { DependencyMap, Entry } from "./types";
+import { DependencyMap, Entry } from "ast-lab-types";
 
 type Visited = { [module: string]: { [member: string]: 1 } };
 
