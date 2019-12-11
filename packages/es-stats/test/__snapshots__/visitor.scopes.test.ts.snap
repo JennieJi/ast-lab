@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import visitors arrowfunction.js 1`] = `
+Object {
+  "arrow": Set {
+    "b",
+  },
+}
+`;
+
+exports[`import visitors class.js 1`] = `
+Object {
+  "c": Set {
+    "b",
+  },
+}
+`;
+
+exports[`import visitors forloop.js 1`] = `
+Object {
+  "func": Set {
+    "b",
+    "a",
+  },
+}
+`;
+
+exports[`import visitors function.js 1`] = `
+Object {
+  "func": Set {
+    "a",
+  },
+}
+`;
+
+exports[`import visitors function-argsObjectAssign.js 1`] = `
+Object {
+  "func": Set {
+    "a",
+  },
+}
+`;
+
+exports[`import visitors function-argsSpread.js 1`] = `
+Object {
+  "func": Set {
+    "a",
+  },
+}
+`;
+
+exports[`import visitors ifelse.js 1`] = `
+Object {
+  "func": Set {
+    "a",
+  },
+}
+`;
+
+exports[`import visitors switch.js 1`] = `
+Object {
+  "func": Set {
+    "type",
+    "TYPES",
+    "v",
+  },
+}
+`;
+
+exports[`import visitors trycatch.js 1`] = `
+Object {
+  "func": Set {
+    "a",
+  },
+}
+`;
