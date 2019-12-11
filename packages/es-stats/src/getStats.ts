@@ -14,7 +14,7 @@ import { Import, Exports, MemberRelation } from 'ast-lab-types';
  * @return {Map<string, Set<name> | null>}
  */
 export default function getStats(file: string) {
-  const ast = parse(file, { sourceType: 'module' }).program;
+  const ast = parse(file, { sourceType: 'module' });
   const imports = [] as Import[];
   const exports = { members: [] } as Exports;
   const relations = {} as MemberRelation;
