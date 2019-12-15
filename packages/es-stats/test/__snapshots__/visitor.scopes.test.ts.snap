@@ -1,23 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`import visitors arrowfunction.js 1`] = `
+exports[`rootRelation visitors exports/exportAllFrom.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors exports/exportDefault.js 1`] = `
 Object {
-  "arrow": Set {
-    "b",
-  },
+  "a": Set {},
 }
 `;
 
-exports[`import visitors class.js 1`] = `
+exports[`rootRelation visitors exports/exportDefaultFuncAlias.js 1`] = `
 Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors exports/exportDefaultValueAlias.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors exports/exportFunc.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors exports/exportFuncAlias.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors exports/exportNamed.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors exports/noExports.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
+Object {
+  "func": Set {},
+}
+`;
+
+exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
+Object {
+  "func": Set {},
+}
+`;
+
+exports[`rootRelation visitors imports/importAlias.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importAll.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importCss.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importDefault.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importNamed.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/noImports.js 1`] = `
+Object {
+  "a": Set {},
+}
+`;
+
+exports[`rootRelation visitors scopes/arrowfunction.js 1`] = `
+Object {
+  "DEFAULT": Set {},
+  "a": Set {},
+  "arrow": Set {
+    "a",
+    "DEFAULT",
+    "b",
+  },
+  "b": Set {},
+}
+`;
+
+exports[`rootRelation visitors scopes/asyncFunction.js 1`] = `
+Object {
+  "a": Set {},
+  "asyncFunc": Set {
+    "a",
+  },
+  "b": Set {},
+}
+`;
+
+exports[`rootRelation visitors scopes/class.js 1`] = `
+Object {
+  "a": Set {},
+  "b": Set {},
   "c": Set {
     "b",
   },
 }
 `;
 
-exports[`import visitors forloop.js 1`] = `
+exports[`rootRelation visitors scopes/constant.js 1`] = `
 Object {
+  "a": Set {},
+  "exportConstant": Set {
+    "a",
+  },
+}
+`;
+
+exports[`rootRelation visitors scopes/eval.js 1`] = `
+Object {
+  "a": Set {},
+  "func": Set {},
+}
+`;
+
+exports[`rootRelation visitors scopes/forloop.js 1`] = `
+Object {
+  "a": Set {},
+  "b": Set {},
   "func": Set {
     "b",
     "a",
@@ -25,50 +134,82 @@ Object {
 }
 `;
 
-exports[`import visitors function.js 1`] = `
+exports[`rootRelation visitors scopes/function.js 1`] = `
 Object {
+  "a": Set {},
+  "b": Set {},
   "func": Set {
     "a",
   },
 }
 `;
 
-exports[`import visitors function-argsObjectAssign.js 1`] = `
+exports[`rootRelation visitors scopes/function-argsObjectAssign.js 1`] = `
 Object {
+  "a": Set {},
+  "b": Set {},
   "func": Set {
     "a",
   },
 }
 `;
 
-exports[`import visitors function-argsSpread.js 1`] = `
+exports[`rootRelation visitors scopes/function-argsSpread.js 1`] = `
 Object {
+  "a": Set {},
+  "b": Set {},
   "func": Set {
     "a",
   },
 }
 `;
 
-exports[`import visitors ifelse.js 1`] = `
+exports[`rootRelation visitors scopes/generator.js 1`] = `
 Object {
+  "a": Set {},
   "func": Set {
     "a",
   },
 }
 `;
 
-exports[`import visitors switch.js 1`] = `
+exports[`rootRelation visitors scopes/ifelse.js 1`] = `
 Object {
+  "a": Set {},
+  "b": Set {},
+  "func": Set {
+    "a",
+  },
+}
+`;
+
+exports[`rootRelation visitors scopes/switch.js 1`] = `
+Object {
+  "TYPES": Set {},
   "func": Set {
     "type",
     "TYPES",
-    "v",
+    "v1",
+  },
+  "type": Set {},
+  "v1": Set {},
+  "v2": Set {},
+}
+`;
+
+exports[`rootRelation visitors scopes/template.js 1`] = `
+Object {
+  "a": Set {},
+  "func": Set {
+    "a",
   },
 }
 `;
 
-exports[`import visitors trycatch.js 1`] = `
+exports[`rootRelation visitors scopes/trycatch.js 1`] = `
 Object {
+  "a": Set {},
+  "b": Set {},
   "func": Set {
     "a",
   },

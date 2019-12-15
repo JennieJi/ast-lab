@@ -4,11 +4,11 @@
     "esModuleInterop": true,
     "target": "es2018",
     "lib": ["es2018"],
+    "strict": true,
     "moduleResolution": "Node",
     "module": "CommonJS",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "sourceMap": true,
     "declaration": true,
     "resolveJsonModule": true,
     "strictNullChecks": true,
@@ -19,8 +19,8 @@
   "exclude": [
     "**/node_modules",
     "**/dist",
+    "**/test",
     "**/*.test.ts",
     "**/types",
-    "**/__tests__"
   ]
 }

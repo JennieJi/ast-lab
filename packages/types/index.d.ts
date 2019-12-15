@@ -1,3 +1,5 @@
+import { ParserOptions } from '@babel/parser';
+
 export type Module = string;
 export type Member = string;
 export type Members = Member[] | '*';
@@ -23,5 +25,6 @@ export type Loader = (path: string) => Promise<string | void>
 
 export type Options = {
   resolver?: (base: string, target: string) => Promise<string | void>,
-  loader?: Loader
+  loader?: Loader,
+  parserOptions?: ParserOptions
 }

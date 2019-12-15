@@ -5,25 +5,28 @@ import traverse from '@babel/traverse';
 import { MemberRelation } from 'ast-lab-types';
 import createVisitor from '../src/visitors/rootRelation';
 
-const dir = path.resolve(__dirname, '__fixtures__/scopes');
-const files = fs.readdirSync(dir);
-describe('import visitors', () => {
-  files.forEach(file => {
-    test(file, () => {
-      console.log('===', file);
-      let res = {} as MemberRelation;
-      const code = fs.readFileSync(path.resolve(dir, file), 'utf-8');
-      traverse(
-        // @ts-ignore
-        parse(code, { 
-          sourceType: 'module',
-          plugins: [
-            'classProperties'
-          ]
-        }),
-        createVisitor(res)
-      );
-      expect(res).toMatchSnapshot();
+const dirs = ['scopes', 'imports', 'exports'];
+describe('rootRelation visitors', () => {
+  dirs.forEach(dir => {
+    const dirPath = path.resolve(__dirname, '__fixtures__', dir);
+    const files = fs.readdirSync(dirPath);
+    files.forEach(file => {
+      test(`${dir}/${file}`, () => {
+        let res = {} as MemberRelation;
+        const code = fs.readFileSync(path.resolve(dirPath, file), 'utf-8');
+        traverse(
+          // @ts-ignore
+          parse(code, { 
+            sourceType: 'module',
+            plugins: [
+              'classProperties',
+              'dynamicImport'
+            ]
+          }),
+          createVisitor(res)
+        );
+        expect(res).toMatchSnapshot();
+      });
     });
   });
 });
