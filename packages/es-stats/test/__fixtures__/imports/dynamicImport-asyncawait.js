@@ -1,3 +1,3 @@
 async function func() {
-  const a = await import ('./b');
+  const dynamicImport = await import ('./b');
 }

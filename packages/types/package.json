@@ -21,5 +21,8 @@
   "license": "MIT",
   "peerDependencies": {
     "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.7.5"
   }
 }

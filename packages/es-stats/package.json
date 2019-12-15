@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "../../node_modules/.bin/tsc --build --verbose ./",
+    "build": "../../node_modules/.bin/tsc",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
   "keywords": [
@@ -30,11 +30,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/debug": "^4.1.5",
     "@babel/types": "^7.7.4",
     "ast-lab-types": "1.0.0-alpha"
   },
   "dependencies": {
     "@babel/parser": "^7.7.5",
-    "@babel/traverse": "^7.7.4"
+    "@babel/traverse": "^7.7.4",
+    "debug": "^4.1.1"
   }
 }
