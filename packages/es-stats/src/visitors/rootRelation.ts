@@ -1,7 +1,8 @@
-import { VariableDeclarator, VariableDeclaration, LVal } from '@babel/types';
+import { VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier } from '@babel/types';
 import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
+import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { MemberRelation, MemberRef } from 'ast-lab-types';
 import _debug from 'debug';
 
@@ -14,6 +15,20 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
   let parentScopes = [] as Scope[];
   const addRefsToPrivates = (refs: Array<MemberRef>) => {
     refs.forEach(({ alias }) => scope.privates.add(alias));
+  };
+  const newScope = () => {
+    parentScopes.push(scope);
+    scope = { privates: new Set(), candidates: new Set() } as Scope;
+  };
+  const exitScopeHandler = () => {
+    if (parentScopes.length <= 1) return;
+    const { candidates } = scope;
+    scope.privates.forEach(d => candidates.delete(d));
+    scope = parentScopes.pop() as Scope;
+    scope.candidates = new Set(
+      Array.from(scope.candidates)
+      .concat(Array.from(candidates))
+    );
   };
 
   return {
@@ -35,32 +50,44 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         if (refs) {
           addRefsToPrivates(refs);
         }
-        parentScopes.push(scope);
-        scope = { privates: new Set(), candidates: new Set() } as Scope;
+        newScope();
       },
       exit({ node }) {
-        debug('EXIT-scope', parentScopes, scope);
+        debug('EXIT-variable scope', parentScopes, scope);
         const { candidates } = scope;
-        scope.privates.forEach(d => candidates.delete(d));
-        scope = parentScopes.pop() as Scope;
-        scope.candidates = new Set(
-          Array.from(scope.candidates)
-          .concat(Array.from(candidates))
-        );
+        exitScopeHandler();
         if (parentScopes.length === 1) {
           const refs = getDeclarationNames(node as VariableDeclaration);
           if (refs) {
-            refs.forEach(({ alias }) => relations[alias] = candidates);
+            refs.forEach(({ alias }) => {
+              relations[alias] = Array.from(candidates).filter(cdd => scope.privates.has(cdd));
+            });
           }
         }
       },
     },
+    ExportNamedDeclaration({ node }) {
+      if (node.source) {
+        node.specifiers.forEach(specifier => {
+          const ref = getModuleReffromExportSpecifier(specifier as ExportSpecifier);
+          if (ref && !relations[ref.name]) {
+            relations[ref.name] = [ref.name];
+          }
+        });
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      if (node.declaration.type === 'Identifier') {
+        const { name } = node.declaration;
+        if (!relations[name]) {
+          relations[name] = [name];
+        }
+      }
+    },
     Scopable: {
       enter(p) {
         if (p.isBlockStatement() && p.parentPath.isFunction()) return;
-        
-        parentScopes.push(scope);
-        scope = { privates: new Set(), candidates: new Set() } as Scope;
+        newScope();
 
         if (p.isFunction()) {
           const refs = p.node.params
@@ -74,24 +101,17 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
       },
       exit(p) {
         const { node, parent, parentPath } = p;
-        debug('EXIT-scope', parentScopes, scope);
-        if (p.isBlockStatement() && parentPath.isFunction()) return;
+        debug('EXIT-scopable scope', parentScopes, scope);
+        if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
 
         const { candidates } = scope;
-        if (parentScopes.length > 1) {
-          scope.privates.forEach(d => candidates.delete(d));
-          scope = parentScopes.pop() as Scope;
-          scope.candidates = new Set(
-            Array.from(scope.candidates)
-            .concat(Array.from(candidates))
-          );
-        }
+        exitScopeHandler();
         // @ts-ignore 
         let id = node.id || parent.id;
         if (parentScopes.length === 1 && id) {
           /** @todo find more specific declaration affected */
-          getPatternNames(id).forEach(({ name }) => {
-            relations[name] = candidates;
+          getPatternNames(id).forEach(({ alias }) => {
+            relations[alias] = Array.from(candidates).filter(cdd => scope.privates.has(cdd));
           });
         }
       }
@@ -109,7 +129,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
     //   }
     // },
     Identifier(p) {
-      const { node, key, scope: astScope } = p;
+      const { node, key } = p;
       let parentPath = p.parentPath;
       // exclude function/class identifier
       if (parentPath.isScopable() && key === 'id' || parentPath.isFunction()) {
@@ -119,8 +139,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         // exclude property
         !p.isProperty() &&
         key !== 'property' &&
-        !(parentPath.isProperty() && key === 'key') &&
-        !astScope.hasGlobal(node.name)
+        !(parentPath.isProperty() && key === 'key')
       ) {
         scope.candidates.add(node.name);
       }

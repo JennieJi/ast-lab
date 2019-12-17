@@ -2,7 +2,7 @@ let a;
 const b = 2;
 
 class c {
-  static c1 = bu;
+  static c1 = b;
 
   c2;
 
