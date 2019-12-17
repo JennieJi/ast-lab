@@ -4,57 +4,63 @@ exports[`rootRelation visitors exports/exportAllFrom.js 1`] = `Object {}`;
 
 exports[`rootRelation visitors exports/exportDefault.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultFuncAlias.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultValueAlias.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportFunc.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportFuncAlias.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportNamed.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
-exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `Object {}`;
+exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `
+Object {
+  "a": Array [
+    "a",
+  ],
+}
+`;
 
 exports[`rootRelation visitors exports/noExports.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
 Object {
-  "func": Set {},
+  "func": Array [],
 }
 `;
 
 exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
 Object {
-  "func": Set {},
+  "func": Array [],
 }
 `;
 
@@ -70,169 +76,177 @@ exports[`rootRelation visitors imports/importNamed.js 1`] = `Object {}`;
 
 exports[`rootRelation visitors imports/noImports.js 1`] = `
 Object {
-  "a": Set {},
+  "a": Array [],
 }
 `;
 
 exports[`rootRelation visitors scopes/arrowfunction.js 1`] = `
 Object {
-  "DEFAULT": Set {},
-  "a": Set {},
-  "arrow": Set {
+  "DEFAULT": Array [],
+  "a": Array [],
+  "arrow": Array [
     "a",
     "DEFAULT",
     "b",
-  },
-  "b": Set {},
+  ],
+  "b": Array [],
 }
 `;
 
 exports[`rootRelation visitors scopes/asyncFunction.js 1`] = `
 Object {
-  "a": Set {},
-  "asyncFunc": Set {
+  "a": Array [],
+  "asyncFunc": Array [
     "a",
-  },
-  "b": Set {},
+  ],
+  "b": Array [],
 }
 `;
 
 exports[`rootRelation visitors scopes/class.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "c": Set {
+  "a": Array [],
+  "b": Array [],
+  "c": Array [
     "b",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/constant.js 1`] = `
 Object {
-  "a": Set {},
-  "exportArray": Set {
+  "a": Array [],
+  "exportArray": Array [
     "a",
-  },
-  "exportArrayMember": Set {
+  ],
+  "exportArrayMember": Array [
     "exportArray",
-  },
-  "exportConstant": Set {
+  ],
+  "exportConstant": Array [
     "a",
-  },
-  "exportObject": Set {
+  ],
+  "exportObject": Array [
     "a",
-  },
-  "exportObject2": Set {
+  ],
+  "exportObject2": Array [
     "a",
-  },
-  "exportObjectMember": Set {
+  ],
+  "exportObjectMember": Array [
     "exportObject",
-  },
-  "exportRestArray": Set {
+  ],
+  "exportRestArray": Array [
     "exportArray",
-  },
-  "exportRestObject": Set {
+  ],
+  "exportRestObject": Array [
     "exportObject",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/eval.js 1`] = `
 Object {
-  "a": Set {},
-  "func": Set {},
+  "a": Array [],
+  "func": Array [],
 }
 `;
 
 exports[`rootRelation visitors scopes/forloop.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "b",
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/function.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/function-argsObjectAssign.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/function-argsSpread.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/generator.js 1`] = `
 Object {
-  "a": Set {},
-  "func": Set {
+  "a": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/ifelse.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "a",
-  },
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/importExport.js 1`] = `
+Object {
+  "im": Array [
+    "im",
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/switch.js 1`] = `
 Object {
-  "TYPES": Set {},
-  "func": Set {
+  "TYPES": Array [],
+  "func": Array [
     "type",
     "TYPES",
     "v1",
-  },
-  "type": Set {},
-  "v1": Set {},
-  "v2": Set {},
+  ],
+  "type": Array [],
+  "v1": Array [],
+  "v2": Array [],
 }
 `;
 
 exports[`rootRelation visitors scopes/template.js 1`] = `
 Object {
-  "a": Set {},
-  "func": Set {
+  "a": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
 
 exports[`rootRelation visitors scopes/trycatch.js 1`] = `
 Object {
-  "a": Set {},
-  "b": Set {},
-  "func": Set {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
     "a",
-  },
+  ],
 }
 `;
