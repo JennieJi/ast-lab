@@ -110,8 +110,29 @@ Object {
 exports[`rootRelation visitors scopes/constant.js 1`] = `
 Object {
   "a": Set {},
+  "exportArray": Set {
+    "a",
+  },
+  "exportArrayMember": Set {
+    "exportArray",
+  },
   "exportConstant": Set {
     "a",
+  },
+  "exportObject": Set {
+    "a",
+  },
+  "exportObject2": Set {
+    "a",
+  },
+  "exportObjectMember": Set {
+    "exportObject",
+  },
+  "exportRestArray": Set {
+    "exportArray",
+  },
+  "exportRestObject": Set {
+    "exportObject",
   },
 }
 `;

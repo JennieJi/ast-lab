@@ -1,18 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`import visitors dynamicImport-asyncawait.js 1`] = `
+exports[`import visitors exports/exportAllFrom.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefault.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefaultFuncAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefaultValueAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportFunc.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportFuncAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportNamed.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportNamedFrom.js 1`] = `
 Array [
   Object {
     "alias": "a",
     "name": "a",
+    "source": "./exportNamed",
+  },
+]
+`;
+
+exports[`import visitors exports/noExports.js 1`] = `Array []`;
+
+exports[`import visitors imports/dynamicImport-asyncawait.js 1`] = `
+Array [
+  Object {
+    "alias": "dynamicImport",
+    "name": "dynamicImport",
     "source": "./b",
   },
 ]
 `;
 
-exports[`import visitors dynamicImport-then.js 1`] = `Array []`;
+exports[`import visitors imports/dynamicImport-then.js 1`] = `Array []`;
 
-exports[`import visitors importAlias.js 1`] = `
+exports[`import visitors imports/importAlias.js 1`] = `
 Array [
   Object {
     "alias": "b",
@@ -22,7 +48,7 @@ Array [
 ]
 `;
 
-exports[`import visitors importAll.js 1`] = `
+exports[`import visitors imports/importAll.js 1`] = `
 Array [
   Object {
     "alias": "base",
@@ -32,7 +58,7 @@ Array [
 ]
 `;
 
-exports[`import visitors importCss.js 1`] = `
+exports[`import visitors imports/importCss.js 1`] = `
 Array [
   Object {
     "alias": "styles",
@@ -42,7 +68,7 @@ Array [
 ]
 `;
 
-exports[`import visitors importDefault.js 1`] = `
+exports[`import visitors imports/importDefault.js 1`] = `
 Array [
   Object {
     "alias": "base",
@@ -52,7 +78,7 @@ Array [
 ]
 `;
 
-exports[`import visitors importNamed.js 1`] = `
+exports[`import visitors imports/importNamed.js 1`] = `
 Array [
   Object {
     "alias": "a",
@@ -62,4 +88,4 @@ Array [
 ]
 `;
 
-exports[`import visitors noImports.js 1`] = `Array []`;
+exports[`import visitors imports/noImports.js 1`] = `Array []`;
