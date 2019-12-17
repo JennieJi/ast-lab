@@ -1,8 +1,9 @@
 import { parse, ParserOptions } from '@babel/parser';
-import traverse, { Visitor } from '@babel/traverse';
+import traverse from '@babel/traverse';
 import createExportVisitors from './visitors/exports';
 import createImportVisitors from './visitors/imports';
 import createRootRelationVisitors from './visitors/rootRelation';
+import mergeVisitors from './mergeVisitors';
 import { Import, Exports, MemberRelation } from 'ast-lab-types';
 
 
@@ -22,11 +23,11 @@ export default function getStats(file: string, parserOptions?: ParserOptions) {
   const exports = { members: [] } as Exports;
   const relations = {} as MemberRelation;
   // @ts-ignore
-  traverse(ast, {
-    ...createExportVisitors(exports),
-    ...createImportVisitors(imports),
-    ...createRootRelationVisitors(relations),
-  } as Visitor);
+  traverse(ast, mergeVisitors(
+    createExportVisitors(exports),
+    createImportVisitors(imports),
+    createRootRelationVisitors(relations)
+  ));
 
 
   return {
