@@ -1,4 +1,4 @@
-import * as resolve from 'enhanced-resolve';
+import * as resolve from './importDefault';
 
 export const { a } = resolve;
 export function func(){

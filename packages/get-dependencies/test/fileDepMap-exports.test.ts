@@ -6,7 +6,11 @@ const dir = path.resolve(__dirname, '__fixtures__/exports');
 describe('fileDepMap()', () => {
   fs.readdirSync(dir).forEach(file => {
     test(file, async () => {
-      const res = await fileDepMap(path.resolve(dir, file));
+      const res = await fileDepMap(path.resolve(dir, file), {
+        parserOptions: {
+          plugins: ['dynamicImport']
+        }
+      });
       expect(res).toMatchSnapshot();
     });
   });

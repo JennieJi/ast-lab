@@ -26,14 +26,6 @@ Map {
 }
 `;
 
-exports[`fileDepMap() exportDefaultFuncAlias.js 1`] = `Map {}`;
-
-exports[`fileDepMap() exportDefaultValueAlias.js 1`] = `Map {}`;
-
-exports[`fileDepMap() exportFunc.js 1`] = `Map {}`;
-
-exports[`fileDepMap() exportFuncAlias.js 1`] = `Map {}`;
-
 exports[`fileDepMap() exportNamed.js 1`] = `
 Map {
   "fs" => Map {
