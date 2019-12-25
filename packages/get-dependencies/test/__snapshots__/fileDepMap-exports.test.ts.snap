@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fileDepMap() exportAllFrom.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "*" => Array [
+      Object {
+        "name": "*",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() exportDefault.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "a" => Array [
+      Object {
+        "name": "default",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportDefault.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() exportDefaultFuncAlias.js 1`] = `Map {}`;
+
+exports[`fileDepMap() exportDefaultValueAlias.js 1`] = `Map {}`;
+
+exports[`fileDepMap() exportFunc.js 1`] = `Map {}`;
+
+exports[`fileDepMap() exportFuncAlias.js 1`] = `Map {}`;
+
+exports[`fileDepMap() exportNamed.js 1`] = `
+Map {
+  "fs" => Map {
+    "default" => Array [
+      Object {
+        "name": "readFile",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamed.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() exportNamedFrom.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "a" => Array [
+      Object {
+        "name": "a",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() noExports.js 1`] = `Map {}`;

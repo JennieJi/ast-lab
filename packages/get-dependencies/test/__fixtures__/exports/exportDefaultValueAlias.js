@@ -1,3 +1,3 @@
-const a;
+let a;
 
 export default a;

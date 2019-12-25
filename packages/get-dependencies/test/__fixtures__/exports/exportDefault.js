@@ -1,3 +1,3 @@
-const a = 1;
+import { a } from './exportNamed';
 
 export default a;

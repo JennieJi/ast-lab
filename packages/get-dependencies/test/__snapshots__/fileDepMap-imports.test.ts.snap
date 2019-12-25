@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fileDepMap() dynamicImport-asyncawait.js 1`] = `
+Map {
+  "./b" => Map {
+    "b" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() dynamicImport-then.js 1`] = `Map {}`;
+
+exports[`fileDepMap() importAlias.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "c",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+      },
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() importAll.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "*" => Array [
+      Object {
+        "name": "a",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+      },
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() importCss.js 1`] = `
+Map {
+  "../nonjs/style.css" => Map {
+    "default" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importDefault.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "default" => Array [
+      Object {
+        "name": "a",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
+      },
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() importNamed.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js",
+      },
+    ],
+  },
+}
+`;

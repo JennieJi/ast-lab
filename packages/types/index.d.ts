@@ -12,7 +12,7 @@ export type Exports = {
   extends?: Module[],
   members: MemberRef[]
 };
-export type MemberRelation =  { [name: string]: Set<Member> };
+export type MemberRelation =  { [name: string]: Member[] };
 
 export type Entry = {
   source: Module, 

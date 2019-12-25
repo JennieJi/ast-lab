@@ -26,10 +26,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/debug": "^4.1.5",
     "@types/enhanced-resolve": "^3.0.6",
     "ast-lab-types": "1.0.0-alpha"
   },
   "dependencies": {
+    "debug": "^4.1.1",
     "enhanced-resolve": "^4.1.1",
     "es-stats": "1.0.0-alpha"
   }
