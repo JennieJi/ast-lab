@@ -2,7 +2,7 @@
 
 exports[`fileDepMap() dynamicImport-asyncawait.js 1`] = `
 Map {
-  "./b" => Map {
+  "./importAll" => Map {
     "b" => Array [],
   },
 }
@@ -12,7 +12,7 @@ exports[`fileDepMap() dynamicImport-then.js 1`] = `Map {}`;
 
 exports[`fileDepMap() importAlias.js 1`] = `
 Map {
-  "enhanced-resolve" => Map {
+  "./importNamed" => Map {
     "resolveFactory" => Array [
       Object {
         "name": "c",
@@ -29,7 +29,7 @@ Map {
 
 exports[`fileDepMap() importAll.js 1`] = `
 Map {
-  "enhanced-resolve" => Map {
+  "./importDefault" => Map {
     "*" => Array [
       Object {
         "name": "a",

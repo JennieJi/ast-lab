@@ -1,4 +1,4 @@
 export function func() {
   let a;
-  import ('./b').then(b => a=b);
+  import ('./importDefault').then(b => a=b);
 }

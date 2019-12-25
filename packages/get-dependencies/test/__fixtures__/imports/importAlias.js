@@ -1,4 +1,4 @@
-import { resolveFactory as b } from 'enhanced-resolve';
+import { resolveFactory as b } from './importNamed';
 
 export const c = b++;
 

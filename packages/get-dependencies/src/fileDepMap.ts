@@ -4,7 +4,7 @@ import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } fr
 import _debug from 'debug';
 import { MODULE_ALL } from './constants';
 
-const debug = _debug('get-dep:file');
+const debug = _debug('get-dependencies:file');
 
 function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
   const affected  = depMap.get(mod) || new Map() as AffectedMap;
@@ -15,8 +15,12 @@ function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member,
 }
 
 /**
+ * Get a file's dependency map
  * @param filePath {string} Absolute file path
  * @param options {object}
+ * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
+ * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
+ * @return {Promise<DependencyMap>}
  */
 export default async function fileDepMap(filePath: string, { loader, parserOptions }: Options = {}): Promise<DependencyMap> {
   const _loader = loader || ((_filePath: string) => Promise.resolve(fs.readFileSync(_filePath, 'utf8')));

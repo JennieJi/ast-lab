@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeDepMap() exports 1`] = `
+Map {
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamed.js" => Map {
+    "*" => Array [
+      Object {
+        "name": "*",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js",
+      },
+    ],
+    "a" => Array [
+      Object {
+        "name": "default",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportDefault.js",
+      },
+      Object {
+        "name": "a",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`mergeDepMap() imports 1`] = `
+Map {
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js" => Map {
+    "b" => Array [],
+  },
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js" => Map {
+    "*" => Array [
+      Object {
+        "name": "a",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+      },
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+      },
+    ],
+  },
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "c",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+      },
+      Object {
+        "name": "func",
+        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+      },
+    ],
+  },
+}
+`;
