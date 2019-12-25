@@ -5,30 +5,29 @@ import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { MemberRelation, MemberRef } from 'ast-lab-types';
 import _debug from 'debug';
+import { MODULE_DEFAULT } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
-type Scope = { privates: Set<string>, candidates: Set<string> };
+type Scope = { privates: Set<string>, candidates: string[] };
 
 export default function createRootRelationVisitors(relations: MemberRelation = {}): Visitor {
-  let scope = { privates: new Set(), candidates: new Set() } as Scope;
+  let scope = { privates: new Set(), candidates: [] } as Scope;
   let parentScopes = [] as Scope[];
   const addRefsToPrivates = (refs: Array<MemberRef>) => {
     refs.forEach(({ alias }) => scope.privates.add(alias));
   };
   const newScope = () => {
     parentScopes.push(scope);
-    scope = { privates: new Set(), candidates: new Set() } as Scope;
+    scope = { privates: new Set(), candidates: [] } as Scope;
   };
   const exitScopeHandler = () => {
     if (parentScopes.length <= 1) return;
-    const { candidates } = scope;
-    scope.privates.forEach(d => candidates.delete(d));
+    const { candidates, privates } = scope;
+    const filteredCandidates = candidates.filter(d => !privates.has(d));
     scope = parentScopes.pop() as Scope;
-    scope.candidates = new Set(
-      Array.from(scope.candidates)
-      .concat(Array.from(candidates))
-    );
+    scope.candidates = Array.from(new Set(scope.candidates.concat(filteredCandidates)));
+    return filteredCandidates;
   };
 
   return {
@@ -54,13 +53,12 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
       },
       exit({ node }) {
         debug('EXIT-variable scope', parentScopes, scope);
-        const { candidates } = scope;
-        exitScopeHandler();
+        const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
           const refs = getDeclarationNames(node as VariableDeclaration);
           if (refs) {
             refs.forEach(({ alias }) => {
-              relations[alias] = Array.from(candidates).filter(cdd => scope.privates.has(cdd));
+              relations[alias] = Array.from(new Set(candidates));
             });
           }
         }
@@ -80,7 +78,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
       if (node.declaration.type === 'Identifier') {
         const { name } = node.declaration;
         if (!relations[name]) {
-          relations[name] = [name];
+          relations[MODULE_DEFAULT] = [name];
         }
       }
     },
@@ -104,14 +102,13 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         debug('EXIT-scopable scope', parentScopes, scope);
         if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
 
-        const { candidates } = scope;
-        exitScopeHandler();
+        const candidates = exitScopeHandler();
         // @ts-ignore 
         let id = node.id || parent.id;
         if (parentScopes.length === 1 && id) {
           /** @todo find more specific declaration affected */
           getPatternNames(id).forEach(({ alias }) => {
-            relations[alias] = Array.from(candidates).filter(cdd => scope.privates.has(cdd));
+            relations[alias] = Array.from(new Set(candidates));
           });
         }
       }
@@ -141,7 +138,8 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         key !== 'property' &&
         !(parentPath.isProperty() && key === 'key')
       ) {
-        scope.candidates.add(node.name);
+        debug('>>>', node);
+        scope.candidates.push(node.name);
       }
     }
   };
