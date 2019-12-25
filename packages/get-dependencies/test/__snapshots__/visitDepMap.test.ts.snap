@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visitDepMap() circular 1`] = `
+Object {
+  "/a": Object {},
+}
+`;
+
+exports[`visitDepMap() importDefault.* 1`] = `
+Object {
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js": Object {},
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js": Object {},
+}
+`;
+
+exports[`visitDepMap() importNamed.resolveFactory 1`] = `
+Object {
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js": Object {},
+  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js": Object {},
+}
+`;
