@@ -64,7 +64,13 @@ Object {
 }
 `;
 
-exports[`rootRelation visitors imports/importAlias.js 1`] = `Object {}`;
+exports[`rootRelation visitors imports/importAlias.js 1`] = `
+Object {
+  "c": Array [
+    "b",
+  ],
+}
+`;
 
 exports[`rootRelation visitors imports/importAll.js 1`] = `Object {}`;
 
@@ -146,7 +152,9 @@ Object {
 exports[`rootRelation visitors scopes/eval.js 1`] = `
 Object {
   "a": Array [],
-  "func": Array [],
+  "func": Array [
+    "eval",
+  ],
 }
 `;
 
@@ -212,7 +220,7 @@ Object {
 
 exports[`rootRelation visitors scopes/importExport.js 1`] = `
 Object {
-  "im": Array [
+  "default": Array [
     "im",
   ],
 }
@@ -246,6 +254,7 @@ Object {
   "a": Array [],
   "b": Array [],
   "func": Array [
+    "console",
     "a",
   ],
 }
