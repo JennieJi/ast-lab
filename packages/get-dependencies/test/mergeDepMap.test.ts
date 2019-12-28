@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import _debug from 'debug';
 import mergeDepMap from '../src/mergeDepMap';
+import { relativeDepMap } from './util';
 
 const debug = _debug('get-dependencies:test');
 const tests = [
@@ -22,7 +23,7 @@ describe('mergeDepMap()', () => {
           }
         }
       );
-      expect(res).toMatchSnapshot();
+      expect(relativeDepMap(res)).toMatchSnapshot();
     });
   });
 });

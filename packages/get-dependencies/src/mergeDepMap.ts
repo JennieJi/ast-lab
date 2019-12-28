@@ -3,7 +3,7 @@ import enhancedResolve from 'enhanced-resolve';
 import _debug from 'debug';
 import denodeify from './denodeify';
 import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
-import getMemberDependency from './fileDepMap';
+import fileDepMap from './fileDepMap';
 
 const debug = _debug('get-dependencies:merge');
 const core = new Set(require('module').builtinModules);
@@ -23,7 +23,7 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
   const fileHandlers = [] as Array<Promise<any>>;
   sources.forEach((src) => {
     fileHandlers.push((async () => {
-      const fileDependencyMap = await getMemberDependency(src, opts);
+      const fileDependencyMap = await fileDepMap(src, opts);
       debug('processing >', src);
       const depMapHandlers = [] as Array<Promise<any>>;
       fileDependencyMap.forEach((memberDeps, modRelativePath) => {
