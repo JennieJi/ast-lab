@@ -16,11 +16,11 @@ Map {
     "resolveFactory" => Array [
       Object {
         "name": "c",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+        "source": "imports/importAlias.js",
       },
       Object {
         "name": "func",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js",
+        "source": "imports/importAlias.js",
       },
     ],
   },
@@ -33,11 +33,11 @@ Map {
     "*" => Array [
       Object {
         "name": "a",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+        "source": "imports/importAll.js",
       },
       Object {
         "name": "func",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js",
+        "source": "imports/importAll.js",
       },
     ],
   },
@@ -58,11 +58,11 @@ Map {
     "default" => Array [
       Object {
         "name": "a",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
+        "source": "imports/importDefault.js",
       },
       Object {
         "name": "func",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js",
+        "source": "imports/importDefault.js",
       },
     ],
   },
@@ -75,7 +75,7 @@ Map {
     "resolveFactory" => Array [
       Object {
         "name": "func",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js",
+        "source": "imports/importNamed.js",
       },
     ],
   },

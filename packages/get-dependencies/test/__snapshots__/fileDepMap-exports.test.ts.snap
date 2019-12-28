@@ -6,7 +6,7 @@ Map {
     "*" => Array [
       Object {
         "name": "*",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportAllFrom.js",
+        "source": "exports/exportAllFrom.js",
       },
     ],
   },
@@ -19,7 +19,7 @@ Map {
     "a" => Array [
       Object {
         "name": "default",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportDefault.js",
+        "source": "exports/exportDefault.js",
       },
     ],
   },
@@ -32,7 +32,7 @@ Map {
     "default" => Array [
       Object {
         "name": "readFile",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamed.js",
+        "source": "exports/exportNamed.js",
       },
     ],
   },
@@ -45,7 +45,7 @@ Map {
     "a" => Array [
       Object {
         "name": "a",
-        "source": "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/exports/exportNamedFrom.js",
+        "source": "exports/exportNamedFrom.js",
       },
     ],
   },

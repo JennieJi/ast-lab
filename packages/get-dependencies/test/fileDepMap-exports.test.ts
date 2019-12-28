@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import fileDepMap from '../src/fileDepMap';
+import { relativeDepMap } from './util';
 
 const dir = path.resolve(__dirname, '__fixtures__/exports');
 describe('fileDepMap()', () => {
@@ -11,7 +12,7 @@ describe('fileDepMap()', () => {
           plugins: ['dynamicImport']
         }
       });
-      expect(res).toMatchSnapshot();
+      expect(relativeDepMap(res)).toMatchSnapshot();
     });
   });
 });
