@@ -2,20 +2,45 @@
 
 exports[`visitDepMap() circular 1`] = `
 Object {
-  "/a": Object {},
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "default",
+  },
 }
 `;
 
-exports[`visitDepMap() importDefault.* 1`] = `
+exports[`visitDepMap() import default simple 1`] = `
 Object {
-  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js": Object {},
-  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js": Object {},
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "default",
+  },
 }
 `;
 
-exports[`visitDepMap() importNamed.resolveFactory 1`] = `
+exports[`visitDepMap() import multiples 1`] = `
 Object {
-  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js": Object {},
-  "/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js": Object {},
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "c1",
+    "c2",
+  },
+  "/d": Set {},
+  "/e": Set {},
 }
 `;
