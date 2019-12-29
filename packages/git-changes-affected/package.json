@@ -26,8 +26,13 @@
     "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
+  "devDependencies": {
+    "@types/enhanced-resolve": "^3.0.6"
+  },
   "dependencies": {
+    "ast-lab-types": "^1.0.0-alpha",
     "enhanced-resolve": "^4.1.1",
-    "get-dependencies": "^1.0.0-alpha"
+    "es-stats": "^1.0.0-alpha",
+    "hunt-affected": "^1.0.0-alpha"
   }
 }
