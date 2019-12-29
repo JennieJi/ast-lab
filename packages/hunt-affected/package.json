@@ -1,5 +1,5 @@
 {
-  "name": "get-dependencies",
+  "name": "hunt-affected",
   "version": "1.0.0-alpha",
   "description": "",
   "main": "dist/index.js",
