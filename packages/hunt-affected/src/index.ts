@@ -1,6 +1,6 @@
-import getDependencies from './getDependencies';
+import huntAffected from './huntAffected';
 
 export { default as fileDepMap } from './fileDepMap';
 export { default as mergeDepMap } from './mergeDepMap';
 export { default as visitDepMap } from './visitDepMap';
-export default getDependencies;
+export default huntAffected;
