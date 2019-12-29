@@ -10,13 +10,16 @@ export default function createExportVisitors(exports: Exports = { members: [] })
       exports.extends = (exports.extends || []).concat(node.source.value);
     },
     ExportNamedDeclaration({ node }) {
-      const { specifiers, declaration } = node;
+      const { specifiers, declaration, loc } = node;
       if (specifiers.length) {
         specifiers.forEach(specifier => {
           // @ts-ignore
           const dep = getModuleRefFromExportSpecifier(specifier);
           if (dep) {
-            exports.members.push(dep);
+            exports.members.push({
+              ...dep,
+              loc
+            });
           }
         });
       }
@@ -25,23 +28,23 @@ export default function createExportVisitors(exports: Exports = { members: [] })
         const names = getDeclarationNames(declaration)
         if (names && names.length) {
           names.forEach(({ name }) => {
-            exports.members.push({ name, alias: name });
+            exports.members.push({ name, alias: name, loc });
           });
         }
       }
     },
     ExportDefaultDeclaration({ node }) {
-      const { declaration } = node;
+      const { declaration, loc } = node;
       const alias = MODULE_DEFAULT;
       // @ts-ignore
       const names = getDeclarationNames(declaration);
       if (names && names.length) {
         names.forEach(({ name }) => {
           name = name || MODULE_DEFAULT;
-          exports.members.push({ name, alias });
+          exports.members.push({ name, alias, loc });
         });
       } else {
-        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT });
+        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT,loc });
       }
     }
   };

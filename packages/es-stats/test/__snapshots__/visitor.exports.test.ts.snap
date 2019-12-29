@@ -14,6 +14,16 @@ Object {
   "members": Array [
     Object {
       "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 3,
+        },
+      },
       "name": "default",
     },
   ],
@@ -25,6 +35,16 @@ Object {
   "members": Array [
     Object {
       "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 5,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 5,
+        },
+      },
       "name": "default",
     },
   ],
@@ -36,6 +56,16 @@ Object {
   "members": Array [
     Object {
       "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 3,
+        },
+      },
       "name": "default",
     },
   ],
@@ -47,6 +77,16 @@ Object {
   "members": Array [
     Object {
       "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 1,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
       "name": "a",
     },
   ],
@@ -58,6 +98,16 @@ Object {
   "members": Array [
     Object {
       "alias": "b",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 16,
+          "line": 5,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 5,
+        },
+      },
       "name": "a",
     },
   ],
@@ -69,6 +119,16 @@ Object {
   "members": Array [
     Object {
       "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 19,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
       "name": "a",
     },
   ],
@@ -80,6 +140,16 @@ Object {
   "members": Array [
     Object {
       "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 34,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
       "name": "a",
     },
   ],
