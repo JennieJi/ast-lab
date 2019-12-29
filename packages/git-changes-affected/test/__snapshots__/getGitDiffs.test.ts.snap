@@ -1,0 +1,882 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getGitDiffs 7037cc7c2229d424df63cdbd0981463d1801c697 1`] = `
+Array [
+  Object {
+    "operation": 3,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": Infinity,
+          "start": 0,
+        },
+      ],
+      "content": "import { DependencyMap, Entry } from \\"ast-lab-types\\";
+
+type Visited = { [module: string]: { [member: string]: 1 } };
+
+export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
+  const visited = {} as Visited;
+  let entryQueue = entries;
+  while(entryQueue.length) {
+    const { source: mod, name } = entryQueue.shift() as Entry;
+    let modVisited = visited[mod];
+    if (!modVisited) {
+      modVisited = visited[mod] = {};
+    }
+    const affected = dependencyMap.get(mod);
+    if (affected && modVisited[name]) {
+      const affectedEntries = affected.get(name);
+      if (affectedEntries && affectedEntries.length) {
+        entryQueue = entryQueue.concat(affectedEntries);
+      }
+    }
+  }
+  return visited;
+}",
+      "file": "packages/get-dependencies/src/visitDependencyMap.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 0,
+          "start": 4,
+        },
+        Object {
+          "end": 4,
+          "start": 2,
+        },
+        Object {
+          "end": 11,
+          "start": 11,
+        },
+        Object {
+          "end": 20,
+          "start": 19,
+        },
+        Object {
+          "end": 23,
+          "start": 22,
+        },
+      ],
+      "content": "import { DependencyMap, Entry } from \\"ast-lab-types\\";
+import _debug from 'debug';
+
+const debug = _debug('get-dependencies:visit');
+
+type Visited = { [module: string]: { [member: string]: 1 } };
+
+export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
+  const visited = {} as Visited;
+  let entryQueue = entries;
+  debug('visit entries:', entries);
+  while(entryQueue.length) {
+    const { source: mod, name } = entryQueue.shift() as Entry;
+    let modVisited = visited[mod];
+    if (!modVisited) {
+      modVisited = visited[mod] = {};
+    }
+    const affected = dependencyMap.get(mod);
+    debug(\`\${mod} affects\`, affected);
+    if (affected && !modVisited[name]) {
+      const affectedEntries = affected.get(name);
+      debug('current queue:', entryQueue);
+      debug('new to queue:', affectedEntries);
+      if (affectedEntries && affectedEntries.length) {
+        entryQueue = entryQueue.concat(affectedEntries);
+      }
+    }
+  }
+  return visited;
+}",
+      "file": "packages/get-dependencies/src/visitDepMap.ts",
+    },
+  },
+  Object {
+    "operation": 1,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 14,
+          "start": 14,
+        },
+      ],
+      "content": null,
+      "file": "packages/get-dependencies/test/__snapshots__/visitDepMap.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 21,
+          "start": 29,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`visitDepMap() circular 1\`] = \`
+Object {
+  \\"/a\\": Object {},
+}
+\`;
+
+exports[\`visitDepMap() importDefault.* 1\`] = \`
+Object {
+  \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js\\": Object {},
+  \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js\\": Object {},
+}
+\`;
+
+exports[\`visitDepMap() importNamed.resolveFactory 1\`] = \`
+Object {
+  \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js\\": Object {},
+  \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js\\": Object {},
+}
+\`;",
+      "file": "packages/get-dependencies/test/__snapshots__/visitDepMap.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 1,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 2,
+          "start": 2,
+        },
+      ],
+      "content": null,
+      "file": "packages/get-dependencies/test/visitDepMap.test.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 21,
+          "start": 29,
+        },
+        Object {
+          "end": 102,
+          "start": 24,
+        },
+      ],
+      "content": "import visitDepMap from '../src/visitDepMap';
+
+describe('visitDepMap()', () => {
+  const depMap = new Map([
+    [
+      \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js\\",
+      new Map([[\\"b\\", []]])
+    ], 
+    [
+    \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js\\",
+    new Map([
+      [
+        \\"*\\", 
+        [{
+          \\"name\\": \\"a\\",
+          \\"source\\": \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js\\",
+        }, {
+          \\"name\\": \\"func\\",
+          \\"source\\": \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAll.js\\",
+        }],
+      ],
+    ]),
+  ],
+  [
+    \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js\\",
+    new Map([
+      [
+        \\"resolveFactory\\", 
+        [{
+          \\"name\\": \\"c\\",
+          \\"source\\": \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js\\",
+        },
+        {
+          \\"name\\": \\"func\\",
+          \\"source\\": \\"/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importAlias.js\\",
+        }],
+      ]
+    ])
+  ]
+  ]);
+  test('importNamed.resolveFactory', () => {
+    expect(visitDepMap(depMap, [
+      {
+        name: 'resolveFactory',
+        source: '/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importNamed.js'
+      }
+    ])).toMatchSnapshot();
+  });
+  test('importDefault.*', () => {
+    expect(visitDepMap(depMap, [
+      {
+        name: '*',
+        source: '/Users/jennie.ji/Projects/affected/packages/get-dependencies/test/__fixtures__/imports/importDefault.js'
+      }
+    ])).toMatchSnapshot();
+  });
+  
+  // test('circular', () => {
+  //   expect(visitDepMap(
+  //     new Map([
+  //       [
+  //         '/a',
+  //         new Map([
+  //           [
+  //             'default',
+  //             [{
+  //               source: '/b',
+  //               name: 'default'
+  //             }]
+  //           ]
+  //         ])
+  //       ], [
+  //         '/b',
+  //         new Map([
+  //           [
+  //             'default',
+  //             [{
+  //               source: '/c',
+  //               name: 'default'
+  //             }]
+  //           ]
+  //         ])
+  //       ], [
+  //         '/c',
+  //         new Map([
+  //           [
+  //             'default',
+  //             [{
+  //               source: '/a',
+  //               name: 'default'
+  //             }]
+  //           ]
+  //         ])
+  //       ]
+  //     ]), 
+  //     [{
+  //       name: 'default',
+  //       source: '/a'
+  //     }]
+  //   )).toMatchSnapshot();
+  // });
+});",
+      "file": "packages/get-dependencies/test/visitDepMap.test.ts",
+    },
+  },
+]
+`;
+
+exports[`getGitDiffs e42f4f6a08569afd48540759cc604aab2b8c02f3 1`] = `
+Array [
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 1,
+          "start": 1,
+        },
+      ],
+      "content": "export { default } from './getStats';",
+      "file": "packages/es-stats/src/index.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 1,
+          "start": 1,
+        },
+        Object {
+          "end": 6,
+          "start": 3,
+        },
+      ],
+      "content": "export { default as createExportVisitors } from './visitors/exports';
+export { default as createImportVisitors } from './visitors/imports';
+export { default as createRootRelationVisitors } from './visitors/rootRelation';
+export { default as  mergeVisitors } from './mergeVisitors';
+export { default } from './getStats';",
+      "file": "packages/es-stats/src/index.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 6,
+          "start": 6,
+        },
+        Object {
+          "end": 13,
+          "start": 13,
+        },
+        Object {
+          "end": 19,
+          "start": 19,
+        },
+        Object {
+          "end": 28,
+          "start": 28,
+        },
+        Object {
+          "end": 34,
+          "start": 34,
+        },
+        Object {
+          "end": 41,
+          "start": 41,
+        },
+        Object {
+          "end": 44,
+          "start": 44,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import getDeclarationNames from '../getDeclarationNames';
+import { MODULE_DEFAULT } from '../constants';
+import { Exports } from 'ast-lab-types';
+
+export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
+  return {
+    ExportAllDeclaration({ node }) {
+      exports.extends = (exports.extends || []).concat(node.source.value);
+    },
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, declaration } = node;
+      if (specifiers.length) {
+        specifiers.forEach(specifier => {
+          // @ts-ignore
+          const dep = getModuleRefFromExportSpecifier(specifier);
+          if (dep) {
+            exports.members.push(dep);
+          }
+        });
+      }
+      if (declaration) {
+        // @ts-ignore
+        const names = getDeclarationNames(declaration)
+        if (names && names.length) {
+          names.forEach(({ name }) => {
+            exports.members.push({ name, alias: name });
+          });
+        }
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      const { declaration } = node;
+      const alias = MODULE_DEFAULT;
+      // @ts-ignore
+      const names = getDeclarationNames(declaration);
+      if (names && names.length) {
+        names.forEach(({ name }) => {
+          name = name || MODULE_DEFAULT;
+          exports.members.push({ name, alias });
+        });
+      } else {
+        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT });
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/exports.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 9,
+          "start": 10,
+        },
+        Object {
+          "end": 13,
+          "start": 13,
+        },
+        Object {
+          "end": 22,
+          "start": 19,
+        },
+        Object {
+          "end": 31,
+          "start": 31,
+        },
+        Object {
+          "end": 37,
+          "start": 37,
+        },
+        Object {
+          "end": 44,
+          "start": 44,
+        },
+        Object {
+          "end": 47,
+          "start": 47,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import getDeclarationNames from '../getDeclarationNames';
+import { MODULE_DEFAULT } from '../constants';
+import { Exports } from 'ast-lab-types';
+
+export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
+  return {
+    ExportAllDeclaration({ node }) {
+      exports.extends = (exports.extends || []).concat(node.source.value);
+    },
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, declaration, loc } = node;
+      if (specifiers.length) {
+        specifiers.forEach(specifier => {
+          // @ts-ignore
+          const dep = getModuleRefFromExportSpecifier(specifier);
+          if (dep) {
+            exports.members.push({
+              ...dep,
+              loc
+            });
+          }
+        });
+      }
+      if (declaration) {
+        // @ts-ignore
+        const names = getDeclarationNames(declaration)
+        if (names && names.length) {
+          names.forEach(({ name }) => {
+            exports.members.push({ name, alias: name, loc });
+          });
+        }
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      const { declaration, loc } = node;
+      const alias = MODULE_DEFAULT;
+      // @ts-ignore
+      const names = getDeclarationNames(declaration);
+      if (names && names.length) {
+        names.forEach(({ name }) => {
+          name = name || MODULE_DEFAULT;
+          exports.members.push({ name, alias, loc });
+        });
+      } else {
+        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT,loc });
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/exports.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 49,
+          "start": 49,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`export visitors exportAllFrom.js 1\`] = \`
+Object {
+  \\"extends\\": Array [
+    \\"./exportNamed\\",
+  ],
+  \\"members\\": Array [],
+}
+\`;
+
+exports[\`export visitors exportDefault.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportDefaultFuncAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportDefaultValueAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportFunc.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportFuncAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"b\\",
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportNamed.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportNamedFrom.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors noExports.js 1\`] = \`
+Object {
+  \\"members\\": Array [],
+}
+\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.exports.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 13,
+          "start": 52,
+        },
+        Object {
+          "end": 26,
+          "start": 17,
+        },
+        Object {
+          "end": 47,
+          "start": 38,
+        },
+        Object {
+          "end": 68,
+          "start": 59,
+        },
+        Object {
+          "end": 89,
+          "start": 80,
+        },
+        Object {
+          "end": 110,
+          "start": 101,
+        },
+        Object {
+          "end": 131,
+          "start": 122,
+        },
+        Object {
+          "end": 152,
+          "start": 143,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`export visitors exportAllFrom.js 1\`] = \`
+Object {
+  \\"extends\\": Array [
+    \\"./exportNamed\\",
+  ],
+  \\"members\\": Array [],
+}
+\`;
+
+exports[\`export visitors exportDefault.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 17,
+          \\"line\\": 3,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 3,
+        },
+      },
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportDefaultFuncAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 17,
+          \\"line\\": 5,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 5,
+        },
+      },
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportDefaultValueAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"default\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 17,
+          \\"line\\": 3,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 3,
+        },
+      },
+      \\"name\\": \\"default\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportFunc.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 1,
+          \\"line\\": 3,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 1,
+        },
+      },
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportFuncAlias.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"b\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 16,
+          \\"line\\": 5,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 5,
+        },
+      },
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportNamed.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 19,
+          \\"line\\": 1,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 1,
+        },
+      },
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors exportNamedFrom.js 1\`] = \`
+Object {
+  \\"members\\": Array [
+    Object {
+      \\"alias\\": \\"a\\",
+      \\"loc\\": SourceLocation {
+        \\"end\\": Position {
+          \\"column\\": 34,
+          \\"line\\": 1,
+        },
+        \\"start\\": Position {
+          \\"column\\": 0,
+          \\"line\\": 1,
+        },
+      },
+      \\"name\\": \\"a\\",
+    },
+  ],
+}
+\`;
+
+exports[\`export visitors noExports.js 1\`] = \`
+Object {
+  \\"members\\": Array [],
+}
+\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.exports.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 87,
+          "start": 87,
+        },
+        Object {
+          "end": 10,
+          "start": 10,
+        },
+        Object {
+          "end": 13,
+          "start": 13,
+        },
+      ],
+      "content": "import { ParserOptions } from '@babel/parser';
+
+export type Module = string;
+export type Member = string;
+export type Members = Member[] | '*';
+export type MemberRef = {
+  name: Member,
+  alias: Member,
+};
+export type Import =  MemberRef & Entry;
+export type Exports = {
+  extends?: Module[],
+  members: MemberRef[]
+};
+export type MemberRelation =  { [name: string]: Member[] };
+
+export type Entry = {
+  source: Module, 
+  name: Member
+};
+export type AffectedMap = Map<Member, Entry[]>;
+export type DependencyMap = Map<Module, AffectedMap>;
+
+export type Loader = (path: string) => Promise<string | void>
+
+export type Options = {
+  resolver?: (base: string, target: string) => Promise<string | void>,
+  loader?: Loader,
+  parserOptions?: ParserOptions
+}",
+      "file": "packages/types/index.d.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 0,
+          "start": 157,
+        },
+        Object {
+          "end": 2,
+          "start": 2,
+        },
+        Object {
+          "end": 13,
+          "start": 11,
+        },
+        Object {
+          "end": 18,
+          "start": 16,
+        },
+      ],
+      "content": "import { ParserOptions } from '@babel/parser';
+import { SourceLocation } from '@babel/types';
+
+export type Module = string;
+export type Member = string;
+export type Members = Member[] | '*';
+export type MemberRef = {
+  name: Member,
+  alias: Member,
+};
+export type Import =  MemberRef & {
+  source: Module
+};
+export type Exports = {
+  extends?: Module[],
+  members: Array<MemberRef & {
+    loc: SourceLocation | null
+  }>
+};
+export type MemberRelation =  { [name: string]: Member[] };
+
+export type Entry = {
+  source: Module, 
+  name: Member
+};
+export type AffectedMap = Map<Member, Entry[]>;
+export type DependencyMap = Map<Module, AffectedMap>;
+
+export type Loader = (path: string) => Promise<string | void>
+
+export type Options = {
+  resolver?: (base: string, target: string) => Promise<string | void>,
+  loader?: Loader,
+  parserOptions?: ParserOptions
+}",
+      "file": "packages/types/index.d.ts",
+    },
+  },
+]
+`;

@@ -1,4 +1,4 @@
-import { getTrackedFiles } from '../src';
+import getTrackedFiles from '../src/getTrackedFiles';
 
 describe('getTrackedFiles()', () => {
   test('should get a list of files', async () => {
