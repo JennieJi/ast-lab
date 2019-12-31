@@ -15,12 +15,13 @@ import getChangedEntries from './getChangedEntries';
 
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
-function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions }: Options) {
+function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions, paths }: Options) {
   const extensions = DEFAULT_EXTENSIONS;
-  const trackedFiles = getTrackedFiles(commit).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
+  const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
+  const entries = getChangedEntries(changes, parserOptions);
   return huntAffected(
     trackedFiles,
-    getChangedEntries(changes, parserOptions),
+    entries,
     {
       loader: (file: string) => Promise.resolve(getRevisionFile(commit, file)),
       resolver: denodeify(resolver.create({
@@ -38,9 +39,10 @@ type Options = {
   modules?: string[],
   // extensions?: string[],
   alias?: { [alias: string]: string },
-  parserOptions?: ParserOptions
+  parserOptions?: ParserOptions,
+  paths?: string[]
 };
-export default async function gitChangesAffected(commit: string, opts: Options) {
+export default async function gitChangesAffected(commit: string, opts: Options = {}) {
   const extensions = DEFAULT_EXTENSIONS;
   const diffs = getGitDiffs(commit);
   const befores = [] as Change[];
@@ -59,8 +61,8 @@ export default async function gitChangesAffected(commit: string, opts: Options) 
       afters.push(target);
     }
   });
-  const affected = await changesAffected( `${commit}~1`, befores, opts);
-  const toMerge = await changesAffected( commit, afters, opts);
+  const affected = await changesAffected(`${commit}~1`, befores, opts);
+  const toMerge = await changesAffected(commit, afters, opts);
   Object.keys(toMerge).forEach(mod => {
     const members = toMerge[mod];
     affected[mod] =affected[mod] ? new Set(

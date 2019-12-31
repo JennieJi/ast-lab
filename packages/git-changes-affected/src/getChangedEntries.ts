@@ -11,12 +11,18 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
       return res;
     }
     const filePath = getAbsolutePath(file);
-    const ast = parse(content, { 
-      ...(parserOptions || {}),
-      sourceType: 'module'
-    });
     const exported = { members: [] } as Exports;
-    traverse(ast, createExportVisitors(exported));
+    try { 
+      const ast = parse(content, { 
+        ...(parserOptions || {}),
+        sourceType: 'module'
+      });
+      traverse(ast, createExportVisitors(exported));
+    } catch(e) {
+      console.warn(`@bable/parser parsing ${filePath} failed!`);
+      console.warn('Parser options:', parserOptions);
+      return res;
+    }
     let iExported = 0;
     const changedExports = changed.reduce(
       (res, { start: startLine, end: endLine }) => {

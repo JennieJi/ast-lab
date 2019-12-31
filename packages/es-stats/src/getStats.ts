@@ -29,7 +29,6 @@ export default function getStats(file: string, parserOptions?: ParserOptions) {
     createRootRelationVisitors(relations)
   ));
 
-
   return {
     imports,
     exports,

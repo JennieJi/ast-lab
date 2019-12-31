@@ -28,20 +28,25 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
       const depMapHandlers = [] as Array<Promise<any>>;
       fileDependencyMap.forEach((memberDeps, modRelativePath) => {
         depMapHandlers.push((async () => {
+          const baseDir = path.dirname(src);
           let modPath = '';
           if (core.has(modRelativePath)) {
             modPath = modRelativePath;
           } else {
             try {
-              const resolvedPath = await resolver(path.dirname(src), modRelativePath);
-              if (!resolvedPath) {
-                console.warn(`Could not solve ${modRelativePath} from ${src}.`);
-                return;
-              }
-              modPath = resolvedPath;
+              modPath = await resolver(baseDir, modRelativePath) || '';
             } catch (e) {
-              console.error(e);
+              // do nothing
             }
+            if (!modPath) {
+              console.warn(`Could not solve ${modRelativePath} from ${src}.`);
+              modPath = modRelativePath;
+            } else if(/node_modules\//.test(modPath)) {
+              modPath = modRelativePath;
+            }
+          }
+          if(/\.\w+$/.test(modRelativePath)) {
+            modPath = path.resolve(baseDir, modRelativePath);
           }
           const affectedMap = depMap.get(modPath) as AffectedMap;
           if (affectedMap) {
