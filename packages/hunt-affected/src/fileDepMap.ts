@@ -23,18 +23,33 @@ function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member,
  * @return {Promise<DependencyMap>}
  */
 export default async function fileDepMap(filePath: string, { loader, parserOptions }: Options = {}): Promise<DependencyMap> {
+  const depMap = new Map() as DependencyMap;
   const _loader = loader || ((_filePath: string) => Promise.resolve(fs.readFileSync(_filePath, 'utf8')));
-  let file = await _loader(filePath);
-  if (!file) {
-    throw new Error(`${filePath} is empty!`)
+  let file;
+  try {
+    file = await _loader(filePath);
+    if (!file) {
+      console.warn(`${filePath} is empty!`);
+      return depMap;
+    }
+  } catch(e) {
+    console.warn(`Failed to load file ${filePath}!`);
+    return depMap;
   }
-  const { imports: target, exports: entry, relations } = ecmaStats(file, parserOptions);
+  let fileStats;
+  try { 
+    fileStats = ecmaStats(file, parserOptions);
+  } catch(e) {
+    console.warn(`@bable/parser parsing ${filePath} failed!`);
+    console.warn('Parser options:', parserOptions);
+    return depMap;
+  }
+  const { imports: target, exports: entry, relations } = fileStats;
   debug('>>> ', filePath);
   debug('imports:', target);
   debug('exports:', entry);
   debug('relations:', relations);
   
-  const depMap = new Map() as DependencyMap;
   const targetIndex = {} as { [key: string]: Import };
 
   target.forEach((ref) => {

@@ -7,7 +7,7 @@ function justifyOperation(operatelog: string) {
   if (/^new file mode/.test(operatelog)) {
     return GIT_OPERATION.new;
   }
-  if (/^delete file mode/.test(operatelog)) {
+  if (/^deleted file mode/.test(operatelog)) {
     return GIT_OPERATION.delete;
   }
   /** @todo confirm rename similarity percentage */
