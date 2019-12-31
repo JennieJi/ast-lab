@@ -20,8 +20,8 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
     let iExported = 0;
     const changedExports = changed.reduce(
       (res, { start: startLine, end: endLine }) => {
-        const ex = exported.members[iExported];
-        while (ex) {
+        while (iExported < exported.members.length) {
+          const ex = exported.members[iExported];
           iExported++;
           if (!ex.loc) { continue; }
           const { start, end } = ex.loc;
