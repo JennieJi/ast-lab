@@ -28,7 +28,7 @@ function isLineAdded(content: string) {
  * @param {string} commit 
  */
 export function getGitDiffs(commit: string): Diff[] {
-  const strOut = exec(`git show ${commit} --format="%N" --first-parent`);
+  const strOut = exec(`git diff ${commit}~1 ${commit}`);
   const diffs = [] as Diff[];
   let lineA = 0;
   let lineB = 0;

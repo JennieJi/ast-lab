@@ -1,4 +1,7 @@
+import path from 'path';
 import getChangedEntries from '../src/getChangedEntries';
+import gitRoot from '../src/gitRoot';
+import { Entry } from 'ast-lab-types';
 
 const sampleFile = 
 `import a from 'SampleModule';
@@ -10,9 +13,19 @@ export default function func() {
  return a(d);
 }`;
 
+const ROOT = gitRoot();
+function relativeEntries(entries: Entry[]) {
+  return entries.map(({ name, source }) => {
+    return {
+      name,
+      source: path.relative(ROOT, source)
+    };
+  });
+}
+
 describe('getChangedEntries', () => {
   test('import should not be counted as entry', () => {
-      expect(getChangedEntries(
+      expect(relativeEntries(getChangedEntries(
         [{
           file: 'sampleFile.js',
           content: sampleFile,
@@ -23,10 +36,10 @@ describe('getChangedEntries', () => {
         {
           sourceType: 'module'
         }
-      )).toMatchSnapshot();
+      ))).toMatchSnapshot();
   });
   test('single line', () => {
-    expect(getChangedEntries(
+    expect(relativeEntries(getChangedEntries(
       [{
         file: 'sampleFile.js',
         content: sampleFile,
@@ -37,8 +50,8 @@ describe('getChangedEntries', () => {
       {
         sourceType: 'module'
       }
-    )).toMatchSnapshot();
-    expect(getChangedEntries(
+    ))).toMatchSnapshot();
+    expect(relativeEntries(getChangedEntries(
       [{
         file: 'sampleFile.js',
         content: sampleFile,
@@ -49,8 +62,8 @@ describe('getChangedEntries', () => {
       {
         sourceType: 'module'
       }
-    )).toMatchSnapshot();
-    expect(getChangedEntries(
+    ))).toMatchSnapshot();
+    expect(relativeEntries(getChangedEntries(
       [{
         file: 'sampleFile.js',
         content: sampleFile,
@@ -61,10 +74,10 @@ describe('getChangedEntries', () => {
       {
         sourceType: 'module'
       }
-    )).toMatchSnapshot();
+    ))).toMatchSnapshot();
   })
   test('within 1 export', () => {
-      expect(getChangedEntries(
+      expect(relativeEntries(getChangedEntries(
         [{
           file: 'sampleFile.js',
           content: sampleFile,
@@ -75,10 +88,10 @@ describe('getChangedEntries', () => {
         {
           sourceType: 'module'
         }
-      )).toMatchSnapshot();
+      ))).toMatchSnapshot();
   });
   test('cross exports', () => {
-      expect(getChangedEntries(
+      expect(relativeEntries(getChangedEntries(
         [{
           file: 'sampleFile.js',
           content: sampleFile,
@@ -89,6 +102,6 @@ describe('getChangedEntries', () => {
         {
           sourceType: 'module'
         }
-      )).toMatchSnapshot();
+      ))).toMatchSnapshot();
   });
 });

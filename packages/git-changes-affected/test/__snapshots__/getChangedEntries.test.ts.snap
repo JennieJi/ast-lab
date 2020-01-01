@@ -4,11 +4,11 @@ exports[`getChangedEntries cross exports 1`] = `
 Array [
   Object {
     "name": "b",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
   Object {
     "name": "default",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
 ]
 `;
@@ -19,7 +19,7 @@ exports[`getChangedEntries single line 1`] = `
 Array [
   Object {
     "name": "b",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
 ]
 `;
@@ -28,7 +28,7 @@ exports[`getChangedEntries single line 2`] = `
 Array [
   Object {
     "name": "default",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
 ]
 `;
@@ -37,7 +37,7 @@ exports[`getChangedEntries single line 3`] = `
 Array [
   Object {
     "name": "default",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
 ]
 `;
@@ -46,7 +46,7 @@ exports[`getChangedEntries within 1 export 1`] = `
 Array [
   Object {
     "name": "default",
-    "source": "/home/jennie/Projects/affected/sampleFile.js",
+    "source": "sampleFile.js",
   },
 ]
 `;
