@@ -3,7 +3,7 @@ import _debug from 'debug';
 
 const debug = _debug('get-dependencies:visit');
 
-type Visited = { [module: string]: Set<Member> };
+export type Visited = { [module: string]: Set<Member> };
 
 export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
   const visited = {} as Visited;
