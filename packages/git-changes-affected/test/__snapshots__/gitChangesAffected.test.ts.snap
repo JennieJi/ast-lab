@@ -2,13 +2,13 @@
 
 exports[`gitChangesAffected can work 1`] = `
 Object {
-  "/home/jennie/Projects/affected/packages/es-stats/src/index.ts": Set {},
-  "/home/jennie/Projects/affected/packages/es-stats/src/visitors/exports.ts": Set {},
+  "packages/es-stats/src/index.ts": Set {},
+  "packages/es-stats/src/visitors/exports.ts": Set {},
 }
 `;
 
 exports[`gitChangesAffected can work 2`] = `
 Object {
-  "/home/jennie/Projects/affected/packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js": Set {},
+  "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js": Set {},
 }
 `;
