@@ -14,9 +14,13 @@ function getPatternNames(pattern: LVal): Array<MemberRef> {
       }, [] as MemberRef[]);
     case 'ObjectPattern':
       return pattern.properties.reduce((ret, prop) => {
-        // @ts-ignore
-        let next = prop.type === 'ExperimentalRestProperty' ? prop.argument : prop.value;
-        return ret.concat(getPatternNames(next))
+        let next = prop.type === 'RestElement' ? prop.argument : prop.value;
+        if (next) {
+          return ret.concat(getPatternNames(next as LVal));
+        } else {
+          console.warn(`getPatternNames - ObjectPattern next is invalid! Value: ${next}.`);
+          return ret;
+        }
       }, [] as MemberRef[]);
     case 'RestElement':
       return getPatternNames(pattern.argument);
