@@ -25,7 +25,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
     // Dynamic import support
     CallExpression({ node, parent, parentPath }) {
       /** @todo enable by plugin? */
-      let id = ((parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+      let id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
       if (id && node.callee.type === 'Import') {
         const { arguments: args } = node;
         if (args[0].type === 'StringLiteral') {

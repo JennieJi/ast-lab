@@ -1,9 +1,13 @@
 import { parse, ParserOptions } from '@babel/parser';
 import traverse from '@babel/traverse';
 import { createExportVisitors } from 'es-stats';
+import _debug from 'debug';
 import getAbsolutePath from './getAbsolutePath';
 import { Exports, Entry } from 'ast-lab-types';
 import { Change } from './types';
+
+
+const debug = _debug('git-changes-affected:entries');
 
 export default function getChangedEntries(changes: Change[], parserOptions?: ParserOptions | null) {
   return changes.reduce((res, { file, content, changed }) => {
@@ -17,10 +21,17 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
         ...(parserOptions || {}),
         sourceType: 'module'
       });
+      // @ts-ignore
       traverse(ast, createExportVisitors(exported));
+      debug('file:', file);
+      debug('exported:', exported);
     } catch(e) {
       console.warn(`@bable/parser parsing ${filePath} failed!`);
+      console.trace();
+      console.warn(e);
       console.warn('Parser options:', parserOptions);
+      console.warn('File content:');
+      console.warn(content);
       return res;
     }
     let iExported = 0;

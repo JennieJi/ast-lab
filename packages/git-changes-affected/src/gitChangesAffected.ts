@@ -1,6 +1,7 @@
 import resolver from 'enhanced-resolve';
 import huntAffected from 'hunt-affected';
 import { ParserOptions } from '@babel/parser';
+import _debug from 'debug';
 import { getGitDiffs } from './getGitDiffs';
 import IncludesFilePlugin from './includesFilePlugin';
 import { GIT_OPERATION } from './constants';
@@ -12,13 +13,17 @@ import hasExt from './hasExt';
 import getAbsolutePath from './getAbsolutePath';
 import getChangedEntries from './getChangedEntries';
 
-
+const debug = _debug('git-changes-affected:affected');
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
 function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions, paths }: Options) {
   const extensions = DEFAULT_EXTENSIONS;
   const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
+  debug('tracked files:');
+  debug(trackedFiles);
   const entries = getChangedEntries(changes, parserOptions);
+  debug(commit, 'entries:');
+  debug(entries);
   return huntAffected(
     trackedFiles,
     entries,
@@ -45,6 +50,8 @@ type Options = {
 export default async function gitChangesAffected(commit: string, opts: Options = {}) {
   const extensions = DEFAULT_EXTENSIONS;
   const diffs = getGitDiffs(commit);
+  debug('diffs:');
+  debug(JSON.stringify(diffs, null, 2));
   const befores = [] as Change[];
   const afters = [] as Change[];
   diffs.forEach(({ source, target, operation }) => {
@@ -62,7 +69,11 @@ export default async function gitChangesAffected(commit: string, opts: Options =
     }
   });
   const affected = await changesAffected(`${commit}~1`, befores, opts);
+  debug('before affected:');
+  debug(affected);
   const toMerge = await changesAffected(commit, afters, opts);
+  debug('after affected:');
+  debug(toMerge);
   Object.keys(toMerge).forEach(mod => {
     const members = toMerge[mod];
     affected[mod] =affected[mod] ? new Set(
