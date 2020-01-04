@@ -4,11 +4,15 @@ exports[`gitChangesAffected can work 1`] = `
 Object {
   "packages/es-stats/src/index.ts": Set {},
   "packages/es-stats/src/visitors/exports.ts": Set {},
+  "packages/types/index.d.ts": Set {},
 }
 `;
 
 exports[`gitChangesAffected can work 2`] = `
 Object {
+  "packages/get-dependencies/src/markExports.ts": Set {},
+  "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js": Set {},
   "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js": Set {},
+  "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js": Set {},
 }
 `;

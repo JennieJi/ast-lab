@@ -1,10 +1,8 @@
-import {
-  Declaration
-} from '@babel/types';
+import { Node } from '@babel/types';
 import getPatternNames from './getPatternNames';
 import { MemberRef } from 'ast-lab-types';
 
-export default function getDeclarationNames(node: Declaration): Array<MemberRef> | null {
+export default function getDeclarationNames(node: Node): Array<MemberRef> | null {
   switch(node.type) {
     case 'VariableDeclaration':
       return node.declarations.reduce((ret, node) => {

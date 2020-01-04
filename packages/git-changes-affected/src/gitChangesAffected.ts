@@ -22,8 +22,7 @@ function changesAffected(commit: string, changes: Change[], { alias, modules, pa
   debug('tracked files:');
   debug(trackedFiles);
   const entries = getChangedEntries(changes, parserOptions);
-  debug(commit, 'entries:');
-  debug(entries);
+  debug(commit, 'entries:', entries);
   return huntAffected(
     trackedFiles,
     entries,
