@@ -1,9 +1,8 @@
 import { Visitor } from '@babel/traverse';
-import { StringLiteral, ExportDefaultSpecifier, ExportNamespaceSpecifier, ExportSpecifier } from '@babel/types'; 
+import { StringLiteral } from '@babel/types'; 
 import { Import } from "ast-lab-types";
 import getPatternNames from '../getPatternNames';
 import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
-import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
 
 export default function createExportVisitors(imports: Import[] = []): Visitor {
   return {
@@ -17,7 +16,8 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
           imports.push({
             alias,
             name,
-            source: modulePath
+            source: modulePath,
+            loc: specifier.loc
           });
         }
       });
@@ -25,33 +25,26 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
     // Dynamic import support
     CallExpression({ node, parent, parentPath }) {
       /** @todo enable by plugin? */
-      let id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
-      if (id && node.callee.type === 'Import') {
-        const { arguments: args } = node;
-        if (args[0].type === 'StringLiteral') {
-          getPatternNames(id).forEach(({ name, alias }) => {
-            imports.push({
-              alias,
-              name,
-              source: (args[0] as StringLiteral).value
-            });
+      if (node.callee.type !== 'Import') { return; }
+      const { arguments: args, loc } = node;
+      if (args[0].type !== 'StringLiteral') { return; }
+      const source = (args[0] as StringLiteral).value;
+      const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+      if (id) {
+        getPatternNames(id).forEach(({ name, alias }) => {
+          imports.push({
+            alias,
+            name,
+            source,
+            loc
           });
-        }
-      }
-      return;
-    },
-    ExportNamedDeclaration({ node }) {
-      const { specifiers, source } = node;
-      if (!source) { return; }
-      if (specifiers.length) {
-        specifiers.forEach(specifier => {
-          const dep = getModuleRefFromExportSpecifier(specifier as ExportDefaultSpecifier | ExportNamespaceSpecifier | ExportSpecifier);
-          if (dep) {
-            imports.push({
-              ...dep,
-              source: source.value
-            });
-          }
+        });
+      } else {
+        imports.push({
+          alias: source,
+          name: source,
+          source,
+          loc
         });
       }
     },
