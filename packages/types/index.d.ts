@@ -8,14 +8,16 @@ export type MemberRef = {
   name: Member,
   alias: Member,
 };
-export type Import =  MemberRef & {
+
+type HasLoc = {
+  loc: SourceLocation | null
+};
+export type Import =  MemberRef & HasLoc & {
   source: Module
 };
 export type Exports = {
   extends?: Module[],
-  members: Array<MemberRef & {
-    loc: SourceLocation | null
-  }>
+  members: Array<MemberRef & HasLoc>
 };
 export type MemberRelation =  { [name: string]: Member[] };
 
