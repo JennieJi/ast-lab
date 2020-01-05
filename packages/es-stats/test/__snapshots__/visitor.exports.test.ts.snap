@@ -30,6 +30,27 @@ Object {
 }
 `;
 
+exports[`export visitors exportDefaultCallExpression.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 28,
+          "line": 6,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 6,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
 exports[`export visitors exportDefaultFuncAlias.js 1`] = `
 Object {
   "members": Array [

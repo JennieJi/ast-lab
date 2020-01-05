@@ -2,7 +2,7 @@ import { Visitor } from '@babel/traverse';
 import { StringLiteral } from '@babel/types';
 import { Import } from "ast-lab-types";
 import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
-import { MODULE_ALL } from '../constants';
+import { MODULE_DEFAULT } from '../constants';
 import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { ExportSpecifier } from '@babel/types';
 
@@ -47,7 +47,8 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
             });
           }
         }
-        const name = scopedNaming(MODULE_ALL);
+        /** @todo identify which member */
+        const name = scopedNaming(MODULE_DEFAULT);
         imports.push({
           alias: name,
           name,

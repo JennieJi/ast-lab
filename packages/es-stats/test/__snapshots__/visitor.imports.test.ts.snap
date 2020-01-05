@@ -4,6 +4,8 @@ exports[`import visitors exports/exportAllFrom.js 1`] = `Array []`;
 
 exports[`import visitors exports/exportDefault.js 1`] = `Array []`;
 
+exports[`import visitors exports/exportDefaultCallExpression.js 1`] = `Array []`;
+
 exports[`import visitors exports/exportDefaultFuncAlias.js 1`] = `Array []`;
 
 exports[`import visitors exports/exportDefaultValueAlias.js 1`] = `Array []`;
@@ -39,7 +41,7 @@ exports[`import visitors exports/noExports.js 1`] = `Array []`;
 exports[`import visitors imports/dynamicImport-asyncawait.js 1`] = `
 Array [
   Object {
-    "alias": "./b#*",
+    "alias": "./b#default",
     "loc": SourceLocation {
       "end": Position {
         "column": 44,
@@ -50,7 +52,7 @@ Array [
         "line": 2,
       },
     },
-    "name": "./b#*",
+    "name": "./b#default",
     "source": "./b",
   },
 ]
@@ -59,7 +61,7 @@ Array [
 exports[`import visitors imports/dynamicImport-then.js 1`] = `
 Array [
   Object {
-    "alias": "./b#*",
+    "alias": "./b#default",
     "loc": SourceLocation {
       "end": Position {
         "column": 16,
@@ -70,7 +72,7 @@ Array [
         "line": 3,
       },
     },
-    "name": "./b#*",
+    "name": "./b#default",
     "source": "./b",
   },
 ]

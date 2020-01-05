@@ -10,7 +10,7 @@ function getPatternNames(pattern: LVal ): Array<MemberRef> {
       }];
     case 'ArrayPattern':
       return pattern.elements.reduce((ret, el) => {
-        return ret.concat(getPatternNames(el));
+        return el ? ret.concat(getPatternNames(el)) : ret;
       }, [] as MemberRef[]);
     case 'ObjectPattern':
       return pattern.properties.reduce((ret, prop) => {

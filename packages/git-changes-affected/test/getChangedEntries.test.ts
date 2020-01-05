@@ -8,10 +8,13 @@ const sampleFile =
 
 export const b = 1;
 
-export default function func() {
+export function func() {
  let d = b + 1;
  return a(d);
-}`;
+}
+
+export default func;
+`;
 
 const ROOT = gitRoot();
 function relativeEntries(entries: Entry[]) {

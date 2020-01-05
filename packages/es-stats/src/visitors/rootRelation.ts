@@ -6,7 +6,7 @@ import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { MemberRelation, MemberRef } from 'ast-lab-types';
 import _debug from 'debug';
-import { MODULE_DEFAULT, MODULE_ALL } from '../constants';
+import { MODULE_DEFAULT } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
@@ -75,13 +75,18 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         });
       }
     },
-    ExportDefaultDeclaration({ node }) {
-      if (node.declaration.type === 'Identifier') {
-        const { name } = node.declaration;
-        if (!relations[name]) {
-          relations[MODULE_DEFAULT] = [name];
+    ExportDefaultDeclaration: {
+      enter() {
+        scope.privates.add(MODULE_DEFAULT);
+        newScope();
+      },
+      exit() {
+        debug('EXIT-export default scope', parentScopes, scope);
+        const candidates = exitScopeHandler();
+        if (parentScopes.length === 1) {
+          relations[MODULE_DEFAULT]= Array.from(new Set(candidates));
         }
-      }
+      },
     },
     Scopable: {
       enter(p) {
@@ -104,13 +109,16 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
 
         const candidates = exitScopeHandler();
-        // @ts-ignore 
-        let id = node.id || parent.id;
-        if (parentScopes.length === 1 && id) {
-          /** @todo find more specific declaration affected */
-          getPatternNames(id).forEach(({ alias }) => {
-            relations[alias] = Array.from(new Set(candidates));
-          });
+        if (parentScopes.length === 1) {
+          const dedupCandidates = Array.from(new Set(candidates));
+          // @ts-ignore 
+          let id = node.id || parent && parent.id;
+          if (id) {
+            /** @todo find more specific declaration affected */
+            getPatternNames(id).forEach(({ alias }) => {
+              relations[alias] = dedupCandidates;
+            });
+          }
         }
       }
     },
@@ -129,7 +137,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
 
       // dynamic import
       if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
-        scope.candidates.push(`${(args[0] as StringLiteral).value}#${MODULE_ALL}`);
+        scope.candidates.push(`${(args[0] as StringLiteral).value}#${MODULE_DEFAULT}`);
       }
     },
     Identifier(p) {

@@ -7,6 +7,10 @@ Array [
     "source": "sampleFile.js",
   },
   Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
+  Object {
     "name": "default",
     "source": "sampleFile.js",
   },
@@ -21,11 +25,23 @@ Array [
     "name": "b",
     "source": "sampleFile.js",
   },
+  Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
+  Object {
+    "name": "default",
+    "source": "sampleFile.js",
+  },
 ]
 `;
 
 exports[`getChangedEntries single line 2`] = `
 Array [
+  Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
   Object {
     "name": "default",
     "source": "sampleFile.js",
@@ -36,6 +52,10 @@ Array [
 exports[`getChangedEntries single line 3`] = `
 Array [
   Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
+  Object {
     "name": "default",
     "source": "sampleFile.js",
   },
@@ -44,6 +64,10 @@ Array [
 
 exports[`getChangedEntries within 1 export 1`] = `
 Array [
+  Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
   Object {
     "name": "default",
     "source": "sampleFile.js",

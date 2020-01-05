@@ -45,7 +45,7 @@ Map {
   "imports/importAll.js" => Map {
     "a" => Array [],
     "func" => Array [],
-    "*" => Array [
+    "default" => Array [
       Object {
         "name": "func",
         "source": "imports/dynamicImport-asyncawait.js",
@@ -55,11 +55,13 @@ Map {
   "imports/importDefault.js" => Map {
     "a" => Array [],
     "func" => Array [],
-    "*" => Array [
+    "default" => Array [
       Object {
         "name": "func",
         "source": "imports/dynamicImport-then.js",
       },
+    ],
+    "*" => Array [
       Object {
         "name": "a",
         "source": "imports/importAll.js",
@@ -82,7 +84,7 @@ Map {
       },
     ],
     "func" => Array [],
-    "*" => Array [],
+    "default" => Array [],
   },
 }
 `;
