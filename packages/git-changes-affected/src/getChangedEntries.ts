@@ -39,17 +39,17 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
       }) as File);
     } catch(e) {
       console.warn(`@bable/parser parsing ${filePath} failed! (${e.message}) Parser options: ${JSON.stringify(parserOptions)}`);
-      console.warn('File content >>> \n', content);
       return res;
     }
     const stats = extractStats(ast);
-    debug(`${file} stats: ${JSON.stringify(stats, null, 2)}`);
+    debug(`${file} stats: ${JSON.stringify(stats)}`);
     const declareLoc = [
       ...locatePrivateDeclares(ast),
       ...(stats.exports.members as Declare[]),
       ...(stats.imports as Declare[])
     ];
-    debug(`${file} declareLoc: ${JSON.stringify(declareLoc, null, 2)}`);
+    debug(`${file} declareLoc: ${JSON.stringify(declareLoc)}`);
+
     const exported = new Set(stats.exports.members.map(({ alias }) => alias));
     const affectExports = {} as MemberRelation;
     exported.forEach(name => {
@@ -65,6 +65,7 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
         }
       });
     });
+    debug(`${file} change ${JSON.stringify(changed)}  \n>>>  ${JSON.stringify(affectExports)}`);
 
     let iDeclare = 0;
     const changedExports = changed.reduce(
@@ -80,7 +81,8 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
           if (startLine <= end.line) {
             if (exported.has(alias)) {
               ex.push(alias);
-            } else if (affectExports[alias]) {
+            }
+            if (affectExports[alias]) {
               ex = ex.concat(affectExports[alias]);
             }
           }

@@ -34,7 +34,8 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
   try { 
     fileStats = ecmaStats(file, parserOptions);
   } catch(e) {
-    console.warn(`@bable/parser parsing ${filePath} failed! (${e.message}) Parser options: ${parserOptions}, File content: ${file}`);
+    console.warn(`get es stats from ${filePath} failed! Parser options: ${JSON.stringify(parserOptions)}`);
+    console.warn(e);
     return depMap;
   }
   const { imports: target, exports: entry, relations } = fileStats;

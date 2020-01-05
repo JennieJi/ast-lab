@@ -2,7 +2,7 @@ import path from 'path';
 import enhancedResolve from 'enhanced-resolve';
 import _debug from 'debug';
 import denodeify from './denodeify';
-import { DependencyMap, Options } from 'ast-lab-types';
+import { DependencyMap, Options, AffectedMap } from 'ast-lab-types';
 import fileDepMap from './fileDepMap';
 import appendEntries from './appendEntries';
 
@@ -55,6 +55,7 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
           } else if (srcSet.has(modPath)) {
             depMap.set(modPath, memberDeps);
           }
+          debug(`${src} > ${modPath} depMap: ${depMap.get(modPath) ?(Array.from(depMap.get(modPath) as AffectedMap).entries()) : null}`);
         })());
       });
       await Promise.all(depMapHandlers);

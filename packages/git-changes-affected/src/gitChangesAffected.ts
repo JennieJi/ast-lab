@@ -20,7 +20,7 @@ function changesAffected(commit: string, changes: Change[], { alias, modules, pa
   const extensions = DEFAULT_EXTENSIONS;
   const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
   const entries = getChangedEntries(changes, parserOptions);
-  debug(commit, 'entries:', entries);
+  debug(`${commit} entries: ${JSON.stringify(entries)}`);
   return huntAffected(
     trackedFiles,
     entries,

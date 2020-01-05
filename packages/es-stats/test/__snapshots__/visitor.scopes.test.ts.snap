@@ -5,18 +5,39 @@ exports[`rootRelation visitors exports/exportAllFrom.js 1`] = `Object {}`;
 exports[`rootRelation visitors exports/exportDefault.js 1`] = `
 Object {
   "a": Array [],
+  "default": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors exports/exportDefaultCallExpression.js 1`] = `
+Object {
+  "a": Array [],
+  "default": Array [
+    "a",
+    "String",
+    "v",
+  ],
+  "v": Array [],
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultFuncAlias.js 1`] = `
 Object {
   "a": Array [],
+  "default": Array [
+    "a",
+  ],
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultValueAlias.js 1`] = `
 Object {
   "a": Array [],
+  "default": Array [
+    "a",
+  ],
 }
 `;
 
@@ -55,7 +76,7 @@ Object {
 exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
 Object {
   "func": Array [
-    "./b#*",
+    "./b#default",
   ],
 }
 `;
@@ -63,7 +84,7 @@ Object {
 exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
 Object {
   "func": Array [
-    "./b#*",
+    "./b#default",
   ],
 }
 `;
