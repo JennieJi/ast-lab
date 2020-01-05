@@ -4,7 +4,8 @@ import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } fr
 import _debug from 'debug';
 import { MODULE_ALL } from './constants';
 
-const debug = _debug('get-dependencies:file');
+const debug = _debug('hunt-affected:file');
+const dynamicImportReg = /[^#]+#/;
 
 function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
   const affected  = depMap.get(mod) || new Map() as AffectedMap;
@@ -53,12 +54,15 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
   debug('exports:', entry);
   debug('relations:', relations);
   
+  const dynamicImportRenameQueue = [] as Array<Import>;
   const targetIndex = {} as { [key: string]: Import };
-
   target.forEach((ref) => {
     const { name, source, alias } = ref;
     targetIndex[alias] = ref;
     updateDependencyMap(depMap, source, name, [] as Entry[]);
+    if (dynamicImportReg.test(name)) {
+      dynamicImportRenameQueue.push(ref);
+    }
   });
 
   if (entry.extends) {
@@ -90,8 +94,9 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
       /** @todo verify whether this helps for performance */
       relations[name] = dependsOn.filter(name => !toClear.has(name));
     }
+
     dependents.forEach(importRef => {
-      debug('importRef > ', importRef);
+      debug('importRef: ', importRef);
       const affectedMap = depMap.get(importRef.source);
       const entries = affectedMap && affectedMap.get(importRef.name);
       if (entries) {
@@ -101,7 +106,22 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
         });
       }
     });
+
+    dynamicImportRenameQueue.forEach(({ source, name }) => {
+      const affectedMap = depMap.get(source);
+      const entries = affectedMap && affectedMap.get(name);
+      if (!affectedMap || !entries) { return; }
+      const renameTo = name.replace(dynamicImportReg, '');
+      affectedMap.set(
+        renameTo, 
+        affectedMap.get(renameTo) ? 
+          (affectedMap.get(renameTo) as Entry[]).concat(entries) : 
+          entries
+      );
+      affectedMap.delete(name);
+    });
   });
+  debug(depMap);
 
   return depMap;
 }

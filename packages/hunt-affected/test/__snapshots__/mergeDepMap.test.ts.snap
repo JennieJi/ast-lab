@@ -25,10 +25,8 @@ Map {
 
 exports[`mergeDepMap() imports 1`] = `
 Map {
-  "imports/importAll.js" => Map {
-    "b" => Array [],
-  },
   "imports/importNamed.js" => Map {
+    "*" => Array [],
     "resolveFactory" => Array [
       Object {
         "name": "c",
@@ -40,8 +38,20 @@ Map {
       },
     ],
   },
+  "imports/importAll.js" => Map {
+    "*" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-asyncawait.js",
+      },
+    ],
+  },
   "imports/importDefault.js" => Map {
     "*" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-then.js",
+      },
       Object {
         "name": "a",
         "source": "imports/importAll.js",

@@ -4,7 +4,7 @@ import _debug from 'debug';
 import mergeDepMap from '../src/mergeDepMap';
 import { relativeDepMap } from './util';
 
-const debug = _debug('get-dependencies:test');
+const debug = _debug('hunt-affected:test');
 const tests = [
   'exports',
   'imports'

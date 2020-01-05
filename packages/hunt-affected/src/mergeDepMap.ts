@@ -5,7 +5,7 @@ import denodeify from './denodeify';
 import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
 import fileDepMap from './fileDepMap';
 
-const debug = _debug('get-dependencies:merge');
+const debug = _debug('hunt-affected:merge');
 const core = new Set(require('module').builtinModules);
 /**
  * 
