@@ -14,14 +14,32 @@ exports[`import visitors exports/exportFuncAlias.js 1`] = `Array []`;
 
 exports[`import visitors exports/exportNamed.js 1`] = `Array []`;
 
-exports[`import visitors exports/exportNamedFrom.js 1`] = `Array []`;
+exports[`import visitors exports/exportNamedFrom.js 1`] = `
+Array [
+  Object {
+    "alias": "a",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 34,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "name": "a",
+    "source": "./exportNamed",
+  },
+]
+`;
 
 exports[`import visitors exports/noExports.js 1`] = `Array []`;
 
 exports[`import visitors imports/dynamicImport-asyncawait.js 1`] = `
 Array [
   Object {
-    "alias": "dynamicImport",
+    "alias": "./b#*",
     "loc": SourceLocation {
       "end": Position {
         "column": 44,
@@ -32,7 +50,7 @@ Array [
         "line": 2,
       },
     },
-    "name": "dynamicImport",
+    "name": "./b#*",
     "source": "./b",
   },
 ]
@@ -41,7 +59,7 @@ Array [
 exports[`import visitors imports/dynamicImport-then.js 1`] = `
 Array [
   Object {
-    "alias": "./b",
+    "alias": "./b#*",
     "loc": SourceLocation {
       "end": Position {
         "column": 16,
@@ -52,7 +70,7 @@ Array [
         "line": 3,
       },
     },
-    "name": "./b",
+    "name": "./b#*",
     "source": "./b",
   },
 ]

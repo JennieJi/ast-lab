@@ -1,7 +1,7 @@
 import { DependencyMap, Entry, Member } from "ast-lab-types";
 import _debug from 'debug';
 
-const debug = _debug('get-dependencies:visit');
+const debug = _debug('hunt-affected:visit');
 
 export type Visited = { [module: string]: Set<Member> };
 

@@ -1,8 +1,10 @@
 import { Visitor } from '@babel/traverse';
-import { StringLiteral } from '@babel/types'; 
+import { StringLiteral } from '@babel/types';
 import { Import } from "ast-lab-types";
-import getPatternNames from '../getPatternNames';
 import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
+import { MODULE_ALL } from '../constants';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import { ExportSpecifier } from '@babel/types';
 
 export default function createExportVisitors(imports: Import[] = []): Visitor {
   return {
@@ -25,28 +27,53 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
     // Dynamic import support
     CallExpression({ node, parent, parentPath }) {
       /** @todo enable by plugin? */
-      if (node.callee.type !== 'Import') { return; }
-      const { arguments: args, loc } = node;
-      if (args[0].type !== 'StringLiteral') { return; }
-      const source = (args[0] as StringLiteral).value;
-      const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
-      if (id) {
-        getPatternNames(id).forEach(({ name, alias }) => {
-          imports.push({
-            alias,
-            name,
-            source,
-            loc
-          });
-        });
-      } else {
+      const { callee, arguments: args, loc } = node;
+      if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
+        const source = (args[0] as StringLiteral).value;
+        const scopedNaming = (member: string) => `${source}#${member}`;
+        const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+        if (id && id.type === 'ObjectPattern') {
+          for (let i = id.properties.length; i--;) {
+            const prop = id.properties[i];
+            if (prop.type === 'RestElement' ) {
+              break;
+            }
+            const name = scopedNaming(prop.key.name);
+            imports.push({
+              alias: name,
+              name,
+              source,
+              loc
+            });
+          }
+        }
+        const name = scopedNaming(MODULE_ALL);
         imports.push({
-          alias: source,
-          name: source,
+          alias: name,
+          name,
           source,
           loc
         });
       }
+    },
+
+    /**
+     * a hack to include exported named from as dependency
+     * @todo find proper way to do this
+     */
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, source, loc } = node;
+      if (!source || !specifiers.length) { return; }
+      specifiers.forEach(specifier => {
+        const dep = getModuleRefFromExportSpecifier(specifier as ExportSpecifier);
+        if (dep) {
+          imports.push({
+            ...dep,
+            source: source.value,
+            loc
+          });
+        }
+      });
     },
   };
 }

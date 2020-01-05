@@ -54,13 +54,17 @@ Object {
 
 exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
 Object {
-  "func": Array [],
+  "func": Array [
+    "./b#*",
+  ],
 }
 `;
 
 exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
 Object {
-  "func": Array [],
+  "func": Array [
+    "./b#*",
+  ],
 }
 `;
 

@@ -2,13 +2,32 @@
 
 exports[`fileDepMap() dynamicImport-asyncawait.js 1`] = `
 Map {
+  "./importNamed" => Map {
+    "*" => Array [],
+  },
   "./importAll" => Map {
-    "b" => Array [],
+    "*" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-asyncawait.js",
+      },
+    ],
   },
 }
 `;
 
-exports[`fileDepMap() dynamicImport-then.js 1`] = `Map {}`;
+exports[`fileDepMap() dynamicImport-then.js 1`] = `
+Map {
+  "./importDefault" => Map {
+    "*" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-then.js",
+      },
+    ],
+  },
+}
+`;
 
 exports[`fileDepMap() importAlias.js 1`] = `
 Map {

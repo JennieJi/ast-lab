@@ -1,11 +1,12 @@
-import { VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier } from '@babel/types';
+import { 
+  VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier, StringLiteral } from '@babel/types';
 import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { MemberRelation, MemberRef } from 'ast-lab-types';
 import _debug from 'debug';
-import { MODULE_DEFAULT } from '../constants';
+import { MODULE_DEFAULT, MODULE_ALL } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
@@ -119,12 +120,18 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
     ObjectMethod({ node }) {
       scope.privates.add(node.key.name);
     },
-    /** @todo handle eval */
-    // CallExpression({ node }) {
-    //   if (node.callee && node.callee.name === 'eval') {
-    //     node.arguments[0].value
-    //   }
-    // },
+    CallExpression({ node }) {
+      const { callee, arguments: args } = node;
+      /** @todo handle eval */
+      // if (callee.name === 'eval') {
+      //   args[0].value
+      // }
+
+      // dynamic import
+      if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
+        scope.candidates.push(`${(args[0] as StringLiteral).value}#${MODULE_ALL}`);
+      }
+    },
     Identifier(p) {
       const { node, key } = p;
       let parentPath = p.parentPath;
