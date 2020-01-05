@@ -19,8 +19,6 @@ const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions, paths }: Options) {
   const extensions = DEFAULT_EXTENSIONS;
   const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
-  debug('tracked files:');
-  debug(trackedFiles);
   const entries = getChangedEntries(changes, parserOptions);
   debug(commit, 'entries:', entries);
   return huntAffected(
@@ -49,8 +47,6 @@ type Options = {
 export default async function gitChangesAffected(commit: string, opts: Options = {}) {
   const extensions = DEFAULT_EXTENSIONS;
   const diffs = getGitDiffs(commit);
-  debug('diffs:');
-  debug(JSON.stringify(diffs, null, 2));
   const befores = [] as Change[];
   const afters = [] as Change[];
   diffs.forEach(({ source, target, operation }) => {
@@ -68,17 +64,15 @@ export default async function gitChangesAffected(commit: string, opts: Options =
     }
   });
   const affected = await changesAffected(`${commit}~1`, befores, opts);
-  debug('before affected:');
-  debug(affected);
+  debug('before affected:', affected);
   const toMerge = await changesAffected(commit, afters, opts);
-  debug('after affected:');
-  debug(toMerge);
+  debug('after affected:', toMerge);
   Object.keys(toMerge).forEach(mod => {
     const members = toMerge[mod];
-    affected[mod] =affected[mod] ? new Set(
+    affected[mod] =affected[mod] ? new Set([
       ...Array.from(affected[mod]),
       ...Array.from(members)
-    ) : members;
+    ]) : members;
   });
   return affected;
 }
