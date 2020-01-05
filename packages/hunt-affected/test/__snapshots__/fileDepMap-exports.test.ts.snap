@@ -23,6 +23,9 @@ Map {
       },
     ],
   },
+  "exports/exportDefault.js" => Map {
+    "default" => Array [],
+  },
 }
 `;
 
@@ -36,6 +39,10 @@ Map {
       },
     ],
   },
+  "exports/exportNamed.js" => Map {
+    "a" => Array [],
+    "readFile" => Array [],
+  },
 }
 `;
 
@@ -48,6 +55,9 @@ Map {
         "source": "exports/exportNamedFrom.js",
       },
     ],
+  },
+  "exports/exportNamedFrom.js" => Map {
+    "a" => Array [],
   },
 }
 `;

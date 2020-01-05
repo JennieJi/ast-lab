@@ -1,19 +1,12 @@
 import fs from 'fs';
 import ecmaStats from 'es-stats';
-import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import { Entry, Import, DependencyMap, Options } from 'ast-lab-types';
 import _debug from 'debug';
+import appendEntries from './appendEntries';
 import { MODULE_ALL } from './constants';
 
 const debug = _debug('hunt-affected:file');
 const dynamicImportReg = /[^#]+#/;
-
-function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
-  const affected  = depMap.get(mod) || new Map() as AffectedMap;
-  if (!depMap.has(mod)) {
-    depMap.set(mod, affected);
-  }
-  affected.set(member, entry);
-}
 
 /**
  * Get a file's dependency map
@@ -55,7 +48,7 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
   target.forEach((ref) => {
     const { name, source, alias } = ref;
     targetIndex[alias] = ref;
-    updateDependencyMap(depMap, source, name, [] as Entry[]);
+    appendEntries(depMap, source, name, [] as Entry[]);
     if (dynamicImportReg.test(name)) {
       dynamicImportRenameQueue.push(ref);
     }
@@ -63,7 +56,7 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
 
   if (entry.extends) {
     entry.extends.forEach((source) => {
-      updateDependencyMap(depMap, source, MODULE_ALL, [{
+      appendEntries(depMap, source, MODULE_ALL, [{
         name: MODULE_ALL,
         source: filePath
       }]);
@@ -93,29 +86,25 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
 
     dependents.forEach(importRef => {
       debug('importRef: ', importRef);
-      const affectedMap = depMap.get(importRef.source);
-      const entries = affectedMap && affectedMap.get(importRef.name);
-      if (entries) {
-        entries.push({
-          name: alias,
-          source: filePath
-        });
-      }
+      appendEntries(depMap, importRef.source, importRef.name, [{
+        name: alias,
+        source: filePath
+      }]);
     });
 
+    // Dynamic import has special format name to avoid conflict
+    // But this is not needed in file dep map
     dynamicImportRenameQueue.forEach(({ source, name }) => {
       const affectedMap = depMap.get(source);
       const entries = affectedMap && affectedMap.get(name);
       if (!affectedMap || !entries) { return; }
       const renameTo = name.replace(dynamicImportReg, '');
-      affectedMap.set(
-        renameTo, 
-        affectedMap.get(renameTo) ? 
-          (affectedMap.get(renameTo) as Entry[]).concat(entries) : 
-          entries
-      );
+      appendEntries(depMap, source, renameTo, entries);
       affectedMap.delete(name);
     });
+
+    // Add its own exports to the depMap
+    appendEntries(depMap, filePath, alias, []);
   });
   debug(depMap);
 

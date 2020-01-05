@@ -13,6 +13,9 @@ Map {
       },
     ],
   },
+  "imports/dynamicImport-asyncawait.js" => Map {
+    "func" => Array [],
+  },
 }
 `;
 
@@ -25,6 +28,9 @@ Map {
         "source": "imports/dynamicImport-then.js",
       },
     ],
+  },
+  "imports/dynamicImport-then.js" => Map {
+    "func" => Array [],
   },
 }
 `;
@@ -43,6 +49,10 @@ Map {
       },
     ],
   },
+  "imports/importAlias.js" => Map {
+    "c" => Array [],
+    "func" => Array [],
+  },
 }
 `;
 
@@ -59,6 +69,10 @@ Map {
         "source": "imports/importAll.js",
       },
     ],
+  },
+  "imports/importAll.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
   },
 }
 `;
@@ -85,6 +99,10 @@ Map {
       },
     ],
   },
+  "imports/importDefault.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
+  },
 }
 `;
 
@@ -97,6 +115,10 @@ Map {
         "source": "imports/importNamed.js",
       },
     ],
+  },
+  "imports/importNamed.js" => Map {
+    "resolveFactory" => Array [],
+    "func" => Array [],
   },
 }
 `;

@@ -2,8 +2,9 @@ import path from 'path';
 import enhancedResolve from 'enhanced-resolve';
 import _debug from 'debug';
 import denodeify from './denodeify';
-import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import { DependencyMap, Options } from 'ast-lab-types';
 import fileDepMap from './fileDepMap';
+import appendEntries from './appendEntries';
 
 const debug = _debug('hunt-affected:merge');
 const core = new Set(require('module').builtinModules);
@@ -47,12 +48,9 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
               modPath = modRelativePath;
             }
           }
-          const affectedMap = depMap.get(modPath) as AffectedMap;
-          debug(`${src} existing ${modPath} affected map: ${affectedMap}`);
-          if (affectedMap) {
+          if (depMap.get(modPath)) {
             memberDeps.forEach((entries, member) => {
-              const affected = affectedMap.get(member);
-              affectedMap.set(member, affected ? affected.concat(entries) : entries);
+              appendEntries(depMap, modPath, member, entries);
             });
           } else if (srcSet.has(modPath)) {
             depMap.set(modPath, memberDeps);
