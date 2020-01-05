@@ -80,7 +80,7 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
           if (startLine <= end.line) {
             if (exported.has(alias)) {
               ex.push(alias);
-            } else {
+            } else if (affectExports[alias]) {
               ex = ex.concat(affectExports[alias]);
             }
           }

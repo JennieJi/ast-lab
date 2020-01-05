@@ -4,15 +4,39 @@ exports[`gitChangesAffected can work 1`] = `
 Object {
   "packages/es-stats/src/index.ts": Set {},
   "packages/es-stats/src/visitors/exports.ts": Set {},
-  "packages/types/index.d.ts": Set {},
 }
 `;
 
 exports[`gitChangesAffected can work 2`] = `
 Object {
-  "packages/get-dependencies/src/markExports.ts": Set {},
-  "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates.js": Set {},
-  "packages/get-dependencies/test/__fixtures__/deepAst/funcUsePrivates2.js": Set {},
-  "packages/get-dependencies/test/__fixtures__/deepAst/valueUsePrivates.js": Set {},
+  "packages/es-stats/src/extractStats.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/fileStats.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/index.ts": Set {},
+  "packages/es-stats/src/visitors/exports.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/visitors/imports.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/visitors/rootRelation.ts": Set {
+    "default",
+  },
+  "packages/hunt-affected/src/fileDepMap.ts": Set {
+    "default",
+  },
+  "packages/hunt-affected/src/huntAffected.ts": Set {
+    "default",
+  },
+  "packages/hunt-affected/src/index.ts": Set {},
+  "packages/hunt-affected/src/mergeDepMap.ts": Set {
+    "default",
+  },
+  "packages/hunt-affected/src/visitDepMap.ts": Set {
+    "default",
+  },
 }
 `;

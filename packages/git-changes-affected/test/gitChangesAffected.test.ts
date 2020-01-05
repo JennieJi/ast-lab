@@ -25,9 +25,9 @@ describe('gitChangesAffected', () => {
     });
     expect(relativeEntries(case1)).toMatchSnapshot();
 
-    const case2 = await gitChangesAffected('ec7b4c814c17c4b9a9467ba0c876983a9b3cd6ec', {
+    const case2 = await gitChangesAffected('8d807ce9c560e3db322f90a337200ddffe4d8719', {
       parserOptions: {
-        plugins: ['typescript']
+        plugins: ['typescript', 'dynamicImport', 'classProperties']
       }
     });
     expect(relativeEntries(case2)).toMatchSnapshot();
