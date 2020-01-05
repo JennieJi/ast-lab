@@ -2,13 +2,10 @@
 
 exports[`mergeDepMap() exports 1`] = `
 Map {
+  "exports/exportDefault.js" => Map {
+    "default" => Array [],
+  },
   "exports/exportNamed.js" => Map {
-    "*" => Array [
-      Object {
-        "name": "*",
-        "source": "exports/exportAllFrom.js",
-      },
-    ],
     "a" => Array [
       Object {
         "name": "default",
@@ -19,26 +16,35 @@ Map {
         "source": "exports/exportNamedFrom.js",
       },
     ],
+    "readFile" => Array [],
+    "*" => Array [
+      Object {
+        "name": "*",
+        "source": "exports/exportAllFrom.js",
+      },
+    ],
+  },
+  "exports/exportNamedFrom.js" => Map {
+    "a" => Array [],
   },
 }
 `;
 
 exports[`mergeDepMap() imports 1`] = `
 Map {
-  "imports/importNamed.js" => Map {
-    "*" => Array [],
-    "resolveFactory" => Array [
-      Object {
-        "name": "c",
-        "source": "imports/importAlias.js",
-      },
-      Object {
-        "name": "func",
-        "source": "imports/importAlias.js",
-      },
-    ],
+  "imports/dynamicImport-asyncawait.js" => Map {
+    "func" => Array [],
+  },
+  "imports/dynamicImport-then.js" => Map {
+    "func" => Array [],
+  },
+  "imports/importAlias.js" => Map {
+    "c" => Array [],
+    "func" => Array [],
   },
   "imports/importAll.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
     "*" => Array [
       Object {
         "name": "func",
@@ -47,6 +53,8 @@ Map {
     ],
   },
   "imports/importDefault.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
     "*" => Array [
       Object {
         "name": "func",
@@ -61,6 +69,20 @@ Map {
         "source": "imports/importAll.js",
       },
     ],
+  },
+  "imports/importNamed.js" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "c",
+        "source": "imports/importAlias.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
+    "func" => Array [],
+    "*" => Array [],
   },
 }
 `;

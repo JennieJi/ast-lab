@@ -15,7 +15,15 @@ Object {
   "packages/es-stats/src/fileStats.ts": Set {
     "default",
   },
-  "packages/es-stats/src/index.ts": Set {},
+  "packages/es-stats/src/index.ts": Set {
+    "createExportVisitors",
+    "createImportVisitors",
+    "createRootRelationVisitors",
+    "mergeVisitors",
+    "extractStats",
+    "getPrivateMemberNames",
+    "default",
+  },
   "packages/es-stats/src/visitors/exports.ts": Set {
     "default",
   },
@@ -31,7 +39,12 @@ Object {
   "packages/hunt-affected/src/huntAffected.ts": Set {
     "default",
   },
-  "packages/hunt-affected/src/index.ts": Set {},
+  "packages/hunt-affected/src/index.ts": Set {
+    "fileDepMap",
+    "mergeDepMap",
+    "visitDepMap",
+    "default",
+  },
   "packages/hunt-affected/src/mergeDepMap.ts": Set {
     "default",
   },

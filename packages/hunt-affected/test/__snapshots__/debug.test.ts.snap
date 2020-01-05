@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`debug mono repo fileDepMap 1`] = `
+Map {
+  "./huntAffected" => Map {
+    "default" => Array [
+      Object {
+        "name": "fileDepMap",
+        "source": "../../src/index.ts",
+      },
+      Object {
+        "name": "mergeDepMap",
+        "source": "../../src/index.ts",
+      },
+      Object {
+        "name": "visitDepMap",
+        "source": "../../src/index.ts",
+      },
+      Object {
+        "name": "default",
+        "source": "../../src/index.ts",
+      },
+    ],
+  },
+  "./fileDepMap" => Map {
+    "default" => Array [],
+  },
+  "./mergeDepMap" => Map {
+    "default" => Array [],
+  },
+  "./visitDepMap" => Map {
+    "default" => Array [],
+    "Visited" => Array [],
+  },
+  "../../src/index.ts" => Map {
+    "fileDepMap" => Array [],
+    "mergeDepMap" => Array [],
+    "visitDepMap" => Array [],
+    "Affected" => Array [],
+    "default" => Array [],
+  },
+}
+`;
