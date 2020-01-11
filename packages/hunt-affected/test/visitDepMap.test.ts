@@ -99,4 +99,37 @@ describe('visitDepMap()', () => {
       [{ name: 'default', source: '/a' }]
     )).toMatchSnapshot();
   });
+
+  test('import all', () => {
+    expect(visitDepMap(
+      new Map([
+        [
+          '/a',
+          new Map([
+            [
+              '*',
+              [{ source: '/b', name: 'default' }]
+            ]
+          ])
+        ], [
+          '/b',
+          new Map([
+            [
+              'default',
+              [{ source: '/c', name: 'default' }]
+            ]
+          ])
+        ], [
+          '/c',
+          new Map([
+            [
+              'default',
+              []
+            ]
+          ])
+        ]
+      ]), 
+      [{ name: 'default', source: '/a' }]
+    )).toMatchSnapshot();
+  });
 });
