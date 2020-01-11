@@ -156,6 +156,18 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         debug('>>>', node);
         scope.candidates.push(node.name);
       }
+    },
+
+    /* JSX */
+    /** @todo make it a plugin */
+    JSXOpeningElement({ node }) {
+      let identifier = node.name;
+      while (identifier.type === 'JSXMemberExpression') {
+        identifier = identifier.object;
+      }
+      if (identifier.type === 'JSXIdentifier') {
+        scope.candidates.push(identifier.name);
+      }
     }
   };
 }
