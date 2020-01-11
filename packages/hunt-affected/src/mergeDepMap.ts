@@ -2,7 +2,7 @@ import path from 'path';
 import enhancedResolve from 'enhanced-resolve';
 import _debug from 'debug';
 import denodeify from './denodeify';
-import { DependencyMap, Options, AffectedMap } from 'ast-lab-types';
+import { DependencyMap, Options } from 'ast-lab-types';
 import fileDepMap from './fileDepMap';
 import appendEntries from './appendEntries';
 
@@ -27,7 +27,7 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
       const fileDependencyMap = await fileDepMap(src, opts);
       const depMapHandlers = [] as Array<Promise<any>>;
       fileDependencyMap.forEach((memberDeps, modRelativePath) => {
-        debug(`${src} dependency ${modRelativePath}: ${memberDeps}`);
+        debug(`${src} > ${modRelativePath} start`);
         depMapHandlers.push((async () => {
           const baseDir = path.dirname(src);
           let modPath = '';
@@ -49,13 +49,16 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
             }
           }
           if (depMap.get(modPath)) {
+            debug(`${src} > ${modPath} append entries: ${JSON.stringify(Array.from(memberDeps.entries()))}`);
             memberDeps.forEach((entries, member) => {
               appendEntries(depMap, modPath, member, entries);
             });
           } else if (srcSet.has(modPath)) {
+            debug(`${src} > ${modPath} add new`);
             depMap.set(modPath, memberDeps);
+          } else {
+            debug(`${src} > ${modPath} depMap not added!`);
           }
-          debug(`${src} > ${modPath} depMap: ${depMap.get(modPath) ?(Array.from(depMap.get(modPath) as AffectedMap).entries()) : null}`);
         })());
       });
       await Promise.all(depMapHandlers);
