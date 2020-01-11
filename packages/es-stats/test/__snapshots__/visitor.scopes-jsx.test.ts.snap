@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rootRelation visitors jsx/functionComponent.js 1`] = `
+Object {
+  "ChildFunctionComponentHasProps1": Array [
+    "ParentFunctionComponent",
+  ],
+  "ChildFunctionComponentHasProps2": Array [
+    "ParentFunctionComponent",
+  ],
+  "ChildFunctionComponentJSXMemberExpression": Array [
+    "ParentFunctionComponentObj",
+  ],
+  "ChildFunctionComponentNoProps": Array [
+    "ParentFunctionComponent",
+  ],
+  "ParentFunctionComponent": Array [
+    "div",
+    "JSON",
+  ],
+  "ParentFunctionComponentObj": Array [
+    "ParentFunctionComponent",
+  ],
+}
+`;
