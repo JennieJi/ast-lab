@@ -39,10 +39,6 @@ export default function visitDependencyMap(dependencyMap: DependencyMap, entries
     "target": Object {
       "changed": Array [
         Object {
-          "end": 0,
-          "start": 4,
-        },
-        Object {
           "end": 4,
           "start": 2,
         },
@@ -51,12 +47,12 @@ export default function visitDependencyMap(dependencyMap: DependencyMap, entries
           "start": 11,
         },
         Object {
-          "end": 20,
-          "start": 19,
+          "end": 21,
+          "start": 20,
         },
         Object {
-          "end": 23,
-          "start": 22,
+          "end": 24,
+          "start": 23,
         },
       ],
       "content": "import { DependencyMap, Entry } from \\"ast-lab-types\\";
@@ -95,12 +91,7 @@ export default function visitDependencyMap(dependencyMap: DependencyMap, entries
   Object {
     "operation": 1,
     "source": Object {
-      "changed": Array [
-        Object {
-          "end": 14,
-          "start": 14,
-        },
-      ],
+      "changed": Array [],
       "content": null,
       "file": "packages/get-dependencies/test/__snapshots__/visitDepMap.test.ts.snap",
     },
@@ -108,7 +99,7 @@ export default function visitDependencyMap(dependencyMap: DependencyMap, entries
       "changed": Array [
         Object {
           "end": 21,
-          "start": 29,
+          "start": 1,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -138,24 +129,15 @@ Object {
   Object {
     "operation": 1,
     "source": Object {
-      "changed": Array [
-        Object {
-          "end": 2,
-          "start": 2,
-        },
-      ],
+      "changed": Array [],
       "content": null,
       "file": "packages/get-dependencies/test/visitDepMap.test.ts",
     },
     "target": Object {
       "changed": Array [
         Object {
-          "end": 21,
-          "start": 29,
-        },
-        Object {
           "end": 102,
-          "start": 24,
+          "start": 1,
         },
       ],
       "content": "import visitDepMap from '../src/visitDepMap';
@@ -271,26 +253,12 @@ Array [
   Object {
     "operation": 0,
     "source": Object {
-      "changed": Array [
-        Object {
-          "end": 1,
-          "start": 1,
-        },
-      ],
+      "changed": Array [],
       "content": "export { default } from './getStats';",
       "file": "packages/es-stats/src/index.ts",
     },
     "target": Object {
-      "changed": Array [
-        Object {
-          "end": 1,
-          "start": 1,
-        },
-        Object {
-          "end": 6,
-          "start": 3,
-        },
-      ],
+      "changed": Array [],
       "content": "export { default as createExportVisitors } from './visitors/exports';
 export { default as createImportVisitors } from './visitors/imports';
 export { default as createRootRelationVisitors } from './visitors/rootRelation';
@@ -304,32 +272,28 @@ export { default } from './getStats';",
     "source": Object {
       "changed": Array [
         Object {
-          "end": 6,
-          "start": 6,
+          "end": 14,
+          "start": 14,
         },
         Object {
-          "end": 13,
-          "start": 13,
+          "end": 20,
+          "start": 20,
         },
         Object {
-          "end": 19,
-          "start": 19,
+          "end": 29,
+          "start": 29,
         },
         Object {
-          "end": 28,
-          "start": 28,
+          "end": 35,
+          "start": 35,
         },
         Object {
-          "end": 34,
-          "start": 34,
+          "end": 42,
+          "start": 42,
         },
         Object {
-          "end": 41,
-          "start": 41,
-        },
-        Object {
-          "end": 44,
-          "start": 44,
+          "end": 45,
+          "start": 45,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -385,32 +349,28 @@ export default function createExportVisitors(exports: Exports = { members: [] })
     "target": Object {
       "changed": Array [
         Object {
-          "end": 9,
-          "start": 10,
+          "end": 14,
+          "start": 14,
         },
         Object {
-          "end": 13,
-          "start": 13,
+          "end": 23,
+          "start": 20,
         },
         Object {
-          "end": 22,
-          "start": 19,
+          "end": 32,
+          "start": 32,
         },
         Object {
-          "end": 31,
-          "start": 31,
+          "end": 38,
+          "start": 38,
         },
         Object {
-          "end": 37,
-          "start": 37,
+          "end": 45,
+          "start": 45,
         },
         Object {
-          "end": 44,
-          "start": 44,
-        },
-        Object {
-          "end": 47,
-          "start": 47,
+          "end": 48,
+          "start": 48,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -470,12 +430,7 @@ export default function createExportVisitors(exports: Exports = { members: [] })
   Object {
     "operation": 0,
     "source": Object {
-      "changed": Array [
-        Object {
-          "end": 49,
-          "start": 49,
-        },
-      ],
+      "changed": Array [],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[\`export visitors exportAllFrom.js 1\`] = \`
@@ -574,36 +529,32 @@ Object {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 13,
-          "start": 52,
+          "end": 27,
+          "start": 18,
         },
         Object {
-          "end": 26,
-          "start": 17,
+          "end": 48,
+          "start": 39,
         },
         Object {
-          "end": 47,
-          "start": 38,
+          "end": 69,
+          "start": 60,
         },
         Object {
-          "end": 68,
-          "start": 59,
+          "end": 90,
+          "start": 81,
         },
         Object {
-          "end": 89,
-          "start": 80,
+          "end": 111,
+          "start": 102,
         },
         Object {
-          "end": 110,
-          "start": 101,
+          "end": 132,
+          "start": 123,
         },
         Object {
-          "end": 131,
-          "start": 122,
-        },
-        Object {
-          "end": 152,
-          "start": 143,
+          "end": 153,
+          "start": 144,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -777,16 +728,12 @@ Object {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 87,
-          "start": 87,
+          "end": 11,
+          "start": 11,
         },
         Object {
-          "end": 10,
-          "start": 10,
-        },
-        Object {
-          "end": 13,
-          "start": 13,
+          "end": 14,
+          "start": 14,
         },
       ],
       "content": "import { ParserOptions } from '@babel/parser';
@@ -824,20 +771,16 @@ export type Options = {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 0,
-          "start": 157,
-        },
-        Object {
           "end": 2,
           "start": 2,
         },
         Object {
-          "end": 13,
-          "start": 11,
+          "end": 14,
+          "start": 12,
         },
         Object {
-          "end": 18,
-          "start": 16,
+          "end": 19,
+          "start": 17,
         },
       ],
       "content": "import { ParserOptions } from '@babel/parser';

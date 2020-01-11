@@ -37,27 +37,30 @@ export function getGitDiffs(commit: string): Diff[] {
   const diffLines = strOut.split('\n')
   diffLines.forEach((content, index) => {
     const lastDiff = diffs[diffs.length - 1];
-    const aChanges = lastDiff &&lastDiff.source.changed;
-    const bChanges = lastDiff &&lastDiff.target.changed;
+    const aChanges = lastDiff && lastDiff.source.changed;
+    const bChanges = lastDiff && lastDiff.target.changed;
     const fileHeadMatch = content.match(/^diff --git a\/([^\n\s]+) b\/([^\n\s]+)/);
     if (fileHeadMatch) {
       if (lastDiff) {
         if (
           lastDiff.operation !== GIT_OPERATION.rename && 
-          aChangeStart !== null
+          aChangeStart
         ) {
           aChanges.push({ 
             start: aChangeStart,
             end: lineA - 1
           });
         }
-        if (bChangeStart !== null) {
+        if (bChangeStart) {
           bChanges.push({
             start: bChangeStart, 
             end: lineB - 1
           });
         }
       }
+      lineA = lineB = 0;
+      aChangeStart = bChangeStart = null;
+
       const [sourceFile, targetFile] = fileHeadMatch.slice(1);
       const operation = justifyOperation(diffLines[index + 1]);
       diffs.push({
@@ -78,10 +81,14 @@ export function getGitDiffs(commit: string): Diff[] {
       });
       return;
     }
-    const chunkHeadMatch = content.match(/@@ -(\d+),\d+ \+(\d+),\d+ @@/);
+    const chunkHeadMatch = content.match(/@@ -(\d+),\d+ \+(\d+),\d+ @@( .+)?/);
     if (chunkHeadMatch) {
       lineA = parseInt(chunkHeadMatch[1], 10);
       lineB = parseInt(chunkHeadMatch[2], 10);
+      if (chunkHeadMatch[3]){
+        lineA++;
+        lineB++;
+      }
       return;
     }
     const isLastLine = index === diffLines.length - 1;
@@ -90,36 +97,36 @@ export function getGitDiffs(commit: string): Diff[] {
     if (
       lastDiff.operation !== GIT_OPERATION.rename
     ) {
-      if (isRemoved && aChangeStart === null) {
+      if (isRemoved && !aChangeStart) {
         aChangeStart = lineA;
       }
       if (
-        (!isRemoved || isLastLine) && aChangeStart !== null
+        (!isRemoved || isLastLine) && aChangeStart
       ) {
         aChanges.push({ 
           start: aChangeStart,
-          end: lineA - 1
+          end: Math.max(aChangeStart, lineA - 1)
         });
         aChangeStart = null;
       }
-      if (!isAdded) {
+      if (!isAdded && lineA) {
         lineA++;
       }
     }
-    if (isAdded && bChangeStart === null) {
+    if (isAdded && !bChangeStart) {
       bChangeStart = lineB;
     }
     if (
       (!isAdded || isLastLine) && 
-      bChangeStart !== null
+      bChangeStart
     ) {
       bChanges.push({
         start: bChangeStart, 
-        end: lineB - 1
+        end: Math.max(bChangeStart, lineB - 1)
       });
       bChangeStart = null;
     }
-    if (!isRemoved) {
+    if (!isRemoved && lineB) {
       lineB++;
     }
   });
