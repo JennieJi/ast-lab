@@ -1,7 +1,10 @@
+import _debug from 'debug';
 import exec from './exec';
 import { GIT_OPERATION } from './constants';
 import { Diff } from './types';
 import getRevisionFile from './getRevisionFile';
+
+const debug = _debug('git-changes-affected:diff');
 
 function justifyOperation(operatelog: string) {
   if (/^new file mode/.test(operatelog)) {
@@ -35,32 +38,64 @@ export function getGitDiffs(commit: string): Diff[] {
   let aChangeStart = null as number | null;
   let bChangeStart = null as number | null;
   const diffLines = strOut.split('\n')
+  debug(`>>> ${commit}`);
   diffLines.forEach((content, index) => {
     const lastDiff = diffs[diffs.length - 1];
-    const aChanges = lastDiff && lastDiff.source.changed;
-    const bChanges = lastDiff && lastDiff.target.changed;
+
     const fileHeadMatch = content.match(/^diff --git a\/([^\n\s]+) b\/([^\n\s]+)/);
-    if (fileHeadMatch) {
-      if (lastDiff) {
+    const chunkHeadMatch = content.match(/@@ -(\d+)(,\d+)? \+(\d+)(,\d+)? @@( .+)?/);
+    const isLastLine = index === diffLines.length - 1 || !!fileHeadMatch || !!chunkHeadMatch;
+    const isAdded = isLineAdded(content);
+    const isRemoved = isLineRemoved(content);
+    debug(`${commit} ${content} > ${fileHeadMatch && fileHeadMatch.slice(1) || chunkHeadMatch && chunkHeadMatch.slice(1)} | last line: ${isLastLine} | ${isRemoved}, ${isAdded} | ${lastDiff && lastDiff.operation}`);
+
+    if (lastDiff) {
+      const aChanges = lastDiff.source.changed;
+      const bChanges = lastDiff.target.changed;
+      if (
+        lastDiff.operation !== GIT_OPERATION.rename
+      ) {
+        if (isRemoved && !aChangeStart) {
+          aChangeStart = lineA;
+        }
         if (
-          lastDiff.operation !== GIT_OPERATION.rename && 
-          aChangeStart
+          (!isRemoved || isLastLine) && aChangeStart
         ) {
+          debug(`${commit} -${lastDiff.source.file} ${aChangeStart}-${lineA - 1}`)
           aChanges.push({ 
             start: aChangeStart,
             end: lineA - 1
           });
+          aChangeStart = null;
         }
-        if (bChangeStart) {
-          bChanges.push({
-            start: bChangeStart, 
-            end: lineB - 1
-          });
+        if (!isAdded && lineA) {
+          lineA++;
         }
       }
-      lineA = lineB = 0;
-      aChangeStart = bChangeStart = null;
+      if (isAdded && !bChangeStart) {
+        bChangeStart = lineB;
+      }
+      if (
+        (!isAdded || isLastLine) && 
+        bChangeStart
+      ) {
+        debug(`${commit} +${lastDiff.target.file} ${bChangeStart}-${lineB - 1}`)
+        bChanges.push({
+          start: bChangeStart, 
+          end: lineB - 1
+        });
+        bChangeStart = null;
+      }
+      if (!isRemoved && lineB) {
+        lineB++;
+      }
+      if (isLastLine) {
+        lineA = lineB = 0;
+        aChangeStart = bChangeStart = null;
+      }
+    }
 
+    if (fileHeadMatch) {
       const [sourceFile, targetFile] = fileHeadMatch.slice(1);
       const operation = justifyOperation(diffLines[index + 1]);
       diffs.push({
@@ -81,53 +116,16 @@ export function getGitDiffs(commit: string): Diff[] {
       });
       return;
     }
-    const chunkHeadMatch = content.match(/@@ -(\d+),\d+ \+(\d+),\d+ @@( .+)?/);
+
     if (chunkHeadMatch) {
       lineA = parseInt(chunkHeadMatch[1], 10);
-      lineB = parseInt(chunkHeadMatch[2], 10);
-      if (chunkHeadMatch[3]){
+      lineB = parseInt(chunkHeadMatch[3], 10);
+      if (chunkHeadMatch[5]){
         lineA++;
         lineB++;
       }
+      debug(`${commit} chunk start -${lastDiff.source.file}:${lineA} +${lastDiff.target.file}:${lineB}`)
       return;
-    }
-    const isLastLine = index === diffLines.length - 1;
-    const isAdded = isLineAdded(content);
-    const isRemoved = isLineRemoved(content);
-    if (
-      lastDiff.operation !== GIT_OPERATION.rename
-    ) {
-      if (isRemoved && !aChangeStart) {
-        aChangeStart = lineA;
-      }
-      if (
-        (!isRemoved || isLastLine) && aChangeStart
-      ) {
-        aChanges.push({ 
-          start: aChangeStart,
-          end: Math.max(aChangeStart, lineA - 1)
-        });
-        aChangeStart = null;
-      }
-      if (!isAdded && lineA) {
-        lineA++;
-      }
-    }
-    if (isAdded && !bChangeStart) {
-      bChangeStart = lineB;
-    }
-    if (
-      (!isAdded || isLastLine) && 
-      bChangeStart
-    ) {
-      bChanges.push({
-        start: bChangeStart, 
-        end: Math.max(bChangeStart, lineB - 1)
-      });
-      bChangeStart = null;
-    }
-    if (!isRemoved && lineB) {
-      lineB++;
     }
   });
   return diffs;

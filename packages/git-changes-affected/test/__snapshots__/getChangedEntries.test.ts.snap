@@ -17,7 +17,18 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries import should not be counted as entry 1`] = `Array []`;
+exports[`getChangedEntries import should not be counted as entry 1`] = `
+Array [
+  Object {
+    "name": "func",
+    "source": "sampleFile.js",
+  },
+  Object {
+    "name": "default",
+    "source": "sampleFile.js",
+  },
+]
+`;
 
 exports[`getChangedEntries single line 1`] = `
 Array [

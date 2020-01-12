@@ -47,7 +47,7 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
       ...locatePrivateDeclares(ast),
       ...(stats.exports.members as Declare[]),
       ...(stats.imports as Declare[])
-    ];
+    ].sort((a, b) => a.loc.start.line - b.loc.start.line);
     debug(`${file} declareLoc: ${JSON.stringify(declareLoc)}`);
 
     const exported = new Set(stats.exports.members.map(({ alias }) => alias));
@@ -72,20 +72,24 @@ export default function getChangedEntries(changes: Change[], parserOptions?: Par
       (ex, { start: startLine, end: endLine }) => {
         while (iDeclare < declareLoc.length) {
           const { loc, alias } = declareLoc[iDeclare];
-          iDeclare++;
           if (!loc) { continue; }
           const { start, end } = loc;
           if (endLine < start.line) { 
+            debug(`${file}:${startLine}-${endLine} X ${start.line}-${end.line}`);
             return ex;
           }
           if (startLine <= end.line) {
+            debug(`${file}:${startLine}-${endLine} √ ${start.line}-${end.line} > ${affectExports[alias]} `);
             if (exported.has(alias)) {
               ex.push(alias);
             }
             if (affectExports[alias]) {
               ex = ex.concat(affectExports[alias]);
             }
+          } else {
+            debug(`${file}:${startLine}-${endLine} X ${start.line}-${end.line}`);
           }
+          iDeclare++;
         }
         return ex;
       }, 

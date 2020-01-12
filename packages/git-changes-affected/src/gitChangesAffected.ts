@@ -17,6 +17,7 @@ const debug = _debug('git-changes-affected:affected');
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
 function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions, paths }: Options) {
+  debug(`${commit} changes: ${JSON.stringify(changes)}`);
   const extensions = DEFAULT_EXTENSIONS;
   const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
   const entries = getChangedEntries(changes, parserOptions);
