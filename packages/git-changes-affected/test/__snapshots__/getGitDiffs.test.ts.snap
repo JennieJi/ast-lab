@@ -1,5 +1,2653 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`getGitDiffs 8d807ce9c560e3db322f90a337200ddffe4d8719 1`] = `
+Array [
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 4,
+          "start": 4,
+        },
+      ],
+      "content": "import { LVal } from \\"@babel/types\\";
+import { MemberRef } from 'ast-lab-types';
+
+function getPatternNames(pattern: LVal): Array<MemberRef> {
+  switch(pattern.type) {
+    case 'Identifier':
+      return [{
+        name: pattern.name,
+        alias: pattern.name
+      }];
+    case 'ArrayPattern':
+      return pattern.elements.reduce((ret, el) => {
+        return ret.concat(getPatternNames(el));
+      }, [] as MemberRef[]);
+    case 'ObjectPattern':
+      return pattern.properties.reduce((ret, prop) => {
+        let next = prop.type === 'RestElement' ? prop.argument : prop.value;
+        if (next) {
+          return ret.concat(getPatternNames(next as LVal));
+        } else {
+          console.warn(\`getPatternNames - ObjectPattern next is invalid! Value: \${next}.\`);
+          return ret;
+        }
+      }, [] as MemberRef[]);
+    case 'RestElement':
+      return getPatternNames(pattern.argument);
+  }
+  return [];
+}
+export default getPatternNames;",
+      "file": "packages/es-stats/src/getPatternNames.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 4,
+          "start": 4,
+        },
+      ],
+      "content": "import { LVal } from \\"@babel/types\\";
+import { MemberRef } from 'ast-lab-types';
+
+function getPatternNames(pattern: LVal ): Array<MemberRef> {
+  switch(pattern.type) {
+    case 'Identifier':
+      return [{
+        name: pattern.name,
+        alias: pattern.name
+      }];
+    case 'ArrayPattern':
+      return pattern.elements.reduce((ret, el) => {
+        return ret.concat(getPatternNames(el));
+      }, [] as MemberRef[]);
+    case 'ObjectPattern':
+      return pattern.properties.reduce((ret, prop) => {
+        let next = prop.type === 'RestElement' ? prop.argument : prop.value;
+        if (next) {
+          return ret.concat(getPatternNames(next as LVal));
+        } else {
+          console.warn(\`getPatternNames - ObjectPattern next is invalid! Value: \${next}.\`);
+          return ret;
+        }
+      }, [] as MemberRef[]);
+    case 'RestElement':
+      return getPatternNames(pattern.argument);
+  }
+  return [];
+}
+export default getPatternNames;",
+      "file": "packages/es-stats/src/getPatternNames.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 26,
+          "start": 15,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import getDeclarationNames from '../getDeclarationNames';
+import { MODULE_DEFAULT } from '../constants';
+import { Exports } from 'ast-lab-types';
+
+export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
+  return {
+    ExportAllDeclaration({ node }) {
+      exports.extends = (exports.extends || []).concat(node.source.value);
+    },
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, declaration, loc } = node;
+      if (specifiers.length) {
+        specifiers.forEach(specifier => {
+          // @ts-ignore
+          const dep = getModuleRefFromExportSpecifier(specifier);
+          if (dep) {
+            exports.members.push({
+              ...dep,
+              loc
+            });
+          }
+        });
+      }
+      if (declaration) {
+        // @ts-ignore
+        const names = getDeclarationNames(declaration)
+        if (names && names.length) {
+          names.forEach(({ name }) => {
+            exports.members.push({ name, alias: name, loc });
+          });
+        }
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      const { declaration, loc } = node;
+      const alias = MODULE_DEFAULT;
+      // @ts-ignore
+      const names = getDeclarationNames(declaration);
+      if (names && names.length) {
+        names.forEach(({ name }) => {
+          name = name || MODULE_DEFAULT;
+          exports.members.push({ name, alias, loc });
+        });
+      } else {
+        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT,loc });
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/exports.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 2,
+          "start": 2,
+        },
+        Object {
+          "end": 24,
+          "start": 16,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import { ExportSpecifier } from '@babel/types';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import getDeclarationNames from '../getDeclarationNames';
+import { MODULE_DEFAULT } from '../constants';
+import { Exports } from 'ast-lab-types';
+
+export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
+  return {
+    ExportAllDeclaration({ node }) {
+      exports.extends = (exports.extends || []).concat(node.source.value);
+    },
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, declaration, loc } = node;
+      specifiers.forEach(specifier => {
+        const dep = getModuleRefFromExportSpecifier(specifier as ExportSpecifier);
+        if (dep) {
+          exports.members.push({
+            ...dep,
+            loc
+          });
+        }
+      });
+      if (declaration) {
+        // @ts-ignore
+        const names = getDeclarationNames(declaration)
+        if (names && names.length) {
+          names.forEach(({ name }) => {
+            exports.members.push({ name, alias: name, loc });
+          });
+        }
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      const { declaration, loc } = node;
+      const alias = MODULE_DEFAULT;
+      // @ts-ignore
+      const names = getDeclarationNames(declaration);
+      if (names && names.length) {
+        names.forEach(({ name }) => {
+          name = name || MODULE_DEFAULT;
+          exports.members.push({ name, alias, loc });
+        });
+      } else {
+        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT,loc });
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/exports.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 2,
+          "start": 2,
+        },
+        Object {
+          "end": 4,
+          "start": 4,
+        },
+        Object {
+          "end": 43,
+          "start": 29,
+        },
+        Object {
+          "end": 46,
+          "start": 45,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import { StringLiteral } from '@babel/types'; 
+import { Import } from \\"ast-lab-types\\";
+import getPatternNames from '../getPatternNames';
+import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
+
+export default function createExportVisitors(imports: Import[] = []): Visitor {
+  return {
+    ImportDeclaration({ node }) {
+      const modulePath = node.source.value;
+      node.specifiers.forEach((specifier) => {
+        // @ts-ignore
+        const dep = importSpecifier2Dependents(specifier);
+        if (dep) {
+          const { name, alias } = dep;
+          imports.push({
+            alias,
+            name,
+            source: modulePath,
+            loc: specifier.loc
+          });
+        }
+      });
+    },
+    // Dynamic import support
+    CallExpression({ node, parent, parentPath }) {
+      /** @todo enable by plugin? */
+      if (node.callee.type !== 'Import') { return; }
+      const { arguments: args, loc } = node;
+      if (args[0].type !== 'StringLiteral') { return; }
+      const source = (args[0] as StringLiteral).value;
+      const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+      if (id) {
+        getPatternNames(id).forEach(({ name, alias }) => {
+          imports.push({
+            alias,
+            name,
+            source,
+            loc
+          });
+        });
+      } else {
+        imports.push({
+          alias: source,
+          name: source,
+          source,
+          loc
+        });
+      }
+    },
+  };
+}",
+      "file": "packages/es-stats/src/visitors/imports.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 2,
+          "start": 2,
+        },
+        Object {
+          "end": 7,
+          "start": 5,
+        },
+        Object {
+          "end": 51,
+          "start": 31,
+        },
+        Object {
+          "end": 54,
+          "start": 53,
+        },
+        Object {
+          "end": 78,
+          "start": 60,
+        },
+      ],
+      "content": "import { Visitor } from '@babel/traverse';
+import { StringLiteral } from '@babel/types';
+import { Import } from \\"ast-lab-types\\";
+import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
+import { MODULE_ALL } from '../constants';
+import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import { ExportSpecifier } from '@babel/types';
+
+export default function createExportVisitors(imports: Import[] = []): Visitor {
+  return {
+    ImportDeclaration({ node }) {
+      const modulePath = node.source.value;
+      node.specifiers.forEach((specifier) => {
+        // @ts-ignore
+        const dep = importSpecifier2Dependents(specifier);
+        if (dep) {
+          const { name, alias } = dep;
+          imports.push({
+            alias,
+            name,
+            source: modulePath,
+            loc: specifier.loc
+          });
+        }
+      });
+    },
+    // Dynamic import support
+    CallExpression({ node, parent, parentPath }) {
+      /** @todo enable by plugin? */
+      const { callee, arguments: args, loc } = node;
+      if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
+        const source = (args[0] as StringLiteral).value;
+        const scopedNaming = (member: string) => \`\${source}#\${member}\`;
+        const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+        if (id && id.type === 'ObjectPattern') {
+          for (let i = id.properties.length; i--;) {
+            const prop = id.properties[i];
+            if (prop.type === 'RestElement' ) {
+              break;
+            }
+            const name = scopedNaming(prop.key.name);
+            imports.push({
+              alias: name,
+              name,
+              source,
+              loc
+            });
+          }
+        }
+        const name = scopedNaming(MODULE_ALL);
+        imports.push({
+          alias: name,
+          name,
+          source,
+          loc
+        });
+      }
+    },
+
+    /**
+     * a hack to include exported named from as dependency
+     * @todo find proper way to do this
+     */
+    ExportNamedDeclaration({ node }) {
+      const { specifiers, source, loc } = node;
+      if (!source || !specifiers.length) { return; }
+      specifiers.forEach(specifier => {
+        const dep = getModuleRefFromExportSpecifier(specifier as ExportSpecifier);
+        if (dep) {
+          imports.push({
+            ...dep,
+            source: source.value,
+            loc
+          });
+        }
+      });
+    },
+  };
+}",
+      "file": "packages/es-stats/src/visitors/imports.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 1,
+          "start": 1,
+        },
+        Object {
+          "end": 8,
+          "start": 8,
+        },
+        Object {
+          "end": 128,
+          "start": 123,
+        },
+      ],
+      "content": "import { VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier } from '@babel/types';
+import { Visitor } from '@babel/traverse';
+import getPatternNames from '../getPatternNames';
+import getDeclarationNames from '../getDeclarationNames';
+import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import { MemberRelation, MemberRef } from 'ast-lab-types';
+import _debug from 'debug';
+import { MODULE_DEFAULT } from '../constants';
+
+const debug = _debug('es-stats:scope');
+
+type Scope = { privates: Set<string>, candidates: string[] };
+
+export default function createRootRelationVisitors(relations: MemberRelation = {}): Visitor {
+  let scope = { privates: new Set(), candidates: [] } as Scope;
+  let parentScopes = [] as Scope[];
+  const addRefsToPrivates = (refs: Array<MemberRef>) => {
+    refs.forEach(({ alias }) => scope.privates.add(alias));
+  };
+  const newScope = () => {
+    parentScopes.push(scope);
+    scope = { privates: new Set(), candidates: [] } as Scope;
+  };
+  const exitScopeHandler = () => {
+    if (parentScopes.length <= 1) return;
+    const { candidates, privates } = scope;
+    const filteredCandidates = candidates.filter(d => !privates.has(d));
+    scope = parentScopes.pop() as Scope;
+    scope.candidates = Array.from(new Set(scope.candidates.concat(filteredCandidates)));
+    return filteredCandidates;
+  };
+
+  return {
+    Function({ node }) {
+      //@ts-ignore
+      const { id, params } = node;
+      if (id) {
+        scope.privates.add(id.name);
+      }
+    },
+    ClassDeclaration({ node }) {
+      if (node.id) {
+        scope.privates.add(node.id.name);
+      }
+    },
+    VariableDeclaration: {
+      enter({ node }) {
+        const refs = getDeclarationNames(node as VariableDeclaration);
+        if (refs) {
+          addRefsToPrivates(refs);
+        }
+        newScope();
+      },
+      exit({ node }) {
+        debug('EXIT-variable scope', parentScopes, scope);
+        const candidates = exitScopeHandler();
+        if (parentScopes.length === 1) {
+          const refs = getDeclarationNames(node as VariableDeclaration);
+          if (refs) {
+            refs.forEach(({ alias }) => {
+              relations[alias] = Array.from(new Set(candidates));
+            });
+          }
+        }
+      },
+    },
+    ExportNamedDeclaration({ node }) {
+      if (node.source) {
+        node.specifiers.forEach(specifier => {
+          const ref = getModuleReffromExportSpecifier(specifier as ExportSpecifier);
+          if (ref && !relations[ref.name]) {
+            relations[ref.name] = [ref.name];
+          }
+        });
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      if (node.declaration.type === 'Identifier') {
+        const { name } = node.declaration;
+        if (!relations[name]) {
+          relations[MODULE_DEFAULT] = [name];
+        }
+      }
+    },
+    Scopable: {
+      enter(p) {
+        if (p.isBlockStatement() && p.parentPath.isFunction()) return;
+        newScope();
+
+        if (p.isFunction()) {
+          const refs = p.node.params
+          .reduce((ret, param) => {
+            return ret.concat(getPatternNames(param as LVal));
+          }, [] as Array<MemberRef>);
+          addRefsToPrivates(refs);
+        } else if (p.isCatchClause()) {
+          addRefsToPrivates(getPatternNames(p.node.param as LVal));
+        }
+      },
+      exit(p) {
+        const { node, parent, parentPath } = p;
+        debug('EXIT-scopable scope', parentScopes, scope);
+        if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
+
+        const candidates = exitScopeHandler();
+        // @ts-ignore 
+        let id = node.id || parent.id;
+        if (parentScopes.length === 1 && id) {
+          /** @todo find more specific declaration affected */
+          getPatternNames(id).forEach(({ alias }) => {
+            relations[alias] = Array.from(new Set(candidates));
+          });
+        }
+      }
+    },
+    VariableDeclarator({ node }) {
+      addRefsToPrivates(getPatternNames((node as VariableDeclarator).id));
+    },
+    ObjectMethod({ node }) {
+      scope.privates.add(node.key.name);
+    },
+    /** @todo handle eval */
+    // CallExpression({ node }) {
+    //   if (node.callee && node.callee.name === 'eval') {
+    //     node.arguments[0].value
+    //   }
+    // },
+    Identifier(p) {
+      const { node, key } = p;
+      let parentPath = p.parentPath;
+      // exclude function/class identifier
+      if (parentPath.isScopable() && key === 'id' || parentPath.isFunction()) {
+        return;
+      }
+      if (
+        // exclude property
+        !p.isProperty() &&
+        key !== 'property' &&
+        !(parentPath.isProperty() && key === 'key')
+      ) {
+        debug('>>>', node);
+        scope.candidates.push(node.name);
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/rootRelation.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 2,
+          "start": 1,
+        },
+        Object {
+          "end": 9,
+          "start": 9,
+        },
+        Object {
+          "end": 135,
+          "start": 124,
+        },
+      ],
+      "content": "import { 
+  VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier, StringLiteral } from '@babel/types';
+import { Visitor } from '@babel/traverse';
+import getPatternNames from '../getPatternNames';
+import getDeclarationNames from '../getDeclarationNames';
+import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
+import { MemberRelation, MemberRef } from 'ast-lab-types';
+import _debug from 'debug';
+import { MODULE_DEFAULT, MODULE_ALL } from '../constants';
+
+const debug = _debug('es-stats:scope');
+
+type Scope = { privates: Set<string>, candidates: string[] };
+
+export default function createRootRelationVisitors(relations: MemberRelation = {}): Visitor {
+  let scope = { privates: new Set(), candidates: [] } as Scope;
+  let parentScopes = [] as Scope[];
+  const addRefsToPrivates = (refs: Array<MemberRef>) => {
+    refs.forEach(({ alias }) => scope.privates.add(alias));
+  };
+  const newScope = () => {
+    parentScopes.push(scope);
+    scope = { privates: new Set(), candidates: [] } as Scope;
+  };
+  const exitScopeHandler = () => {
+    if (parentScopes.length <= 1) return;
+    const { candidates, privates } = scope;
+    const filteredCandidates = candidates.filter(d => !privates.has(d));
+    scope = parentScopes.pop() as Scope;
+    scope.candidates = Array.from(new Set(scope.candidates.concat(filteredCandidates)));
+    return filteredCandidates;
+  };
+
+  return {
+    Function({ node }) {
+      //@ts-ignore
+      const { id, params } = node;
+      if (id) {
+        scope.privates.add(id.name);
+      }
+    },
+    ClassDeclaration({ node }) {
+      if (node.id) {
+        scope.privates.add(node.id.name);
+      }
+    },
+    VariableDeclaration: {
+      enter({ node }) {
+        const refs = getDeclarationNames(node as VariableDeclaration);
+        if (refs) {
+          addRefsToPrivates(refs);
+        }
+        newScope();
+      },
+      exit({ node }) {
+        debug('EXIT-variable scope', parentScopes, scope);
+        const candidates = exitScopeHandler();
+        if (parentScopes.length === 1) {
+          const refs = getDeclarationNames(node as VariableDeclaration);
+          if (refs) {
+            refs.forEach(({ alias }) => {
+              relations[alias] = Array.from(new Set(candidates));
+            });
+          }
+        }
+      },
+    },
+    ExportNamedDeclaration({ node }) {
+      if (node.source) {
+        node.specifiers.forEach(specifier => {
+          const ref = getModuleReffromExportSpecifier(specifier as ExportSpecifier);
+          if (ref && !relations[ref.name]) {
+            relations[ref.name] = [ref.name];
+          }
+        });
+      }
+    },
+    ExportDefaultDeclaration({ node }) {
+      if (node.declaration.type === 'Identifier') {
+        const { name } = node.declaration;
+        if (!relations[name]) {
+          relations[MODULE_DEFAULT] = [name];
+        }
+      }
+    },
+    Scopable: {
+      enter(p) {
+        if (p.isBlockStatement() && p.parentPath.isFunction()) return;
+        newScope();
+
+        if (p.isFunction()) {
+          const refs = p.node.params
+          .reduce((ret, param) => {
+            return ret.concat(getPatternNames(param as LVal));
+          }, [] as Array<MemberRef>);
+          addRefsToPrivates(refs);
+        } else if (p.isCatchClause()) {
+          addRefsToPrivates(getPatternNames(p.node.param as LVal));
+        }
+      },
+      exit(p) {
+        const { node, parent, parentPath } = p;
+        debug('EXIT-scopable scope', parentScopes, scope);
+        if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
+
+        const candidates = exitScopeHandler();
+        // @ts-ignore 
+        let id = node.id || parent.id;
+        if (parentScopes.length === 1 && id) {
+          /** @todo find more specific declaration affected */
+          getPatternNames(id).forEach(({ alias }) => {
+            relations[alias] = Array.from(new Set(candidates));
+          });
+        }
+      }
+    },
+    VariableDeclarator({ node }) {
+      addRefsToPrivates(getPatternNames((node as VariableDeclarator).id));
+    },
+    ObjectMethod({ node }) {
+      scope.privates.add(node.key.name);
+    },
+    CallExpression({ node }) {
+      const { callee, arguments: args } = node;
+      /** @todo handle eval */
+      // if (callee.name === 'eval') {
+      //   args[0].value
+      // }
+
+      // dynamic import
+      if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
+        scope.candidates.push(\`\${(args[0] as StringLiteral).value}#\${MODULE_ALL}\`);
+      }
+    },
+    Identifier(p) {
+      const { node, key } = p;
+      let parentPath = p.parentPath;
+      // exclude function/class identifier
+      if (parentPath.isScopable() && key === 'id' || parentPath.isFunction()) {
+        return;
+      }
+      if (
+        // exclude property
+        !p.isProperty() &&
+        key !== 'property' &&
+        !(parentPath.isProperty() && key === 'key')
+      ) {
+        debug('>>>', node);
+        scope.candidates.push(node.name);
+      }
+    }
+  };
+}",
+      "file": "packages/es-stats/src/visitors/rootRelation.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 18,
+          "start": 18,
+        },
+        Object {
+          "end": 25,
+          "start": 25,
+        },
+        Object {
+          "end": 36,
+          "start": 36,
+        },
+        Object {
+          "end": 45,
+          "start": 45,
+        },
+        Object {
+          "end": 56,
+          "start": 56,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`import visitors exports/exportAllFrom.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefault.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefaultFuncAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefaultValueAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportFunc.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportFuncAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportNamed.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportNamedFrom.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/noExports.js 1\`] = \`Array []\`;
+
+exports[\`import visitors imports/dynamicImport-asyncawait.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"dynamicImport\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 44,
+        \\"line\\": 2,
+      },
+      \\"start\\": Position {
+        \\"column\\": 30,
+        \\"line\\": 2,
+      },
+    },
+    \\"name\\": \\"dynamicImport\\",
+    \\"source\\": \\"./b\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/dynamicImport-then.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"./b\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 16,
+        \\"line\\": 3,
+      },
+      \\"start\\": Position {
+        \\"column\\": 2,
+        \\"line\\": 3,
+      },
+    },
+    \\"name\\": \\"./b\\",
+    \\"source\\": \\"./b\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importAlias.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"b\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 15,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 9,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"a\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importAll.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"base\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 16,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"*\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importCss.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"styles\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 13,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"default\\",
+    \\"source\\": \\"../nonjs/style.css\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importDefault.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"base\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 11,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"default\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importNamed.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"a\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 10,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 9,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"a\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/noImports.js 1\`] = \`Array []\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.imports.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 36,
+          "start": 18,
+        },
+        Object {
+          "end": 43,
+          "start": 43,
+        },
+        Object {
+          "end": 54,
+          "start": 54,
+        },
+        Object {
+          "end": 63,
+          "start": 63,
+        },
+        Object {
+          "end": 74,
+          "start": 74,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`import visitors exports/exportAllFrom.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefault.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefaultFuncAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportDefaultValueAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportFunc.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportFuncAlias.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportNamed.js 1\`] = \`Array []\`;
+
+exports[\`import visitors exports/exportNamedFrom.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"a\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 34,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 0,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"a\\",
+    \\"source\\": \\"./exportNamed\\",
+  },
+]
+\`;
+
+exports[\`import visitors exports/noExports.js 1\`] = \`Array []\`;
+
+exports[\`import visitors imports/dynamicImport-asyncawait.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"./b#*\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 44,
+        \\"line\\": 2,
+      },
+      \\"start\\": Position {
+        \\"column\\": 30,
+        \\"line\\": 2,
+      },
+    },
+    \\"name\\": \\"./b#*\\",
+    \\"source\\": \\"./b\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/dynamicImport-then.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"./b#*\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 16,
+        \\"line\\": 3,
+      },
+      \\"start\\": Position {
+        \\"column\\": 2,
+        \\"line\\": 3,
+      },
+    },
+    \\"name\\": \\"./b#*\\",
+    \\"source\\": \\"./b\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importAlias.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"b\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 15,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 9,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"a\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importAll.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"base\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 16,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"*\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importCss.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"styles\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 13,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"default\\",
+    \\"source\\": \\"../nonjs/style.css\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importDefault.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"base\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 11,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 7,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"default\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/importNamed.js 1\`] = \`
+Array [
+  Object {
+    \\"alias\\": \\"a\\",
+    \\"loc\\": SourceLocation {
+      \\"end\\": Position {
+        \\"column\\": 10,
+        \\"line\\": 1,
+      },
+      \\"start\\": Position {
+        \\"column\\": 9,
+        \\"line\\": 1,
+      },
+    },
+    \\"name\\": \\"a\\",
+    \\"source\\": \\"./base\\",
+  },
+]
+\`;
+
+exports[\`import visitors imports/noImports.js 1\`] = \`Array []\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.imports.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 58,
+          "start": 58,
+        },
+        Object {
+          "end": 64,
+          "start": 64,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`rootRelation visitors exports/exportAllFrom.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors exports/exportDefault.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportDefaultFuncAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportDefaultValueAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportFunc.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportFuncAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportNamed.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportNamedFrom.js 1\`] = \`
+Object {
+  \\"a\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors exports/noExports.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors imports/dynamicImport-asyncawait.js 1\`] = \`
+Object {
+  \\"func\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors imports/dynamicImport-then.js 1\`] = \`
+Object {
+  \\"func\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors imports/importAlias.js 1\`] = \`
+Object {
+  \\"c\\": Array [
+    \\"b\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors imports/importAll.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importCss.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importDefault.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importNamed.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/noImports.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/arrowfunction.js 1\`] = \`
+Object {
+  \\"DEFAULT\\": Array [],
+  \\"a\\": Array [],
+  \\"arrow\\": Array [
+    \\"a\\",
+    \\"DEFAULT\\",
+    \\"b\\",
+  ],
+  \\"b\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/asyncFunction.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"asyncFunc\\": Array [
+    \\"a\\",
+  ],
+  \\"b\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/class.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"c\\": Array [
+    \\"b\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/constant.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"exportArray\\": Array [
+    \\"a\\",
+  ],
+  \\"exportArrayMember\\": Array [
+    \\"exportArray\\",
+  ],
+  \\"exportConstant\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObject\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObject2\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObjectMember\\": Array [
+    \\"exportObject\\",
+  ],
+  \\"exportRestArray\\": Array [
+    \\"exportArray\\",
+  ],
+  \\"exportRestObject\\": Array [
+    \\"exportObject\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/eval.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"eval\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/forloop.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"b\\",
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function-argsObjectAssign.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function-argsSpread.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/generator.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/ifelse.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/importExport.js 1\`] = \`
+Object {
+  \\"default\\": Array [
+    \\"im\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/switch.js 1\`] = \`
+Object {
+  \\"TYPES\\": Array [],
+  \\"func\\": Array [
+    \\"type\\",
+    \\"TYPES\\",
+    \\"v1\\",
+  ],
+  \\"type\\": Array [],
+  \\"v1\\": Array [],
+  \\"v2\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/template.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/trycatch.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"console\\",
+    \\"a\\",
+  ],
+}
+\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.scopes.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 60,
+          "start": 58,
+        },
+        Object {
+          "end": 68,
+          "start": 66,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`rootRelation visitors exports/exportAllFrom.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors exports/exportDefault.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportDefaultFuncAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportDefaultValueAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportFunc.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportFuncAlias.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportNamed.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors exports/exportNamedFrom.js 1\`] = \`
+Object {
+  \\"a\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors exports/noExports.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors imports/dynamicImport-asyncawait.js 1\`] = \`
+Object {
+  \\"func\\": Array [
+    \\"./b#*\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors imports/dynamicImport-then.js 1\`] = \`
+Object {
+  \\"func\\": Array [
+    \\"./b#*\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors imports/importAlias.js 1\`] = \`
+Object {
+  \\"c\\": Array [
+    \\"b\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors imports/importAll.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importCss.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importDefault.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/importNamed.js 1\`] = \`Object {}\`;
+
+exports[\`rootRelation visitors imports/noImports.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/arrowfunction.js 1\`] = \`
+Object {
+  \\"DEFAULT\\": Array [],
+  \\"a\\": Array [],
+  \\"arrow\\": Array [
+    \\"a\\",
+    \\"DEFAULT\\",
+    \\"b\\",
+  ],
+  \\"b\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/asyncFunction.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"asyncFunc\\": Array [
+    \\"a\\",
+  ],
+  \\"b\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/class.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"c\\": Array [
+    \\"b\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/constant.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"exportArray\\": Array [
+    \\"a\\",
+  ],
+  \\"exportArrayMember\\": Array [
+    \\"exportArray\\",
+  ],
+  \\"exportConstant\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObject\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObject2\\": Array [
+    \\"a\\",
+  ],
+  \\"exportObjectMember\\": Array [
+    \\"exportObject\\",
+  ],
+  \\"exportRestArray\\": Array [
+    \\"exportArray\\",
+  ],
+  \\"exportRestObject\\": Array [
+    \\"exportObject\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/eval.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"eval\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/forloop.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"b\\",
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function-argsObjectAssign.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/function-argsSpread.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/generator.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/ifelse.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/importExport.js 1\`] = \`
+Object {
+  \\"default\\": Array [
+    \\"im\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/switch.js 1\`] = \`
+Object {
+  \\"TYPES\\": Array [],
+  \\"func\\": Array [
+    \\"type\\",
+    \\"TYPES\\",
+    \\"v1\\",
+  ],
+  \\"type\\": Array [],
+  \\"v1\\": Array [],
+  \\"v2\\": Array [],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/template.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"func\\": Array [
+    \\"a\\",
+  ],
+}
+\`;
+
+exports[\`rootRelation visitors scopes/trycatch.js 1\`] = \`
+Object {
+  \\"a\\": Array [],
+  \\"b\\": Array [],
+  \\"func\\": Array [
+    \\"console\\",
+    \\"a\\",
+  ],
+}
+\`;",
+      "file": "packages/es-stats/test/__snapshots__/visitor.scopes.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 8,
+          "start": 8,
+        },
+        Object {
+          "end": 58,
+          "start": 58,
+        },
+        Object {
+          "end": 95,
+          "start": 95,
+        },
+      ],
+      "content": "import fs from 'fs';
+import ecmaStats from 'es-stats';
+import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import _debug from 'debug';
+import { MODULE_ALL } from './constants';
+
+const debug = _debug('get-dependencies:file');
+
+function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
+  const affected  = depMap.get(mod) || new Map() as AffectedMap;
+  if (!depMap.has(mod)) {
+    depMap.set(mod, affected);
+  }
+  affected.set(member, entry);
+}
+
+/**
+ * Get a file's dependency map
+ * @param filePath {string} Absolute file path
+ * @param options {object}
+ * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
+ * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
+ * @return {Promise<DependencyMap>}
+ */
+export default async function fileDepMap(filePath: string, { loader, parserOptions }: Options = {}): Promise<DependencyMap> {
+  const depMap = new Map() as DependencyMap;
+  const _loader = loader || ((_filePath: string) => Promise.resolve(fs.readFileSync(_filePath, 'utf8')));
+  let file;
+  try {
+    file = await _loader(filePath);
+    if (!file) {
+      console.warn(\`\${filePath} is empty!\`);
+      return depMap;
+    }
+  } catch(e) {
+    console.warn(\`Failed to load file \${filePath}!\`);
+    return depMap;
+  }
+  let fileStats;
+  try { 
+    fileStats = ecmaStats(file, parserOptions);
+  } catch(e) {
+    console.warn(\`@bable/parser parsing \${filePath} failed!\`);
+    console.trace();
+    console.warn(e);
+    console.warn('Parser options:', parserOptions, 'File content:');
+    console.warn(file);
+    return depMap;
+  }
+  const { imports: target, exports: entry, relations } = fileStats;
+  debug('>>> ', filePath);
+  debug('imports:', target);
+  debug('exports:', entry);
+  debug('relations:', relations);
+  
+  const targetIndex = {} as { [key: string]: Import };
+
+  target.forEach((ref) => {
+    const { name, source, alias } = ref;
+    targetIndex[alias] = ref;
+    updateDependencyMap(depMap, source, name, [] as Entry[]);
+  });
+
+  if (entry.extends) {
+    entry.extends.forEach((source) => {
+      updateDependencyMap(depMap, source, MODULE_ALL, [{
+        name: MODULE_ALL,
+        source: filePath
+      }]);
+    })
+  }
+
+  debug('targetIndex:', targetIndex);
+  debug('depMap initialized:', depMap);
+
+  entry.members.forEach(({ name, alias }) => {
+    const dependents = new Set() as Set<Import>;
+    let dependsOn = relations[name];
+    const toClear = new Set() as Set<string>;
+    if (dependsOn) {
+      dependsOn.forEach(dependent => {
+        const importRef = targetIndex[dependent];
+        if (importRef) {
+          dependents.add(importRef);
+        } else if (relations[dependent]) {
+          dependsOn = dependsOn.concat(relations[dependent]);
+          toClear.add(dependent);
+        }
+      });
+      /** @todo verify whether this helps for performance */
+      relations[name] = dependsOn.filter(name => !toClear.has(name));
+    }
+    dependents.forEach(importRef => {
+      debug('importRef > ', importRef);
+      const affectedMap = depMap.get(importRef.source);
+      const entries = affectedMap && affectedMap.get(importRef.name);
+      if (entries) {
+        entries.push({
+          name: alias,
+          source: filePath
+        });
+      }
+    });
+  });
+
+  return depMap;
+}",
+      "file": "packages/hunt-affected/src/fileDepMap.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 9,
+          "start": 8,
+        },
+        Object {
+          "end": 58,
+          "start": 58,
+        },
+        Object {
+          "end": 66,
+          "start": 64,
+        },
+        Object {
+          "end": 98,
+          "start": 98,
+        },
+        Object {
+          "end": 100,
+          "start": 100,
+        },
+        Object {
+          "end": 123,
+          "start": 110,
+        },
+        Object {
+          "end": 125,
+          "start": 125,
+        },
+      ],
+      "content": "import fs from 'fs';
+import ecmaStats from 'es-stats';
+import { Module, Member, Entry, Import, DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import _debug from 'debug';
+import { MODULE_ALL } from './constants';
+
+const debug = _debug('hunt-affected:file');
+const dynamicImportReg = /[^#]+#/;
+
+function updateDependencyMap(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
+  const affected  = depMap.get(mod) || new Map() as AffectedMap;
+  if (!depMap.has(mod)) {
+    depMap.set(mod, affected);
+  }
+  affected.set(member, entry);
+}
+
+/**
+ * Get a file's dependency map
+ * @param filePath {string} Absolute file path
+ * @param options {object}
+ * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
+ * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
+ * @return {Promise<DependencyMap>}
+ */
+export default async function fileDepMap(filePath: string, { loader, parserOptions }: Options = {}): Promise<DependencyMap> {
+  const depMap = new Map() as DependencyMap;
+  const _loader = loader || ((_filePath: string) => Promise.resolve(fs.readFileSync(_filePath, 'utf8')));
+  let file;
+  try {
+    file = await _loader(filePath);
+    if (!file) {
+      console.warn(\`\${filePath} is empty!\`);
+      return depMap;
+    }
+  } catch(e) {
+    console.warn(\`Failed to load file \${filePath}!\`);
+    return depMap;
+  }
+  let fileStats;
+  try { 
+    fileStats = ecmaStats(file, parserOptions);
+  } catch(e) {
+    console.warn(\`@bable/parser parsing \${filePath} failed!\`);
+    console.trace();
+    console.warn(e);
+    console.warn('Parser options:', parserOptions, 'File content:');
+    console.warn(file);
+    return depMap;
+  }
+  const { imports: target, exports: entry, relations } = fileStats;
+  debug('>>> ', filePath);
+  debug('imports:', target);
+  debug('exports:', entry);
+  debug('relations:', relations);
+  
+  const dynamicImportRenameQueue = [] as Array<Import>;
+  const targetIndex = {} as { [key: string]: Import };
+  target.forEach((ref) => {
+    const { name, source, alias } = ref;
+    targetIndex[alias] = ref;
+    updateDependencyMap(depMap, source, name, [] as Entry[]);
+    if (dynamicImportReg.test(name)) {
+      dynamicImportRenameQueue.push(ref);
+    }
+  });
+
+  if (entry.extends) {
+    entry.extends.forEach((source) => {
+      updateDependencyMap(depMap, source, MODULE_ALL, [{
+        name: MODULE_ALL,
+        source: filePath
+      }]);
+    })
+  }
+
+  debug('targetIndex:', targetIndex);
+  debug('depMap initialized:', depMap);
+
+  entry.members.forEach(({ name, alias }) => {
+    const dependents = new Set() as Set<Import>;
+    let dependsOn = relations[name];
+    const toClear = new Set() as Set<string>;
+    if (dependsOn) {
+      dependsOn.forEach(dependent => {
+        const importRef = targetIndex[dependent];
+        if (importRef) {
+          dependents.add(importRef);
+        } else if (relations[dependent]) {
+          dependsOn = dependsOn.concat(relations[dependent]);
+          toClear.add(dependent);
+        }
+      });
+      /** @todo verify whether this helps for performance */
+      relations[name] = dependsOn.filter(name => !toClear.has(name));
+    }
+
+    dependents.forEach(importRef => {
+      debug('importRef: ', importRef);
+      const affectedMap = depMap.get(importRef.source);
+      const entries = affectedMap && affectedMap.get(importRef.name);
+      if (entries) {
+        entries.push({
+          name: alias,
+          source: filePath
+        });
+      }
+    });
+
+    dynamicImportRenameQueue.forEach(({ source, name }) => {
+      const affectedMap = depMap.get(source);
+      const entries = affectedMap && affectedMap.get(name);
+      if (!affectedMap || !entries) { return; }
+      const renameTo = name.replace(dynamicImportReg, '');
+      affectedMap.set(
+        renameTo, 
+        affectedMap.get(renameTo) ? 
+          (affectedMap.get(renameTo) as Entry[]).concat(entries) : 
+          entries
+      );
+      affectedMap.delete(name);
+    });
+  });
+  debug(depMap);
+
+  return depMap;
+}",
+      "file": "packages/hunt-affected/src/fileDepMap.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 9,
+          "start": 9,
+        },
+      ],
+      "content": "import path from 'path';
+import enhancedResolve from 'enhanced-resolve';
+import _debug from 'debug';
+import denodeify from './denodeify';
+import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import fileDepMap from './fileDepMap';
+
+const debug = _debug('get-dependencies:merge');
+const core = new Set(require('module').builtinModules);
+/**
+ * 
+ * @param sources {string[]}
+ * @param opts {object}
+ * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
+ * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
+ * @return {Promise<DependencyMap>}
+ */
+export default async function mergeDepMap(sources: string[], opts: Options = {}) {
+  const srcSet = new Set(sources);
+  const depMap = new Map() as DependencyMap;
+  const resolver = opts.resolver || denodeify(enhancedResolve);
+
+  const fileHandlers = [] as Array<Promise<any>>;
+  sources.forEach((src) => {
+    fileHandlers.push((async () => {
+      const fileDependencyMap = await fileDepMap(src, opts);
+      debug('processing >', src);
+      const depMapHandlers = [] as Array<Promise<any>>;
+      fileDependencyMap.forEach((memberDeps, modRelativePath) => {
+        depMapHandlers.push((async () => {
+          const baseDir = path.dirname(src);
+          let modPath = '';
+          if (core.has(modRelativePath)) {
+            modPath = modRelativePath;
+          } else {
+            try {
+              modPath = await resolver(baseDir, modRelativePath) || '';
+            } catch (e) {
+              // do nothing
+            }
+            if (!modPath) {
+              console.warn(\`Could not solve \${modRelativePath} from \${src}.\`);
+              modPath = modRelativePath;
+            } else if(/node_modules\\\\//.test(modPath)) {
+              modPath = modRelativePath;
+            }
+          }
+          if(/\\\\.\\\\w+$/.test(modRelativePath)) {
+            modPath = path.resolve(baseDir, modRelativePath);
+          }
+          const affectedMap = depMap.get(modPath) as AffectedMap;
+          if (affectedMap) {
+            memberDeps.forEach((entries, member) => {
+              const affected = affectedMap.get(member);
+              affectedMap.set(member, affected ? affected.concat(entries) : entries);
+            });
+          } else if (srcSet.has(modPath)) {
+            depMap.set(modPath, memberDeps);
+          }
+        })());
+      });
+      await Promise.all(depMapHandlers);
+    })());
+  });
+  await Promise.all(fileHandlers);
+  return depMap;
+}",
+      "file": "packages/hunt-affected/src/mergeDepMap.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 9,
+          "start": 9,
+        },
+      ],
+      "content": "import path from 'path';
+import enhancedResolve from 'enhanced-resolve';
+import _debug from 'debug';
+import denodeify from './denodeify';
+import { DependencyMap, AffectedMap, Options } from 'ast-lab-types';
+import fileDepMap from './fileDepMap';
+
+const debug = _debug('hunt-affected:merge');
+const core = new Set(require('module').builtinModules);
+/**
+ * 
+ * @param sources {string[]}
+ * @param opts {object}
+ * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
+ * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
+ * @return {Promise<DependencyMap>}
+ */
+export default async function mergeDepMap(sources: string[], opts: Options = {}) {
+  const srcSet = new Set(sources);
+  const depMap = new Map() as DependencyMap;
+  const resolver = opts.resolver || denodeify(enhancedResolve);
+
+  const fileHandlers = [] as Array<Promise<any>>;
+  sources.forEach((src) => {
+    fileHandlers.push((async () => {
+      const fileDependencyMap = await fileDepMap(src, opts);
+      debug('processing >', src);
+      const depMapHandlers = [] as Array<Promise<any>>;
+      fileDependencyMap.forEach((memberDeps, modRelativePath) => {
+        depMapHandlers.push((async () => {
+          const baseDir = path.dirname(src);
+          let modPath = '';
+          if (core.has(modRelativePath)) {
+            modPath = modRelativePath;
+          } else {
+            try {
+              modPath = await resolver(baseDir, modRelativePath) || '';
+            } catch (e) {
+              // do nothing
+            }
+            if (!modPath) {
+              console.warn(\`Could not solve \${modRelativePath} from \${src}.\`);
+              modPath = modRelativePath;
+            } else if(/node_modules\\\\//.test(modPath)) {
+              modPath = modRelativePath;
+            }
+          }
+          if(/\\\\.\\\\w+$/.test(modRelativePath)) {
+            modPath = path.resolve(baseDir, modRelativePath);
+          }
+          const affectedMap = depMap.get(modPath) as AffectedMap;
+          if (affectedMap) {
+            memberDeps.forEach((entries, member) => {
+              const affected = affectedMap.get(member);
+              affectedMap.set(member, affected ? affected.concat(entries) : entries);
+            });
+          } else if (srcSet.has(modPath)) {
+            depMap.set(modPath, memberDeps);
+          }
+        })());
+      });
+      await Promise.all(depMapHandlers);
+    })());
+  });
+  await Promise.all(fileHandlers);
+  return depMap;
+}",
+      "file": "packages/hunt-affected/src/mergeDepMap.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 4,
+          "start": 4,
+        },
+      ],
+      "content": "import { DependencyMap, Entry, Member } from \\"ast-lab-types\\";
+import _debug from 'debug';
+
+const debug = _debug('get-dependencies:visit');
+
+export type Visited = { [module: string]: Set<Member> };
+
+export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
+  const visited = {} as Visited;
+  let entryQueue = entries;
+  debug('visit entries:', entries);
+  while(entryQueue.length) {
+    const { source: mod, name } = entryQueue.shift() as Entry;
+    let modVisited = visited[mod];
+    if (!modVisited) {
+      modVisited = visited[mod] = new Set();
+    }
+    const affected = dependencyMap.get(mod);
+    debug(\`\${mod} affects\`, affected);
+    if (affected && !modVisited.has(name)) {
+      modVisited.add(name);
+      const affectedEntries = affected.get(name);
+      debug('current queue:', entryQueue);
+      debug('new to queue:', affectedEntries);
+      if (affectedEntries && affectedEntries.length) {
+        entryQueue = entryQueue.concat(affectedEntries);
+      }
+    }
+  }
+  return visited;
+}",
+      "file": "packages/hunt-affected/src/visitDepMap.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 4,
+          "start": 4,
+        },
+      ],
+      "content": "import { DependencyMap, Entry, Member } from \\"ast-lab-types\\";
+import _debug from 'debug';
+
+const debug = _debug('hunt-affected:visit');
+
+export type Visited = { [module: string]: Set<Member> };
+
+export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
+  const visited = {} as Visited;
+  let entryQueue = entries;
+  debug('visit entries:', entries);
+  while(entryQueue.length) {
+    const { source: mod, name } = entryQueue.shift() as Entry;
+    let modVisited = visited[mod];
+    if (!modVisited) {
+      modVisited = visited[mod] = new Set();
+    }
+    const affected = dependencyMap.get(mod);
+    debug(\`\${mod} affects\`, affected);
+    if (affected && !modVisited.has(name)) {
+      modVisited.add(name);
+      const affectedEntries = affected.get(name);
+      debug('current queue:', entryQueue);
+      debug('new to queue:', affectedEntries);
+      if (affectedEntries && affectedEntries.length) {
+        entryQueue = entryQueue.concat(affectedEntries);
+      }
+    }
+  }
+  return visited;
+}",
+      "file": "packages/hunt-affected/src/visitDepMap.ts",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 6,
+          "start": 6,
+        },
+        Object {
+          "end": 11,
+          "start": 11,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`fileDepMap() dynamicImport-asyncawait.js 1\`] = \`
+Map {
+  \\"./importAll\\" => Map {
+    \\"b\\" => Array [],
+  },
+}
+\`;
+
+exports[\`fileDepMap() dynamicImport-then.js 1\`] = \`Map {}\`;
+
+exports[\`fileDepMap() importAlias.js 1\`] = \`
+Map {
+  \\"./importNamed\\" => Map {
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"c\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importAll.js 1\`] = \`
+Map {
+  \\"./importDefault\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importCss.js 1\`] = \`
+Map {
+  \\"../nonjs/style.css\\" => Map {
+    \\"default\\" => Array [],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importDefault.js 1\`] = \`
+Map {
+  \\"enhanced-resolve\\" => Map {
+    \\"default\\" => Array [
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importDefault.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importDefault.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importNamed.js 1\`] = \`
+Map {
+  \\"enhanced-resolve\\" => Map {
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importNamed.js\\",
+      },
+    ],
+  },
+}
+\`;",
+      "file": "packages/hunt-affected/test/__snapshots__/fileDepMap-imports.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 7,
+          "start": 5,
+        },
+        Object {
+          "end": 14,
+          "start": 9,
+        },
+        Object {
+          "end": 30,
+          "start": 19,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`fileDepMap() dynamicImport-asyncawait.js 1\`] = \`
+Map {
+  \\"./importNamed\\" => Map {
+    \\"*\\" => Array [],
+  },
+  \\"./importAll\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/dynamicImport-asyncawait.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() dynamicImport-then.js 1\`] = \`
+Map {
+  \\"./importDefault\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/dynamicImport-then.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importAlias.js 1\`] = \`
+Map {
+  \\"./importNamed\\" => Map {
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"c\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importAll.js 1\`] = \`
+Map {
+  \\"./importDefault\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importCss.js 1\`] = \`
+Map {
+  \\"../nonjs/style.css\\" => Map {
+    \\"default\\" => Array [],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importDefault.js 1\`] = \`
+Map {
+  \\"enhanced-resolve\\" => Map {
+    \\"default\\" => Array [
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importDefault.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importDefault.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`fileDepMap() importNamed.js 1\`] = \`
+Map {
+  \\"enhanced-resolve\\" => Map {
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importNamed.js\\",
+      },
+    ],
+  },
+}
+\`;",
+      "file": "packages/hunt-affected/test/__snapshots__/fileDepMap-imports.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 31,
+          "start": 29,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`mergeDepMap() exports 1\`] = \`
+Map {
+  \\"exports/exportNamed.js\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"*\\",
+        \\"source\\": \\"exports/exportAllFrom.js\\",
+      },
+    ],
+    \\"a\\" => Array [
+      Object {
+        \\"name\\": \\"default\\",
+        \\"source\\": \\"exports/exportDefault.js\\",
+      },
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"exports/exportNamedFrom.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`mergeDepMap() imports 1\`] = \`
+Map {
+  \\"imports/importAll.js\\" => Map {
+    \\"b\\" => Array [],
+  },
+  \\"imports/importNamed.js\\" => Map {
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"c\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+    ],
+  },
+  \\"imports/importDefault.js\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+    ],
+  },
+}
+\`;",
+      "file": "packages/hunt-affected/test/__snapshots__/mergeDepMap.test.ts.snap",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 30,
+          "start": 30,
+        },
+        Object {
+          "end": 49,
+          "start": 42,
+        },
+        Object {
+          "end": 55,
+          "start": 52,
+        },
+      ],
+      "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[\`mergeDepMap() exports 1\`] = \`
+Map {
+  \\"exports/exportNamed.js\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"*\\",
+        \\"source\\": \\"exports/exportAllFrom.js\\",
+      },
+    ],
+    \\"a\\" => Array [
+      Object {
+        \\"name\\": \\"default\\",
+        \\"source\\": \\"exports/exportDefault.js\\",
+      },
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"exports/exportNamedFrom.js\\",
+      },
+    ],
+  },
+}
+\`;
+
+exports[\`mergeDepMap() imports 1\`] = \`
+Map {
+  \\"imports/importNamed.js\\" => Map {
+    \\"*\\" => Array [],
+    \\"resolveFactory\\" => Array [
+      Object {
+        \\"name\\": \\"c\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAlias.js\\",
+      },
+    ],
+  },
+  \\"imports/importAll.js\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/dynamicImport-asyncawait.js\\",
+      },
+    ],
+  },
+  \\"imports/importDefault.js\\" => Map {
+    \\"*\\" => Array [
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/dynamicImport-then.js\\",
+      },
+      Object {
+        \\"name\\": \\"a\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+      Object {
+        \\"name\\": \\"func\\",
+        \\"source\\": \\"imports/importAll.js\\",
+      },
+    ],
+  },
+}
+\`;",
+      "file": "packages/hunt-affected/test/__snapshots__/mergeDepMap.test.ts.snap",
+    },
+  },
+  Object {
+    "operation": 0,
+    "source": Object {
+      "changed": Array [
+        Object {
+          "end": 8,
+          "start": 8,
+        },
+      ],
+      "content": "import fs from 'fs';
+import path from 'path';
+import _debug from 'debug';
+import mergeDepMap from '../src/mergeDepMap';
+import { relativeDepMap } from './util';
+
+const debug = _debug('get-dependencies:test');
+const tests = [
+  'exports',
+  'imports'
+]
+describe('mergeDepMap()', () => {
+  tests.forEach(_dir => {
+    const dir = path.resolve(__dirname, '__fixtures__', _dir);
+    const sources = fs.readdirSync(dir);
+    test(_dir, async () => {
+      debug(_dir);
+      const res = await mergeDepMap(
+        sources.map(src => path.resolve(dir, src)),
+        {
+          parserOptions: {
+            plugins: ['dynamicImport']
+          }
+        }
+      );
+      expect(relativeDepMap(res)).toMatchSnapshot();
+    });
+  });
+});",
+      "file": "packages/hunt-affected/test/mergeDepMap.test.ts",
+    },
+    "target": Object {
+      "changed": Array [
+        Object {
+          "end": 8,
+          "start": 8,
+        },
+      ],
+      "content": "import fs from 'fs';
+import path from 'path';
+import _debug from 'debug';
+import mergeDepMap from '../src/mergeDepMap';
+import { relativeDepMap } from './util';
+
+const debug = _debug('hunt-affected:test');
+const tests = [
+  'exports',
+  'imports'
+]
+describe('mergeDepMap()', () => {
+  tests.forEach(_dir => {
+    const dir = path.resolve(__dirname, '__fixtures__', _dir);
+    const sources = fs.readdirSync(dir);
+    test(_dir, async () => {
+      debug(_dir);
+      const res = await mergeDepMap(
+        sources.map(src => path.resolve(dir, src)),
+        {
+          parserOptions: {
+            plugins: ['dynamicImport']
+          }
+        }
+      );
+      expect(relativeDepMap(res)).toMatchSnapshot();
+    });
+  });
+});",
+      "file": "packages/hunt-affected/test/mergeDepMap.test.ts",
+    },
+  },
+]
+`;
+
 exports[`getGitDiffs 7037cc7c2229d424df63cdbd0981463d1801c697 1`] = `
 Array [
   Object {
@@ -258,7 +2906,12 @@ Array [
       "file": "packages/es-stats/src/index.ts",
     },
     "target": Object {
-      "changed": Array [],
+      "changed": Array [
+        Object {
+          "end": 4,
+          "start": 1,
+        },
+      ],
       "content": "export { default as createExportVisitors } from './visitors/exports';
 export { default as createImportVisitors } from './visitors/imports';
 export { default as createRootRelationVisitors } from './visitors/rootRelation';
