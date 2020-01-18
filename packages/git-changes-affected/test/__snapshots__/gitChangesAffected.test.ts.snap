@@ -2,8 +2,19 @@
 
 exports[`gitChangesAffected can work 1`] = `
 Object {
-  "packages/es-stats/src/index.ts": Set {},
-  "packages/es-stats/src/visitors/exports.ts": Set {},
+  "packages/es-stats/src/getStats.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/index.ts": Set {
+    "default",
+    "createExportVisitors",
+    "createImportVisitors",
+    "createRootRelationVisitors",
+    "mergeVisitors",
+  },
+  "packages/es-stats/src/visitors/exports.ts": Set {
+    "default",
+  },
 }
 `;
 
@@ -15,13 +26,18 @@ Object {
   "packages/es-stats/src/fileStats.ts": Set {
     "default",
   },
+  "packages/es-stats/src/getDeclarationNames.ts": Set {
+    "default",
+  },
+  "packages/es-stats/src/getPatternNames.ts": Set {
+    "default",
+  },
   "packages/es-stats/src/index.ts": Set {
     "createExportVisitors",
     "createImportVisitors",
     "createRootRelationVisitors",
-    "mergeVisitors",
-    "extractStats",
     "getPrivateMemberNames",
+    "extractStats",
     "default",
   },
   "packages/es-stats/src/visitors/exports.ts": Set {

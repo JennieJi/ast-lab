@@ -17,6 +17,7 @@ const core = new Set(require('module').builtinModules);
  * @return {Promise<DependencyMap>}
  */
 export default async function mergeDepMap(sources: string[], opts: Options = {}) {
+  debug('===');
   const srcSet = new Set(sources);
   const depMap = new Map() as DependencyMap;
   const resolver = opts.resolver || denodeify(enhancedResolve);
@@ -54,7 +55,7 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
               appendEntries(depMap, modPath, member, entries);
             });
           } else if (srcSet.has(modPath)) {
-            debug(`${src} > ${modPath} add new`);
+            debug(`${src} > ${modPath} add new: ${JSON.stringify(Array.from(memberDeps.entries()))}`);
             depMap.set(modPath, memberDeps);
           } else {
             debug(`${src} > ${modPath} depMap not added!`);

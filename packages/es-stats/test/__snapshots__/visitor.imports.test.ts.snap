@@ -33,6 +33,21 @@ Array [
     "name": "a",
     "source": "./exportNamed",
   },
+  Object {
+    "alias": "b",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 45,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+    "name": "default",
+    "source": "./exportNamed",
+  },
 ]
 `;
 

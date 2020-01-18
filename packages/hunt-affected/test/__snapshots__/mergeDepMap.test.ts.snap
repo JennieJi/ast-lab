@@ -23,9 +23,16 @@ Map {
         "source": "exports/exportAllFrom.js",
       },
     ],
+    "default" => Array [
+      Object {
+        "name": "b",
+        "source": "exports/exportNamedFrom.js",
+      },
+    ],
   },
   "exports/exportNamedFrom.js" => Map {
     "a" => Array [],
+    "b" => Array [],
   },
 }
 `;
@@ -84,7 +91,12 @@ Map {
       },
     ],
     "func" => Array [],
-    "default" => Array [],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
   },
 }
 `;

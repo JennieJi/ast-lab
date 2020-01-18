@@ -67,23 +67,26 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
   debug('targetIndex:', targetIndex);
   debug('depMap initialized:', depMap);
 
-  entry.members.forEach(({ name, alias }) => {
+  entry.members.forEach(({ alias }) => {
     const dependents = new Set() as Set<Import>;
-    let dependsOn = relations[name];
-    const toClear = new Set() as Set<string>;
+    let dependsOn = relations[alias];
     if (dependsOn) {
-      dependsOn.forEach(dependent => {
-        const importRef = targetIndex[dependent];
-        if (importRef) {
-          dependents.add(importRef);
-        } else if (relations[dependent]) {
-          dependsOn = dependsOn.concat(relations[dependent]);
-          toClear.add(dependent);
-        }
-      });
-      /** @todo verify whether this helps for performance */
-      relations[name] = dependsOn.filter(name => !toClear.has(name));
+      dependsOn.push(alias);
+    } else {
+      dependsOn = [alias];
     }
+    const toClear = new Set() as Set<string>;
+    dependsOn.forEach(dependent => {
+      const importRef = targetIndex[dependent];
+      if (importRef) {
+        dependents.add(importRef);
+      } else if (relations[dependent]) {
+        dependsOn = dependsOn.concat(relations[dependent]);
+        toClear.add(dependent);
+      }
+    });
+    /** @todo verify whether this helps for performance */
+    relations[alias] = dependsOn.filter(name => !toClear.has(name));
 
     dependents.forEach(importRef => {
       debug('importRef: ', importRef);
@@ -107,7 +110,7 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
     // Add its own exports to the depMap
     appendEntries(depMap, filePath, alias, []);
   });
-  debug(depMap);
+  debug('depMap', depMap);
 
   return depMap;
 }
