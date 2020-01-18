@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fileDepMap() exportAllFrom.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "*" => Array [
+      Object {
+        "name": "*",
+        "source": "exports/exportAllFrom.js",
+      },
+    ],
+  },
+}
+`;
+
+exports[`fileDepMap() exportDefault.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "a" => Array [
+      Object {
+        "name": "default",
+        "source": "exports/exportDefault.js",
+      },
+    ],
+  },
+  "exports/exportDefault.js" => Map {
+    "default" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() exportNamed.js 1`] = `
+Map {
+  "fs" => Map {
+    "default" => Array [
+      Object {
+        "name": "readFile",
+        "source": "exports/exportNamed.js",
+      },
+    ],
+  },
+  "exports/exportNamed.js" => Map {
+    "a" => Array [],
+    "readFile" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() exportNamedFrom.js 1`] = `
+Map {
+  "./exportNamed" => Map {
+    "a" => Array [
+      Object {
+        "name": "a",
+        "source": "exports/exportNamedFrom.js",
+      },
+    ],
+    "default" => Array [
+      Object {
+        "name": "b",
+        "source": "exports/exportNamedFrom.js",
+      },
+    ],
+  },
+  "exports/exportNamedFrom.js" => Map {
+    "a" => Array [],
+    "b" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() noExports.js 1`] = `Map {}`;

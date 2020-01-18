@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`export visitors exportAllFrom.js 1`] = `
+Object {
+  "extends": Array [
+    "./exportNamed",
+  ],
+  "members": Array [],
+}
+`;
+
+exports[`export visitors exportDefault.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 3,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportDefaultCallExpression.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 28,
+          "line": 6,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 6,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportDefaultFuncAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 5,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 5,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportDefaultValueAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "default",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 17,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 3,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportFunc.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 1,
+          "line": 3,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportFuncAlias.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "b",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 16,
+          "line": 5,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 5,
+        },
+      },
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportNamed.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 19,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
+      "name": "a",
+    },
+  ],
+}
+`;
+
+exports[`export visitors exportNamedFrom.js 1`] = `
+Object {
+  "members": Array [
+    Object {
+      "alias": "a",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 34,
+          "line": 1,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 1,
+        },
+      },
+      "name": "a",
+    },
+    Object {
+      "alias": "b",
+      "loc": SourceLocation {
+        "end": Position {
+          "column": 45,
+          "line": 2,
+        },
+        "start": Position {
+          "column": 0,
+          "line": 2,
+        },
+      },
+      "name": "default",
+    },
+  ],
+}
+`;
+
+exports[`export visitors noExports.js 1`] = `
+Object {
+  "members": Array [],
+}
+`;

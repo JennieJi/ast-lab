@@ -14,7 +14,6 @@ module.exports = {
     'jest/globals': true,
   },
   rules: {
-    // Prettier
     'prettier/prettier': 'error'
   }
 };

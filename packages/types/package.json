@@ -1,0 +1,28 @@
+{
+  "name": "ast-lab-types",
+  "version": "1.0.0-alpha",
+  "description": "",
+  "main": "index.d.ts",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc --build --verbose ./"
+  },
+  "files": [
+    "index.d.ts"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "repository": {
+    "url": "https://github.com/JennieJi/ast-lab",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/ast-lab/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.7.5"
+  }
+}

@@ -1,0 +1,9 @@
+const a = 1;
+export const exportConstant = a + 1;
+export const exportObject = { a };
+export const exportObject2 = { x: a };
+export const exportObjectMember = exportObject.a;
+export const exportRestObject = { ...exportObject };
+export const exportArray = [a];
+export const exportRestArray = [...exportArray];
+export const exportArrayMember = exportArray[0];

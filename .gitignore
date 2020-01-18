@@ -11,3 +11,6 @@ node_modules
 # built files
 lib
 dist
+
+# debug test cases
+debug

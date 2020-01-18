@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeDepMap() exports 1`] = `
+Map {
+  "exports/exportDefault.js" => Map {
+    "default" => Array [],
+  },
+  "exports/exportNamed.js" => Map {
+    "a" => Array [
+      Object {
+        "name": "default",
+        "source": "exports/exportDefault.js",
+      },
+      Object {
+        "name": "a",
+        "source": "exports/exportNamedFrom.js",
+      },
+    ],
+    "readFile" => Array [],
+    "*" => Array [
+      Object {
+        "name": "*",
+        "source": "exports/exportAllFrom.js",
+      },
+    ],
+    "default" => Array [
+      Object {
+        "name": "b",
+        "source": "exports/exportNamedFrom.js",
+      },
+    ],
+  },
+  "exports/exportNamedFrom.js" => Map {
+    "a" => Array [],
+    "b" => Array [],
+  },
+}
+`;
+
+exports[`mergeDepMap() imports 1`] = `
+Map {
+  "imports/dynamicImport-asyncawait.js" => Map {
+    "func" => Array [],
+  },
+  "imports/dynamicImport-then.js" => Map {
+    "func" => Array [],
+  },
+  "imports/importAlias.js" => Map {
+    "c" => Array [],
+    "func" => Array [],
+  },
+  "imports/importAll.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-asyncawait.js",
+      },
+    ],
+  },
+  "imports/importDefault.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-then.js",
+      },
+    ],
+    "*" => Array [
+      Object {
+        "name": "a",
+        "source": "imports/importAll.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importAll.js",
+      },
+    ],
+  },
+  "imports/importNamed.js" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "c",
+        "source": "imports/importAlias.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
+    "func" => Array [],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
+  },
+}
+`;

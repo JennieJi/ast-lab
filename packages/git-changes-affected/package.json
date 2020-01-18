@@ -10,11 +10,11 @@
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "repository": {
-    "url": "https://github.com/JennieJi/affected",
+    "url": "https://github.com/JennieJi/ast-lab",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/JennieJi/affected/issues"
+    "url": "https://github.com/JennieJi/ast-lab/issues"
   },
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,8 +26,17 @@
     "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
   },
+  "devDependencies": {
+    "@babel/types": "^7.7.4",
+    "@types/debug": "^4.1.5",
+    "@types/enhanced-resolve": "^3.0.6"
+  },
   "dependencies": {
+    "@babel/parser": "^7.7.5",
+    "ast-lab-types": "^1.0.0-alpha",
+    "debug": "^4.1.1",
     "enhanced-resolve": "^4.1.1",
-    "get-dependencies": "^1.0.0-alpha"
+    "es-stats": "^1.0.0-alpha",
+    "hunt-affected": "^1.0.0-alpha"
   }
 }

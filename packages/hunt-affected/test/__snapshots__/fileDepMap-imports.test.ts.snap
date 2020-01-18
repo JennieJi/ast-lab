@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fileDepMap() dynamicImport-asyncawait.js 1`] = `
+Map {
+  "./importNamed" => Map {
+    "default" => Array [],
+  },
+  "./importAll" => Map {
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-asyncawait.js",
+      },
+    ],
+  },
+  "imports/dynamicImport-asyncawait.js" => Map {
+    "func" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() dynamicImport-then.js 1`] = `
+Map {
+  "./importDefault" => Map {
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/dynamicImport-then.js",
+      },
+    ],
+  },
+  "imports/dynamicImport-then.js" => Map {
+    "func" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importAlias.js 1`] = `
+Map {
+  "./importNamed" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "c",
+        "source": "imports/importAlias.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
+  },
+  "imports/importAlias.js" => Map {
+    "c" => Array [],
+    "func" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importAll.js 1`] = `
+Map {
+  "./importDefault" => Map {
+    "*" => Array [
+      Object {
+        "name": "a",
+        "source": "imports/importAll.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importAll.js",
+      },
+    ],
+  },
+  "imports/importAll.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importCss.js 1`] = `
+Map {
+  "../nonjs/style.css" => Map {
+    "default" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importDefault.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "default" => Array [
+      Object {
+        "name": "a",
+        "source": "imports/importDefault.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importDefault.js",
+      },
+    ],
+  },
+  "imports/importDefault.js" => Map {
+    "a" => Array [],
+    "func" => Array [],
+  },
+}
+`;
+
+exports[`fileDepMap() importNamed.js 1`] = `
+Map {
+  "enhanced-resolve" => Map {
+    "resolveFactory" => Array [
+      Object {
+        "name": "resolveFactory",
+        "source": "imports/importNamed.js",
+      },
+      Object {
+        "name": "func",
+        "source": "imports/importNamed.js",
+      },
+    ],
+  },
+  "imports/importNamed.js" => Map {
+    "resolveFactory" => Array [],
+    "func" => Array [],
+  },
+}
+`;
