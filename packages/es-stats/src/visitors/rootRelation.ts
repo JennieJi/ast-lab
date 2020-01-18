@@ -70,7 +70,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         node.specifiers.forEach(specifier => {
           const ref = getModuleReffromExportSpecifier(specifier as ExportSpecifier);
           if (ref && !relations[ref.name]) {
-            relations[ref.name] = [ref.name];
+            relations[ref.alias] = [];
           }
         });
       }

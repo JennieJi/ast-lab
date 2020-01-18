@@ -5,32 +5,40 @@ Map {
   "./huntAffected" => Map {
     "default" => Array [
       Object {
-        "name": "fileDepMap",
-        "source": "../../src/index.ts",
-      },
-      Object {
-        "name": "mergeDepMap",
-        "source": "../../src/index.ts",
-      },
-      Object {
-        "name": "visitDepMap",
-        "source": "../../src/index.ts",
-      },
-      Object {
         "name": "default",
         "source": "../../src/index.ts",
       },
     ],
   },
   "./fileDepMap" => Map {
-    "default" => Array [],
+    "default" => Array [
+      Object {
+        "name": "fileDepMap",
+        "source": "../../src/index.ts",
+      },
+    ],
   },
   "./mergeDepMap" => Map {
-    "default" => Array [],
+    "default" => Array [
+      Object {
+        "name": "mergeDepMap",
+        "source": "../../src/index.ts",
+      },
+    ],
   },
   "./visitDepMap" => Map {
-    "default" => Array [],
-    "Visited" => Array [],
+    "default" => Array [
+      Object {
+        "name": "visitDepMap",
+        "source": "../../src/index.ts",
+      },
+    ],
+    "Visited" => Array [
+      Object {
+        "name": "Affected",
+        "source": "../../src/index.ts",
+      },
+    ],
   },
   "../../src/index.ts" => Map {
     "fileDepMap" => Array [],

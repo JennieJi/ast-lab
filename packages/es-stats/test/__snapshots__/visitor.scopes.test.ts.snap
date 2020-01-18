@@ -61,9 +61,8 @@ Object {
 
 exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `
 Object {
-  "a": Array [
-    "a",
-  ],
+  "a": Array [],
+  "b": Array [],
 }
 `;
 

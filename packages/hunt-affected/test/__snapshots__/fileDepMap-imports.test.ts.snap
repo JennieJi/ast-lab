@@ -48,6 +48,12 @@ Map {
         "source": "imports/importAlias.js",
       },
     ],
+    "default" => Array [
+      Object {
+        "name": "func",
+        "source": "imports/importAlias.js",
+      },
+    ],
   },
   "imports/importAlias.js" => Map {
     "c" => Array [],
@@ -110,6 +116,10 @@ exports[`fileDepMap() importNamed.js 1`] = `
 Map {
   "enhanced-resolve" => Map {
     "resolveFactory" => Array [
+      Object {
+        "name": "resolveFactory",
+        "source": "imports/importNamed.js",
+      },
       Object {
         "name": "func",
         "source": "imports/importNamed.js",

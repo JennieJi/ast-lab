@@ -20,7 +20,7 @@ describe('gitChangesAffected', () => {
         plugins: ['typescript']
       },
       paths: [
-        'packages/es-stats/src'
+        '../es-stats/src'
       ]
     });
     expect(relativeEntries(case1)).toMatchSnapshot();
