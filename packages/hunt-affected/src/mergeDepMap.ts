@@ -32,7 +32,7 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
         depMapHandlers.push((async () => {
           const baseDir = path.dirname(src);
           let modPath = '';
-          if (core.has(modRelativePath)) {
+          if (path.isAbsolute(modRelativePath) || core.has(modRelativePath)) {
             modPath = modRelativePath;
           } else {
             try {
