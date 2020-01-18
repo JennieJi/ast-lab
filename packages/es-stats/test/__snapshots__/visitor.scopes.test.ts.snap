@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rootRelation visitors exports/exportAllFrom.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors exports/exportDefault.js 1`] = `
+Object {
+  "a": Array [],
+  "default": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors exports/exportDefaultCallExpression.js 1`] = `
+Object {
+  "a": Array [],
+  "default": Array [
+    "a",
+    "String",
+    "v",
+  ],
+  "v": Array [],
+}
+`;
+
+exports[`rootRelation visitors exports/exportDefaultFuncAlias.js 1`] = `
+Object {
+  "a": Array [],
+  "default": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors exports/exportDefaultValueAlias.js 1`] = `
+Object {
+  "a": Array [],
+  "default": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors exports/exportFunc.js 1`] = `
+Object {
+  "a": Array [],
+}
+`;
+
+exports[`rootRelation visitors exports/exportFuncAlias.js 1`] = `
+Object {
+  "a": Array [],
+}
+`;
+
+exports[`rootRelation visitors exports/exportNamed.js 1`] = `
+Object {
+  "a": Array [],
+}
+`;
+
+exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+}
+`;
+
+exports[`rootRelation visitors exports/noExports.js 1`] = `
+Object {
+  "a": Array [],
+}
+`;
+
+exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
+Object {
+  "func": Array [
+    "./b#default",
+  ],
+}
+`;
+
+exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
+Object {
+  "func": Array [
+    "./b#default",
+  ],
+}
+`;
+
+exports[`rootRelation visitors imports/importAlias.js 1`] = `
+Object {
+  "c": Array [
+    "b",
+  ],
+}
+`;
+
+exports[`rootRelation visitors imports/importAll.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importCss.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importDefault.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/importNamed.js 1`] = `Object {}`;
+
+exports[`rootRelation visitors imports/noImports.js 1`] = `
+Object {
+  "a": Array [],
+}
+`;
+
+exports[`rootRelation visitors scopes/arrowfunction.js 1`] = `
+Object {
+  "DEFAULT": Array [],
+  "a": Array [],
+  "arrow": Array [
+    "a",
+    "DEFAULT",
+    "b",
+  ],
+  "b": Array [],
+}
+`;
+
+exports[`rootRelation visitors scopes/asyncFunction.js 1`] = `
+Object {
+  "a": Array [],
+  "asyncFunc": Array [
+    "a",
+  ],
+  "b": Array [],
+}
+`;
+
+exports[`rootRelation visitors scopes/class.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "c": Array [
+    "b",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/constant.js 1`] = `
+Object {
+  "a": Array [],
+  "exportArray": Array [
+    "a",
+  ],
+  "exportArrayMember": Array [
+    "exportArray",
+  ],
+  "exportConstant": Array [
+    "a",
+  ],
+  "exportObject": Array [
+    "a",
+  ],
+  "exportObject2": Array [
+    "a",
+  ],
+  "exportObjectMember": Array [
+    "exportObject",
+  ],
+  "exportRestArray": Array [
+    "exportArray",
+  ],
+  "exportRestObject": Array [
+    "exportObject",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/eval.js 1`] = `
+Object {
+  "a": Array [],
+  "func": Array [
+    "eval",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/forloop.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "b",
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/function.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/function-argsObjectAssign.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/function-argsSpread.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/generator.js 1`] = `
+Object {
+  "a": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/ifelse.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/importExport.js 1`] = `
+Object {
+  "default": Array [
+    "im",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/switch.js 1`] = `
+Object {
+  "TYPES": Array [],
+  "func": Array [
+    "type",
+    "TYPES",
+    "v1",
+  ],
+  "type": Array [],
+  "v1": Array [],
+  "v2": Array [],
+}
+`;
+
+exports[`rootRelation visitors scopes/template.js 1`] = `
+Object {
+  "a": Array [],
+  "func": Array [
+    "a",
+  ],
+}
+`;
+
+exports[`rootRelation visitors scopes/trycatch.js 1`] = `
+Object {
+  "a": Array [],
+  "b": Array [],
+  "func": Array [
+    "console",
+    "a",
+  ],
+}
+`;

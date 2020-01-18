@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visitDepMap() circular 1`] = `
+Object {
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "default",
+  },
+}
+`;
+
+exports[`visitDepMap() import all 1`] = `
+Object {
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "default",
+  },
+}
+`;
+
+exports[`visitDepMap() import default simple 1`] = `
+Object {
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "default",
+  },
+}
+`;
+
+exports[`visitDepMap() import multiples 1`] = `
+Object {
+  "/a": Set {
+    "default",
+  },
+  "/b": Set {
+    "default",
+  },
+  "/c": Set {
+    "c1",
+    "c2",
+  },
+  "/d": Set {},
+  "/e": Set {},
+}
+`;

@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import visitors exports/exportAllFrom.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefault.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefaultCallExpression.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefaultFuncAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportDefaultValueAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportFunc.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportFuncAlias.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportNamed.js 1`] = `Array []`;
+
+exports[`import visitors exports/exportNamedFrom.js 1`] = `
+Array [
+  Object {
+    "alias": "a",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 34,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+    "name": "a",
+    "source": "./exportNamed",
+  },
+  Object {
+    "alias": "b",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 45,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+    "name": "default",
+    "source": "./exportNamed",
+  },
+]
+`;
+
+exports[`import visitors exports/noExports.js 1`] = `Array []`;
+
+exports[`import visitors imports/dynamicImport-asyncawait.js 1`] = `
+Array [
+  Object {
+    "alias": "./b#default",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 44,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 30,
+        "line": 2,
+      },
+    },
+    "name": "./b#default",
+    "source": "./b",
+  },
+]
+`;
+
+exports[`import visitors imports/dynamicImport-then.js 1`] = `
+Array [
+  Object {
+    "alias": "./b#default",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 16,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 2,
+        "line": 3,
+      },
+    },
+    "name": "./b#default",
+    "source": "./b",
+  },
+]
+`;
+
+exports[`import visitors imports/importAlias.js 1`] = `
+Array [
+  Object {
+    "alias": "b",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 15,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 9,
+        "line": 1,
+      },
+    },
+    "name": "a",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors imports/importAll.js 1`] = `
+Array [
+  Object {
+    "alias": "base",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 16,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 1,
+      },
+    },
+    "name": "*",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors imports/importCss.js 1`] = `
+Array [
+  Object {
+    "alias": "styles",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 13,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 1,
+      },
+    },
+    "name": "default",
+    "source": "../nonjs/style.css",
+  },
+]
+`;
+
+exports[`import visitors imports/importDefault.js 1`] = `
+Array [
+  Object {
+    "alias": "base",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 11,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 1,
+      },
+    },
+    "name": "default",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors imports/importNamed.js 1`] = `
+Array [
+  Object {
+    "alias": "a",
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 10,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 9,
+        "line": 1,
+      },
+    },
+    "name": "a",
+    "source": "./base",
+  },
+]
+`;
+
+exports[`import visitors imports/noImports.js 1`] = `Array []`;
