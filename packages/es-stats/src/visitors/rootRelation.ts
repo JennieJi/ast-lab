@@ -12,6 +12,10 @@ const debug = _debug('es-stats:scope');
 
 type Scope = { privates: Set<string>, candidates: string[] };
 
+/**
+ * Create a Babel visitor that will find out the dependency relationships between root declarations, and save to an object ref.
+ * @param relations The object ref to save the relationships
+ */
 export default function createRootRelationVisitors(relations: MemberRelation = {}): Visitor {
   let scope = { privates: new Set(), candidates: [] } as Scope;
   let parentScopes = [] as Scope[];

@@ -1,6 +1,11 @@
 import { LVal } from "@babel/types";
 import { MemberRef } from 'ast-lab-types';
 
+/**
+ * Find variable names from a normal variable, array, object or rest object/array
+ * @param pattern @babel/types.LVal
+ * @return A list of object contains variable name and alias.
+ */
 function getPatternNames(pattern: LVal ): Array<MemberRef> {
   switch(pattern.type) {
     case 'Identifier':

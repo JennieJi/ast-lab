@@ -5,6 +5,10 @@ import getDeclarationNames from '../getDeclarationNames';
 import { MODULE_DEFAULT } from '../constants';
 import { Exports } from 'ast-lab-types';
 
+/**
+ * Create a Babel visitor that will find out all the exports and save them into an object ref.
+ * @param exports The object ref to save the exports result.
+ */
 export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
   return {
     ExportAllDeclaration({ node }) {
