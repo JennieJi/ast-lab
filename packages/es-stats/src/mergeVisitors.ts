@@ -1,5 +1,23 @@
 import { Visitor } from '@babel/traverse';
-
+/**
+ * Merge multiple @babel/traverse visitor objects into one.
+ * Example:
+ * ```
+ * mergeVisitors(
+ *  {
+ *    Identifier(node) {
+ *      console.log(1);
+ *    }
+ *  },
+ *  {
+ *    Identifier(node) {
+ *      console.log(2);
+ *    }
+ *  }
+ * );
+ * ```
+ * @param visitors @babel/traverse visitors
+ */
 export default function mergeVisitors(...visitors: Visitor[]): Visitor {
   return visitors.reduce((ret, visitor, i) => {
     if (!i) { return visitor; }

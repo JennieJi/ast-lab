@@ -5,10 +5,19 @@ import extractStats from './extractStats';
 
 const debug = _debug('es-stats:file');
 /**
- * Get ES6 file dependencies (module and imported defination)
- * @todo support import affected export mapping
- * @param file {string} file content in text
- * @return {Map<string, Set<name> | null>}
+ * Get ES file imports, exports, and root declaration definitions.
+ * Example:
+ * ```
+ * fileStats(
+ *  fs.readFileSync('esfile.js', 'utf-8'),
+ *  {
+ *    plugins: ['jsx']
+ *  }
+ * );
+ * ```
+ * 
+ * @param file File content
+ * @param parserOptions Options supported by @babel/parser@^7.7.5
  */
 export default function fileStats(file: string, parserOptions?: ParserOptions) {
   debug(file);

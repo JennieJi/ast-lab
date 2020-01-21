@@ -1,7 +1,7 @@
 {
   "name": "es-stats",
   "version": "1.0.0-alpha",
-  "description": "",
+  "description": "Find out import, exports and root declarations' dependency relationships of an ES module file.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,11 +11,14 @@
   "keywords": [
     "ecma",
     "es6",
+    "babel",
     "import",
     "export",
     "relation",
     "dependency",
-    "ast"
+    "ast",
+    "file",
+    "module"
   ],
   "files": [
     "./dist"
@@ -23,7 +26,8 @@
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
-    "type": "git"
+    "type": "git",
+    "directory": "packges/es-stats"
   },
   "bugs": {
     "url": "https://github.com/JennieJi/ast-lab/issues"

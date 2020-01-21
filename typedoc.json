@@ -1,0 +1,17 @@
+{
+  "name": "Jennie's ast lab",
+  "out": "docs",
+  "inputFiles": "packages",
+  "plugin": [
+    "typedoc-plugin-lerna-packages",
+    "typedoc-plugin-sourcefile-link"
+  ],
+  "exclude": [
+    "**/node_modules"
+  ],
+  "includeDeclarations": true,
+  "excludePrivate": true,
+  "excludeNotExported": true,
+  "excludeProtected": true,
+  "excludeExternals": true
+}

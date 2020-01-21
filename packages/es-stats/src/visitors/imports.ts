@@ -6,6 +6,10 @@ import { MODULE_DEFAULT } from '../constants';
 import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
 import { ExportSpecifier } from '@babel/types';
 
+/**
+ * Create a Babel visitor that will find out all the imports and save them into an object ref.
+ * @param imports The object ref to save the imports result.
+ */
 export default function createExportVisitors(imports: Import[] = []): Visitor {
   return {
     ImportDeclaration({ node }) {

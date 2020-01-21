@@ -2,6 +2,12 @@ import { Node } from '@babel/types';
 import getPatternNames from './getPatternNames';
 import { MemberRef } from 'ast-lab-types';
 
+/**
+ * Extract declaration names and its alias from AST declaration nodes.
+ * This function only handles *VariableDeclaration*, *FunctionDeclaration*, *ClassDeclaration*.
+ * @param node AST node object
+ * @return A list of objects contain declaration name and alias
+ */
 export default function getDeclarationNames(node: Node): Array<MemberRef> | null {
   switch(node.type) {
     case 'VariableDeclaration':
