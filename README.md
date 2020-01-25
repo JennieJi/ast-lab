@@ -1,3 +1,3 @@
 A monorepo for AST related ideas.
 
-Check packages under package folder for more details.
+Check docs and examples here: https://jennieji.github.io/ast-lab

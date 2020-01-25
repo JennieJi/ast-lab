@@ -1,20 +1,18 @@
 import fs from 'fs';
 import ecmaStats from 'es-stats';
-import { Entry, Import, DependencyMap, Options } from 'ast-lab-types';
+import { Entry, Import, DependencyMap } from 'ast-lab-types';
 import _debug from 'debug';
 import appendEntries from './appendEntries';
 import { MODULE_ALL } from './constants';
+import { Options } from './types';
 
 const debug = _debug('hunt-affected:file');
 const dynamicImportReg = /[^#]+#/;
 
 /**
  * Get a file's dependency map
- * @param filePath {string} Absolute file path
- * @param options {object}
- * @prop options.loader {Loader} Read file content from absolute file path. Uses fs.readFileSync as utf8 by default.
- * @prop options.parserOptions {@babel/parser.options} Allow customize babel parser options while parsing file content to AST.
- * @return {Promise<DependencyMap>}
+ * @param filePath Absolute file path
+ * @param options
  */
 export default async function fileDepMap(filePath: string, { loader, parserOptions }: Options = {}): Promise<DependencyMap> {
   const depMap = new Map() as DependencyMap;
