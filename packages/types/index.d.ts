@@ -1,4 +1,3 @@
-import { ParserOptions } from '@babel/parser';
 import { SourceLocation } from '@babel/types';
 
 export type Module = string;
@@ -29,9 +28,3 @@ export type AffectedMap = Map<Member, Entry[]>;
 export type DependencyMap = Map<Module, AffectedMap>;
 
 export type Loader = (path: string) => Promise<string | void>
-
-export type Options = {
-  resolver?: (base: string, target: string) => Promise<string | void>,
-  loader?: Loader,
-  parserOptions?: ParserOptions
-}

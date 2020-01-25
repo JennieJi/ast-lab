@@ -1,5 +1,12 @@
 import { DependencyMap, Module, Entry, AffectedMap, Member } from "ast-lab-types";
 
+/**
+ * @internal
+ * @param depMap 
+ * @param mod 
+ * @param member 
+ * @param entry 
+ */
 export default function appendEntries(depMap: DependencyMap, mod: Module, member: Member, entry: Entry[]): void {
   const affected  = depMap.get(mod) || new Map() as AffectedMap;
   if (!depMap.has(mod)) {

@@ -6,6 +6,11 @@ const debug = _debug('hunt-affected:visit');
 
 export type Visited = { [module: string]: Set<Member> };
 
+/**
+ * 
+ * @param dependencyMap 
+ * @param entries 
+ */
 export default function visitDependencyMap(dependencyMap: DependencyMap, entries: Entry[]): Visited {
   const visited = {} as Visited;
   let entryQueue = entries;
