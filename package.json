@@ -2,7 +2,7 @@
   "name": "ast-lab",
   "private": true,
   "scripts": {
-    "setup": "npm i && lerna bootstrap",
+    "setup": "npm i && lerna bootstrap && npm run build",
     "docs": "typedoc",
     "build": "lerna run build --stream",
     "lint": "eslint packages",
