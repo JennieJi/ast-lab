@@ -7,8 +7,10 @@ export type Diff = {
 };
 
 export type Change = {
+  /** File path relative to the repo */
   file: string,
   content: string | null,
+  /** Changed file code line ranges */
   changed: Array<{
     start: number,
     end: number

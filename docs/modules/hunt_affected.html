@@ -62,6 +62,59 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#hunt-affected" id="hunt-affected" style="color: inherit; text-decoration: none;">
+						<h1>hunt-affected</h1>
+					</a>
+					<p>Detect where your file exports are used and potentially afffected by it&#39;s changes.</p>
+					<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+						<h2>Quick start</h2>
+					</a>
+					<p>Intalling via npm:</p>
+					<pre><code class="language-sh">npm i hunt-affected</code></pre>
+					<p>And feed the function with a list of absolute file paths you would like to check, and the entry points like this:</p>
+					<pre><code class="language-javascript"><span class="hljs-keyword">const</span> huntAffected = <span class="hljs-built_in">require</span>(<span class="hljs-string">'hunt-affected'</span>);
+
+huntAffected(
+  [<span class="hljs-string">'a.js'</span>, <span class="hljs-string">'b.js'</span>, <span class="hljs-string">'c.js'</span>],
+  [{ <span class="hljs-attr">source</span>: <span class="hljs-string">'a.js'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'default'</span> }]
+);</code></pre>
+					<p>To support things like <code>JSX</code>, <code>flow</code>, <code>dynamic imports</code>, etc.. You will need to enable <code>@babel/parser</code> plugins:</p>
+					<pre><code class="language-javascript">huntAffected(
+  [<span class="hljs-string">'a.js'</span>, <span class="hljs-string">'b.js'</span>, <span class="hljs-string">'c.js'</span>],
+  [{ <span class="hljs-attr">source</span>: <span class="hljs-string">'a.js'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'default'</span> }]
+  {
+    <span class="hljs-attr">parserOptions</span>: {
+      <span class="hljs-attr">plugins</span>: [<span class="hljs-string">'jsx'</span>, <span class="hljs-string">'dynamicImport'</span>]
+    }
+  }
+);</code></pre>
+					<p>All the options in <code>parserOptions</code> will be passed to <code>@babel/parser</code> directly. <code>@babel/parser</code> options can be found <a href="https://babeljs.io/docs/en/babel-parser">here</a>.</p>
+					<p>By default, it will try to read file with NodeJs default file system and decode them with <code>utf-8</code>.</p>
+					<p>You may replace this behavior by passing a customised <code>loader</code> function:</p>
+					<pre><code class="language-javascript">huntAffected(
+  [<span class="hljs-string">'a.js'</span>, <span class="hljs-string">'b.js'</span>, <span class="hljs-string">'c.js'</span>],
+  [{ <span class="hljs-attr">source</span>: <span class="hljs-string">'a.js'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'default'</span> }]
+  {
+    <span class="hljs-attr">loader</span>: <span class="hljs-keyword">async</span> (path) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> myWayToReadFile(path);
+    }
+  }
+);</code></pre>
+					<p>And when it tries to resolve file imported module paths to absolute file path, it will use Webpack&#39;s <a href="http://github.com/webpack/enhanced-resolve">enhanced-resolve</a> by default, and tries to resolve to real files.</p>
+					<p>You may replace this behavior by passing a customised <code>resolver</code> function:</p>
+					<pre><code class="language-javascript">huntAffected(
+  [<span class="hljs-string">'a.js'</span>, <span class="hljs-string">'b.js'</span>, <span class="hljs-string">'c.js'</span>],
+  [{ <span class="hljs-attr">source</span>: <span class="hljs-string">'a.js'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'default'</span> }]
+  {
+    <span class="hljs-attr">resolver</span>: <span class="hljs-keyword">async</span> (base: string, <span class="hljs-attr">target</span>: string) =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'resolved/file/path.js'</span>;
+    }
+  }
+);</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -131,17 +184,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="options" class="tsd-anchor"></a>
 					<h3>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>loader<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Loader</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>resolver<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>loader<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>resolver<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in hunt-affected/src/types.ts:4</li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/types.ts#L3">hunt-affected/src/types.ts:3</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> loader<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Loader</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> loader<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
 										<p>Function for reading file content from absolute file path. Uses fs.readFileSync to read with decoding <em>utf8</em> by default.</p>
@@ -173,7 +226,7 @@
 					<div class="tsd-signature tsd-kind-icon">Visited<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/visitDepMap.ts#L7">hunt-affected/src/visitDepMap.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/visitDepMap.ts#L7">hunt-affected/src/visitDepMap.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -194,7 +247,7 @@
 					<div class="tsd-signature tsd-kind-icon">MODULE_<wbr>ALL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"*"</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/constants.ts#L2">hunt-affected/src/constants.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/constants.ts#L2">hunt-affected/src/constants.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +257,7 @@
 					<div class="tsd-signature tsd-kind-icon">MODULE_<wbr>DEFAULT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> = &quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/constants.ts#L1">hunt-affected/src/constants.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/constants.ts#L1">hunt-affected/src/constants.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -221,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/appendEntries.ts#L10">hunt-affected/src/appendEntries.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/appendEntries.ts#L10">hunt-affected/src/appendEntries.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,7 +314,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/denodeify.ts#L5">hunt-affected/src/denodeify.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/denodeify.ts#L5">hunt-affected/src/denodeify.ts:5</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,7 +351,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/fileDepMap.ts#L17">hunt-affected/src/fileDepMap.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/fileDepMap.ts#L17">hunt-affected/src/fileDepMap.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -340,7 +393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/huntAffected.ts#L29">hunt-affected/src/huntAffected.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/huntAffected.ts#L29">hunt-affected/src/huntAffected.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -395,7 +448,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/mergeDepMap.ts#L17">hunt-affected/src/mergeDepMap.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/mergeDepMap.ts#L17">hunt-affected/src/mergeDepMap.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,10 +484,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/hunt-affected/src/visitDepMap.ts#L14">hunt-affected/src/visitDepMap.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/hunt-affected/src/visitDepMap.ts#L14">hunt-affected/src/visitDepMap.ts:14</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Walk through the dependency map from given entries to find out what are affected.</p>
+								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">

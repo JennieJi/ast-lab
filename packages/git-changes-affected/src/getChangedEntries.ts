@@ -25,7 +25,13 @@ function locatePrivateDeclares(ast: File): Declare[] {
   }, [] as Declare[]);
 }
 
-export default function getChangedEntries(changes: Change[], parserOptions?: ParserOptions | null) {
+/**
+ * Find what declarations does the code line changes belong to.
+ * @param changes 
+ * @param parserOptions `@babel/parser` options
+ * @return A list of object contains module absolute path and declaration name
+ */
+export default function getChangedEntries(changes: Change[], parserOptions?: ParserOptions | null): Entry[] {
   return changes.reduce((res, { file, content, changed }) => {
     if (!content) {
       return res;

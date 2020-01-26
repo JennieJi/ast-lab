@@ -15,7 +15,8 @@ function relativeEntries(affected: Affected) {
 
 describe('gitChangesAffected', () => {
   test('can work', async () => {
-    const case1 = await gitChangesAffected('e42f4f6a08569afd48540759cc604aab2b8c02f3', {
+    const case1 = await gitChangesAffected({
+      to: 'e42f4f6a08569afd48540759cc604aab2b8c02f3',
       parserOptions: {
         plugins: ['typescript']
       },
@@ -25,7 +26,8 @@ describe('gitChangesAffected', () => {
     });
     expect(relativeEntries(case1)).toMatchSnapshot();
 
-    const case2 = await gitChangesAffected('8d807ce9c560e3db322f90a337200ddffe4d8719', {
+    const case2 = await gitChangesAffected({
+      to: '8d807ce9c560e3db322f90a337200ddffe4d8719',
       parserOptions: {
         plugins: ['typescript', 'dynamicImport', 'classProperties']
       }

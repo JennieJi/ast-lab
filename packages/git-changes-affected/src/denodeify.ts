@@ -1,3 +1,4 @@
+/** @internal */
 export default function denodeify<Response>(func: Function) {
   return (...args: any[]) => new Promise<Response>((resolve, reject) => {
     func(

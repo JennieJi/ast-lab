@@ -47,4 +47,5 @@ class IncludesFilePlugin {
 	}
 };
 
+/** @internal */
 export default IncludesFilePlugin;

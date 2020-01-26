@@ -26,5 +26,3 @@ export type Entry = {
 };
 export type AffectedMap = Map<Member, Entry[]>;
 export type DependencyMap = Map<Module, AffectedMap>;
-
-export type Loader = (path: string) => Promise<string | void>

@@ -1,22 +1,27 @@
 {
   "name": "print-file-tree",
   "version": "1.0.0-alpha",
-  "description": "Find git changes affected files",
+  "description": "Console log a tree like structure from list of files",
   "keywords": [
-    "affected",
-    "changes",
-    "git",
-    "dependencies"
+    "console",
+    "print",
+    "file",
+    "tree"
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "repository": {
+    "url": "https://github.com/JennieJi/ast-lab",
+    "type": "git",
+    "directory": "packages/print-file-tree"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && ../../node_modules/.bin/tsc -p ./",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "../../node_modules/.bin/tsc -p ./",
+    "test": "echo \"Error: run tests from root\" && exit 0"
   }
 }

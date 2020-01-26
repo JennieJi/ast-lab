@@ -1,7 +1,7 @@
 {
   "name": "hunt-affected",
   "version": "1.0.0-alpha",
-  "description": "",
+  "description": "Detect where your file exports are used and potentially afffected by it's changes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,7 +11,10 @@
   "keywords": [
     "affected",
     "dependency",
-    "change"
+    "change",
+    "used",
+    "ecma",
+    "export"
   ],
   "files": [
     "./dist"
@@ -19,7 +22,8 @@
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
-    "type": "git"
+    "type": "git",
+    "directory": "packages/hunt-affected"
   },
   "bugs": {
     "url": "https://github.com/JennieJi/ast-lab/issues"

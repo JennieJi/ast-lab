@@ -11,7 +11,8 @@
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
-    "type": "git"
+    "type": "git",
+    "directory": "packages/git-changes-affected"
   },
   "bugs": {
     "url": "https://github.com/JennieJi/ast-lab/issues"

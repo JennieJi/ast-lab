@@ -1,5 +1,10 @@
-import { 
-  VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier, StringLiteral } from '@babel/types';
+import {
+  VariableDeclarator,
+  VariableDeclaration,
+  LVal,
+  ExportSpecifier,
+  StringLiteral,
+} from '@babel/types';
 import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
@@ -10,13 +15,15 @@ import { MODULE_DEFAULT } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
-type Scope = { privates: Set<string>, candidates: string[] };
+type Scope = { privates: Set<string>; candidates: string[] };
 
 /**
  * Create a Babel visitor that will find out the dependency relationships between root declarations, and save to an object ref.
  * @param relations The object ref to save the relationships
  */
-export default function createRootRelationVisitors(relations: MemberRelation = {}): Visitor {
+export default function createRootRelationVisitors(
+  relations: MemberRelation = {}
+): Visitor {
   let scope = { privates: new Set(), candidates: [] } as Scope;
   let parentScopes = [] as Scope[];
   const addRefsToPrivates = (refs: Array<MemberRef>) => {
@@ -31,7 +38,9 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
     const { candidates, privates } = scope;
     const filteredCandidates = candidates.filter(d => !privates.has(d));
     scope = parentScopes.pop() as Scope;
-    scope.candidates = Array.from(new Set(scope.candidates.concat(filteredCandidates)));
+    scope.candidates = Array.from(
+      new Set(scope.candidates.concat(filteredCandidates))
+    );
     return filteredCandidates;
   };
 
@@ -72,7 +81,9 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
     ExportNamedDeclaration({ node }) {
       if (node.source) {
         node.specifiers.forEach(specifier => {
-          const ref = getModuleReffromExportSpecifier(specifier as ExportSpecifier);
+          const ref = getModuleReffromExportSpecifier(
+            specifier as ExportSpecifier
+          );
           if (ref && !relations[ref.name]) {
             relations[ref.alias] = [];
           }
@@ -88,7 +99,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         debug('EXIT-export default scope', parentScopes, scope);
         const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
-          relations[MODULE_DEFAULT]= Array.from(new Set(candidates));
+          relations[MODULE_DEFAULT] = Array.from(new Set(candidates));
         }
       },
     },
@@ -98,10 +109,12 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
         newScope();
 
         if (p.isFunction()) {
-          const refs = p.node.params
-          .reduce((ret, param) => {
-            return ret.concat(getPatternNames(param as LVal));
-          }, [] as Array<MemberRef>);
+          const refs = p.node.params.reduce(
+            (ret, param) => {
+              return ret.concat(getPatternNames(param as LVal));
+            },
+            [] as Array<MemberRef>
+          );
           addRefsToPrivates(refs);
         } else if (p.isCatchClause()) {
           addRefsToPrivates(getPatternNames(p.node.param as LVal));
@@ -110,13 +123,14 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
       exit(p) {
         const { node, parent, parentPath } = p;
         debug('EXIT-scopable scope', parentScopes, scope);
-        if (p.isBlockStatement() && parentPath && parentPath.isFunction()) return;
+        if (p.isBlockStatement() && parentPath && parentPath.isFunction())
+          return;
 
         const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
           const dedupCandidates = Array.from(new Set(candidates));
-          // @ts-ignore 
-          let id = node.id || parent && parent.id;
+          // @ts-ignore
+          let id = node.id || (parent && parent.id);
           if (id) {
             /** @todo find more specific declaration affected */
             getPatternNames(id).forEach(({ alias }) => {
@@ -124,7 +138,7 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
             });
           }
         }
-      }
+      },
     },
     VariableDeclarator({ node }) {
       addRefsToPrivates(getPatternNames((node as VariableDeclarator).id));
@@ -141,14 +155,19 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
 
       // dynamic import
       if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
-        scope.candidates.push(`${(args[0] as StringLiteral).value}#${MODULE_DEFAULT}`);
+        scope.candidates.push(
+          `${(args[0] as StringLiteral).value}#${MODULE_DEFAULT}`
+        );
       }
     },
     Identifier(p) {
       const { node, key } = p;
       let parentPath = p.parentPath;
       // exclude function/class identifier
-      if (parentPath.isScopable() && key === 'id' || parentPath.isFunction()) {
+      if (
+        (parentPath.isScopable() && key === 'id') ||
+        parentPath.isFunction()
+      ) {
         return;
       }
       if (
@@ -172,6 +191,6 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
       if (identifier.type === 'JSXIdentifier') {
         scope.candidates.push(identifier.name);
       }
-    }
+    },
   };
 }

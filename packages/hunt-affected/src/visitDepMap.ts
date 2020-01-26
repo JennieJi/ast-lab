@@ -7,7 +7,7 @@ const debug = _debug('hunt-affected:visit');
 export type Visited = { [module: string]: Set<Member> };
 
 /**
- * 
+ * Walk through the dependency map from given entries to find out what are affected.
  * @param dependencyMap 
  * @param entries 
  */
