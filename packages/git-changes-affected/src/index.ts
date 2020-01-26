@@ -1,4 +1,4 @@
-import gitChangesAffected from './gitChangesAffected';
-
 export * from './types';
-export default gitChangesAffected;
+export { default as getGitDiffs } from './getGitDiffs';
+export { default as getChangedEntries } from './getChangedEntries';
+export { default, huntRevisionImpact} from './gitChangesAffected';

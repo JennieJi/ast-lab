@@ -9,7 +9,9 @@ import { Exports } from 'ast-lab-types';
  * Create a Babel visitor that will find out all the exports and save them into an object ref.
  * @param exports The object ref to save the exports result.
  */
-export default function createExportVisitors(exports: Exports = { members: [] }): Visitor {
+export default function createExportVisitors(
+  exports: Exports = { members: [] }
+): Visitor {
   return {
     ExportAllDeclaration({ node }) {
       exports.extends = (exports.extends || []).concat(node.source.value);
@@ -17,17 +19,19 @@ export default function createExportVisitors(exports: Exports = { members: [] })
     ExportNamedDeclaration({ node }) {
       const { specifiers, declaration, loc } = node;
       specifiers.forEach(specifier => {
-        const dep = getModuleRefFromExportSpecifier(specifier as ExportSpecifier);
+        const dep = getModuleRefFromExportSpecifier(
+          specifier as ExportSpecifier
+        );
         if (dep) {
           exports.members.push({
             ...dep,
-            loc
+            loc,
           });
         }
       });
       if (declaration) {
         // @ts-ignore
-        const names = getDeclarationNames(declaration)
+        const names = getDeclarationNames(declaration);
         if (names && names.length) {
           names.forEach(({ name }) => {
             exports.members.push({ name, alias: name, loc });
@@ -46,8 +50,12 @@ export default function createExportVisitors(exports: Exports = { members: [] })
           exports.members.push({ name, alias, loc });
         });
       } else {
-        exports.members.push({ name: MODULE_DEFAULT, alias: MODULE_DEFAULT,loc });
+        exports.members.push({
+          name: MODULE_DEFAULT,
+          alias: MODULE_DEFAULT,
+          loc,
+        });
       }
-    }
+    },
   };
 }

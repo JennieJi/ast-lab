@@ -6,4 +6,5 @@ function exec(cmd: string): string {
   }).toString().trim();
 }
 
+/** @internal */
 export default exec;

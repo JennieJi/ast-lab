@@ -68,11 +68,35 @@
 						<h1>es-stats</h1>
 					</a>
 					<p>Find out import, exports and root declarations&#39; dependency relationships of an ES module file.</p>
-					<a href="#quick-starting" id="quick-starting" style="color: inherit; text-decoration: none;">
-						<h2>Quick starting</h2>
+					<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+						<h2>Quick start</h2>
 					</a>
-					<p>Intall via npm:</p>
+					<p>Intalling via npm:</p>
 					<pre><code class="language-sh">npm i es-stats</code></pre>
+					<p>Extract imports, exports, and root declarations&#39; relationship with default settings:</p>
+					<pre><code class="language-javascript"><span class="hljs-keyword">const</span> esStats = <span class="hljs-built_in">require</span>(<span class="hljs-string">'es-stats'</span>);
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+
+<span class="hljs-keyword">const</span> {
+  imports,
+  exports,
+  relations
+} = esStats(fs.readFileSync(<span class="hljs-string">'myfile.js'</span>, <span class="hljs-string">'utf-8'</span>));
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Imports:'</span>, imports);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Exports:'</span>, exports);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Relations:'</span>, relations);</code></pre>
+					<p>To support things like <code>JSX</code>, <code>flow</code>, <code>dynamic imports</code>, etc.. You will need to enable <code>@babel/parser</code> plugins:</p>
+					<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {
+  imports,
+  exports,
+  relations
+} = esStats(
+  fs.readFileSync(<span class="hljs-string">'myfile.js'</span>, <span class="hljs-string">'utf-8'</span>),
+  {
+    <span class="hljs-attr">plugins</span>: [<span class="hljs-string">'jsx'</span>, <span class="hljs-string">'dynamicImport'</span>]
+  }
+);</code></pre>
+					<p>All the options in the 2nd parameter will be passed to <code>@babel/parser</code> directly. <code>@babel/parser</code> options can be found <a href="https://babeljs.io/docs/en/babel-parser">here</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -159,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">MODULE_<wbr>ALL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"*"</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/constants.ts#L2">es-stats/src/constants.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/constants.ts#L2">es-stats/src/constants.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +193,7 @@
 					<div class="tsd-signature tsd-kind-icon">MODULE_<wbr>DEFAULT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> = &quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/constants.ts#L1">es-stats/src/constants.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/constants.ts#L1">es-stats/src/constants.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/visitors/exports.ts#L12">es-stats/src/visitors/exports.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/visitors/exports.ts#L12">es-stats/src/visitors/exports.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +241,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/visitors/imports.ts#L13">es-stats/src/visitors/imports.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/visitors/imports.ts#L13">es-stats/src/visitors/imports.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -248,7 +272,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/visitors/rootRelation.ts#L19">es-stats/src/visitors/rootRelation.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/visitors/rootRelation.ts#L19">es-stats/src/visitors/rootRelation.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -279,7 +303,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/extractStats.ts#L29">es-stats/src/extractStats.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/extractStats.ts#L29">es-stats/src/extractStats.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -350,7 +374,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/fileStats.ts#L22">es-stats/src/fileStats.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/fileStats.ts#L22">es-stats/src/fileStats.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -418,7 +442,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/getDeclarationNames.ts#L11">es-stats/src/getDeclarationNames.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/getDeclarationNames.ts#L11">es-stats/src/getDeclarationNames.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -451,7 +475,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/13e5e0b/packages/es-stats/src/mergeVisitors.ts#L21">es-stats/src/mergeVisitors.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/es-stats/src/mergeVisitors.ts#L21">es-stats/src/mergeVisitors.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

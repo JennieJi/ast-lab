@@ -1,5 +1,5 @@
 import resolver from 'enhanced-resolve';
-import huntAffected from 'hunt-affected';
+import huntAffected, { Affected } from 'hunt-affected';
 import { ParserOptions } from '@babel/parser';
 import _debug from 'debug';
 import { getGitDiffs } from './getGitDiffs';
@@ -16,17 +16,23 @@ import getChangedEntries from './getChangedEntries';
 const debug = _debug('git-changes-affected:affected');
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
-function changesAffected(commit: string, changes: Change[], { alias, modules, parserOptions, paths }: Options) {
-  debug(`${commit} changes: ${JSON.stringify(changes)}`);
+/**
+ * Find what module declarations will be affected by changing given code lines in given git revision context.
+ * @param revision Git [revision](https://git-scm.com/docs/gitrevisions)
+ * @param changes 
+ * @param options 
+ */
+export function huntRevisionImpact(revision: string, changes: Change[], { alias, modules, parserOptions, paths }: Options): Promise<Affected> {
+  debug(`${revision} changes: ${JSON.stringify(changes)}`);
   const extensions = DEFAULT_EXTENSIONS;
-  const trackedFiles = getTrackedFiles(commit, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
+  const trackedFiles = getTrackedFiles(revision, paths).filter(file => hasExt(file, extensions)).map(getAbsolutePath);
   const entries = getChangedEntries(changes, parserOptions);
-  debug(`${commit} entries: ${JSON.stringify(entries)}`);
+  debug(`${revision} entries: ${JSON.stringify(entries)}`);
   return huntAffected(
     trackedFiles,
     entries,
     {
-      loader: (file: string) => Promise.resolve(getRevisionFile(commit, file)),
+      loader: (file: string) => Promise.resolve(getRevisionFile(revision, file)),
       resolver: denodeify(resolver.create({
         extensions,
         alias,
@@ -39,15 +45,28 @@ function changesAffected(commit: string, changes: Change[], { alias, modules, pa
 }
 
 type Options = {
+  /** The end result revision. Default to `HEAD`. */
+  to?: string,
+  /** The revision to compare from. Default to one commit before `to` revision. */
+  from?: string,
+  /** Paths where to look for JS modules, if you have customised modules other than npm's `node_modules`. */
   modules?: string[],
   // extensions?: string[],
+  /** Module alias to a path */
   alias?: { [alias: string]: string },
+  /** `@babel/parser` options for parsing file to AST */
   parserOptions?: ParserOptions,
+  /** Limit paths of tracked files to check with. By default it will check all the git tracked files. */
   paths?: string[]
 };
-export default async function gitChangesAffected(commit: string, opts: Options = {}) {
+/**
+ * Compare 2 git revisions and find out what module declarations are affected by these changes.
+ * @param opts 
+ */
+export default async function gitChangesAffected(opts: Options = {}): Promise<Affected> {
   const extensions = DEFAULT_EXTENSIONS;
-  const diffs = getGitDiffs(commit);
+  const to = opts.to || `HEAD`;
+  const diffs = getGitDiffs(to, opts.from);
   const befores = [] as Change[];
   const afters = [] as Change[];
   diffs.forEach(({ source, target, operation }) => {
@@ -64,9 +83,9 @@ export default async function gitChangesAffected(commit: string, opts: Options =
       afters.push(target);
     }
   });
-  const affected = await changesAffected(`${commit}~1`, befores, opts);
+  const affected = await huntRevisionImpact(opts.from || `${to}~1`, befores, opts);
   debug('before affected:', affected);
-  const toMerge = await changesAffected(commit, afters, opts);
+  const toMerge = await huntRevisionImpact(to, afters, opts);
   debug('after affected:', toMerge);
   Object.keys(toMerge).forEach(mod => {
     const members = toMerge[mod];

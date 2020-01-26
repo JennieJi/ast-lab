@@ -1,6 +1,6 @@
 import { Visitor } from '@babel/traverse';
 import { StringLiteral } from '@babel/types';
-import { Import } from "ast-lab-types";
+import { Import } from 'ast-lab-types';
 import importSpecifier2Dependents from '../getModuleRefFromImportSpecifier';
 import { MODULE_DEFAULT } from '../constants';
 import getModuleRefFromExportSpecifier from '../getModuleRefFromExportSpecifier';
@@ -14,7 +14,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
   return {
     ImportDeclaration({ node }) {
       const modulePath = node.source.value;
-      node.specifiers.forEach((specifier) => {
+      node.specifiers.forEach(specifier => {
         // @ts-ignore
         const dep = importSpecifier2Dependents(specifier);
         if (dep) {
@@ -23,7 +23,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
             alias,
             name,
             source: modulePath,
-            loc: specifier.loc
+            loc: specifier.loc,
           });
         }
       });
@@ -35,11 +35,13 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
       if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
         const source = (args[0] as StringLiteral).value;
         const scopedNaming = (member: string) => `${source}#${member}`;
-        const id = ((parent && parent.type === 'AwaitExpression' ? parentPath.parent : parent) as any).id;
+        const id = ((parent && parent.type === 'AwaitExpression'
+          ? parentPath.parent
+          : parent) as any).id;
         if (id && id.type === 'ObjectPattern') {
-          for (let i = id.properties.length; i--;) {
+          for (let i = id.properties.length; i--; ) {
             const prop = id.properties[i];
-            if (prop.type === 'RestElement' ) {
+            if (prop.type === 'RestElement') {
               break;
             }
             const name = scopedNaming(prop.key.name);
@@ -47,7 +49,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
               alias: name,
               name,
               source,
-              loc
+              loc,
             });
           }
         }
@@ -57,7 +59,7 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
           alias: name,
           name,
           source,
-          loc
+          loc,
         });
       }
     },
@@ -68,14 +70,18 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
      */
     ExportNamedDeclaration({ node }) {
       const { specifiers, source, loc } = node;
-      if (!source || !specifiers.length) { return; }
+      if (!source || !specifiers.length) {
+        return;
+      }
       specifiers.forEach(specifier => {
-        const dep = getModuleRefFromExportSpecifier(specifier as ExportSpecifier);
+        const dep = getModuleRefFromExportSpecifier(
+          specifier as ExportSpecifier
+        );
         if (dep) {
           imports.push({
             ...dep,
             source: source.value,
-            loc
+            loc,
           });
         }
       });

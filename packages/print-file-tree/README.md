@@ -1,11 +1,8 @@
-# `git-changes-affected`
+# `print-file-tree`
 
-> TODO: description
+## Quick starting
 
-## Usage
-
-```
-const gitChangesAffected = require('git-changes-affected');
-
-// TODO: DEMONSTRATE API
+Installing via npm:
+```sh
+npm i print-file-tree
 ```
