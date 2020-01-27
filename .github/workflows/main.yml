@@ -20,14 +20,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: lint
-    env:
-      CODECOV_TOKEN: ${{ secrets.CodeCov }}
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: npm run setup --ci
     - name: jest test
-      run: npm run test --ci --parallel --collect-coverage
-    - name: upload coverage data
-      run: bash <(curl -s https://codecov.io/bash)
+      run: npm run test --ci --parallel
         
