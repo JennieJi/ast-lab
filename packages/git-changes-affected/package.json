@@ -9,6 +9,7 @@
     "dependencies"
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "homepage": "https://jennieji.github.io/ast-lab/modules/git_changes_affected.html",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
     "type": "git",
@@ -23,6 +24,10 @@
   "files": [
     "dist"
   ],
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
   "scripts": {
     "build": "../../node_modules/.bin/tsc --build --verbose ./",
     "test": "../../node_modules/.bin/jest  --config=./jest.config.js"

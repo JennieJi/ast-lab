@@ -18,12 +18,9 @@ describe('rootRelation visitors', () => {
         const code = fs.readFileSync(path.resolve(dirPath, file), 'utf-8');
         traverse(
           // @ts-ignore
-          parse(code, { 
+          parse(code, {
             sourceType: 'module',
-            plugins: [
-              'classProperties',
-              'dynamicImport'
-            ]
+            plugins: ['classProperties', 'dynamicImport'],
           }),
           createVisitor(res)
         );

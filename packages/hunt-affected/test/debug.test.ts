@@ -6,8 +6,8 @@ describe('debug mono repo', () => {
   test('fileDepMap', async () => {
     const res = await fileDepMap(path.resolve(__dirname, '../src/index.ts'), {
       parserOptions: {
-        plugins: ['typescript']
-      }
+        plugins: ['typescript'],
+      },
     });
     expect(relativeDepMap(res)).toMatchSnapshot();
   });

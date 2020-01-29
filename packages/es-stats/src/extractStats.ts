@@ -12,7 +12,7 @@ import { File } from '@babel/types';
  * ```
  * const fs = require('fs');
  * const { parse } = require('@babel/parse');
- * 
+ *
  * extractStats(
  *  parse(
  *    fs.readFileSync('esfile.js', 'utf-8'),
@@ -23,19 +23,28 @@ import { File } from '@babel/types';
  *  )
  * );
  * ```
- * 
+ *
  * @param ast File AST object
  */
-export default function extractStats(ast: File) {
+export default function extractStats(
+  ast: File
+): {
+  imports: Import[];
+  exports: Exports;
+  relations: MemberRelation;
+} {
   const imports = [] as Import[];
   const exports = { members: [] } as Exports;
   const relations = {} as MemberRelation;
-  // @ts-ignore
-  traverse(ast, mergeVisitors(
-    createExportVisitors(exports),
-    createImportVisitors(imports),
-    createRootRelationVisitors(relations)
-  ));
+  traverse(
+    // @ts-ignore
+    ast,
+    mergeVisitors(
+      createExportVisitors(exports),
+      createImportVisitors(imports),
+      createRootRelationVisitors(relations)
+    )
+  );
 
   return {
     imports,

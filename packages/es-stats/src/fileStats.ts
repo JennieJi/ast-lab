@@ -15,15 +15,18 @@ const debug = _debug('es-stats:file');
  *  }
  * );
  * ```
- * 
+ *
  * @param file File content
  * @param parserOptions Options supported by @babel/parser@^7.7.5
  */
-export default function fileStats(file: string, parserOptions?: ParserOptions) {
+export default function fileStats(
+  file: string,
+  parserOptions?: ParserOptions
+): ReturnType<typeof extractStats> {
   debug(file);
-  const ast = parse(file, { 
+  const ast = parse(file, {
     ...(parserOptions || {}),
-    sourceType: 'module'
+    sourceType: 'module',
   });
   return extractStats(ast as File);
 }

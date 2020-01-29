@@ -20,12 +20,15 @@ import { Visitor } from '@babel/traverse';
  */
 export default function mergeVisitors(...visitors: Visitor[]): Visitor {
   return visitors.reduce((ret, visitor, i) => {
-    if (!i) { return visitor; }
+    if (!i) {
+      return visitor;
+    }
     Object.keys(visitor).forEach(key => {
       const value = visitor[key];
       const existing = ret[key];
       if (existing) {
-        const enterSuper = typeof existing === 'function' ? existing : existing.enter;
+        const enterSuper =
+          typeof existing === 'function' ? existing : existing.enter;
         const currentEnter = typeof value === 'function' ? value : value.enter;
         ret[key] = {
           enter() {
@@ -43,7 +46,7 @@ export default function mergeVisitors(...visitors: Visitor[]): Visitor {
             if (value.exit) {
               value.exit.apply(this, arguments);
             }
-          }
+          },
         };
       } else {
         ret[key] = value;

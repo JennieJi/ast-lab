@@ -39,34 +39,45 @@ export function getGitDiffs(to: string, from?: string): Diff[] {
   let lineB = 0;
   let aChangeStart = null as number | null;
   let bChangeStart = null as number | null;
-  const diffLines = strOut.split('\n')
+  const diffLines = strOut.split('\n');
   debug(`>>> ${from}...${to}`);
   diffLines.forEach((content, index) => {
     const lastDiff = diffs[diffs.length - 1];
 
-    const fileHeadMatch = content.match(/^diff --git a\/([^\n\s]+) b\/([^\n\s]+)/);
-    const chunkHeadMatch = content.match(/@@ -(\d+)(,\d+)? \+(\d+)(,\d+)? @@( .+)?/);
-    const isLastLine = index === diffLines.length - 1 || !!fileHeadMatch || !!chunkHeadMatch;
+    const fileHeadMatch = content.match(
+      /^diff --git a\/([^\n\s]+) b\/([^\n\s]+)/
+    );
+    const chunkHeadMatch = content.match(
+      /@@ -(\d+)(,\d+)? \+(\d+)(,\d+)? @@( .+)?/
+    );
+    const isLastLine =
+      index === diffLines.length - 1 || !!fileHeadMatch || !!chunkHeadMatch;
     const isAdded = isLineAdded(content);
     const isRemoved = isLineRemoved(content);
-    debug(`${from}...${to} ${content} > ${fileHeadMatch && fileHeadMatch.slice(1) || chunkHeadMatch && chunkHeadMatch.slice(1)} | last line: ${isLastLine} | ${isRemoved}, ${isAdded} | ${lastDiff && lastDiff.operation}`);
+    debug(
+      `${from}...${to} ${content} > ${(fileHeadMatch &&
+        fileHeadMatch.slice(1)) ||
+        (chunkHeadMatch &&
+          chunkHeadMatch.slice(
+            1
+          ))} | last line: ${isLastLine} | ${isRemoved}, ${isAdded} | ${lastDiff &&
+        lastDiff.operation}`
+    );
 
     if (lastDiff) {
       const aChanges = lastDiff.source.changed;
       const bChanges = lastDiff.target.changed;
-      if (
-        lastDiff.operation !== GIT_OPERATION.rename
-      ) {
+      if (lastDiff.operation !== GIT_OPERATION.rename) {
         if (isRemoved && !aChangeStart) {
           aChangeStart = lineA;
         }
-        if (
-          (!isRemoved || isLastLine) && aChangeStart
-        ) {
-          debug(`${from} -${lastDiff.source.file} ${aChangeStart}-${lineA - 1}`)
-          aChanges.push({ 
+        if ((!isRemoved || isLastLine) && aChangeStart) {
+          debug(
+            `${from} -${lastDiff.source.file} ${aChangeStart}-${lineA - 1}`
+          );
+          aChanges.push({
             start: aChangeStart,
-            end: lineA - 1
+            end: lineA - 1,
           });
           aChangeStart = null;
         }
@@ -77,14 +88,11 @@ export function getGitDiffs(to: string, from?: string): Diff[] {
       if (isAdded && !bChangeStart) {
         bChangeStart = lineB;
       }
-      if (
-        (!isAdded || isLastLine) && 
-        bChangeStart
-      ) {
-        debug(`${to} +${lastDiff.target.file} ${bChangeStart}-${lineB - 1}`)
+      if ((!isAdded || isLastLine) && bChangeStart) {
+        debug(`${to} +${lastDiff.target.file} ${bChangeStart}-${lineB - 1}`);
         bChanges.push({
-          start: bChangeStart, 
-          end: lineB - 1
+          start: bChangeStart,
+          end: lineB - 1,
         });
         bChangeStart = null;
       }
@@ -103,16 +111,27 @@ export function getGitDiffs(to: string, from?: string): Diff[] {
       diffs.push({
         source: {
           file: sourceFile,
-          content: operation === GIT_OPERATION.new ? null : getRevisionFile(`${from}`, sourceFile),
-          changed: operation === GIT_OPERATION.rename ? [{
-            start: 0, 
-            end: Infinity
-          }]: []
+          content:
+            operation === GIT_OPERATION.new
+              ? null
+              : getRevisionFile(`${from}`, sourceFile),
+          changed:
+            operation === GIT_OPERATION.rename
+              ? [
+                  {
+                    start: 0,
+                    end: Infinity,
+                  },
+                ]
+              : [],
         },
         target: {
           file: targetFile,
-          content:  operation === GIT_OPERATION.delete ? null : getRevisionFile(to, targetFile),
-          changed: []
+          content:
+            operation === GIT_OPERATION.delete
+              ? null
+              : getRevisionFile(to, targetFile),
+          changed: [],
         },
         operation,
       });
@@ -122,11 +141,13 @@ export function getGitDiffs(to: string, from?: string): Diff[] {
     if (chunkHeadMatch) {
       lineA = parseInt(chunkHeadMatch[1], 10);
       lineB = parseInt(chunkHeadMatch[3], 10);
-      if (chunkHeadMatch[5]){
+      if (chunkHeadMatch[5]) {
         lineA++;
         lineB++;
       }
-      debug(`${from}...${to} chunk start -${lastDiff.source.file}:${lineA} +${lastDiff.target.file}:${lineB}`)
+      debug(
+        `${from}...${to} chunk start -${lastDiff.source.file}:${lineA} +${lastDiff.target.file}:${lineB}`
+      );
       return;
     }
   });

@@ -109,12 +109,9 @@ export default function createRootRelationVisitors(
         newScope();
 
         if (p.isFunction()) {
-          const refs = p.node.params.reduce(
-            (ret, param) => {
-              return ret.concat(getPatternNames(param as LVal));
-            },
-            [] as Array<MemberRef>
-          );
+          const refs = p.node.params.reduce((ret, param) => {
+            return ret.concat(getPatternNames(param as LVal));
+          }, [] as Array<MemberRef>);
           addRefsToPrivates(refs);
         } else if (p.isCatchClause()) {
           addRefsToPrivates(getPatternNames(p.node.param as LVal));
@@ -162,7 +159,7 @@ export default function createRootRelationVisitors(
     },
     Identifier(p) {
       const { node, key } = p;
-      let parentPath = p.parentPath;
+      const parentPath = p.parentPath;
       // exclude function/class identifier
       if (
         (parentPath.isScopable() && key === 'id') ||
