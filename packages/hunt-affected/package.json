@@ -19,7 +19,12 @@
   "files": [
     "./dist"
   ],
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "homepage": "https://jennieji.github.io/ast-lab/modules/hunt-affected.html",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
     "type": "git",

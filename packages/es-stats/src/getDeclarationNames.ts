@@ -8,14 +8,19 @@ import { MemberRef } from 'ast-lab-types';
  * @param node AST node object
  * @return A list of objects contain declaration name and alias
  */
-export default function getDeclarationNames(node: Node): Array<MemberRef> | null {
-  switch(node.type) {
+export default function getDeclarationNames(
+  node: Node
+): Array<MemberRef> | null {
+  switch (node.type) {
     case 'VariableDeclaration':
       return node.declarations.reduce((ret, node) => {
         if (node.id) {
           return ret.concat(getPatternNames(node.id));
         } else {
-          console.warn('getDeclarationNames - VariableDeclaration id not exist, node:', node);
+          console.warn(
+            'getDeclarationNames - VariableDeclaration id not exist, node:',
+            node
+          );
           return ret;
         }
       }, [] as Array<MemberRef>);

@@ -16,9 +16,9 @@ describe('import visitors', () => {
         const code = fs.readFileSync(path.resolve(dir, file), 'utf-8');
         traverse(
           // @ts-ignore
-          parse(code, { 
+          parse(code, {
             sourceType: 'module',
-            plugins: ['dynamicImport']
+            plugins: ['dynamicImport'],
           }),
           createVisitor(res)
         );

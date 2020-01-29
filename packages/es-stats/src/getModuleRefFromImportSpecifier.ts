@@ -1,24 +1,30 @@
-import { MODULE_ALL, MODULE_DEFAULT} from './constants';
-import { ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier } from '@babel/types';
+import { MODULE_ALL, MODULE_DEFAULT } from './constants';
+import {
+  ImportDefaultSpecifier,
+  ImportNamespaceSpecifier,
+  ImportSpecifier,
+} from '@babel/types';
 import { MemberRef } from 'ast-lab-types';
 
-export default function(specifier: ImportDefaultSpecifier | ImportNamespaceSpecifier | ImportSpecifier): MemberRef | null {
+export default function(
+  specifier: ImportDefaultSpecifier | ImportNamespaceSpecifier | ImportSpecifier
+): MemberRef | null {
   const alias = specifier.local.name;
-  switch(specifier.type) {
+  switch (specifier.type) {
     case 'ImportSpecifier':
       return {
         name: specifier.imported.name,
-        alias
+        alias,
       };
     case 'ImportDefaultSpecifier':
       return {
         name: MODULE_DEFAULT,
-        alias
-      }
+        alias,
+      };
     case 'ImportNamespaceSpecifier':
-      return  {
+      return {
         name: MODULE_ALL,
-        alias
+        alias,
       };
   }
   return null;

@@ -9,8 +9,8 @@ describe('fileDepMap()', () => {
     test(file, async () => {
       const res = await fileDepMap(path.resolve(dir, file), {
         parserOptions: {
-          plugins: ['dynamicImport']
-        }
+          plugins: ['dynamicImport'],
+        },
       });
       expect(relativeDepMap(res)).toMatchSnapshot();
     });

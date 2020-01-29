@@ -1,5 +1,5 @@
 import path from 'path';
-import exec from "./exec";
+import exec from './exec';
 import gitRoot from './gitRoot';
 
 const ROOT = gitRoot();
@@ -8,6 +8,6 @@ function getRelativePath(file: string) {
 }
 
 /** @internal */
-export default  function getRevisionFile(revision: string, file: string) {
+export default function getRevisionFile(revision: string, file: string) {
   return exec(`git show ${revision}:${getRelativePath(file)}`);
 }

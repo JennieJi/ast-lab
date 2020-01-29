@@ -12,6 +12,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "homepage": "https://jennieji.github.io/ast-lab/modules/print-file-tree.html",
   "repository": {
     "url": "https://github.com/JennieJi/ast-lab",
     "type": "git",
@@ -20,6 +21,10 @@
   "files": [
     "dist"
   ],
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
   "scripts": {
     "build": "../../node_modules/.bin/tsc -p ./",
     "test": "echo \"Error: run tests from root\" && exit 0"
