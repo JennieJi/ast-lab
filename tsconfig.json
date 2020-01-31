@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "es2019",
+    "target": "es6",
     "lib": ["es2019"],
     "strict": true,
     "moduleResolution": "Node",
@@ -14,13 +14,13 @@
     "strictNullChecks": true,
     "downlevelIteration": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noImplicitAny": true,
+    "noImplicitAny": true
   },
   "exclude": [
     "**/node_modules",
     "**/dist",
     "**/test",
     "**/*.test.ts",
-    "**/types",
+    "**/types"
   ]
 }
