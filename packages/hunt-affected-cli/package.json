@@ -1,0 +1,43 @@
+{
+  "name": "hunt-affected-cli",
+  "version": "1.0.0-alpha",
+  "description": "Detect where your file exports are used and potentially afffected by it's changes",
+  "main": "dist/index.js",
+  "bin": {
+    "hunt-affected": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc --build --verbose ./"
+  },
+  "keywords": [
+    "affected",
+    "dependency",
+    "change",
+    "used",
+    "ecma",
+    "export"
+  ],
+  "files": [
+    "./dist"
+  ],
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "homepage": "https://jennieji.github.io/ast-lab",
+  "repository": {
+    "url": "https://github.com/JennieJi/ast-lab",
+    "type": "git",
+    "directory": "packages/hunt-affected-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/ast-lab/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^4.1.0",
+    "glob": "^7.1.4",
+    "hunt-affected": "^1.0.0-alpha"
+  }
+}
