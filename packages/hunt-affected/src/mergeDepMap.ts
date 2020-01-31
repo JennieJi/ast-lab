@@ -17,11 +17,31 @@ const core = new Set(require('module').builtinModules);
 export default async function mergeDepMap(
   sources: string[],
   opts: Options = {}
-) {
+): Promise<DependencyMap> {
   debug('===');
   const srcSet = new Set(sources);
   const depMap = new Map() as DependencyMap;
-  const resolver = opts.resolver || denodeify(enhancedResolve);
+  const extensions = ['.js', '.json'];
+  const parserPlugins = opts.parserOptions?.plugins;
+  if (parserPlugins?.includes('typescript')) {
+    extensions.push('.ts');
+  }
+  if (parserPlugins?.includes('jsx')) {
+    extensions.push('.jsx');
+    if (parserPlugins?.includes('typescript')) {
+      extensions.push('.tsx');
+    }
+  }
+  if (parserPlugins?.includes('flow')) {
+    extensions.push('.flow');
+  }
+  const resolver =
+    opts.resolver ||
+    denodeify(
+      enhancedResolve.create({
+        extensions,
+      })
+    );
 
   const fileHandlers = [] as Array<Promise<any>>;
   sources.forEach(src => {
