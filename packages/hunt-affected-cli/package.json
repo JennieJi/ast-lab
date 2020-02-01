@@ -1,7 +1,7 @@
 {
   "name": "hunt-affected-cli",
   "version": "1.0.0-alpha",
-  "description": "Detect where your file exports are used and potentially afffected by it's changes",
+  "description": "CLI for detecting where your file exports are used and potentially afffected by it's changes",
   "main": "dist/index.js",
   "bin": {
     "hunt-affected": "./dist/index.js"
