@@ -1,5 +1,4 @@
-# hunt-affected-cli
-
+hunt-affected-cli
 ===
 
 The CLI for detecting where your file exports are used and potentially afffected by it's changes.

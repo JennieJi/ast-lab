@@ -101,7 +101,9 @@ gitChangesAffected();</code></pre>
 							<h3>References</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#change" class="tsd-kind-icon">Change</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#default_extensions" class="tsd-kind-icon">DEFAULT_<wbr>EXTENSIONS</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#diff" class="tsd-kind-icon">Diff</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#git_operation" class="tsd-kind-icon">GIT_<wbr>OPERATION</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#default" class="tsd-kind-icon">default</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#getchangedentries" class="tsd-kind-icon">get<wbr>Changed<wbr>Entries</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="git_changes_affected.html#getgitdiffs" class="tsd-kind-icon">get<wbr>Git<wbr>Diffs</a></li>
@@ -111,7 +113,7 @@ gitChangesAffected();</code></pre>
 						<section class="tsd-index-section ">
 							<h3>Enumerations</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/git_changes_affected.git_operation.html" class="tsd-kind-icon">GIT_<wbr>OPERATION</a></li>
+								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/git_changes_affected.git_operation-1.html" class="tsd-kind-icon">GIT_<wbr>OPERATION</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -119,12 +121,19 @@ gitChangesAffected();</code></pre>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="git_changes_affected.html#change-1" class="tsd-kind-icon">Change</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="git_changes_affected.html#diff-1" class="tsd-kind-icon">Diff</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="git_changes_affected.html#options" class="tsd-kind-icon">Options</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="git_changes_affected.html#options-1" class="tsd-kind-icon">Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="git_changes_affected.html#default_extensions-1" class="tsd-kind-icon">DEFAULT_<wbr>EXTENSIONS</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="git_changes_affected.html#denodeify" class="tsd-kind-icon">denodeify</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="git_changes_affected.html#getabsolutepath" class="tsd-kind-icon">get<wbr>Absolute<wbr>Path</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="git_changes_affected.html#getchangedentries-1" class="tsd-kind-icon">get<wbr>Changed<wbr>Entries</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="git_changes_affected.html#getgitdiffs-1" class="tsd-kind-icon">get<wbr>Git<wbr>Diffs</a></li>
@@ -147,9 +156,19 @@ gitChangesAffected();</code></pre>
 					Re-exports <a href="git_changes_affected.html#change-1">Change</a>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="default_extensions" class="tsd-anchor"></a>
+					<h3>DEFAULT_<wbr>EXTENSIONS</h3>
+					Re-exports <a href="git_changes_affected.html#default_extensions-1">DEFAULT_EXTENSIONS</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="diff" class="tsd-anchor"></a>
 					<h3>Diff</h3>
 					Re-exports <a href="git_changes_affected.html#diff-1">Diff</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="git_operation" class="tsd-anchor"></a>
+					<h3>GIT_<wbr>OPERATION</h3>
+					Re-exports <a href="../enums/git_changes_affected.git_operation-1.html">GIT_OPERATION</a>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="default" class="tsd-anchor"></a>
@@ -180,7 +199,7 @@ gitChangesAffected();</code></pre>
 					<div class="tsd-signature tsd-kind-icon">Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>changed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>start<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/types.ts#L9">git-changes-affected/src/types.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/types.ts#L11">git-changes-affected/src/types.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -211,17 +230,17 @@ gitChangesAffected();</code></pre>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="diff-1" class="tsd-anchor"></a>
 					<h3>Diff</h3>
-					<div class="tsd-signature tsd-kind-icon">Diff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>operation<span class="tsd-signature-symbol">: </span><a href="../enums/git_changes_affected.git_operation.html" class="tsd-signature-type">GIT_OPERATION</a><span class="tsd-signature-symbol">; </span>source<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol">; </span>target<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Diff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>operation<span class="tsd-signature-symbol">: </span><a href="../enums/git_changes_affected.git_operation-1.html" class="tsd-signature-type">GIT_OPERATION</a><span class="tsd-signature-symbol">; </span>source<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol">; </span>target<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/types.ts#L3">git-changes-affected/src/types.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/types.ts#L5">git-changes-affected/src/types.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5>operation<span class="tsd-signature-symbol">: </span><a href="../enums/git_changes_affected.git_operation.html" class="tsd-signature-type">GIT_OPERATION</a></h5>
+								<h5>operation<span class="tsd-signature-symbol">: </span><a href="../enums/git_changes_affected.git_operation-1.html" class="tsd-signature-type">GIT_OPERATION</a></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5>source<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a></h5>
@@ -232,44 +251,87 @@ gitChangesAffected();</code></pre>
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="options" class="tsd-anchor"></a>
+					<h3>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>extensions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>modules<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>paths<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/huntRevisionImpact.ts#L13">git-changes-affected/src/huntRevisionImpact.ts:13</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> alias<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Module alias to a path</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> extensions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Filter file extensions, default value: <code>[&#39;.js&#39;, &#39;.jsx&#39;, &#39;.ts&#39;, &#39;.tsx]</code>.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> modules<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Paths where to look for JS modules, if you have customised modules other than npm&#39;s <code>node_modules</code>.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> parser<wbr>Options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ParserOptions</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p><code>@babel/parser</code> options for parsing file to AST</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> paths<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Limit paths of tracked files to check with. By default it will check all the git tracked files.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="options-1" class="tsd-anchor"></a>
+					<h3>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HuntRevisionImpactOptions</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>from<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>to<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/gitChangesAffected.ts#L14">git-changes-affected/src/gitChangesAffected.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="default_extensions-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>EXTENSIONS</h3>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>EXTENSIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;.js&#x27;, &#x27;.jsx&#x27;, &#x27;.ts&#x27;, &#x27;.tsx&#x27;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/constants.ts#L8">git-changes-affected/src/constants.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-					<a name="denodeify" class="tsd-anchor"></a>
-					<h3>denodeify</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">denodeify&lt;Response&gt;<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/denodeify.ts#L2">git-changes-affected/src/denodeify.ts:2</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>internal</dt>
-									<dd></dd>
-								</dl>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>Response</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>func: <span class="tsd-signature-type">Function</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getabsolutepath" class="tsd-anchor"></a>
 					<h3>get<wbr>Absolute<wbr>Path</h3>
@@ -280,7 +342,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/getAbsolutePath.ts#L6">git-changes-affected/src/getAbsolutePath.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/getAbsolutePath.ts#L6">git-changes-affected/src/getAbsolutePath.ts:6</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -309,7 +371,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/getChangedEntries.ts#L34">git-changes-affected/src/getChangedEntries.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/getChangedEntries.ts#L35">git-changes-affected/src/getChangedEntries.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +406,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/getGitDiffs.ts#L34">git-changes-affected/src/getGitDiffs.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/getGitDiffs.ts#L34">git-changes-affected/src/getGitDiffs.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -381,7 +443,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/getRevisionFile.ts#L11">git-changes-affected/src/getRevisionFile.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/getRevisionFile.ts#L11">git-changes-affected/src/getRevisionFile.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -413,7 +475,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/getTrackedFiles.ts#L7">git-changes-affected/src/getTrackedFiles.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/getTrackedFiles.ts#L7">git-changes-affected/src/getTrackedFiles.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -439,13 +501,13 @@ gitChangesAffected();</code></pre>
 					<a name="gitchangesaffected" class="tsd-anchor"></a>
 					<h3>git<wbr>Changes<wbr>Affected</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">git<wbr>Changes<wbr>Affected<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">?: </span><a href="hunt_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="hunt_affected.html#affected" class="tsd-signature-type">Affected</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">git<wbr>Changes<wbr>Affected<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">?: </span><a href="git_changes_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="hunt_affected.html#affected" class="tsd-signature-type">Affected</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/gitChangesAffected.ts#L66">git-changes-affected/src/gitChangesAffected.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/gitChangesAffected.ts#L25">git-changes-affected/src/gitChangesAffected.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -456,7 +518,7 @@ gitChangesAffected();</code></pre>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> opts: <a href="hunt_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol"> = {}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> opts: <a href="git_changes_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol"> = {}</span></h5>
 									<div class="tsd-comment tsd-typography">
 									</div>
 								</li>
@@ -475,7 +537,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/gitRoot.ts#L4">git-changes-affected/src/gitRoot.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/gitRoot.ts#L4">git-changes-affected/src/gitRoot.ts:4</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -498,7 +560,7 @@ gitChangesAffected();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/hasExt.ts#L2">git-changes-affected/src/hasExt.ts:2</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/hasExt.ts#L2">git-changes-affected/src/hasExt.ts:2</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -524,13 +586,13 @@ gitChangesAffected();</code></pre>
 					<a name="huntrevisionimpact-1" class="tsd-anchor"></a>
 					<h3>hunt<wbr>Revision<wbr>Impact</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">hunt<wbr>Revision<wbr>Impact<span class="tsd-signature-symbol">(</span>revision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, changes<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol">[]</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>modules<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="hunt_affected.html#affected" class="tsd-signature-type">Affected</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">hunt<wbr>Revision<wbr>Impact<span class="tsd-signature-symbol">(</span>revision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, changes<span class="tsd-signature-symbol">: </span><a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol">[]</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>extensions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>modules<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="hunt_affected.html#affected" class="tsd-signature-type">Affected</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/cc18f38/packages/git-changes-affected/src/gitChangesAffected.ts#L25">git-changes-affected/src/gitChangesAffected.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/git-changes-affected/src/huntRevisionImpact.ts#L34">git-changes-affected/src/huntRevisionImpact.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -550,10 +612,13 @@ gitChangesAffected();</code></pre>
 									<h5>changes: <a href="git_changes_affected.html#change-1" class="tsd-signature-type">Change</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>modules<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h5>
+									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>extensions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>modules<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>parserOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ParserOptions</span><span class="tsd-signature-symbol">; </span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>extensions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 										</li>
 										<li class="tsd-parameter">
 											<h5>modules<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
@@ -589,6 +654,9 @@ gitChangesAffected();</code></pre>
 						<a href="hunt_affected.html">hunt-<wbr>affected</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="hunt_unused.html">hunt-<wbr>unused</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="print_file_tree.html">print-<wbr>file-<wbr>tree</a>
 					</li>
 				</ul>
@@ -599,7 +667,13 @@ gitChangesAffected();</code></pre>
 						<a href="git_changes_affected.html#change" class="tsd-kind-icon">Change</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="git_changes_affected.html#default_extensions" class="tsd-kind-icon">DEFAULT_<wbr>EXTENSIONS</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="git_changes_affected.html#diff" class="tsd-kind-icon">Diff</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="git_changes_affected.html#git_operation" class="tsd-kind-icon">GIT_<wbr>OPERATION</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="git_changes_affected.html#default" class="tsd-kind-icon">default</a>
@@ -614,7 +688,7 @@ gitChangesAffected();</code></pre>
 						<a href="git_changes_affected.html#huntrevisionimpact" class="tsd-kind-icon">hunt<wbr>Revision<wbr>Impact</a>
 					</li>
 					<li class=" tsd-kind-enum tsd-parent-kind-module">
-						<a href="../enums/git_changes_affected.git_operation.html" class="tsd-kind-icon">GIT_<wbr>OPERATION</a>
+						<a href="../enums/git_changes_affected.git_operation-1.html" class="tsd-kind-icon">GIT_<wbr>OPERATION</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="git_changes_affected.html#change-1" class="tsd-kind-icon">Change</a>
@@ -622,8 +696,14 @@ gitChangesAffected();</code></pre>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="git_changes_affected.html#diff-1" class="tsd-kind-icon">Diff</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="git_changes_affected.html#denodeify" class="tsd-kind-icon">denodeify</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="git_changes_affected.html#options" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="git_changes_affected.html#options-1" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="git_changes_affected.html#default_extensions-1" class="tsd-kind-icon">DEFAULT_<wbr>EXTENSIONS</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="git_changes_affected.html#getabsolutepath" class="tsd-kind-icon">get<wbr>Absolute<wbr>Path</a>

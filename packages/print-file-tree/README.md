@@ -1,4 +1,5 @@
-# `print-file-tree`
+print-file-tree
+===
 
 ## Quick starting
 

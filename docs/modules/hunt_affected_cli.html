@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Jennie&#x27;s ast lab</title>
+	<title>hunt-affected-cli | Jennie&#x27;s ast lab</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Jennie&#x27;s ast lab</a>
+					<a href="../index.html" class="title">Jennie&#x27;s ast lab</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -49,55 +49,64 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="hunt_affected_cli.html">hunt-affected-cli</a>
 				</li>
 			</ul>
-			<h1>Jennie&#x27;s ast lab</h1>
+			<h1>Module hunt-affected-cli</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Modules</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-module"><a href="modules/es_stats.html" class="tsd-kind-icon">es-<wbr>stats</a></li>
-								<li class="tsd-kind-module"><a href="modules/git_changes_affected.html" class="tsd-kind-icon">git-<wbr>changes-<wbr>affected</a></li>
-								<li class="tsd-kind-module"><a href="modules/hunt_affected.html" class="tsd-kind-icon">hunt-<wbr>affected</a></li>
-								<li class="tsd-kind-module"><a href="modules/hunt_affected_cli.html" class="tsd-kind-icon">hunt-<wbr>affected-<wbr>cli</a></li>
-								<li class="tsd-kind-module"><a href="modules/hunt_unused.html" class="tsd-kind-icon">hunt-<wbr>unused</a></li>
-								<li class="tsd-kind-module"><a href="modules/print_file_tree.html" class="tsd-kind-icon">print-<wbr>file-<wbr>tree</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#hunt-affected-cli" id="hunt-affected-cli" style="color: inherit; text-decoration: none;">
+						<h1>hunt-affected-cli</h1>
+					</a>
+					<p>The CLI for detecting where your file exports are used and potentially afffected by it&#39;s changes.</p>
+					<p>Based on <a href="https://jennieji.github.io/ast-lab/modules/hunt-affected.html">hunt-affected</a> with limited support.</p>
+					<a href="#quick-starting" id="quick-starting" style="color: inherit; text-decoration: none;">
+						<h2>Quick starting</h2>
+					</a>
+					<p>Install globally via npm:</p>
+					<pre><code class="language-sh">npm i hunt-affected -g</code></pre>
+					<p>And run the script under your source code path:</p>
+					<pre><code class="language-sh">hunt-affected &lt;entryFile&gt; [*|[export1[,export2[,exports]]]]</code></pre>
+					<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+						<h2>Options</h2>
+					</a>
+					<a href="#--source" id="--source" style="color: inherit; text-decoration: none;">
+						<h3>--source</h3>
+					</a>
+					<p>All the <code>.js</code> files will be scanned under the script running path by default. You may change this by <code>--source=&lt;glob&gt;</code> option, e.g.:</p>
+					<pre><code class="language-sh">hunt-affected myFile.js default --<span class="hljs-built_in">source</span>=src/*.js</code></pre>
+					<a href="#--parser-plugins" id="--parser-plugins" style="color: inherit; text-decoration: none;">
+						<h3>--parser-plugins</h3>
+					</a>
+					<p>As <code>hunt-affected</code> is using <code>@babel/parser</code> to parse JS files, you may need to take care of the parser configurations. So far it only supports passing <a href="https://babeljs.io/docs/en/7.4.0/babel-parser#plugins">plugin option</a>.</p>
+					<p>Following plugins are enabled on <code>.js</code>|<code>.jsx</code>|<code>.ts</code>|<code>.tsx</code> files by default:</p>
+					<ul>
+						<li><code>dynamicImport</code></li>
+						<li><code>classProperties</code></li>
+						<li><code>flowComments</code></li>
+						<li><code>objectRestSpread</code></li>
+						<li><code>functionBind</code></li>
+						<li><code>jsx</code></li>
+						<li><code>flow</code> (.js and .jsx only)</li>
+						<li><code>typescript</code> (.ts and .tsx only)</li>
+					</ul>
+				</div>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals current ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/es_stats.html">es-<wbr>stats</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/git_changes_affected.html">git-<wbr>changes-<wbr>affected</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/hunt_affected.html">hunt-<wbr>affected</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/hunt_unused.html">hunt-<wbr>unused</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/print_file_tree.html">print-<wbr>file-<wbr>tree</a>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
@@ -172,7 +181,7 @@
 	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

@@ -73,25 +73,30 @@
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> esStats = <span class="hljs-built_in">require</span>(<span class="hljs-string">'es-stats'</span>);
 <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 
-<span class="hljs-keyword">const</span> {
-  imports,
-  exports,
-  relations
-} = esStats(fs.readFileSync(<span class="hljs-string">'myfile.js'</span>, <span class="hljs-string">'utf-8'</span>));
+<span class="hljs-keyword">const</span> { imports, exports, relations } = esStats(
+  fs.readFileSync(<span class="hljs-string">'myfile.js'</span>, <span class="hljs-string">'utf-8'</span>)
+);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Imports:'</span>, imports);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Exports:'</span>, exports);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Relations:'</span>, relations);</code></pre>
 				<p>To support things like <code>JSX</code>, <code>flow</code>, <code>dynamic imports</code>, etc.. You will need to enable <code>@babel/parser</code> plugins:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {
-  imports,
-  exports,
-  relations
-} = esStats(
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { imports, exports, relations } = esStats(
   fs.readFileSync(<span class="hljs-string">'myfile.js'</span>, <span class="hljs-string">'utf-8'</span>),
   {
-    <span class="hljs-attr">plugins</span>: [<span class="hljs-string">'jsx'</span>, <span class="hljs-string">'dynamicImport'</span>]
+    <span class="hljs-attr">plugins</span>: [<span class="hljs-string">'jsx'</span>, <span class="hljs-string">'dynamicImport'</span>],
   }
 );</code></pre>
+				<p>Following plugins are enabled on <code>.js</code>|<code>.jsx</code>|<code>.ts</code>|<code>.tsx</code> files by default:</p>
+				<ul>
+					<li><code>dynamicImport</code></li>
+					<li><code>classProperties</code></li>
+					<li><code>flowComments</code></li>
+					<li><code>objectRestSpread</code></li>
+					<li><code>functionBind</code></li>
+					<li><code>jsx</code></li>
+					<li><code>flow</code> (.js and .jsx only)</li>
+					<li><code>typescript</code> (.ts and .tsx only)</li>
+				</ul>
 				<p>All the options in the 2nd parameter will be passed to <code>@babel/parser</code> directly. <code>@babel/parser</code> options can be found <a href="https://babeljs.io/docs/en/babel-parser">here</a>.</p>
 			</div>
 		</div>
@@ -109,6 +114,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/hunt_affected.html">hunt-<wbr>affected</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/hunt_unused.html">hunt-<wbr>unused</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/print_file_tree.html">print-<wbr>file-<wbr>tree</a>
