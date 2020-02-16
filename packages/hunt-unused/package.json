@@ -1,0 +1,45 @@
+{
+  "name": "hunt-unused",
+  "version": "1.0.0-alpha",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc --build --verbose ./",
+    "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
+  },
+  "keywords": [
+    "unused",
+    "exports",
+    "ecma",
+    "cli",
+    "tool",
+    "cleanup"
+  ],
+  "files": [
+    "./dist"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "repository": {
+    "url": "https://github.com/JennieJi/ast-lab/modules/hunt-unused.html",
+    "type": "git",
+    "directory": "packages/hunt-unsed"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/ast-lab/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.1.0",
+    "glob": "^7.1.6",
+    "hunt-affected": "^1.0.0-alpha"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.8.4",
+    "@types/commander": "^2.12.2",
+    "@types/glob": "^7.1.1",
+    "ast-lab-types": "^1.0.0-alpha"
+  }
+}

@@ -1,10 +1,8 @@
-import resolver from 'enhanced-resolve';
 import huntAffected, { Affected } from 'hunt-affected';
 import _debug from 'debug';
 import { ParserOptions } from '@babel/parser';
 import IncludesFilePlugin from './includesFilePlugin';
 import getRevisionFile from './getRevisionFile';
-import denodeify from './denodeify';
 import getTrackedFiles from './getTrackedFiles';
 import getAbsolutePath from './getAbsolutePath';
 import getChangedEntries from './getChangedEntries';
@@ -22,7 +20,7 @@ export type Options = {
   parserOptions?: ParserOptions;
   /** Limit paths of tracked files to check with. By default it will check all the git tracked files. */
   paths?: string[];
-  /** Filter file extensions, eg. `['.js', '.jsx', '.ts', '.tsx]`. */
+  /** Filter file extensions, default value: `['.js', '.jsx', '.ts', '.tsx]`. */
   extensions?: string[];
 };
 
@@ -47,14 +45,12 @@ export default function huntRevisionImpact(
   debug(`${revision} entries: ${JSON.stringify(entries)}`);
   return huntAffected(trackedFiles, entries, {
     loader: (file: string) => Promise.resolve(getRevisionFile(revision, file)),
-    resolver: denodeify(
-      resolver.create({
-        extensions: _extensions,
-        alias,
-        modules,
-        plugins: [new IncludesFilePlugin(trackedFiles, extensions)],
-      })
-    ),
+    resolverOptions: {
+      extensions: _extensions,
+      alias,
+      modules,
+      plugins: [new IncludesFilePlugin(trackedFiles, extensions)],
+    },
     parserOptions,
   });
 }

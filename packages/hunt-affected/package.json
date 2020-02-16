@@ -41,6 +41,7 @@
     "ast-lab-types": "^1.0.0-alpha"
   },
   "dependencies": {
+    "commander": "^4.1.0",
     "debug": "^4.1.1",
     "enhanced-resolve": "^4.1.1",
     "es-stats": "^1.0.0-alpha"

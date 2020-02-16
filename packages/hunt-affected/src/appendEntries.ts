@@ -11,22 +11,23 @@ import {
  * @param depMap
  * @param mod
  * @param member
- * @param entry
+ * @param entries
  */
 export default function appendEntries(
   depMap: DependencyMap,
   mod: Module,
   member: Member,
-  entry: Entry[]
+  entries: Entry[]
 ): void {
-  const affected = depMap.get(mod) || (new Map() as AffectedMap);
-  if (!depMap.has(mod)) {
+  let affected = depMap.get(mod);
+  if (!affected) {
+    affected = new Map() as AffectedMap;
     depMap.set(mod, affected);
   }
   affected.set(
     member,
     affected.get(member)
-      ? (affected.get(member) as Entry[]).concat(entry)
-      : entry
+      ? (affected.get(member) as Entry[]).concat(entries)
+      : entries
   );
 }
