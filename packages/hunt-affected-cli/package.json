@@ -15,7 +15,8 @@
     "change",
     "used",
     "ecma",
-    "export"
+    "export",
+    "cli"
   ],
   "files": [
     "./dist"

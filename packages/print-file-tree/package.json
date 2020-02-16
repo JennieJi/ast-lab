@@ -1,14 +1,17 @@
 {
   "name": "print-file-tree",
   "version": "1.0.0-alpha",
-  "description": "Console log a tree like structure from list of files",
+  "description": "Console print simple file tree",
   "keywords": [
-    "console",
-    "print",
     "file",
-    "tree"
+    "tree",
+    "print",
+    "console"
   ],
   "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "bugs": {
+    "url": "https://github.com/JennieJi/ast-lab/issues"
+  },
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.js",

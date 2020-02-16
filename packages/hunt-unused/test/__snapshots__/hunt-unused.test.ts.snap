@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`huntUnused fixture test 1`] = `
+Object {
+  "/Users/jennie.ji/Projects/affected/packages/hunt-unused/test/fixtures/b.js": Array [
+    "b2",
+  ],
+  "/Users/jennie.ji/Projects/affected/packages/hunt-unused/test/fixtures/c.js": Array [],
+  "/Users/jennie.ji/Projects/affected/packages/hunt-unused/test/fixtures/d.js": Array [
+    "*",
+  ],
+}
+`;

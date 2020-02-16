@@ -1,4 +1,4 @@
-# `hunt-affected-cli`
+# hunt-affected-cli
 
 ===
 
@@ -34,20 +34,13 @@ hunt-affected myFile.js default --source=src/*.js
 
 As `hunt-affected` is using `@babel/parser` to parse JS files, you may need to take care of the parser configurations. So far it only supports passing [plugin option](https://babeljs.io/docs/en/7.4.0/babel-parser#plugins).
 
-If you would like to handle Typescript files:
+Following plugins are enabled on `.js`|`.jsx`|`.ts`|`.tsx` files by default:
 
-```sh
-hunt-affected myFile.js --parser-plugins=typescript
-```
-
-If you would like to handle Flow files:
-
-```sh
-hunt-affected myFile.js --parser-plugins=flow
-```
-
-If you would like to handle JSX:
-
-```sh
-hunt-affected myFile.js --parser-plugins=typescript,jsx
-```
+- `dynamicImport`
+- `classProperties`
+- `flowComments`
+- `objectRestSpread`
+- `functionBind`
+- `jsx`
+- `flow` (.js and .jsx only)
+- `typescript` (.ts and .tsx only)
