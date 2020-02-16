@@ -1,6 +1,6 @@
 {
   "name": "git-changes-affected",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Find git changes affected files",
   "keywords": [
     "affected",
@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "@babel/parser": "^7.7.5",
-    "ast-lab-types": "^1.0.0-alpha",
+    "ast-lab-types": "^1.0.0-alpha.1",
     "debug": "^4.1.1",
-    "es-stats": "^1.0.0-alpha",
-    "hunt-affected": "^1.0.0-alpha"
+    "es-stats": "^1.0.0-alpha.1",
+    "hunt-affected": "^1.0.0-alpha.1"
   }
 }

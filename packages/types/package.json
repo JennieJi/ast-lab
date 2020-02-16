@@ -1,6 +1,6 @@
 {
   "name": "ast-lab-types",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "main": "index.d.ts",
   "types": "index.d.ts",

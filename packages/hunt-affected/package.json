@@ -1,6 +1,6 @@
 {
   "name": "hunt-affected",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Detect where your file exports are used and potentially afffected by it's changes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -38,12 +38,12 @@
     "@babel/parser": "^7.7.5",
     "@types/debug": "^4.1.5",
     "@types/enhanced-resolve": "^3.0.6",
-    "ast-lab-types": "^1.0.0-alpha"
+    "ast-lab-types": "^1.0.0-alpha.1"
   },
   "dependencies": {
     "commander": "^4.1.0",
     "debug": "^4.1.1",
     "enhanced-resolve": "^4.1.1",
-    "es-stats": "^1.0.0-alpha"
+    "es-stats": "^1.0.0-alpha.1"
   }
 }
