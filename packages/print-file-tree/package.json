@@ -1,6 +1,6 @@
 {
   "name": "print-file-tree",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Console print simple file tree",
   "keywords": [
     "file",
