@@ -1,14 +1,14 @@
 import huntAffected, { Affected } from 'hunt-affected';
 import _debug from 'debug';
-import { ParserOptions } from '@babel/parser';
+import { Entry } from 'ast-lab-types';
 import IncludesFilePlugin from './includesFilePlugin';
 import getRevisionFile from './getRevisionFile';
 import getTrackedFiles from './getTrackedFiles';
 import getAbsolutePath from './getAbsolutePath';
-import getChangedEntries from './getChangedEntries';
-import { Change } from './types';
+import { Change, ParserOptions } from './types';
 import { DEFAULT_EXTENSIONS } from './constants';
 import hasExt from './hasExt';
+import getChangedEntry from './getChangedEntry';
 
 export type Options = {
   /** Paths where to look for JS modules, if you have customised modules other than npm's `node_modules`. */
@@ -37,11 +37,21 @@ export default function huntRevisionImpact(
   { alias, modules, parserOptions, paths, extensions }: Options
 ): Promise<Affected> {
   const _extensions = extensions || DEFAULT_EXTENSIONS;
-  debug(`${revision} changes: ${JSON.stringify(changes)}`);
-  const trackedFiles = getTrackedFiles(revision, paths)
-    .filter(file => hasExt(file, _extensions))
-    .map(getAbsolutePath);
-  const entries = getChangedEntries(changes, parserOptions);
+  const trackedFilesRelative = getTrackedFiles(revision, paths).filter(file =>
+    hasExt(file, _extensions)
+  );
+  const trackedFiles = trackedFilesRelative.map(getAbsolutePath);
+  const trackedFilesRelativeSet = new Set(trackedFilesRelative);
+  const entries = changes.reduce((ret, change) => {
+    if (
+      !trackedFilesRelativeSet.has(change.file) ||
+      !hasExt(change.file, _extensions)
+    ) {
+      return ret;
+    }
+    const newEntries = getChangedEntry(change, parserOptions);
+    return newEntries ? ret.concat(newEntries) : ret;
+  }, [] as Entry[]);
   debug(`${revision} entries: ${JSON.stringify(entries)}`);
   return huntAffected(trackedFiles, entries, {
     loader: (file: string) => Promise.resolve(getRevisionFile(revision, file)),

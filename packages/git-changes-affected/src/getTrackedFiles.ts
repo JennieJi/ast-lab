@@ -3,11 +3,14 @@ import gitRoot from './gitRoot';
 
 const root = gitRoot();
 
-/** @internal */
+/**
+ * @param revision Git revision.
+ * @param paths Glob path expression for filtering files
+ */
 export default function getTrackedFiles(
-  revision: string = 'HEAD',
+  revision = 'HEAD',
   paths?: string[]
-) {
+): string[] {
   const pathsInCmd = paths && paths.length ? paths.join(' ') : root;
   const raw = exec(
     `git ls-tree -r ${revision} --name-only --full-name ${pathsInCmd}`

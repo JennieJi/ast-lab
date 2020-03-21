@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getChangedEntries cross exports 1`] = `
+exports[`getChangedEntry cross exports 1`] = `
 Array [
   Object {
     "name": "b",
@@ -17,7 +17,7 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries import should not be counted as entry 1`] = `
+exports[`getChangedEntry import should not be counted as entry 1`] = `
 Array [
   Object {
     "name": "func",
@@ -30,7 +30,7 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries single line 1`] = `
+exports[`getChangedEntry single line 1`] = `
 Array [
   Object {
     "name": "b",
@@ -47,7 +47,7 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries single line 2`] = `
+exports[`getChangedEntry single line 2`] = `
 Array [
   Object {
     "name": "func",
@@ -60,7 +60,7 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries single line 3`] = `
+exports[`getChangedEntry single line 3`] = `
 Array [
   Object {
     "name": "func",
@@ -73,7 +73,7 @@ Array [
 ]
 `;
 
-exports[`getChangedEntries within 1 export 1`] = `
+exports[`getChangedEntry within 1 export 1`] = `
 Array [
   Object {
     "name": "func",

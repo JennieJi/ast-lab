@@ -1,0 +1,41 @@
+{
+  "name": "git-changes-affected-monorepo",
+  "version": "1.0.0-alpha",
+  "description": "Find git changes affected files",
+  "keywords": [
+    "affected",
+    "changes",
+    "git",
+    "dependencies"
+  ],
+  "author": "Jennie Ji <jennie.ji@hotmail.com>",
+  "homepage": "https://jennieji.github.io/ast-lab/modules/git_changes_affected_monorepo.html",
+  "repository": {
+    "url": "https://github.com/JennieJi/ast-lab",
+    "type": "git",
+    "directory": "packages/git-changes-affected-monorepo"
+  },
+  "bugs": {
+    "url": "https://github.com/JennieJi/ast-lab/issues"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "directories": {
+    "lib": "dist",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc --build --verbose ./",
+    "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
+  },
+  "dependencies": {
+    "git-changes-affected": "^1.0.0-alpha"
+  },
+  "devDependencies": {
+    "hunt-affected": "^1.0.0-alpha"
+  }
+}
