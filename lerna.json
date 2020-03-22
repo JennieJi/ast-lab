@@ -3,12 +3,9 @@
   "npmClient": "npm",
   "command": {
     "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ]
+      "ignoreChanges": ["*.md", ".gitignore", ""],
+      "registry": "https://npm.pkg.github.com/"
     }
   },
-  "packages": [
-    "packages/*"
-  ]
+  "packages": ["packages/*"]
 }
