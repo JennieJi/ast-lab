@@ -9,13 +9,16 @@ import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
-import { MemberRelation, MemberRef } from 'ast-lab-types';
+import { MemberRelation, MemberRef, ImportBase } from 'ast-lab-types';
 import _debug from 'debug';
 import { MODULE_DEFAULT } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
-type Scope = { privates: Set<string>; candidates: string[] };
+type Scope = {
+  privates: Set<string>;
+  candidates: (string | ImportBase)[];
+};
 
 /**
  * Create a Babel visitor that will find out the dependency relationships between root declarations, and save to an object ref.
@@ -36,7 +39,9 @@ export default function createRootRelationVisitors(
   const exitScopeHandler = () => {
     if (parentScopes.length <= 1) return;
     const { candidates, privates } = scope;
-    const filteredCandidates = candidates.filter(d => !privates.has(d));
+    const filteredCandidates = candidates.filter(
+      d => typeof d !== 'string' || !privates.has(d)
+    );
     scope = parentScopes.pop() as Scope;
     scope.candidates = Array.from(
       new Set(scope.candidates.concat(filteredCandidates))
@@ -144,9 +149,12 @@ export default function createRootRelationVisitors(
 
       // dynamic import
       if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
-        scope.candidates.push(
-          `${(args[0] as StringLiteral).value}#${MODULE_DEFAULT}`
-        );
+        /** @todo analyze details of what's dynamically imported */
+        scope.candidates.push({
+          source: (args[0] as StringLiteral).value,
+          name: MODULE_DEFAULT,
+          alias: '',
+        });
       }
     },
     Identifier(p) {
