@@ -2,10 +2,7 @@ import { Entry } from 'ast-lab-types';
 import _debug from 'debug';
 import { Options } from './types';
 import mergeDepMap from './mergeDepMap';
-import {
-  default as visitDependencyMap,
-  Visited as Affected,
-} from './visitDepMap';
+import { default as visitDependencyMap, Affected } from './visitDepMap';
 
 const debug = _debug('hunt-affected:affected');
 

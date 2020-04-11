@@ -54,7 +54,11 @@ Object {
     "c1",
     "c2",
   },
-  "/d": Set {},
-  "/e": Set {},
+  "/d": Set {
+    "default",
+  },
+  "/e": Set {
+    "default",
+  },
 }
 `;

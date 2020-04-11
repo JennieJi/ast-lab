@@ -1,102 +1,271 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mergeDepMap() exports 1`] = `
-Map {
-  "exports/exportDefault.js" => Map {
-    "default" => Array [],
+Object {
+  "exports/exportAllFrom.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "exports/exportNamed.js",
+    },
+    "fs": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "readFile",
+          "source": "exports/exportNamed.js",
+        },
+      ],
+      "name": "fs",
+      "source": "exports/exportNamed.js",
+    },
+    "readFile": Object {
+      "affects": Array [],
+      "name": "readFile",
+      "source": "exports/exportNamed.js",
+    },
   },
-  "exports/exportNamed.js" => Map {
-    "a" => Array [
-      Object {
-        "name": "default",
-        "source": "exports/exportDefault.js",
-      },
-      Object {
-        "name": "a",
-        "source": "exports/exportNamedFrom.js",
-      },
-    ],
-    "readFile" => Array [],
-    "*" => Array [
-      Object {
-        "name": "*",
-        "source": "exports/exportAllFrom.js",
-      },
-    ],
-    "default" => Array [
-      Object {
-        "name": "b",
-        "source": "exports/exportNamedFrom.js",
-      },
-    ],
+  "exports/exportDefault.js": Object {
+    "a": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "default",
+          "source": "exports/exportDefault.js",
+        },
+      ],
+      "name": "a",
+      "source": "exports/exportDefault.js",
+    },
+    "default": Object {
+      "affects": Array [],
+      "name": "default",
+      "source": "exports/exportDefault.js",
+    },
   },
-  "exports/exportNamedFrom.js" => Map {
-    "a" => Array [],
-    "b" => Array [],
+  "exports/exportNamed.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "exports/exportNamed.js",
+    },
+    "fs": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "readFile",
+          "source": "exports/exportNamed.js",
+        },
+      ],
+      "name": "fs",
+      "source": "exports/exportNamed.js",
+    },
+    "readFile": Object {
+      "affects": Array [],
+      "name": "readFile",
+      "source": "exports/exportNamed.js",
+    },
+  },
+  "exports/exportNamedFrom.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "exports/exportNamedFrom.js",
+    },
+    "b": Object {
+      "affects": Array [],
+      "name": "b",
+      "source": "exports/exportNamedFrom.js",
+    },
+  },
+  "exports/noExports.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "exports/noExports.js",
+    },
   },
 }
 `;
 
 exports[`mergeDepMap() imports 1`] = `
-Map {
-  "imports/dynamicImport-asyncawait.js" => Map {
-    "func" => Array [],
+Object {
+  "imports/dynamicImport-asyncawait.js": Object {
+    "a": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/dynamicImport-asyncawait.js",
+        },
+      ],
+      "name": "a",
+      "source": "imports/dynamicImport-asyncawait.js",
+    },
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/dynamicImport-asyncawait.js",
+    },
   },
-  "imports/dynamicImport-then.js" => Map {
-    "func" => Array [],
+  "imports/dynamicImport-then.js": Object {
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/dynamicImport-then.js",
+    },
   },
-  "imports/importAlias.js" => Map {
-    "c" => Array [],
-    "func" => Array [],
+  "imports/importAlias.js": Object {
+    "b": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "c",
+          "source": "imports/importAlias.js",
+        },
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/importAlias.js",
+        },
+      ],
+      "name": "b",
+      "source": "imports/importAlias.js",
+    },
+    "c": Object {
+      "affects": Array [],
+      "name": "c",
+      "source": "imports/importAlias.js",
+    },
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/importAlias.js",
+    },
+    "importNamed": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/importAlias.js",
+        },
+      ],
+      "name": "importNamed",
+      "source": "imports/importAlias.js",
+    },
   },
-  "imports/importAll.js" => Map {
-    "a" => Array [],
-    "func" => Array [],
-    "default" => Array [
-      Object {
-        "name": "func",
-        "source": "imports/dynamicImport-asyncawait.js",
-      },
-    ],
+  "imports/importAll.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "imports/importAll.js",
+    },
+    "default": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/dynamicImport-asyncawait.js",
+        },
+      ],
+      "name": "default",
+      "source": "imports/importAll.js",
+    },
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/importAll.js",
+    },
+    "resolve": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "a",
+          "source": "imports/importAll.js",
+        },
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/importAll.js",
+        },
+      ],
+      "name": "resolve",
+      "source": "imports/importAll.js",
+    },
   },
-  "imports/importDefault.js" => Map {
-    "a" => Array [],
-    "func" => Array [],
-    "default" => Array [
-      Object {
-        "name": "func",
-        "source": "imports/dynamicImport-then.js",
-      },
-    ],
-    "*" => Array [
-      Object {
-        "name": "a",
-        "source": "imports/importAll.js",
-      },
-      Object {
-        "name": "func",
-        "source": "imports/importAll.js",
-      },
-    ],
+  "imports/importDefault.js": Object {
+    "a": Object {
+      "affects": Array [],
+      "name": "a",
+      "source": "imports/importDefault.js",
+    },
+    "default": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/dynamicImport-then.js",
+        },
+      ],
+      "name": "default",
+      "source": "imports/importDefault.js",
+    },
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/importDefault.js",
+    },
+    "resolve": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "a",
+          "source": "imports/importDefault.js",
+        },
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/importDefault.js",
+        },
+      ],
+      "name": "resolve",
+      "source": "imports/importDefault.js",
+    },
   },
-  "imports/importNamed.js" => Map {
-    "resolveFactory" => Array [
-      Object {
-        "name": "c",
-        "source": "imports/importAlias.js",
-      },
-      Object {
-        "name": "func",
-        "source": "imports/importAlias.js",
-      },
-    ],
-    "func" => Array [],
-    "default" => Array [
-      Object {
-        "name": "func",
-        "source": "imports/importAlias.js",
-      },
-    ],
+  "imports/importNamed.js": Object {
+    "default": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [
+            Object {
+              "affects": Array [],
+              "name": "func",
+              "source": "imports/dynamicImport-asyncawait.js",
+            },
+          ],
+          "name": "a",
+          "source": "imports/dynamicImport-asyncawait.js",
+        },
+      ],
+      "name": "default",
+      "source": "imports/importNamed.js",
+    },
+    "func": Object {
+      "affects": Array [],
+      "name": "func",
+      "source": "imports/importNamed.js",
+    },
+    "resolveFactory": Object {
+      "affects": Array [
+        Object {
+          "affects": Array [],
+          "name": "func",
+          "source": "imports/importNamed.js",
+        },
+      ],
+      "name": "resolveFactory",
+      "source": "imports/importNamed.js",
+    },
   },
 }
 `;

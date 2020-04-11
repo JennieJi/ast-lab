@@ -1,10 +1,11 @@
-import { DependencyMap, Entry, Member } from 'ast-lab-types';
+import { Entry } from 'ast-lab-types';
+import { DependencyMap } from './types';
 import _debug from 'debug';
 import { MODULE_ALL } from './constants';
 
 const debug = _debug('hunt-affected:visit');
 
-export type Visited = { [module: string]: Set<Member> };
+export type Affected = { [module: string]: Set<string> };
 
 /**
  * Walk through the dependency map from given entries to find out what are affected.
@@ -14,8 +15,8 @@ export type Visited = { [module: string]: Set<Member> };
 export default function visitDependencyMap(
   dependencyMap: DependencyMap,
   entries: Entry[]
-): Visited {
-  const visited = {} as Visited;
+): Affected {
+  const visited = {} as Affected;
   let entryQueue = entries;
   debug('visit entries:', entries);
   while (entryQueue.length) {
@@ -24,20 +25,19 @@ export default function visitDependencyMap(
     if (!modVisited) {
       modVisited = visited[mod] = new Set();
     }
-    const affected = dependencyMap.get(mod);
-    debug(`${mod} affects`, affected);
-    if (affected && !modVisited.has(name)) {
+    const declarations = dependencyMap[mod];
+    if (declarations && !modVisited.has(name)) {
       modVisited.add(name);
-      const matchedEntries = affected.get(name);
+      const matchedEntries = declarations[name];
       debug('current queue:', entryQueue);
-      if (matchedEntries && matchedEntries.length) {
+      if (matchedEntries) {
         debug('new to queue:', matchedEntries);
-        entryQueue = entryQueue.concat(matchedEntries);
+        entryQueue = entryQueue.concat(matchedEntries.affects);
       }
-      const allEntries = affected.get(MODULE_ALL);
-      if (allEntries && allEntries.length) {
+      const allEntries = declarations[MODULE_ALL];
+      if (allEntries) {
         debug('new to queue:', allEntries);
-        entryQueue = entryQueue.concat(allEntries);
+        entryQueue = entryQueue.concat(allEntries.affects);
       }
     }
   }
