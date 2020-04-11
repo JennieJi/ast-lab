@@ -25,7 +25,7 @@ export default function createRootRelationVisitors(
   relations: MemberRelation = {}
 ): Visitor {
   let scope = { privates: new Set(), candidates: [] } as Scope;
-  let parentScopes = [] as Scope[];
+  const parentScopes = [] as Scope[];
   const addRefsToPrivates = (refs: Array<MemberRef>) => {
     refs.forEach(({ alias }) => scope.privates.add(alias));
   };
@@ -45,11 +45,9 @@ export default function createRootRelationVisitors(
   };
 
   return {
-    Function({ node }) {
-      //@ts-ignore
-      const { id, params } = node;
-      if (id) {
-        scope.privates.add(id.name);
+    FunctionDeclaration({ node }) {
+      if (node.id) {
+        scope.privates.add(node.id.name);
       }
     },
     ClassDeclaration({ node }) {
@@ -105,7 +103,6 @@ export default function createRootRelationVisitors(
     },
     Scopable: {
       enter(p) {
-        if (p.isBlockStatement() && p.parentPath.isFunction()) return;
         newScope();
 
         if (p.isFunction()) {
@@ -118,16 +115,14 @@ export default function createRootRelationVisitors(
         }
       },
       exit(p) {
-        const { node, parent, parentPath } = p;
+        const { node, parent } = p;
         debug('EXIT-scopable scope', parentScopes, scope);
-        if (p.isBlockStatement() && parentPath && parentPath.isFunction())
-          return;
 
         const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
           const dedupCandidates = Array.from(new Set(candidates));
           // @ts-ignore
-          let id = node.id || (parent && parent.id);
+          const id = node.id || (parent && parent.id);
           if (id) {
             /** @todo find more specific declaration affected */
             getPatternNames(id).forEach(({ alias }) => {
@@ -139,9 +134,6 @@ export default function createRootRelationVisitors(
     },
     VariableDeclarator({ node }) {
       addRefsToPrivates(getPatternNames((node as VariableDeclarator).id));
-    },
-    ObjectMethod({ node }) {
-      scope.privates.add(node.key.name);
     },
     CallExpression({ node }) {
       const { callee, arguments: args } = node;
@@ -161,10 +153,7 @@ export default function createRootRelationVisitors(
       const { node, key } = p;
       const parentPath = p.parentPath;
       // exclude function/class identifier
-      if (
-        (parentPath.isScopable() && key === 'id') ||
-        parentPath.isFunction()
-      ) {
+      if (parentPath.isClass() || parentPath.isFunction()) {
         return;
       }
       if (

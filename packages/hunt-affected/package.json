@@ -35,7 +35,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/parser": "^7.7.5",
+    "@babel/parser": "^7.9.3",
     "@types/debug": "^4.1.5",
     "@types/enhanced-resolve": "^3.0.6",
     "ast-lab-types": "^1.0.0-alpha.1"
