@@ -2,24 +2,96 @@
 
 exports[`rootRelation visitors jsx/functionComponent.js 1`] = `
 Object {
-  "ChildFunctionComponentHasProps1": Array [
-    "ParentFunctionComponent",
-  ],
-  "ChildFunctionComponentHasProps2": Array [
-    "ParentFunctionComponent",
-  ],
-  "ChildFunctionComponentJSXMemberExpression": Array [
-    "ParentFunctionComponentObj",
-  ],
-  "ChildFunctionComponentNoProps": Array [
-    "ParentFunctionComponent",
-  ],
-  "ParentFunctionComponent": Array [
-    "div",
-    "JSON",
-  ],
-  "ParentFunctionComponentObj": Array [
-    "ParentFunctionComponent",
-  ],
+  "ChildFunctionComponentHasProps1": Object {
+    "dependencies": Array [
+      "ParentFunctionComponent",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 13,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 9,
+      },
+    },
+  },
+  "ChildFunctionComponentHasProps2": Object {
+    "dependencies": Array [
+      "ParentFunctionComponent",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 21,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 15,
+      },
+    },
+  },
+  "ChildFunctionComponentJSXMemberExpression": Object {
+    "dependencies": Array [
+      "ParentFunctionComponentObj",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 30,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 28,
+      },
+    },
+  },
+  "ChildFunctionComponentNoProps": Object {
+    "dependencies": Array [
+      "ParentFunctionComponent",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 5,
+      },
+    },
+  },
+  "ParentFunctionComponent": Object {
+    "dependencies": Array [
+      "div",
+      "JSON",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "ParentFunctionComponentObj": Object {
+    "dependencies": Array [
+      "ParentFunctionComponent",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 2,
+        "line": 26,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 24,
+      },
+    },
+  },
 }
 `;

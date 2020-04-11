@@ -9,7 +9,7 @@ import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
-import { MemberRelation, MemberRef, ImportBase } from 'ast-lab-types';
+import { Declarations, MemberRef, ImportBase } from 'ast-lab-types';
 import _debug from 'debug';
 import { MODULE_DEFAULT } from '../constants';
 
@@ -25,7 +25,7 @@ type Scope = {
  * @param relations The object ref to save the relationships
  */
 export default function createRootRelationVisitors(
-  relations: MemberRelation = {}
+  relations: Declarations = {}
 ): Visitor {
   let scope = { privates: new Set(), candidates: [] } as Scope;
   const parentScopes = [] as Scope[];
@@ -75,7 +75,10 @@ export default function createRootRelationVisitors(
           const refs = getDeclarationNames(node as VariableDeclaration);
           if (refs) {
             refs.forEach(({ alias }) => {
-              relations[alias] = Array.from(new Set(candidates));
+              relations[alias] = {
+                dependencies: Array.from(new Set(candidates)),
+                loc: node.loc,
+              };
             });
           }
         }
@@ -88,7 +91,10 @@ export default function createRootRelationVisitors(
             specifier as ExportSpecifier
           );
           if (ref && !relations[ref.name]) {
-            relations[ref.alias] = [];
+            relations[ref.alias] = {
+              dependencies: [],
+              loc: node.loc,
+            };
           }
         });
       }
@@ -98,11 +104,14 @@ export default function createRootRelationVisitors(
         scope.privates.add(MODULE_DEFAULT);
         newScope();
       },
-      exit() {
+      exit({ node }) {
         debug('EXIT-export default scope', parentScopes, scope);
         const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
-          relations[MODULE_DEFAULT] = Array.from(new Set(candidates));
+          relations[MODULE_DEFAULT] = {
+            dependencies: Array.from(new Set(candidates)),
+            loc: node.loc,
+          };
         }
       },
     },
@@ -131,7 +140,10 @@ export default function createRootRelationVisitors(
           if (id) {
             /** @todo find more specific declaration affected */
             getPatternNames(id).forEach(({ alias }) => {
-              relations[alias] = dedupCandidates;
+              relations[alias] = {
+                dependencies: dedupCandidates,
+                loc: node.loc,
+              };
             });
           }
         }

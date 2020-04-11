@@ -19,7 +19,14 @@ export type Exports = {
   extends?: Module[];
   members: Array<MemberRef & HasLoc>;
 };
-export type MemberRelation = { [name: string]: (Member | ImportBase)[] };
+export type Declarations = {
+  [name: string]: HasLoc & {
+    dependencies: (Member | ImportBase)[];
+  };
+};
+export type MemberRelation = {
+  [name: string]: (Member | ImportBase)[];
+};
 
 export type Entry = {
   source: Module;

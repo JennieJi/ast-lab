@@ -4,95 +4,319 @@ exports[`rootRelation visitors exports/exportAllFrom.js 1`] = `Object {}`;
 
 exports[`rootRelation visitors exports/exportDefault.js 1`] = `
 Object {
-  "a": Array [],
-  "default": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "default": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 17,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultCallExpression.js 1`] = `
 Object {
-  "a": Array [],
-  "default": Array [
-    "a",
-    "String",
-    "v",
-  ],
-  "v": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "default": Object {
+    "dependencies": Array [
+      "a",
+      "String",
+      "v",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 28,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 6,
+      },
+    },
+  },
+  "v": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultFuncAlias.js 1`] = `
 Object {
-  "a": Array [],
-  "default": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "default": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 17,
+        "line": 5,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 5,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportDefaultValueAlias.js 1`] = `
 Object {
-  "a": Array [],
-  "default": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 6,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "default": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 17,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportFunc.js 1`] = `
 Object {
-  "a": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportFuncAlias.js 1`] = `
 Object {
-  "a": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportNamed.js 1`] = `
 Object {
-  "a": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 19,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/exportNamedFrom.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 34,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 45,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors exports/noExports.js 1`] = `
 Object {
-  "a": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors imports/dynamicImport-asyncawait.js 1`] = `
 Object {
-  "func": Array [
-    "./b#default",
-  ],
+  "func": Object {
+    "dependencies": Array [
+      Object {
+        "alias": "",
+        "name": "default",
+        "source": "./b",
+      },
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors imports/dynamicImport-then.js 1`] = `
 Object {
-  "func": Array [
-    "./b#default",
-  ],
+  "func": Object {
+    "dependencies": Array [
+      Object {
+        "alias": "",
+        "name": "default",
+        "source": "./b",
+      },
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors imports/importAlias.js 1`] = `
 Object {
-  "c": Array [
-    "b",
-  ],
+  "c": Object {
+    "dependencies": Array [
+      "b",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
@@ -106,180 +330,780 @@ exports[`rootRelation visitors imports/importNamed.js 1`] = `Object {}`;
 
 exports[`rootRelation visitors imports/noImports.js 1`] = `
 Object {
-  "a": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/arrowfunction.js 1`] = `
 Object {
-  "DEFAULT": Array [],
-  "a": Array [],
-  "arrow": Array [
-    "a",
-    "DEFAULT",
-    "b",
-  ],
-  "b": Array [],
+  "DEFAULT": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 18,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 3,
+      },
+    },
+  },
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "arrow": Object {
+    "dependencies": Array [
+      "a",
+      "DEFAULT",
+      "b",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 4,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/asyncFunction.js 1`] = `
 Object {
-  "a": Array [],
-  "asyncFunc": Array [
-    "a",
-  ],
-  "b": Array [],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "asyncFunc": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 3,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/class.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "c": Array [
-    "b",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 6,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "c": Object {
+    "dependencies": Array [
+      "b",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 15,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 4,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/constant.js 1`] = `
 Object {
-  "a": Array [],
-  "exportArray": Array [
-    "a",
-  ],
-  "exportArrayMember": Array [
-    "exportArray",
-  ],
-  "exportConstant": Array [
-    "a",
-  ],
-  "exportObject": Array [
-    "a",
-  ],
-  "exportObject2": Array [
-    "a",
-  ],
-  "exportObjectMember": Array [
-    "exportObject",
-  ],
-  "exportRestArray": Array [
-    "exportArray",
-  ],
-  "exportRestObject": Array [
-    "exportObject",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "exportArray": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 31,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 7,
+      },
+    },
+  },
+  "exportArrayMember": Object {
+    "dependencies": Array [
+      "exportArray",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 48,
+        "line": 9,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 9,
+      },
+    },
+  },
+  "exportConstant": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 36,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 2,
+      },
+    },
+  },
+  "exportObject": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 34,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 3,
+      },
+    },
+  },
+  "exportObject2": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 38,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 4,
+      },
+    },
+  },
+  "exportObjectMember": Object {
+    "dependencies": Array [
+      "exportObject",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 49,
+        "line": 5,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 5,
+      },
+    },
+  },
+  "exportRestArray": Object {
+    "dependencies": Array [
+      "exportArray",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 48,
+        "line": 8,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 8,
+      },
+    },
+  },
+  "exportRestObject": Object {
+    "dependencies": Array [
+      "exportObject",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 52,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 6,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/eval.js 1`] = `
 Object {
-  "a": Array [],
-  "func": Array [
-    "eval",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "eval",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/forloop.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "b",
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 13,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "b",
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 9,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 4,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/function.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/function-argsObjectAssign.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/function-argsSpread.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 14,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 7,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/generator.js 1`] = `
 Object {
-  "a": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/ifelse.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 9,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 4,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/importExport.js 1`] = `
 Object {
-  "default": Array [
-    "im",
-  ],
+  "default": Object {
+    "dependencies": Array [
+      "im",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 18,
+        "line": 3,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 3,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/switch.js 1`] = `
 Object {
-  "TYPES": Array [],
-  "func": Array [
-    "type",
-    "TYPES",
-    "v1",
-  ],
-  "type": Array [],
-  "v1": Array [],
-  "v2": Array [],
+  "TYPES": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 2,
+        "line": 5,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "type",
+      "TYPES",
+      "v1",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 26,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 10,
+      },
+    },
+  },
+  "type": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 15,
+        "line": 6,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 6,
+      },
+    },
+  },
+  "v1": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 23,
+        "line": 7,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 7,
+      },
+    },
+  },
+  "v2": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 23,
+        "line": 8,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 8,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/template.js 1`] = `
 Object {
-  "a": Array [],
-  "func": Array [
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 4,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
 }
 `;
 
 exports[`rootRelation visitors scopes/trycatch.js 1`] = `
 Object {
-  "a": Array [],
-  "b": Array [],
-  "func": Array [
-    "console",
-    "a",
-  ],
+  "a": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 1,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 1,
+      },
+    },
+  },
+  "b": Object {
+    "dependencies": Array [],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "line": 2,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 2,
+      },
+    },
+  },
+  "func": Object {
+    "dependencies": Array [
+      "console",
+      "a",
+    ],
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 1,
+        "line": 10,
+      },
+      "start": Position {
+        "column": 0,
+        "line": 4,
+      },
+    },
+  },
 }
 `;
