@@ -1,30 +1,12 @@
 import { parse, ParserOptions } from '@babel/parser';
-import { File, SourceLocation } from '@babel/types';
-import { extractStats, getPrivateMemberNames } from 'es-stats';
+import { File } from '@babel/types';
+import { extractStats } from 'es-stats';
 import _debug from 'debug';
 import getAbsolutePath from './getAbsolutePath';
-import { Entry, MemberRef, MemberRelation } from 'ast-lab-types';
+import { Entry } from 'ast-lab-types';
 import { Change } from './types';
 
 const debug = _debug('git-changes-affected:entries');
-
-type Declare = MemberRef & { loc: SourceLocation };
-/** @todo improve precision of private declaration location */
-function locatePrivateDeclares(ast: File): Declare[] {
-  return ast.program.body.reduce((locs, d) => {
-    const refs = getPrivateMemberNames(d);
-    const { loc } = d;
-    if (!refs || !refs.length || !loc) {
-      return locs;
-    }
-    return locs.concat(
-      refs.map(ref => ({
-        ...ref,
-        loc,
-      }))
-    );
-  }, [] as Declare[]);
-}
 
 /**
  * Find what declarations does the code line changes belong to.
@@ -57,71 +39,47 @@ export default function getChangedEntries(
     }
     const stats = extractStats(ast);
     debug(`${file} stats: ${JSON.stringify(stats)}`);
-    const declareLoc = [
-      ...locatePrivateDeclares(ast),
-      ...(stats.exports.members as Declare[]),
-      ...(stats.imports as Declare[]),
-    ].sort((a, b) => a.loc.start.line - b.loc.start.line);
-    debug(`${file} declareLoc: ${JSON.stringify(declareLoc)}`);
 
-    const exported = new Set(stats.exports.members.map(({ alias }) => alias));
-    const affectExports = {} as MemberRelation;
-    exported.forEach(name => {
-      const expanded = new Set(stats.relations[name] || []);
-      expanded.forEach(m => {
-        if (m === name) {
-          return;
-        }
-        affectExports[m] = [...(affectExports[m] || []), name];
-        if (stats.relations[m]) {
-          stats.relations[m].forEach(r => expanded.add(r));
-        }
-      });
-    });
-    debug(
-      `${file} change ${JSON.stringify(changed)}  \n>>>  ${JSON.stringify(
-        affectExports
-      )}`
-    );
+    const declareLoc = Object.keys(stats.declarations)
+      .map(name => ({
+        loc: stats.declarations[name].loc,
+        name,
+        alias: name,
+      }))
+      .concat(stats.imports)
+      .sort((a, b) => (a.loc?.start?.line || 0) - (b.loc?.start?.line || 0));
 
-    let iDeclare = 0;
-    const changedExports = changed.reduce(
-      (ex, { start: startLine, end: endLine }) => {
-        while (iDeclare < declareLoc.length) {
-          const { loc, alias } = declareLoc[iDeclare];
-          if (!loc) {
-            continue;
-          }
+    let iDeclaration = 0;
+    const changedDeclarations = changed.reduce(
+      (ret, { start: startLine, end: endLine }) => {
+        while (declareLoc[iDeclaration]) {
+          const { loc, alias } = declareLoc[iDeclaration];
+          if (!loc) continue;
           const { start, end } = loc;
           if (endLine < start.line) {
             debug(
               `${file}:${startLine}-${endLine} X ${start.line}-${end.line}`
             );
-            return ex;
+            return ret;
           }
-          if (startLine <= end.line) {
-            debug(
-              `${file}:${startLine}-${endLine} √ ${start.line}-${end.line} > ${affectExports[alias]} `
-            );
-            if (exported.has(alias)) {
-              ex.push(alias);
-            }
-            if (affectExports[alias]) {
-              ex = ex.concat(affectExports[alias]);
-            }
-          } else {
+          if (startLine > end.line) {
             debug(
               `${file}:${startLine}-${endLine} X ${start.line}-${end.line}`
             );
+          } else {
+            debug(
+              `${file}:${startLine}-${endLine} √ ${start.line}-${end.line} > ${alias} `
+            );
+            ret.push(alias);
           }
-          iDeclare++;
+          iDeclaration++;
         }
-        return ex;
+        return ret;
       },
       [] as string[]
     );
     return res.concat(
-      Array.from(new Set(changedExports)).map(name => ({
+      Array.from(new Set(changedDeclarations)).map(name => ({
         source: filePath,
         name,
       }))

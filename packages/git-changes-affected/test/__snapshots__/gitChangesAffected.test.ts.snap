@@ -3,6 +3,7 @@
 exports[`gitChangesAffected can work 1`] = `
 Object {
   "packages/es-stats/src/getStats.ts": Set {
+    "createExportVisitors",
     "default",
   },
   "packages/es-stats/src/index.ts": Set {
@@ -15,57 +16,93 @@ Object {
   "packages/es-stats/src/visitors/exports.ts": Set {
     "default",
   },
+  "packages/types/index.d.ts": Set {
+    "SourceLocation",
+  },
 }
 `;
 
 exports[`gitChangesAffected can work 2`] = `
 Object {
   "packages/es-stats/src/extractStats.ts": Set {
+    "createExportVisitors",
+    "createImportVisitors",
+    "createRootRelationVisitors",
     "default",
   },
   "packages/es-stats/src/fileStats.ts": Set {
+    "extractStats",
     "default",
   },
   "packages/es-stats/src/getDeclarationNames.ts": Set {
+    "getPatternNames",
     "default",
   },
   "packages/es-stats/src/getPatternNames.ts": Set {
+    "getPatternNames",
     "default",
   },
   "packages/es-stats/src/index.ts": Set {
     "createExportVisitors",
     "createImportVisitors",
     "createRootRelationVisitors",
-    "getPrivateMemberNames",
     "extractStats",
+    "getPrivateMemberNames",
     "default",
   },
   "packages/es-stats/src/visitors/exports.ts": Set {
     "default",
+    "getDeclarationNames",
+    "ExportSpecifier",
   },
   "packages/es-stats/src/visitors/imports.ts": Set {
+    "StringLiteral",
+    "getPatternNames",
     "default",
+    "MODULE_ALL",
+    "getModuleRefFromExportSpecifier",
+    "ExportSpecifier",
   },
   "packages/es-stats/src/visitors/rootRelation.ts": Set {
+    "VariableDeclarator",
+    "VariableDeclaration",
+    "LVal",
+    "ExportSpecifier",
+    "MODULE_DEFAULT",
     "default",
+    "getPatternNames",
+    "getDeclarationNames",
+    "StringLiteral",
+    "MODULE_ALL",
   },
   "packages/hunt-affected/src/fileDepMap.ts": Set {
+    "debug",
     "default",
+    "dynamicImportReg",
   },
   "packages/hunt-affected/src/huntAffected.ts": Set {
+    "mergeDepMap",
+    "visitDependencyMap",
     "default",
   },
   "packages/hunt-affected/src/index.ts": Set {
     "fileDepMap",
     "mergeDepMap",
     "visitDepMap",
+    "huntAffected",
     "default",
   },
   "packages/hunt-affected/src/mergeDepMap.ts": Set {
+    "debug",
+    "fileDepMap",
     "default",
   },
   "packages/hunt-affected/src/visitDepMap.ts": Set {
+    "debug",
     "default",
+  },
+  "packages/hunt-affected/test/mergeDepMap.test.ts": Set {
+    "debug",
   },
 }
 `;
