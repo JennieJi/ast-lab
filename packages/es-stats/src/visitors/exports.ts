@@ -30,6 +30,7 @@ export default function createExportVisitors(
         }
       });
       if (declaration) {
+        // @ts-ignore
         const names = getDeclarationNames(declaration);
         if (names && names.length) {
           names.forEach(({ name }) => {
@@ -41,6 +42,7 @@ export default function createExportVisitors(
     ExportDefaultDeclaration({ node }) {
       const { declaration, loc } = node;
       const alias = MODULE_DEFAULT;
+      // @ts-ignore
       const names = getDeclarationNames(declaration);
       if (names && names.length) {
         names.forEach(({ name }) => {
