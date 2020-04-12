@@ -1,6 +1,7 @@
 import { ParserOptions } from '@babel/parser';
 import { ResolverFactory } from 'enhanced-resolve';
 import { Entry } from 'ast-lab-types';
+import { DECLARATION_TYPE } from './constants';
 
 export type Resolver = (base: string, target: string) => Promise<string | void>;
 export type Options = {
@@ -16,6 +17,7 @@ export type Options = {
 
 export type DeclarationNode = Entry & {
   affects: DeclarationNode[];
+  type: DECLARATION_TYPE;
 };
 export type DependencyMap = {
   [module: string]: {

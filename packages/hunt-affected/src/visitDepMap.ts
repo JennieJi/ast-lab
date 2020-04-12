@@ -28,11 +28,11 @@ export default function visitDependencyMap(
     const declarations = dependencyMap[mod];
     if (declarations && !modVisited.has(name)) {
       modVisited.add(name);
-      const matchedEntries = declarations[name];
+      const matched = declarations[name];
       debug('current queue:', entryQueue);
-      if (matchedEntries) {
-        debug('new to queue:', matchedEntries);
-        entryQueue = entryQueue.concat(matchedEntries.affects);
+      if (matched) {
+        debug('new to queue:', matched.affects);
+        entryQueue = entryQueue.concat(matched.affects);
       }
       const allEntries = declarations[MODULE_ALL];
       if (allEntries) {

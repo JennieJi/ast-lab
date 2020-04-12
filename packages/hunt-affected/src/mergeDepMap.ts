@@ -8,6 +8,7 @@ import { Import } from 'ast-lab-types';
 import { Options, DeclarationNode, Resolver, DependencyMap } from './types';
 import completeExtensions from './completeExtensions';
 import resolveModule from './resolveModule';
+import { DECLARATION_TYPE } from './constants';
 
 const debug = _debug('hunt-affected:merge');
 
@@ -32,16 +33,18 @@ async function convertImports(
   return Object.fromEntries(resolvedImports);
 }
 
-function getDeclaration(
+export function getDeclaration(
   depMap: DependencyMap,
   source: string,
-  declaration: string
+  declaration: string,
+  type: DECLARATION_TYPE
 ): DeclarationNode {
   if (!depMap[source]) depMap[source] = {};
   if (!depMap[source][declaration]) {
     return (depMap[source][declaration] = {
       source,
       name: declaration,
+      type,
       affects: [],
     });
   }
@@ -71,6 +74,19 @@ function handleExtends(depMap: DependencyMap, extendsToHandle: Extends): void {
         ...depMap[extend],
         ...depMap[source],
       };
+      const currentDeclarations = depMap[source];
+      const extendDeclarations = depMap[extend];
+      Object.keys(extendDeclarations).forEach(key => {
+        if (
+          extendDeclarations[key].type !== DECLARATION_TYPE.export ||
+          currentDeclarations[key]
+        )
+          return;
+        currentDeclarations[key] = {
+          ...extendDeclarations[key],
+          source,
+        };
+      });
     }
     if (remaining[extend]) {
       nextBatch.push(current);
@@ -131,7 +147,10 @@ export default async function mergeDepMap(
     if (!fileStats) return;
     const { relations, exports } = fileStats;
     const baseDir = path.dirname(src);
-    const imports = convertImports(resolver, baseDir, fileStats.imports);
+    const imports = await convertImports(resolver, baseDir, fileStats.imports);
+    const exportsDeclarations = new Set(
+      exports.members.map(({ alias }) => alias)
+    );
     if (exports.extends) {
       const modulePaths = await Promise.all(
         exports.extends.map(ex => resolveModule(resolver, ex, baseDir))
@@ -141,22 +160,64 @@ export default async function mergeDepMap(
 
     const declarations = Object.keys(relations);
     for (const declaration of declarations) {
-      const declarationNode = getDeclaration(depMap, src, declaration);
+      const isImported = imports[declaration];
+      const nodeType = exportsDeclarations.has(declaration)
+        ? DECLARATION_TYPE.export
+        : isImported
+        ? DECLARATION_TYPE.import
+        : DECLARATION_TYPE.private;
+      const declarationNode = getDeclaration(
+        depMap,
+        src,
+        declaration,
+        nodeType
+      );
+      if (isImported) {
+        const { name, source } = isImported;
+        getDeclaration(
+          depMap,
+          source,
+          name,
+          DECLARATION_TYPE.export
+        ).affects.push(declarationNode);
+      }
       for (const dep of relations[declaration]) {
         if (typeof dep === 'string') {
           const isImported = imports[dep];
           if (isImported) {
-            const { name, source } = isImported;
-            getDeclaration(depMap, source, name).affects.push(declarationNode);
+            const { name, alias, source } = isImported;
+            const depNode = getDeclaration(
+              depMap,
+              src,
+              alias,
+              DECLARATION_TYPE.import
+            );
+            getDeclaration(
+              depMap,
+              source,
+              name,
+              DECLARATION_TYPE.export
+            ).affects.push(depNode);
+            depNode.affects.push(declarationNode);
           } else {
-            getDeclaration(depMap, src, dep).affects.push(declarationNode);
+            getDeclaration(
+              depMap,
+              src,
+              dep,
+              exportsDeclarations.has(dep)
+                ? DECLARATION_TYPE.export
+                : DECLARATION_TYPE.private
+            ).affects.push(declarationNode);
           }
         } else {
           const { source, name } = dep;
           const resolvedSource = await resolveModule(resolver, source, baseDir);
-          getDeclaration(depMap, resolvedSource, name).affects.push(
-            declarationNode
-          );
+          getDeclaration(
+            depMap,
+            resolvedSource,
+            name,
+            DECLARATION_TYPE.export
+          ).affects.push(declarationNode);
         }
       }
     }
