@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>hunt-unused | Jennie&#x27;s ast lab</title>
+	<title>DECLARATION_TYPE | Jennie&#x27;s ast lab</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,123 +52,65 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="hunt_unused.html">hunt-unused</a>
+					<a href="../modules/hunt_affected.html">hunt-affected</a>
+				</li>
+				<li>
+					<a href="hunt_affected.declaration_type.html">DECLARATION_TYPE</a>
 				</li>
 			</ul>
-			<h1>Module hunt-unused</h1>
+			<h1>Enumeration DECLARATION_TYPE</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<a href="#hunt-unused" id="hunt-unused" style="color: inherit; text-decoration: none;">
-						<h1>hunt-unused</h1>
-					</a>
-					<p>The CLI for detecting where your file exports are used and potentially afffected by it&#39;s changes.</p>
-					<p>Based on <a href="https://jennieji.github.io/ast-lab/modules/hunt-affected.html">hunt-affected</a> with limited support.</p>
-					<a href="#quick-starting" id="quick-starting" style="color: inherit; text-decoration: none;">
-						<h2>Quick starting</h2>
-					</a>
-					<p>Install globally via npm:</p>
-					<pre><code class="language-sh">npm i hunt-unused -g</code></pre>
-					<p>And run the script under your source code path:</p>
-					<pre><code class="language-sh">hunt-unused</code></pre>
-					<a href="#specify-entries" id="specify-entries" style="color: inherit; text-decoration: none;">
-						<h3>specify entries</h3>
-					</a>
-					<p>A project usually exports a file as entry, like the package main file. This file is not used anywhere within the project. <code>hunt-unused</code> will consider <code>index.js</code> and <code>index.ts</code> as the entry files, you may configure this by your own:</p>
-					<pre><code class="language-sh">hunt-unused src/index.js src/cli.js</code></pre>
-					<a href="#options" id="options" style="color: inherit; text-decoration: none;">
-						<h2>Options</h2>
-					</a>
-					<a href="#--source" id="--source" style="color: inherit; text-decoration: none;">
-						<h3>--source</h3>
-					</a>
-					<p>All the <code>.js</code> files will be scanned under the script running path by default. You may change this by <code>--source=&lt;glob&gt;</code> option, e.g.:</p>
-					<pre><code class="language-sh">hunt-unused --<span class="hljs-built_in">source</span>=src/*.js</code></pre>
-					<a href="#--alias" id="--alias" style="color: inherit; text-decoration: none;">
-						<h3>--alias</h3>
-					</a>
-					<p>Node module alias for helping solve real file paths.</p>
-					<p>Example:</p>
-					<pre><code class="language-sh">hunt-unused --<span class="hljs-built_in">alias</span>=<span class="hljs-string">"src:./src"</span></code></pre>
-					<a href="#--module-paths" id="--module-paths" style="color: inherit; text-decoration: none;">
-						<h3>--module-paths</h3>
-					</a>
-					<p>Node module paths.</p>
-					<p>Example:</p>
-					<pre><code class="language-sh">hunt-unused --module-paths=node_modules,../../node_modules</code></pre>
-					<a href="#--extensions" id="--extensions" style="color: inherit; text-decoration: none;">
-						<h3>--extensions</h3>
-					</a>
-					<p>File extensions to handle with. Defaults to .js, .jsx, .ts, .tsx&#39;.</p>
-					<a href="#--parser-plugins" id="--parser-plugins" style="color: inherit; text-decoration: none;">
-						<h3>--parser-plugins</h3>
-					</a>
-					<p>As <code>hunt-unused</code> is using <code>@babel/parser</code> to parse JS files, you may need to take care of the parser configurations. So far it only supports passing <a href="https://babeljs.io/docs/en/7.4.0/babel-parser#plugins">plugin option</a>.</p>
-					<p>Following @babel/parser plugins are enabled on <code>.js</code>|<code>.jsx</code>|<code>.ts</code>|<code>.tsx</code> files by default:</p>
-					<ul>
-						<li><code>dynamicImport</code></li>
-						<li><code>classProperties</code></li>
-						<li><code>flowComments</code></li>
-						<li><code>objectRestSpread</code></li>
-						<li><code>functionBind</code></li>
-						<li><code>jsx</code></li>
-						<li><code>flow</code> (.js and .jsx only)</li>
-						<li><code>typescript</code> (.ts and .tsx only)</li>
-					</ul>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="hunt_unused.html#huntunused" class="tsd-kind-icon">hunt<wbr>Unused</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="hunt_affected.declaration_type.html#export" class="tsd-kind-icon">export</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="hunt_affected.declaration_type.html#import" class="tsd-kind-icon">import</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="hunt_affected.declaration_type.html#private" class="tsd-kind-icon">private</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="huntunused" class="tsd-anchor"></a>
-					<h3>hunt<wbr>Unused</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">hunt<wbr>Unused<span class="tsd-signature-symbol">(</span>entries<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><a href="git_changes_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Unused</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/b9a183b/packages/hunt-unused/src/index.ts#L32">hunt-unused/src/index.ts:32</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> entries: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;index.js&#x27;, &#x27;index.ts&#x27;]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Exclude file entries that hunt unused cannot recognize</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="git_changes_affected.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol"> = {}</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Unused</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="export" class="tsd-anchor"></a>
+					<h3>export</h3>
+					<div class="tsd-signature tsd-kind-icon">export<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/53d216c/packages/hunt-affected/src/constants.ts#L6">hunt-affected/src/constants.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="import" class="tsd-anchor"></a>
+					<h3>import</h3>
+					<div class="tsd-signature tsd-kind-icon">import<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/53d216c/packages/hunt-affected/src/constants.ts#L7">hunt-affected/src/constants.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="private" class="tsd-anchor"></a>
+					<h3>private</h3>
+					<div class="tsd-signature tsd-kind-icon">private<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/JennieJi/ast-lab/blob/53d216c/packages/hunt-affected/src/constants.ts#L5">hunt-affected/src/constants.ts:5</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -179,26 +121,86 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="es_stats.html">es-<wbr>stats</a>
+						<a href="../modules/es_stats.html">es-<wbr>stats</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="git_changes_affected.html">git-<wbr>changes-<wbr>affected</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="hunt_affected.html">hunt-<wbr>affected</a>
+						<a href="../modules/git_changes_affected.html">git-<wbr>changes-<wbr>affected</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="hunt_unused.html">hunt-<wbr>unused</a>
+						<a href="../modules/hunt_affected.html">hunt-<wbr>affected</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="print_file_tree.html">print-<wbr>file-<wbr>tree</a>
+						<a href="../modules/print_file_tree.html">print-<wbr>file-<wbr>tree</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#affected" class="tsd-kind-icon">Affected</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#mergedepmap" class="tsd-kind-icon">merge<wbr>Dep<wbr>Map</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum tsd-parent-kind-module">
+						<a href="hunt_affected.declaration_type.html" class="tsd-kind-icon">DECLARATION_<wbr>TYPE</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="hunt_affected.declaration_type.html#export" class="tsd-kind-icon">export</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="hunt_affected.declaration_type.html#import" class="tsd-kind-icon">import</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="hunt_affected.declaration_type.html#private" class="tsd-kind-icon">private</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#affected-1" class="tsd-kind-icon">Affected</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#declarationnode" class="tsd-kind-icon">Declaration<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#dependencymap" class="tsd-kind-icon">Dependency<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#options" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#resolver-1" class="tsd-kind-icon">Resolver</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#module_all" class="tsd-kind-icon">MODULE_<wbr>ALL</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#module_default" class="tsd-kind-icon">MODULE_<wbr>DEFAULT</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="hunt_unused.html#huntunused" class="tsd-kind-icon">hunt<wbr>Unused</a>
+						<a href="../modules/hunt_affected.html#completeextensions" class="tsd-kind-icon">complete<wbr>Extensions</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/hunt_affected.html#denodeify" class="tsd-kind-icon">denodeify</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#getdeclaration" class="tsd-kind-icon">get<wbr>Declaration</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#huntaffected" class="tsd-kind-icon">hunt<wbr>Affected</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#mergedepmap-1" class="tsd-kind-icon">merge<wbr>Dep<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#resolvemodule" class="tsd-kind-icon">resolve<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/hunt_affected.html#visitdependencymap" class="tsd-kind-icon">visit<wbr>Dependency<wbr>Map</a>
 					</li>
 				</ul>
 			</nav>
