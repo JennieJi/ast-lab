@@ -7,7 +7,9 @@
   "scripts": {
     "hunt-affected": "../hunt-affected-cli/dist/index.js",
     "build": "../../node_modules/.bin/tsc",
-    "test": "../../node_modules/.bin/jest  --config=./jest.config.js"
+    "test": "../../node_modules/.bin/jest  --config=./jest.config.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "ecma",
@@ -47,6 +49,8 @@
   "dependencies": {
     "@babel/parser": "^7.9.3",
     "@babel/traverse": "^7.7.4",
-    "debug": "^4.1.1"
-  }
+    "debug": "^4.1.1",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
