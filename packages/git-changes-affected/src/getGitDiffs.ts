@@ -141,10 +141,6 @@ export function getGitDiffs(to: string, from?: string): Diff[] {
     if (chunkHeadMatch) {
       lineA = parseInt(chunkHeadMatch[1], 10);
       lineB = parseInt(chunkHeadMatch[3], 10);
-      if (chunkHeadMatch[5]) {
-        lineA++;
-        lineB++;
-      }
       debug(
         `${from}...${to} chunk start -${lastDiff.source.file}:${lineA} +${lastDiff.target.file}:${lineB}`
       );

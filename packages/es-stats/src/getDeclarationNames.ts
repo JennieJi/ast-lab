@@ -1,7 +1,6 @@
-import { Node } from '@babel/types';
 import getPatternNames from './getPatternNames';
 import { MemberRef } from 'ast-lab-types';
-
+import { Node } from '@babel/types';
 /**
  * Extract declaration names and its alias from AST declaration nodes.
  * This function only handles *VariableDeclaration*, *FunctionDeclaration*, *ClassDeclaration*.

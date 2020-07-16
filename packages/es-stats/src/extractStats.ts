@@ -3,7 +3,7 @@ import createExportVisitors from './visitors/exports';
 import createImportVisitors from './visitors/imports';
 import createRootRelationVisitors from './visitors/rootRelation';
 import mergeVisitors from './mergeVisitors';
-import { Import, Exports, MemberRelation } from 'ast-lab-types';
+import { Import, Exports, MemberRelation, Declarations } from 'ast-lab-types';
 import { File } from '@babel/types';
 
 /**
@@ -31,24 +31,29 @@ export default function extractStats(
 ): {
   imports: Import[];
   exports: Exports;
+  declarations: Declarations;
   relations: MemberRelation;
 } {
   const imports = [] as Import[];
   const exports = { members: [] } as Exports;
-  const relations = {} as MemberRelation;
+  const declarations = {} as Declarations;
   traverse(
     // @ts-ignore
     ast,
     mergeVisitors(
       createExportVisitors(exports),
       createImportVisitors(imports),
-      createRootRelationVisitors(relations)
+      createRootRelationVisitors(declarations)
     )
   );
 
   return {
     imports,
     exports,
-    relations,
+    declarations,
+    // Backward compact
+    relations: Object.fromEntries(
+      Object.keys(declarations).map(d => [d, declarations[d].dependencies])
+    ),
   };
 }

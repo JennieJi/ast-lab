@@ -1,20 +1,17 @@
-import path from 'path';
-import { DependencyMap } from 'ast-lab-types';
+import * as path from 'path';
+import { DependencyMap } from '../src/types';
 
 const baseDir = path.resolve(__dirname, '__fixtures__');
+const getRelative = (mod: string) =>
+  path.isAbsolute(mod) ? path.relative(baseDir, mod) : mod;
 // make source paths relative to avoid snapshot change
 export function relativeDepMap(depMap: DependencyMap) {
-  const updated = new Map() as DependencyMap;
-  depMap.forEach((affectMap, mod) => {
-    updated.set(
-      path.isAbsolute(mod) ? path.relative(baseDir, mod) : mod,
-      affectMap
-    );
-    affectMap.forEach(entries => {
-      entries.forEach(entry => {
-        entry.source = path.relative(baseDir, entry.source);
+  return Object.fromEntries(
+    Object.entries(depMap).map(([mod, declarations]) => {
+      Object.values(declarations).forEach(d => {
+        d.source = getRelative(d.source);
       });
-    });
-  });
-  return updated;
+      return [getRelative(mod), declarations];
+    })
+  );
 }

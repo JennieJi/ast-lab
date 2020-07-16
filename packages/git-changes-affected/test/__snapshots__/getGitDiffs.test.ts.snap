@@ -88,8 +88,8 @@ export default getPatternNames;",
     "source": Object {
       "changed": Array [
         Object {
-          "end": 26,
-          "start": 15,
+          "end": 25,
+          "start": 14,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -152,8 +152,8 @@ export default function createExportVisitors(exports: Exports = { members: [] })
           "start": 2,
         },
         Object {
-          "end": 24,
-          "start": 16,
+          "end": 23,
+          "start": 15,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -221,12 +221,12 @@ export default function createExportVisitors(exports: Exports = { members: [] })
           "start": 4,
         },
         Object {
-          "end": 43,
-          "start": 29,
+          "end": 42,
+          "start": 28,
         },
         Object {
-          "end": 46,
-          "start": 45,
+          "end": 45,
+          "start": 44,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -294,16 +294,16 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
           "start": 5,
         },
         Object {
-          "end": 51,
-          "start": 31,
+          "end": 50,
+          "start": 30,
         },
         Object {
-          "end": 54,
-          "start": 53,
+          "end": 53,
+          "start": 52,
         },
         Object {
-          "end": 78,
-          "start": 60,
+          "end": 77,
+          "start": 59,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -401,8 +401,8 @@ export default function createExportVisitors(imports: Import[] = []): Visitor {
           "start": 8,
         },
         Object {
-          "end": 128,
-          "start": 123,
+          "end": 127,
+          "start": 122,
         },
       ],
       "content": "import { VariableDeclarator, VariableDeclaration, LVal, ExportSpecifier } from '@babel/types';
@@ -564,8 +564,8 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
           "start": 9,
         },
         Object {
-          "end": 135,
-          "start": 124,
+          "end": 134,
+          "start": 123,
         },
       ],
       "content": "import { 
@@ -729,24 +729,24 @@ export default function createRootRelationVisitors(relations: MemberRelation = {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 18,
-          "start": 18,
+          "end": 17,
+          "start": 17,
         },
         Object {
-          "end": 25,
-          "start": 25,
+          "end": 24,
+          "start": 24,
         },
         Object {
-          "end": 36,
-          "start": 36,
+          "end": 35,
+          "start": 35,
         },
         Object {
-          "end": 45,
-          "start": 45,
+          "end": 44,
+          "start": 44,
         },
         Object {
-          "end": 56,
-          "start": 56,
+          "end": 55,
+          "start": 55,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -915,24 +915,24 @@ exports[\`import visitors imports/noImports.js 1\`] = \`Array []\`;",
     "target": Object {
       "changed": Array [
         Object {
-          "end": 36,
-          "start": 18,
+          "end": 35,
+          "start": 17,
         },
         Object {
-          "end": 43,
-          "start": 43,
+          "end": 42,
+          "start": 42,
         },
         Object {
-          "end": 54,
-          "start": 54,
+          "end": 53,
+          "start": 53,
         },
         Object {
-          "end": 63,
-          "start": 63,
+          "end": 62,
+          "start": 62,
         },
         Object {
-          "end": 74,
-          "start": 74,
+          "end": 73,
+          "start": 73,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -1122,12 +1122,12 @@ exports[\`import visitors imports/noImports.js 1\`] = \`Array []\`;",
     "source": Object {
       "changed": Array [
         Object {
-          "end": 58,
-          "start": 58,
+          "end": 57,
+          "start": 57,
         },
         Object {
-          "end": 64,
-          "start": 64,
+          "end": 63,
+          "start": 63,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -1396,12 +1396,12 @@ Object {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 60,
-          "start": 58,
+          "end": 59,
+          "start": 57,
         },
         Object {
-          "end": 68,
-          "start": 66,
+          "end": 67,
+          "start": 65,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -1677,16 +1677,16 @@ Object {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 8,
-          "start": 8,
+          "end": 7,
+          "start": 7,
         },
         Object {
-          "end": 58,
-          "start": 58,
+          "end": 57,
+          "start": 57,
         },
         Object {
-          "end": 95,
-          "start": 95,
+          "end": 94,
+          "start": 94,
         },
       ],
       "content": "import fs from 'fs';
@@ -1801,32 +1801,32 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
     "target": Object {
       "changed": Array [
         Object {
-          "end": 9,
-          "start": 8,
+          "end": 8,
+          "start": 7,
         },
         Object {
-          "end": 58,
-          "start": 58,
+          "end": 57,
+          "start": 57,
         },
         Object {
-          "end": 66,
-          "start": 64,
+          "end": 65,
+          "start": 63,
         },
         Object {
-          "end": 98,
-          "start": 98,
+          "end": 97,
+          "start": 97,
         },
         Object {
-          "end": 100,
-          "start": 100,
+          "end": 99,
+          "start": 99,
         },
         Object {
-          "end": 123,
-          "start": 110,
+          "end": 122,
+          "start": 109,
         },
         Object {
-          "end": 125,
-          "start": 125,
+          "end": 124,
+          "start": 124,
         },
       ],
       "content": "import fs from 'fs';
@@ -1964,8 +1964,8 @@ export default async function fileDepMap(filePath: string, { loader, parserOptio
     "source": Object {
       "changed": Array [
         Object {
-          "end": 9,
-          "start": 9,
+          "end": 8,
+          "start": 8,
         },
       ],
       "content": "import path from 'path';
@@ -2040,8 +2040,8 @@ export default async function mergeDepMap(sources: string[], opts: Options = {})
     "target": Object {
       "changed": Array [
         Object {
-          "end": 9,
-          "start": 9,
+          "end": 8,
+          "start": 8,
         },
       ],
       "content": "import path from 'path';
@@ -2420,8 +2420,8 @@ Map {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 31,
-          "start": 29,
+          "end": 30,
+          "start": 28,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -2485,16 +2485,16 @@ Map {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 30,
-          "start": 30,
+          "end": 29,
+          "start": 29,
         },
         Object {
-          "end": 49,
-          "start": 42,
+          "end": 48,
+          "start": 41,
         },
         Object {
-          "end": 55,
-          "start": 52,
+          "end": 54,
+          "start": 51,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -2571,8 +2571,8 @@ Map {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 8,
-          "start": 8,
+          "end": 7,
+          "start": 7,
         },
       ],
       "content": "import fs from 'fs';
@@ -2609,8 +2609,8 @@ describe('mergeDepMap()', () => {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 8,
-          "start": 8,
+          "end": 7,
+          "start": 7,
         },
       ],
       "content": "import fs from 'fs';
@@ -2695,12 +2695,12 @@ export default function visitDependencyMap(dependencyMap: DependencyMap, entries
           "start": 11,
         },
         Object {
-          "end": 21,
-          "start": 20,
+          "end": 20,
+          "start": 19,
         },
         Object {
-          "end": 24,
-          "start": 23,
+          "end": 23,
+          "start": 22,
         },
       ],
       "content": "import { DependencyMap, Entry } from \\"ast-lab-types\\";
@@ -2925,28 +2925,28 @@ export { default } from './getStats';",
     "source": Object {
       "changed": Array [
         Object {
-          "end": 14,
-          "start": 14,
+          "end": 13,
+          "start": 13,
         },
         Object {
-          "end": 20,
-          "start": 20,
+          "end": 19,
+          "start": 19,
         },
         Object {
-          "end": 29,
-          "start": 29,
+          "end": 28,
+          "start": 28,
         },
         Object {
-          "end": 35,
-          "start": 35,
+          "end": 34,
+          "start": 34,
         },
         Object {
-          "end": 42,
-          "start": 42,
+          "end": 41,
+          "start": 41,
         },
         Object {
-          "end": 45,
-          "start": 45,
+          "end": 44,
+          "start": 44,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -3002,28 +3002,28 @@ export default function createExportVisitors(exports: Exports = { members: [] })
     "target": Object {
       "changed": Array [
         Object {
-          "end": 14,
-          "start": 14,
+          "end": 13,
+          "start": 13,
         },
         Object {
-          "end": 23,
-          "start": 20,
+          "end": 22,
+          "start": 19,
         },
         Object {
-          "end": 32,
-          "start": 32,
+          "end": 31,
+          "start": 31,
         },
         Object {
-          "end": 38,
-          "start": 38,
+          "end": 37,
+          "start": 37,
         },
         Object {
-          "end": 45,
-          "start": 45,
+          "end": 44,
+          "start": 44,
         },
         Object {
-          "end": 48,
-          "start": 48,
+          "end": 47,
+          "start": 47,
         },
       ],
       "content": "import { Visitor } from '@babel/traverse';
@@ -3182,32 +3182,32 @@ Object {
     "target": Object {
       "changed": Array [
         Object {
-          "end": 27,
-          "start": 18,
+          "end": 26,
+          "start": 17,
         },
         Object {
-          "end": 48,
-          "start": 39,
+          "end": 47,
+          "start": 38,
         },
         Object {
-          "end": 69,
-          "start": 60,
+          "end": 68,
+          "start": 59,
         },
         Object {
-          "end": 90,
-          "start": 81,
+          "end": 89,
+          "start": 80,
         },
         Object {
-          "end": 111,
-          "start": 102,
+          "end": 110,
+          "start": 101,
         },
         Object {
-          "end": 132,
-          "start": 123,
+          "end": 131,
+          "start": 122,
         },
         Object {
-          "end": 153,
-          "start": 144,
+          "end": 152,
+          "start": 143,
         },
       ],
       "content": "// Jest Snapshot v1, https://goo.gl/fbAQLP
@@ -3381,12 +3381,12 @@ Object {
     "source": Object {
       "changed": Array [
         Object {
-          "end": 11,
-          "start": 11,
+          "end": 10,
+          "start": 10,
         },
         Object {
-          "end": 14,
-          "start": 14,
+          "end": 13,
+          "start": 13,
         },
       ],
       "content": "import { ParserOptions } from '@babel/parser';
@@ -3428,12 +3428,12 @@ export type Options = {
           "start": 2,
         },
         Object {
-          "end": 14,
-          "start": 12,
+          "end": 13,
+          "start": 11,
         },
         Object {
-          "end": 19,
-          "start": 17,
+          "end": 18,
+          "start": 16,
         },
       ],
       "content": "import { ParserOptions } from '@babel/parser';

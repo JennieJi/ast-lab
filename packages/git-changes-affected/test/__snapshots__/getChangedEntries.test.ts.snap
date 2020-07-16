@@ -10,21 +10,13 @@ Array [
     "name": "func",
     "source": "sampleFile.js",
   },
-  Object {
-    "name": "default",
-    "source": "sampleFile.js",
-  },
 ]
 `;
 
-exports[`getChangedEntries import should not be counted as entry 1`] = `
+exports[`getChangedEntries import could be counted as entry 1`] = `
 Array [
   Object {
-    "name": "func",
-    "source": "sampleFile.js",
-  },
-  Object {
-    "name": "default",
+    "name": "a",
     "source": "sampleFile.js",
   },
 ]
@@ -36,14 +28,6 @@ Array [
     "name": "b",
     "source": "sampleFile.js",
   },
-  Object {
-    "name": "func",
-    "source": "sampleFile.js",
-  },
-  Object {
-    "name": "default",
-    "source": "sampleFile.js",
-  },
 ]
 `;
 
@@ -51,10 +35,6 @@ exports[`getChangedEntries single line 2`] = `
 Array [
   Object {
     "name": "func",
-    "source": "sampleFile.js",
-  },
-  Object {
-    "name": "default",
     "source": "sampleFile.js",
   },
 ]
@@ -66,10 +46,6 @@ Array [
     "name": "func",
     "source": "sampleFile.js",
   },
-  Object {
-    "name": "default",
-    "source": "sampleFile.js",
-  },
 ]
 `;
 
@@ -77,10 +53,6 @@ exports[`getChangedEntries within 1 export 1`] = `
 Array [
   Object {
     "name": "func",
-    "source": "sampleFile.js",
-  },
-  Object {
-    "name": "default",
     "source": "sampleFile.js",
   },
 ]

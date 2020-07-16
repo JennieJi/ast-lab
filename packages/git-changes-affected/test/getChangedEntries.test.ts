@@ -26,7 +26,7 @@ function relativeEntries(entries: Entry[]) {
 }
 
 describe('getChangedEntries', () => {
-  test('import should not be counted as entry', () => {
+  test('import could be counted as entry', () => {
     expect(
       relativeEntries(
         getChangedEntries(

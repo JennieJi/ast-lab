@@ -4,12 +4,26 @@ exports[`visitDepMap() circular 1`] = `
 Object {
   "/a": Set {
     "default",
+    "b",
   },
   "/b": Set {
+    "c",
     "default",
   },
   "/c": Set {
+    "a",
     "default",
+  },
+}
+`;
+
+exports[`visitDepMap() export from 1`] = `
+Object {
+  "/a": Set {
+    "default",
+  },
+  "/index": Set {
+    "a",
   },
 }
 `;
@@ -20,9 +34,11 @@ Object {
     "default",
   },
   "/b": Set {
+    "a",
     "default",
   },
   "/c": Set {
+    "b",
     "default",
   },
 }
@@ -34,9 +50,11 @@ Object {
     "default",
   },
   "/b": Set {
+    "a",
     "default",
   },
   "/c": Set {
+    "b",
     "default",
   },
 }
@@ -48,13 +66,21 @@ Object {
     "default",
   },
   "/b": Set {
+    "a",
     "default",
   },
   "/c": Set {
+    "b",
     "c1",
     "c2",
   },
-  "/d": Set {},
-  "/e": Set {},
+  "/d": Set {
+    "c1",
+    "default",
+  },
+  "/e": Set {
+    "c1",
+    "default",
+  },
 }
 `;

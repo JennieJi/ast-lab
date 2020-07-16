@@ -9,20 +9,23 @@ import { Visitor } from '@babel/traverse';
 import getPatternNames from '../getPatternNames';
 import getDeclarationNames from '../getDeclarationNames';
 import getModuleReffromExportSpecifier from '../getModuleRefFromExportSpecifier';
-import { MemberRelation, MemberRef } from 'ast-lab-types';
+import { Declarations, MemberRef, ImportBase } from 'ast-lab-types';
 import _debug from 'debug';
 import { MODULE_DEFAULT } from '../constants';
 
 const debug = _debug('es-stats:scope');
 
-type Scope = { privates: Set<string>; candidates: string[] };
+type Scope = {
+  privates: Set<string>;
+  candidates: (string | ImportBase)[];
+};
 
 /**
  * Create a Babel visitor that will find out the dependency relationships between root declarations, and save to an object ref.
  * @param relations The object ref to save the relationships
  */
 export default function createRootRelationVisitors(
-  relations: MemberRelation = {}
+  relations: Declarations = {}
 ): Visitor {
   let scope = { privates: new Set(), candidates: [] } as Scope;
   const parentScopes = [] as Scope[];
@@ -36,7 +39,9 @@ export default function createRootRelationVisitors(
   const exitScopeHandler = () => {
     if (parentScopes.length <= 1) return;
     const { candidates, privates } = scope;
-    const filteredCandidates = candidates.filter(d => !privates.has(d));
+    const filteredCandidates = candidates.filter(
+      d => typeof d !== 'string' || !privates.has(d)
+    );
     scope = parentScopes.pop() as Scope;
     scope.candidates = Array.from(
       new Set(scope.candidates.concat(filteredCandidates))
@@ -70,7 +75,10 @@ export default function createRootRelationVisitors(
           const refs = getDeclarationNames(node as VariableDeclaration);
           if (refs) {
             refs.forEach(({ alias }) => {
-              relations[alias] = Array.from(new Set(candidates));
+              relations[alias] = {
+                dependencies: Array.from(new Set(candidates)),
+                loc: node.loc,
+              };
             });
           }
         }
@@ -83,7 +91,10 @@ export default function createRootRelationVisitors(
             specifier as ExportSpecifier
           );
           if (ref && !relations[ref.name]) {
-            relations[ref.alias] = [];
+            relations[ref.alias] = {
+              dependencies: [],
+              loc: node.loc,
+            };
           }
         });
       }
@@ -93,11 +104,14 @@ export default function createRootRelationVisitors(
         scope.privates.add(MODULE_DEFAULT);
         newScope();
       },
-      exit() {
+      exit({ node }) {
         debug('EXIT-export default scope', parentScopes, scope);
         const candidates = exitScopeHandler();
         if (parentScopes.length === 1) {
-          relations[MODULE_DEFAULT] = Array.from(new Set(candidates));
+          relations[MODULE_DEFAULT] = {
+            dependencies: Array.from(new Set(candidates)),
+            loc: node.loc,
+          };
         }
       },
     },
@@ -126,7 +140,10 @@ export default function createRootRelationVisitors(
           if (id) {
             /** @todo find more specific declaration affected */
             getPatternNames(id).forEach(({ alias }) => {
-              relations[alias] = dedupCandidates;
+              relations[alias] = {
+                dependencies: dedupCandidates,
+                loc: node.loc,
+              };
             });
           }
         }
@@ -144,9 +161,12 @@ export default function createRootRelationVisitors(
 
       // dynamic import
       if (callee.type === 'Import' && args[0].type === 'StringLiteral') {
-        scope.candidates.push(
-          `${(args[0] as StringLiteral).value}#${MODULE_DEFAULT}`
-        );
+        /** @todo analyze details of what's dynamically imported */
+        scope.candidates.push({
+          source: (args[0] as StringLiteral).value,
+          name: MODULE_DEFAULT,
+          alias: '',
+        });
       }
     },
     Identifier(p) {
