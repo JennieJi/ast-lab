@@ -3,7 +3,7 @@ import path from 'path';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import debug from 'debug';
-import { MemberRelation } from 'ast-lab-types';
+import { Declarations } from 'ast-lab-types';
 import createVisitor from '../src/visitors/rootRelation';
 
 const dirs = ['jsx'];
@@ -14,7 +14,7 @@ describe('rootRelation visitors', () => {
     files.forEach(file => {
       test(`${dir}/${file}`, () => {
         debug('es-stats:test')(`${dir}/${file}`);
-        let res = {} as MemberRelation;
+        let res = {} as Declarations;
         const code = fs.readFileSync(path.resolve(dirPath, file), 'utf-8');
         traverse(
           // @ts-ignore
