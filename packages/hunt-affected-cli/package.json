@@ -19,7 +19,7 @@
     "cli"
   ],
   "files": [
-    "./dist"
+    "dist/"
   ],
   "directories": {
     "lib": "dist",

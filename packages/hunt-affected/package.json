@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.1",
   "description": "Detect where your file exports are used and potentially afffected by it's changes",
   "main": "dist/index.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "../../node_modules/.bin/tsc --build --verbose ./",
@@ -17,7 +18,7 @@
     "export"
   ],
   "files": [
-    "./dist"
+    "dist/"
   ],
   "directories": {
     "lib": "dist",

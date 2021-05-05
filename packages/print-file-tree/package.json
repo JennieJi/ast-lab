@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.js",
   "homepage": "https://jennieji.github.io/ast-lab/modules/print-file-tree.html",
   "repository": {
@@ -22,7 +23,7 @@
     "directory": "packages/print-file-tree"
   },
   "files": [
-    "dist"
+    "dist/"
   ],
   "directories": {
     "lib": "dist",

@@ -20,9 +20,10 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/"
   ],
   "directories": {
     "lib": "dist",

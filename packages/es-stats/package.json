@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.1",
   "description": "Find out import, exports and root declarations' dependency relationships of an ES module file.",
   "main": "dist/index.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "hunt-affected": "../hunt-affected-cli/dist/index.js",
@@ -24,7 +25,7 @@
     "module"
   ],
   "files": [
-    "./dist"
+    "dist/"
   ],
   "directories": {
     "lib": "dist",
