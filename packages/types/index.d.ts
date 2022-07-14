@@ -9,7 +9,7 @@ export type MemberRef = {
 };
 
 type HasLoc = {
-  loc: SourceLocation | null;
+  loc: SourceLocation | null | undefined;
 };
 export type ImportBase = MemberRef & {
   source: Module;

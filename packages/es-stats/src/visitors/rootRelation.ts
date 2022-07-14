@@ -120,6 +120,7 @@ export default function createRootRelationVisitors(
         newScope();
 
         if (p.isFunction()) {
+          // @ts-ignore
           const refs = p.node.params.reduce((ret, param) => {
             return ret.concat(getPatternNames(param as LVal));
           }, [] as Array<MemberRef>);

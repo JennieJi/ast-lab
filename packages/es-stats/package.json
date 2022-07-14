@@ -1,6 +1,6 @@
 {
   "name": "es-stats",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Find out import, exports and root declarations' dependency relationships of an ES module file.",
   "main": "dist/index.js",
   "modules": "dist/index.js",
@@ -53,5 +53,6 @@
     "@babel/traverse": "^7.9.5",
     "debug": "^4.1.1"
   },
-  "snyk": true
+  "snyk": true,
+  "gitHead": "1dbe4f90a735c6ec5d99f8e0c6ed58ee770cae85"
 }
