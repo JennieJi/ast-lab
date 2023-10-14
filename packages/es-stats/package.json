@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.9.3",
-    "@babel/traverse": "^7.9.5",
+    "@babel/traverse": "^7.23.2",
     "debug": "^4.1.1"
   },
   "snyk": true,
