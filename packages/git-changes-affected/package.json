@@ -40,7 +40,7 @@
   "dependencies": {
     "@babel/parser": "^7.9.3",
     "ast-lab-types": "^1.0.0-alpha.3",
-    "debug": "^4.1.1",
+    "debug": "^4.3.1",
     "es-stats": "^1.0.0-alpha.3",
     "hunt-affected": "^1.0.0-alpha.3"
   },
