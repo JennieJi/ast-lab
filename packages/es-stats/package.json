@@ -51,7 +51,7 @@
   "dependencies": {
     "@babel/parser": "^7.9.3",
     "@babel/traverse": "^7.9.5",
-    "debug": "^4.1.1"
+    "debug": "^4.3.1"
   },
   "snyk": true,
   "gitHead": "1dbe4f90a735c6ec5d99f8e0c6ed58ee770cae85"
