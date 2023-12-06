@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "commander": "^4.1.0",
-    "debug": "^4.1.1",
+    "debug": "^4.3.1",
     "enhanced-resolve": "^4.1.1",
     "es-stats": "^1.0.0-alpha.3"
   },
